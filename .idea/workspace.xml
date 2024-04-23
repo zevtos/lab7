@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Add.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/AddPerson.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Clear.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/ExecuteScript.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Exit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Help.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Remove.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Show.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/AddIfMin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/History.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/MaxByName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/MinByDiscount.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/RemoveFirst.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/RemoveHead.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/special/SumOfPrice.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/update/Update.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/ColorForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/CoordinatesForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/Form.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/PersonForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/TicketForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/TicketTypeForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/managers/CommandManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/Interrogator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/Console.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/StandartConsole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/InteractiveRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ModeRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ScriptRunner.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/test/java/ru/itmo/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/Command.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/CommandName.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/Describable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/Executable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/DuplicateException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/EmptyValueException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/InvalidFormException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/InvalidNumberOfElementsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/InvalidRangeException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/InvalidScriptInputException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/NotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/ResponseException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/ScriptRecursionException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Color.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Coordinates.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Ticket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/TicketType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Networkable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Response.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/base/Element.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/base/Validatable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/test/java/ru/itmo/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/ru/itmo/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/itmo/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/ru/itmo/AppTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2fVHxueU7xXmpf41m9dDoOGVd1P" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.client.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "Maven.client [exec:java].executor": "Run",
+    "Maven.lab6 [compile,package].executor": "Run",
+    "Maven.lab6 [exec:java].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/zevtos/itmo/labs/md/prog/lab6/client",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\client\src\main\java\ru\itmo" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo\general" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo\general\utility" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo\general\models" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo\general\network" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Maven.lab6 [compile,package]">
+    <configuration name="client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="ru.itmo.client.main.Main" />
+      <module name="client" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="lab6 [compile,package]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="compile" />
+                <option value="package" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="client/pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.client" />
+      <item itemvalue="Maven.lab6 [compile,package]" />
+    </list>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="" />
+      <created>1713879574792</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713879574792</updated>
+      <workItem from="1713879575845" duration="1212000" />
+      <workItem from="1713880807326" duration="951000" />
+      <workItem from="1713888562994" duration="1490000" />
+      <workItem from="1713891229007" duration="8000" />
+      <workItem from="1713891307295" duration="12406000" />
+      <workItem from="1713904168376" duration="75000" />
+      <workItem from="1713904251891" duration="1537000" />
+      <workItem from="1713905867396" duration="1627000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
