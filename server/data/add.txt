@@ -1,0 +1,13 @@
+add
+ScriptTicket
+100
+1
+1
+
+
+usual
+new
+2000-02-20
+180
+100000
+black

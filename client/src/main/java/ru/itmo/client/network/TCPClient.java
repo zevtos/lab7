@@ -86,7 +86,6 @@ public class TCPClient {
         try {
             sendRequest(request);
             waitForResponse(); // Ждем получения ответа от сервера
-            System.out.println(response);
             return response;
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Ошибка при отправки запроса серверу");

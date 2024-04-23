@@ -83,7 +83,13 @@ public class InteractiveRunner implements ModeRunner {
             case "exit" -> {
                 var req = command.execute(userCommand);
                 if (!req.isSuccess()) return Runner.ExitCode.ERROR;
-                else return Runner.ExitCode.EXIT;
+                var response = tcpClient.sendCommand(req);
+                if(response.isSuccess()){
+                    console.println(response);
+                }else{
+                    console.printError(response);
+                }
+                return Runner.ExitCode.EXIT;
             }
             case "execute_script" -> {
                 var req = command.execute(userCommand);
@@ -93,7 +99,12 @@ public class InteractiveRunner implements ModeRunner {
             default -> {
                 var req = command.execute(userCommand);
                 if (!req.isSuccess()) return Runner.ExitCode.ERROR;
-                tcpClient.sendCommand(req);
+                var response = tcpClient.sendCommand(req);
+                if(response.isSuccess()){
+                    console.println(response.toString());
+                }else{
+                    console.printError(response.toString());
+                }
             }
         }
         return Runner.ExitCode.OK;

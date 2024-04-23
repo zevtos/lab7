@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "birthday": "2006-02-07",
+    "height": 180.0,
+    "passportID": "409315",
+    "hairColor": "BLACK"
+  },
+  {
+    "id": 2,
+    "birthday": "2005-05-12",
+    "height": 188.0,
+    "passportID": "412991",
+    "hairColor": "YELLOW"
+  }
+]

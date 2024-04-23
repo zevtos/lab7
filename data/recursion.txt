@@ -1,0 +1,6 @@
+info
+execute_script data/script.txt
+execute_script data/script.txt
+execute_script data/script.txt
+execute_script data/script.txt
+info

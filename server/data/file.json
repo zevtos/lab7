@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "ticket1",
+    "coordinates": {
+      "x": 1.0,
+      "y": 1.0
+    },
+    "creationDate": "2024-02-16T22:24:32.0198035+03:00[Europe/Moscow]",
+    "price": 100.0,
+    "discount": 10,
+    "comment": "skldfj",
+    "type": "USUAL",
+    "person": {
+      "id": 1,
+      "birthday": "2006-02-07",
+      "height": 180.0,
+      "passportID": "409315",
+      "hairColor": "BLACK"
+    }
+  },
+  {
+    "id": 2,
+    "name": "ticket2",
+    "coordinates": {
+      "x": 2.0,
+      "y": 2.0
+    },
+    "creationDate": "2024-02-15T22:12:47.3749988+03:00[Europe/Moscow]",
+    "price": 300.0,
+    "discount": 40,
+    "comment": "vitek",
+    "type": "VIP",
+    "person": {
+      "id": 2,
+      "birthday": "2005-05-12",
+      "height": 188.0,
+      "passportID": "412991",
+      "hairColor": "YELLOW"
+    }
+  }
+]
