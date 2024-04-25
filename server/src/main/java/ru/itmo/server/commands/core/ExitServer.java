@@ -7,17 +7,17 @@ import ru.itmo.general.commands.Command;
 import ru.itmo.server.managers.collections.TicketCollectionManager;
 
 /**
- * Команда 'exit'. Завершает выполнение программы (без сохранения в файл).
+ * Команда 'exit'. Завершает выполнение программы (сохраняя в файл).
  * @author zevtos
  */
-public class Exit extends Command {
+public class ExitServer extends Command {
     private TicketCollectionManager ticketCollectionManager;
     /**
      * Конструктор для создания экземпляра команды Exit.
      *
      */
-    public Exit(TicketCollectionManager ticketCollectionManager) {
-        super(CommandName.EXIT, "завершить программу (без сохранения в файл)");
+    public ExitServer(TicketCollectionManager ticketCollectionManager) {
+        super(CommandName.EXIT_SERVER, "завершить программу (с сохранением в файл)");
         this.ticketCollectionManager = ticketCollectionManager;
     }
 
@@ -30,6 +30,7 @@ public class Exit extends Command {
     @Override
     public Response execute(Request arguments) {
         try {
+            ticketCollectionManager.saveCollection();
             return new Response(true, null);
         } catch (Exception e){
             return new Response(false, e.toString());

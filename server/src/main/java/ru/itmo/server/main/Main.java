@@ -1,8 +1,11 @@
 package ru.itmo.server.main;
 
+import lombok.SneakyThrows;
 import ru.itmo.server.managers.collections.TicketCollectionManager;
 import ru.itmo.server.network.TCPServer;
 import sun.misc.Signal;
+
+import java.util.Scanner;
 
 /**
  * Главный класс приложения.
@@ -12,22 +15,35 @@ import sun.misc.Signal;
 public class Main {
     private static final int MISSING_FILE_ARGUMENT_EXIT_CODE = 1;
     private static final int PORT = 4093;
+    private static boolean flag = true;
 
     /**
      * Точка входа в приложение.
      *
      * @param args аргументы командной строки
      */
+    @SneakyThrows
     public static void main(String[] args) {
         // обработка сигналов
-        setSignalProcessing('\n' + "Для получения справки введите 'help', для завершения программы введите 'exit'" + '\n',
-                "INT", "TERM", "TSTP", "BREAK", "EOF");
 
         checkFileArgument(args);
 
         var ticketCollectionManager = new TicketCollectionManager(args);
 
-        new TCPServer(PORT, ticketCollectionManager).start();
+        setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
+
+        TCPServer tcpServer = new TCPServer(PORT, ticketCollectionManager);
+        tcpServer.start();
+        Scanner scanner = new Scanner(System.in);
+        String input;
+        while(flag){
+            input = scanner.nextLine();
+            if(input.equalsIgnoreCase("exit")){
+                flag = false;
+            }
+        }
+        // Сделать класс для возврата Response который будет запускать новый поток и хранить этот цикл, а так всё збс
+        tcpServer.stop_server();
     }
 
     /**
@@ -41,15 +57,13 @@ public class Main {
             System.exit(MISSING_FILE_ARGUMENT_EXIT_CODE);
         }
     }
-
-    private static void setSignalProcessing(String messageString, String... signalNames) {
+    private static void setSignalProcessing(String... signalNames) {
         for (String signalName : signalNames) {
             try {
-                Signal.handle(new Signal(signalName), signal -> System.out.print(messageString));
+                Signal.handle(new Signal(signalName), signal -> flag = false);
             } catch (IllegalArgumentException ignored) {
                 // Игнорируем исключение, если сигнал с таким названием уже существует или такого сигнала не существует
             }
         }
     }
-
 }

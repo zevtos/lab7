@@ -19,5 +19,5 @@ public enum CommandName {
     ADD_PERSON,
     GET_PERSON_BY_ID,
     EXECUTE_SCRIPT,
-    PING
+    EXIT_SERVER, PING
 }

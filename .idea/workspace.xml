@@ -4,37 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="1.1">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/ConnectionMonitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/ConnectionWaitingAnimation.java" afterDir="false" />
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="1.2">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/commands/core/ExitServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/AddPerson.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/AddPerson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Remove.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/core/Remove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/AddIfMin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/MaxByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/MaxByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/MinByDiscount.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/MinByDiscount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/RemoveFirst.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/RemoveFirst.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/RemoveHead.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/custom/RemoveHead.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/update/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/commands/update/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/ColorForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/ColorForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/CoordinatesForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/CoordinatesForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/PersonForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/PersonForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/TicketForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/TicketForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/TicketTypeForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/forms/TicketTypeForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/Console.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/StandartConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/StandartConsole.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/InteractiveRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/InteractiveRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ScriptRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ScriptRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/general/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/CommandName.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/CommandName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Response.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/commands/core/Exit.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/commands/core/Exit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/network/TCPServer.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,35 +58,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.client.executor": "Run",
-    "Application.client1.executor": "Run",
-    "Application.server.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.client [exec:java].executor": "Run",
-    "Maven.client.executor": "Run",
-    "Maven.general.executor": "Run",
-    "Maven.lab6 [compile,package].executor": "Run",
-    "Maven.lab6 [exec:java].executor": "Run",
-    "Maven.server [compile,package].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/zevtos/itmo/labs/md/prog/lab6/general",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.client1.executor&quot;: &quot;Run&quot;,
+    &quot;Application.server.executor&quot;: &quot;Debug&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client [exec:java].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.general.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab6 [compile,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab6 [exec:java].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.server [compile,package].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zevtos/itmo/labs/md/prog/lab6/general&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6" />
@@ -118,7 +99,7 @@
       <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo\general\network" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.client">
+  <component name="RunManager" selected="Application.server">
     <configuration name="client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.main.Main" />
       <module name="client" />
@@ -275,7 +256,10 @@
       <workItem from="1713988354236" duration="2370000" />
       <workItem from="1713990778355" duration="1473000" />
       <workItem from="1714027525649" duration="4375000" />
-      <workItem from="1714035164313" duration="10488000" />
+      <workItem from="1714035164313" duration="13890000" />
+      <workItem from="1714053714847" duration="265000" />
+      <workItem from="1714054016060" duration="1679000" />
+      <workItem from="1714073558739" duration="653000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -293,7 +277,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713912913570</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="1.2">
+      <option name="closed" value="true" />
+      <created>1714050047969</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714050047970</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +305,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="1.0" />
     <MESSAGE value="1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.1" />
+    <MESSAGE value="1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

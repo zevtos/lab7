@@ -105,18 +105,16 @@ public class InteractiveRunner implements ModeRunner {
             }
             default -> {
                 var req = command.execute(userCommand);
-                if("exit".equals(req.getCommand())){
+                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
+                if (req.getCommand().equals("exit")) {
+                    tcpClient.sendCommand(req);
                     return Runner.ExitCode.EXIT;
                 }
-                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
                 var response = tcpClient.sendCommand(req);
                 if (response.isSuccess()) {
                     console.println(response.toString());
                 } else {
                     console.logError(getClass(), response.toString());
-                }
-                if (req.getCommand().equals("exit")) {
-                    return Runner.ExitCode.EXIT;
                 }
             }
         }

@@ -71,6 +71,9 @@
                     <version>3.0.0</version>
                     <configuration>
                         <mainClass>ru.itmo.server.main.Main</mainClass>
+                        <arguments>
+                            <argument>data/file.json</argument>
+                        </arguments>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -82,9 +85,6 @@
                             <manifest>
                                 <mainClass>ru.itmo.server.main.Main</mainClass>
                             </manifest>
-                            <arguments>
-                                <argument>data/file.json</argument>
-                            </arguments>
                         </archive>
                     </configuration>
                 </plugin>

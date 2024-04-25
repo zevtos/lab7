@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**
@@ -36,7 +38,7 @@ public class StandartConsole implements Console {
     }
 
     public void log(String string) {
-        logger.info('\r' + string);
+        System.out.print(string);
     }
 
     /**
@@ -44,9 +46,10 @@ public class StandartConsole implements Console {
      *
      * @param obj Ошибка для печати.
      */
+    @SneakyThrows
     public void logError(Class<?> callingClass, Object obj) {
-        Logger special_logger = LoggerFactory.getLogger(callingClass);
-        special_logger.error('\r' + "Error:" + obj.toString());
+        System.err.print("Error:" + obj.toString() + '\n');
+        Thread.sleep(20);
     }
 
     /**
