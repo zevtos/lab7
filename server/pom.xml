@@ -5,9 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.itmo</groupId>
-        <artifactId>general</artifactId>
+        <artifactId>lab6</artifactId>
         <version>1.0</version>
-        <relativePath>../general/pom.xml</relativePath>
     </parent>
 
     <artifactId>server</artifactId>
@@ -19,6 +18,14 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>ru.itmo</groupId>
+            <artifactId>general</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
@@ -59,6 +66,14 @@
                     <version>3.0.0</version>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>3.0.0</version>
+                    <configuration>
+                        <mainClass>ru.itmo.server.main.Main</mainClass>
+                    </configuration>
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>3.2.0</version>
@@ -67,6 +82,9 @@
                             <manifest>
                                 <mainClass>ru.itmo.server.main.Main</mainClass>
                             </manifest>
+                            <arguments>
+                                <argument>data/file.json</argument>
+                            </arguments>
                         </archive>
                     </configuration>
                 </plugin>

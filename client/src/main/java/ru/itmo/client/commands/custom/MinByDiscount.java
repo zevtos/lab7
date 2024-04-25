@@ -4,7 +4,6 @@ import ru.itmo.general.commands.Command;
 import ru.itmo.client.utility.console.Console;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
-import ru.itmo.general.exceptions.ResponseException;
 import ru.itmo.general.network.Request;
 
 /**
@@ -37,11 +36,11 @@ public class MinByDiscount extends Command {
 //            return true;
 
         } catch (InvalidNumberOfElementsException exception) {
-            console.printError("Неправильное количество аргументов!");
+            console.logError(getClass(), "Неправильное количество аргументов!");
             return new Request(false, getName(), getUsingError());
         }
 //        catch (ResponseException exception) {
-//            console.printError(exception.getMessage());
+//            console.logError(getClass(), exception.getMessage());
 //        }
     }
 }

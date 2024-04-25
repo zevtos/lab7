@@ -1,9 +1,11 @@
 package ru.itmo.client.utility.console;
 
+import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * Обеспечивает ввод команд и вывод результатов в стандартной консоли.
  *
@@ -11,7 +13,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class StandartConsole implements Console {
     private static final String PROMPT = "$ ";
-
+    private static final Logger logger = LoggerFactory.getLogger(StandartConsole.class);
     /**
      * Выводит объект в консоль.
      *
@@ -29,18 +31,22 @@ public class StandartConsole implements Console {
     public void println(Object obj) {
         System.out.println(obj);
     }
+    public void println() {
+        System.out.println();
+    }
+
+    public void log(String string) {
+        logger.info('\r' + string);
+    }
 
     /**
      * Выводит ошибку в консоль.
      *
      * @param obj Ошибка для печати.
      */
-    public void printError(Object obj) {
-        System.err.print("Error: " + obj + '\n');
-        try {
-            TimeUnit.MILLISECONDS.sleep(20); // Пауза
-        } catch (InterruptedException ignored) {
-        }
+    public void logError(Class<?> callingClass, Object obj) {
+        Logger special_logger = LoggerFactory.getLogger(callingClass);
+        special_logger.error('\r' + "Error:" + obj.toString());
     }
 
     /**

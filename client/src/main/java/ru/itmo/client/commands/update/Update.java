@@ -45,18 +45,18 @@ public class Update extends Command {
 //            return true;
 
         } catch (InvalidNumberOfElementsException exception) {
-            console.printError("Неправильное количество аргументов!");
+            console.logError(getClass(), "Неправильное количество аргументов!");
             console.println(getUsingError());
         }
 //        catch (ResponseException exception) {
-//            console.printError(exception.getMessage());
+//            console.logError(getClass(), exception.getMessage());
 //        }
         catch (NumberFormatException exception) {
-            console.printError("ID должен быть представлен числом!");
+            console.logError(getClass(), "ID должен быть представлен числом!");
         } catch (InvalidScriptInputException e) {
-            console.printError("Некорректный ввод в скрипте!");
+            console.logError(getClass(), "Некорректный ввод в скрипте!");
         } catch (InvalidFormException e) {
-            console.printError("Поля билета не валидны! Билет не обновлен!");
+            console.logError(getClass(), "Поля билета не валидны! Билет не обновлен!");
         }
         return new Request();
     }

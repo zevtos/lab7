@@ -35,10 +35,10 @@ public class RemoveFirst extends Command {
 
         }
 //        catch (ResponseException exception) {
-//            console.printError(exception.getMessage());
+//            console.logError(getClass(), exception.getMessage());
 //        }
         catch (InvalidNumberOfElementsException exception) {
-            console.printError("Неправильное количество аргументов!");
+            console.logError(getClass(), "Неправильное количество аргументов!");
             return new Request(false, getName(), getUsingError());
         }
     }

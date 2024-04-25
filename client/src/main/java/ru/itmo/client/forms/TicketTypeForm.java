@@ -47,13 +47,13 @@ public class TicketTypeForm extends Form<TicketType> {
                 ticketType = TicketType.valueOf(strTicketType.toUpperCase());
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Тип билета не распознан!");
+                console.logError(getClass(), "Тип билета не распознан!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalArgumentException exception) {
-                console.printError("Тип билета отсутствует в списке!");
+                console.logError(getClass(), "Тип билета отсутствует в списке!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError("Произошла непредвиденная ошибка!");
+                console.logError(getClass(), "Произошла непредвиденная ошибка!");
                 System.exit(0);
             }
         }

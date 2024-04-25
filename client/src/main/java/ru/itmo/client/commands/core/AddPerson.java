@@ -49,10 +49,10 @@ public class AddPerson extends Command {
 //                return new Request();
 //            }
         } catch (InvalidNumberOfElementsException exception) {
-            console.printError("Неправильное количество аргументов!");
+            console.logError(getClass(), "Неправильное количество аргументов!");
             console.println(getUsingError());
         } catch (InvalidFormException exception) {
-            console.printError("Поля пользователя не валидны! Пользователь не создан!");
+            console.logError(getClass(), "Поля пользователя не валидны! Пользователь не создан!");
         } catch (InvalidScriptInputException ignored) {
             // Ignored
         }

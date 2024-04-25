@@ -51,13 +51,13 @@ public class CoordinatesForm extends Form<Coordinates> {
                 x = Double.parseDouble(strX);
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Координата X не распознана!");
+                console.logError(getClass(), "Координата X не распознана!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError("Координата X должна быть числом!");
+                console.logError(getClass(), "Координата X должна быть числом!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError("Непредвиденная ошибка!");
+                console.logError(getClass(), "Непредвиденная ошибка!");
                 System.exit(0);
             }
         }
@@ -84,15 +84,15 @@ public class CoordinatesForm extends Form<Coordinates> {
                 if (y <= -420) throw new InvalidRangeException("Значение Y должно быть больше -420");
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Координата Y не распознана!");
+                console.logError(getClass(), "Координата Y не распознана!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError("Координата Y должна быть числом!");
+                console.logError(getClass(), "Координата Y должна быть числом!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (InvalidRangeException exception) {
-                console.printError(exception.getMessage());
+                console.logError(getClass(), exception.getMessage());
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError("Непредвиденная ошибка!");
+                console.logError(getClass(), "Непредвиденная ошибка!");
                 System.exit(0);
             }
         }

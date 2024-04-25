@@ -8,10 +8,14 @@ import ru.itmo.general.exceptions.ScriptRecursionException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Запускает выполнение скрипта команд.
+ *
  * @author zevtos
  */
 public class ScriptRunner implements ModeRunner {
@@ -22,7 +26,8 @@ public class ScriptRunner implements ModeRunner {
 
     /**
      * Конструктор для ScriptRunner.
-     * @param console Консоль.
+     *
+     * @param console        Консоль.
      * @param commandManager Менеджер команд.
      */
     public ScriptRunner(TCPClient tcpClient, Console console, CommandManager commandManager) {
@@ -33,6 +38,7 @@ public class ScriptRunner implements ModeRunner {
 
     /**
      * Запускает выполнение скрипта.
+     *
      * @param argument Аргумент - путь к файлу скрипта.
      * @return Код завершения выполнения скрипта.
      */
@@ -65,12 +71,12 @@ public class ScriptRunner implements ModeRunner {
             Interrogator.setUserMode();
 
         } catch (NoSuchElementException | IllegalStateException exception) {
-            console.printError("Ошибка ввода.");
+            console.logError(getClass(), "Ошибка ввода.");
             try {
                 Interrogator.getUserScanner().hasNext();
                 return run("");
-            } catch (NoSuchElementException | IllegalStateException exception1){
-                console.printError("Экстренное завершение программы");
+            } catch (NoSuchElementException | IllegalStateException exception1) {
+                console.logError(getClass(), "Экстренное завершение программы");
                 userCommand = new String[2];
                 userCommand[0] = "save";
                 userCommand[1] = "";
@@ -79,11 +85,11 @@ public class ScriptRunner implements ModeRunner {
                 executeCommand(userCommand);
                 return Runner.ExitCode.ERROR;
             }
-        } catch (FileNotFoundException exception){
-            console.printError("Файл не найден");
+        } catch (FileNotFoundException exception) {
+            console.logError(getClass(), "Файл не найден");
             return Runner.ExitCode.ERROR;
-        } catch (ScriptRecursionException exception){
-            console.printError("Обнаружена рекурсия");
+        } catch (ScriptRecursionException exception) {
+            console.logError(getClass(), "Обнаружена рекурсия");
             return Runner.ExitCode.ERROR;
         } finally {
             scriptSet.remove(argument);
@@ -102,10 +108,10 @@ public class ScriptRunner implements ModeRunner {
                 var req = command.execute(userCommand);
                 if (!req.isSuccess()) return Runner.ExitCode.ERROR;
                 var response = tcpClient.sendCommand(req);
-                if(response.isSuccess()){
+                if (response.isSuccess()) {
                     console.println(response);
-                }else{
-                    console.printError(response);
+                } else {
+                    console.logError(getClass(), response);
                 }
                 return Runner.ExitCode.EXIT;
             }
@@ -115,16 +121,34 @@ public class ScriptRunner implements ModeRunner {
                 else return run(userCommand[1]); // Interactive mode doesn't support script execution.
             }
             default -> {
+                if(!tcpClient.isConnected()) repairConnection();
                 var req = command.execute(userCommand);
                 if (!req.isSuccess()) return Runner.ExitCode.ERROR;
                 var response = tcpClient.sendCommand(req);
-                if(response.isSuccess()){
+                if (response.isSuccess()) {
                     console.println(response);
-                }else{
-                    console.printError(response);
+                } else {
+                    console.logError(getClass(), response);
                 }
             }
         }
         return Runner.ExitCode.OK;
+    }
+    public void repairConnection() {
+        console.logError(getClass(), "Нет подключения к серверу. Попытка подключения...");
+        while (true) {
+            try {
+                tcpClient.connect();
+                if (tcpClient.isConnected()) {
+                    console.println("Соединение с сервером восстановлено.");
+                    break;
+                }
+                TimeUnit.SECONDS.sleep(5);
+            } catch (InterruptedException e) {
+                console.logError(getClass(), "Ошибка при восстановлении соединения: " + e.getMessage());
+            } catch (TimeoutException e) {
+                console.logError(getClass(), "Тайм-аут при подключении к серверу");
+            }
+        }
     }
 }

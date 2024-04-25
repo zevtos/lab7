@@ -1,7 +1,5 @@
 package ru.itmo.client.utility.console;
 
-import java.util.Scanner;
-
 /**
  * Интерфейс для консоли, обеспечивающий ввод команд и вывод результатов.
  * @author zevtos
@@ -23,7 +21,7 @@ public interface Console {
      * Выводит ошибку в консоль.
      * @param obj Ошибка для печати.
      */
-    void printError(Object obj);
+    void logError(Class<?> callingClass, Object obj);
 
     /**
      * Выводит два элемента в формате таблицы.
@@ -44,4 +42,7 @@ public interface Console {
     String getPrompt();
 
 
+    void println();
+
+    void log(String s);
 }

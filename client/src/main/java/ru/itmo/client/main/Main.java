@@ -28,13 +28,10 @@ public class Main {
         Interrogator.setUserScanner(new Scanner(System.in));
         var console = new StandartConsole();
         try {
-            var client = new TCPClient(InetAddress.getLocalHost().getHostAddress(), PORT);
-            client.connect();
+            var client = new TCPClient(InetAddress.getLocalHost().getHostAddress(), PORT, console);
             new Runner(console, client).run();
         } catch (UnknownHostException e) {
-            console.printError("");
-        } catch (IOException e) {
-            console.printError("Соединение прервано");
+            console.logError(Main.class, "");
         }
     }
 }

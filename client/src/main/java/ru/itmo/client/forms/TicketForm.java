@@ -1,6 +1,5 @@
 package ru.itmo.client.forms;
 
-import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.Interrogator;
 import ru.itmo.client.utility.console.Console;
 import ru.itmo.general.exceptions.EmptyValueException;
@@ -78,16 +77,16 @@ public class TicketForm extends Form<Ticket> {
                 if (discount <= 0 || discount > 100) throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Скидка не распознана!");
+                console.logError(getClass(), "Скидка не распознана!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (InvalidRangeException exception) {
-                console.printError("Процент скидки должен быть в диапазоне от 0 до 100!");
+                console.logError(getClass(), "Процент скидки должен быть в диапазоне от 0 до 100!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError("Скидка должна быть представлена целым числом от 0 до 100!");
+                console.logError(getClass(), "Скидка должна быть представлена целым числом от 0 до 100!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError("Непредвиденная ошибка!");
+                console.logError(getClass(), "Непредвиденная ошибка!");
                 System.exit(0);
             }
         }
@@ -107,13 +106,13 @@ public class TicketForm extends Form<Ticket> {
                 if (name.isEmpty()) throw new EmptyValueException();
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Название не распознано!");
+                console.logError(getClass(), "Название не распознано!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (EmptyValueException exception) {
-                console.printError("Название не может быть пустым!");
+                console.logError(getClass(), "Название не может быть пустым!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError("Непредвиденная ошибка!");
+                console.logError(getClass(), "Непредвиденная ошибка!");
                 System.exit(0);
             }
         }
@@ -141,16 +140,16 @@ public class TicketForm extends Form<Ticket> {
                 if (price < MIN_PRICE) throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Цена билета не распознана!");
+                console.logError(getClass(), "Цена билета не распознана!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (InvalidRangeException exception) {
-                console.printError("Цена билета должна быть больше нуля!");
+                console.logError(getClass(), "Цена билета должна быть больше нуля!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError("Цена билета должна быть представлена числом!");
+                console.logError(getClass(), "Цена билета должна быть представлена числом!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError("Непредвиденная ошибка!");
+                console.logError(getClass(), "Непредвиденная ошибка!");
                 System.exit(0);
             }
         }
@@ -172,10 +171,10 @@ public class TicketForm extends Form<Ticket> {
                 }
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError("Комментарий не распознан!");
+                console.logError(getClass(), "Комментарий не распознан!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError("Непредвиденная ошибка!");
+                console.logError(getClass(), "Непредвиденная ошибка!");
                 System.exit(0);
             }
         }

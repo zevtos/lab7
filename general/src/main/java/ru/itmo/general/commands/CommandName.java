@@ -18,5 +18,6 @@ public enum CommandName {
     HISTORY,
     ADD_PERSON,
     GET_PERSON_BY_ID,
-    EXECUTE_SCRIPT
+    EXECUTE_SCRIPT,
+    PING
 }

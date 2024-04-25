@@ -1,11 +1,9 @@
 package ru.itmo.client.commands.custom;
 
 import ru.itmo.general.commands.Command;
-import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.console.Console;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
-import ru.itmo.general.exceptions.ResponseException;
 import ru.itmo.general.network.Request;
 
 /**
@@ -40,11 +38,11 @@ public class MaxByName extends Command {
 //            return true;
 
         } catch (InvalidNumberOfElementsException exception) {
-            console.printError("Неправильное количество аргументов!");
+            console.logError(getClass(), "Неправильное количество аргументов!");
             console.println(getUsingError());
         }
 //        } catch (ResponseException e) {
-//            console.printError(e.getMessage());;
+//            console.logError(getClass(), e.getMessage());;
 //        }
         return new Request();
     }

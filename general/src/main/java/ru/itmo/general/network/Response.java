@@ -17,6 +17,6 @@ public class Response extends Networkable {
 
     @Override
     public String toString() {
-        return ((message != null) ? message : "") + (data != null ? (data.toString()) : "");
+        return ((message != null) ? message : "") + (data != null ? ((message != null) ? '\n' + data.toString() : data.toString()) : "");
     }
 }

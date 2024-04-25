@@ -1,15 +1,20 @@
 package ru.itmo.client.utility.runtime;
 
 import ru.itmo.client.managers.CommandManager;
+import ru.itmo.client.network.ConnectionMonitor;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.Interrogator;
 import ru.itmo.client.utility.console.Console;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Запускает выполнение интерактивного режима.
+ *
  * @author zevtos
  */
 public class InteractiveRunner implements ModeRunner {
@@ -20,9 +25,10 @@ public class InteractiveRunner implements ModeRunner {
 
     /**
      * Конструктор для InteractiveRunner.
-     * @param console Консоль.
+     *
+     * @param console        Консоль.
      * @param commandManager Менеджер команд.
-     * @param scriptRunner Запускает выполнение скриптов.
+     * @param scriptRunner   Запускает выполнение скриптов.
      */
     public InteractiveRunner(TCPClient tcpClient, Console console, CommandManager commandManager, ScriptRunner scriptRunner) {
         this.tcpClient = tcpClient;
@@ -33,11 +39,18 @@ public class InteractiveRunner implements ModeRunner {
 
     /**
      * Запускает выполнение интерактивного режима.
+     *
      * @param argument Не используется в интерактивном режиме.
      * @return Код завершения выполнения интерактивного режима.
      */
     @Override
     public Runner.ExitCode run(String argument) {
+        console.println("Подключение к серверу...");
+        try {
+            tcpClient.connect();
+        } catch (TimeoutException e) {
+            console.logError(getClass(), "Тайм-аут при подключении к серверу" + '\n' + "Подключение не установлено!");
+        }
         String[] userCommand;
         try (Scanner userScanner = Interrogator.getUserScanner()) {
             Runner.ExitCode commandStatus;
@@ -51,19 +64,19 @@ public class InteractiveRunner implements ModeRunner {
                 try {
                     commandStatus = executeCommand(userCommand);
                 } catch (NoSuchElementException e) {
-                    console.printError("Команда '" + userCommand[0] + "' не найдена. Введите 'help' для помощи");
+                    console.logError(getClass(), "Команда '" + userCommand[0] + "' не найдена. Введите 'help' для помощи");
                     commandStatus = Runner.ExitCode.ERROR;
                 }
                 commandManager.addToHistory(userCommand[0]);
             } while (commandStatus != Runner.ExitCode.EXIT);
             return commandStatus;
         } catch (NoSuchElementException | IllegalStateException exception) {
-            console.printError("Ошибка ввода.");
+            console.logError(getClass(), "Ошибка ввода.");
             try {
                 Interrogator.getUserScanner().hasNext();
                 return run("");
-            } catch (NoSuchElementException | IllegalStateException exception1){
-                console.printError("Экстренное завершение программы");
+            } catch (NoSuchElementException | IllegalStateException exception1) {
+                console.logError(getClass(), "Экстренное завершение программы");
                 userCommand = new String[2];
                 userCommand[1] = "";
                 userCommand[0] = "exit";
@@ -80,33 +93,34 @@ public class InteractiveRunner implements ModeRunner {
         if (command == null) throw new NoSuchElementException();
 
         switch (userCommand[0]) {
-            case "exit" -> {
-                var req = command.execute(userCommand);
-                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
-                var response = tcpClient.sendCommand(req);
-                if(response.isSuccess()){
-                    console.println(response);
-                }else{
-                    console.printError(response);
-                }
-                return Runner.ExitCode.EXIT;
-            }
             case "execute_script" -> {
                 var req = command.execute(userCommand);
                 if (!req.isSuccess()) return Runner.ExitCode.ERROR;
                 else return scriptRunner.run(userCommand[1]);
             }
-            default -> {
+            case "help", "history" -> {
                 var req = command.execute(userCommand);
                 if (!req.isSuccess()) return Runner.ExitCode.ERROR;
+                else return Runner.ExitCode.OK;
+            }
+            default -> {
+                var req = command.execute(userCommand);
+                if("exit".equals(req.getCommand())){
+                    return Runner.ExitCode.EXIT;
+                }
+                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
                 var response = tcpClient.sendCommand(req);
-                if(response.isSuccess()){
+                if (response.isSuccess()) {
                     console.println(response.toString());
-                }else{
-                    console.printError(response.toString());
+                } else {
+                    console.logError(getClass(), response.toString());
+                }
+                if (req.getCommand().equals("exit")) {
+                    return Runner.ExitCode.EXIT;
                 }
             }
         }
         return Runner.ExitCode.OK;
     }
 }
+

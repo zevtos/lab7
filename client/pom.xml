@@ -6,20 +6,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>ru.itmo</groupId>
-        <artifactId>general</artifactId>
+        <artifactId>lab6</artifactId>
         <version>1.0</version>
-        <relativePath>../general/pom.xml</relativePath>
     </parent>
 
     <artifactId>client</artifactId>
 
     <name>client</name>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>ru.itmo</groupId>
+            <artifactId>general</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->

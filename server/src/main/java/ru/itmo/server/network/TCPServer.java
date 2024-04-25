@@ -74,7 +74,6 @@ public class TCPServer {
         }
     }
 
-
     public void stop() throws IOException {
         if (serverSocketChannel != null) {
             serverSocketChannel.close();
@@ -103,13 +102,14 @@ public class TCPServer {
             if (bytesRead == -1) {
                 key.cancel();
                 clientSocketChannel.close();
-                logger.error("Клиент отключился: {}", clientSocketChannel);
+                logger.error("Клиент отключился");
                 return;
             }
         } catch (IOException e) {
             logger.error("Ошибка при чтении данных: {}", e.getMessage());
             key.cancel();
             try {
+                logger.error("Закрытие канала: {}", clientSocketChannel.getRemoteAddress());
                 clientSocketChannel.close();
             } catch (IOException ce) {
                 logger.error("Ошибка при закрытии канала: {}", ce.getMessage());
@@ -121,6 +121,13 @@ public class TCPServer {
             byte[] requestBytes = byteArrayOutputStream.toByteArray();
             ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(requestBytes));
             Request request = (Request) objectInputStream.readObject();
+
+            if ("ping".equals(request.getCommand())) {
+                Response pingResponse = new Response(true, "Ping successful");
+                sendResponse(clientSocketChannel, pingResponse);
+                return;
+            }
+
             Response response = processRequest(request);
             sendResponse(clientSocketChannel, response);
         } catch (Exception e) {
