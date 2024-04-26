@@ -2,6 +2,7 @@ package ru.itmo.server.managers;
 
 
 
+import lombok.Getter;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.commands.Command;
@@ -22,17 +23,39 @@ import java.util.Map;
  * @author zevtos
  */
 public class CommandManager {
-    private final Map<String, Command> commands = new HashMap<>();
-    private final List<String> commandHistory = new ArrayList<>();
-
-    public CommandManager(TicketCollectionManager ticketCollectionManager){
+    /**
+     * -- GETTER --
+     *  Получает словарь команд.
+     *
+     */
+    @Getter
+    private static Map<String, Command> commands;
+    /**
+     * -- GETTER --
+     *  Получает историю команд.
+     *
+     */
+    @Getter
+    private static final List<String> commandHistory = new ArrayList<>();
+    /**
+     * Регистрирует команду.
+     *
+     * @param commandName Название команды.
+     * @param command     Команда
+     */
+    public static void register(String commandName, Command command) {
+        commands.put(commandName, command);
+    }
+    public static void init(TicketCollectionManager ticketCollectionManager){
+        commands = new HashMap<>();
+        register("save", new Save(ticketCollectionManager));
         register("info", new Info(ticketCollectionManager));
         register("show", new Show(ticketCollectionManager));
         register("add", new Add(ticketCollectionManager));
         register("update", new Update(ticketCollectionManager));
         register("remove_by_id", new Remove(ticketCollectionManager));
         register("clear", new Clear(ticketCollectionManager));
-        register("exit", new Exit(ticketCollectionManager));
+        register("exit", new Exit());
         register("remove_first", new RemoveFirst(ticketCollectionManager));
         register("remove_head", new RemoveHead(ticketCollectionManager));
         register("add_if_min", new AddIfMin(ticketCollectionManager));
@@ -41,47 +64,17 @@ public class CommandManager {
         register("max_by_name", new MaxByName(ticketCollectionManager));
         register("add_person", new AddPerson(ticketCollectionManager));
     }
-
-    /**
-     * Регистрирует команду.
-     *
-     * @param commandName Название команды.
-     * @param command     Команда.
-     */
-    public void register(String commandName, Command command) {
-        commands.put(commandName, command);
-    }
-
-    /**
-     * Получает словарь команд.
-     *
-     * @return Словарь команд.
-     */
-    public Map<String, Command> getCommands() {
-        return commands;
-    }
-
-    /**
-     * Получает историю команд.
-     *
-     * @return История команд.
-     */
-    public List<String> getCommandHistory() {
-        return commandHistory;
-    }
-
-    /**
-     * Добавляет команду в историю.
-     *
-     * @param command Команда.
-     */
-    public void addToHistory(String command) {
-        commandHistory.add(command);
-    }
-
-    public Response handle(Request request) {
-        var command = this.getCommands().get(request.getCommand());
+    public static Response handle(Request request) {
+        var command = getCommands().get(request.getCommand());
         if (command == null) return new Response(false, request.getCommand(), "Команда не найдена!");
-        return command.execute(request);
+        if(!"exit".equals(request.getCommand()) && !"save".equals(request.getCommand())) {
+            return command.execute(request);
+        }
+        return new Response(false, "Неизвестная команда");
+    }
+    public static void handleServer(Request request) {
+        var command = getCommands().get(request.getCommand());
+        if (command == null) return;
+        if("exit".equals(request.getCommand()) || "save".equals(request.getCommand())) command.execute(request);
     }
 }

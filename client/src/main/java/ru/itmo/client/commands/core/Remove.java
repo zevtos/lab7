@@ -39,7 +39,7 @@ public class Remove extends Command {
             return new Request(getName(), id);
 //            Response resp;
 //            if (!(resp = tcpClient.sendCommand(new RemoveRequest(id))).isSuccess()) {
-//                console.logError(getClass(), resp.getMessage()); throw new ResponseException(resp.getMessage());
+//                console.printError(getClass(), resp.getMessage()); throw new ResponseException(resp.getMessage());
 //            }
 //
 //            console.println("Билет успешно удален.");
@@ -47,10 +47,10 @@ public class Remove extends Command {
         } catch (InvalidNumberOfElementsException exception) {
             console.println(getUsingError());
         } catch (NumberFormatException exception) {
-            console.logError(getClass(), "ID должен быть представлен числом!");}
+            console.printError(getClass(), "ID должен быть представлен числом!");}
 
 //        } catch (ResponseException e) {
-//            console.logError(getClass(), e.getMessage());
+//            console.printError(getClass(), e.getMessage());
 //        }
 
         return new Request();

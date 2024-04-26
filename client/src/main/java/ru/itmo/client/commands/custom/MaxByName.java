@@ -38,11 +38,11 @@ public class MaxByName extends Command {
 //            return true;
 
         } catch (InvalidNumberOfElementsException exception) {
-            console.logError(getClass(), "Неправильное количество аргументов!");
+            console.printError(getClass(), "Неправильное количество аргументов!");
             console.println(getUsingError());
         }
 //        } catch (ResponseException e) {
-//            console.logError(getClass(), e.getMessage());;
+//            console.printError(getClass(), e.getMessage());;
 //        }
         return new Request();
     }

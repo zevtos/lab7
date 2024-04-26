@@ -4,21 +4,18 @@ import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.commands.Command;
-import ru.itmo.server.managers.collections.TicketCollectionManager;
 
 /**
  * Команда 'exit'. Завершает выполнение программы (без сохранения в файл).
  * @author zevtos
  */
 public class Exit extends Command {
-    private TicketCollectionManager ticketCollectionManager;
     /**
      * Конструктор для создания экземпляра команды Exit.
      *
      */
-    public Exit(TicketCollectionManager ticketCollectionManager) {
+    public Exit() {
         super(CommandName.EXIT, "завершить программу (без сохранения в файл)");
-        this.ticketCollectionManager = ticketCollectionManager;
     }
 
     /**

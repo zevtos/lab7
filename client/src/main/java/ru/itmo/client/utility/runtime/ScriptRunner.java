@@ -8,7 +8,6 @@ import ru.itmo.general.exceptions.ScriptRecursionException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -71,12 +70,12 @@ public class ScriptRunner implements ModeRunner {
             Interrogator.setUserMode();
 
         } catch (NoSuchElementException | IllegalStateException exception) {
-            console.logError(getClass(), "Ошибка ввода.");
+            console.printError(getClass(), "Ошибка ввода.");
             try {
                 Interrogator.getUserScanner().hasNext();
                 return run("");
             } catch (NoSuchElementException | IllegalStateException exception1) {
-                console.logError(getClass(), "Экстренное завершение программы");
+                console.printError(getClass(), "Экстренное завершение программы");
                 userCommand = new String[2];
                 userCommand[0] = "save";
                 userCommand[1] = "";
@@ -86,10 +85,10 @@ public class ScriptRunner implements ModeRunner {
                 return Runner.ExitCode.ERROR;
             }
         } catch (FileNotFoundException exception) {
-            console.logError(getClass(), "Файл не найден");
+            console.printError(getClass(), "Файл не найден");
             return Runner.ExitCode.ERROR;
         } catch (ScriptRecursionException exception) {
-            console.logError(getClass(), "Обнаружена рекурсия");
+            console.printError(getClass(), "Обнаружена рекурсия");
             return Runner.ExitCode.ERROR;
         } finally {
             scriptSet.remove(argument);
@@ -111,7 +110,7 @@ public class ScriptRunner implements ModeRunner {
                 if (response.isSuccess()) {
                     console.println(response);
                 } else {
-                    console.logError(getClass(), response);
+                    console.printError(getClass(), response);
                 }
                 return Runner.ExitCode.EXIT;
             }
@@ -128,14 +127,14 @@ public class ScriptRunner implements ModeRunner {
                 if (response.isSuccess()) {
                     console.println(response);
                 } else {
-                    console.logError(getClass(), response);
+                    console.printError(getClass(), response);
                 }
             }
         }
         return Runner.ExitCode.OK;
     }
     public void repairConnection() {
-        console.logError(getClass(), "Нет подключения к серверу. Попытка подключения...");
+        console.printError(getClass(), "Нет подключения к серверу. Попытка подключения...");
         while (true) {
             try {
                 tcpClient.connect();
@@ -145,9 +144,9 @@ public class ScriptRunner implements ModeRunner {
                 }
                 TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
-                console.logError(getClass(), "Ошибка при восстановлении соединения: " + e.getMessage());
+                console.printError(getClass(), "Ошибка при восстановлении соединения: " + e.getMessage());
             } catch (TimeoutException e) {
-                console.logError(getClass(), "Тайм-аут при подключении к серверу");
+                console.printError(getClass(), "Тайм-аут при подключении к серверу");
             }
         }
     }

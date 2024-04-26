@@ -1,5 +1,8 @@
 package ru.itmo.server.managers.collections;
 
+import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.itmo.general.exceptions.DuplicateException;
 import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
@@ -15,8 +18,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author zevtos
  */
 public class TicketCollectionManager implements CollectionManager<Ticket> {
+    private final Logger logger = LoggerFactory.getLogger("TicketCollectionManager");
     private int currentId = 1;
+    /**
+     * -- GETTER --
+     *
+     */
+    @Getter
     private final LinkedList<Ticket> collection = new LinkedList<>();
+    /**
+     * -- GETTER --
+     *
+     */
+    @Getter
     private LocalDateTime lastSaveTime;
     private final DumpManager<Ticket> dumpManager;
     private final PersonCollectionManager personCollectionManager;
@@ -62,27 +76,13 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         AtomicBoolean flag = new AtomicBoolean(true);
         collection.forEach(ticket -> {
             if (!ticket.validate()) {
-                //console.printError("Билет с id=" + ticket.getId() + " имеет недопустимые поля.");
+                logger.error("Билет с id={} имеет недопустимые поля.", ticket.getId());
                 flag.set(false);
             }
         });
         if (flag.get()) {
-            //console.println("! Загруженные билеты валидны.");
+            logger.info("! Загруженные билеты валидны.");
         }
-    }
-
-    /**
-     * @return Последнее время сохранения.
-     */
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
-    }
-
-    /**
-     * @return коллекция.
-     */
-    public LinkedList<Ticket> getCollection() {
-        return collection;
     }
 
     /**
@@ -135,14 +135,6 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         collection.add(ticket);
         update();
         return true;
-    }
-
-    public void addAll(Collection<Ticket> tickets) {
-        for (Ticket ticket : tickets) {
-            if (!contains(ticket)) {
-                collection.add(ticket);
-            }
-        }
     }
 
 

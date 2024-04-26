@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.itmo.server.utility.adapters.LocalDateTimeAdapter;
 import ru.itmo.server.utility.adapters.ZonedDateAdapter;
 
@@ -22,6 +24,7 @@ import java.util.NoSuchElementException;
  * @author zevtos
  */
 public class DumpManager<T> {
+    private final Logger logger = LoggerFactory.getLogger("DumpManager");
     private final java.lang.reflect.Type collectionType;
     private final String collectionName;
     private final Gson gson = new GsonBuilder()
@@ -55,11 +58,10 @@ public class DumpManager<T> {
     public void writeCollection(Collection<T> collection) {
         try (OutputStreamWriter collectionPrintWriter = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8)) {
             collectionPrintWriter.write(gson.toJson(collection));
-            //console.println("Коллекция " + collectionName + " сохранена в файл!");
+            logger.info("Коллекция {} сохранена в файл!", collectionName);
         } catch (IOException exception) {
-            //console.printError("Загрузочный файл не может быть открыт!");
+            logger.error("Загрузочный файл не может быть открыт!");
         }
-        //TODO: сделать передачу messages и удалить console из Dump
     }
 
     /**
@@ -86,24 +88,22 @@ public class DumpManager<T> {
                     jsonString = new StringBuilder("[]");
                 }
 
-                LinkedList<T> collection = gson.fromJson(jsonString.toString(),
+                logger.info("Коллекция {} успешно загружена!", collectionName);
+                return gson.<LinkedList<T>>fromJson(jsonString.toString(),
                         collectionType);
 
-                //console.println("Коллекция " + collectionName + " успешно загружена!");
-                return collection;
-
             } catch (FileNotFoundException exception) {
-                //console.printError("Загрузочный файл не найден!");
+                logger.error("Загрузочный файл не найден!");
             } catch (NoSuchElementException exception) {
-                //console.printError("Загрузочный файл пуст!");
+                logger.error("Загрузочный файл пуст!");
             } catch (JsonParseException exception) {
-                //console.printError("В загрузочном файле не обнаружена необходимая коллекция!");
+                logger.error("В загрузочном файле не обнаружена необходимая коллекция!");
             } catch (IllegalStateException | IOException exception) {
-                //console.printError("Непредвиденная ошибка!");
+                logger.error("Непредвиденная ошибка!");
                 System.exit(0);
             }
         } else {
-            //console.printError("Аргумент командной строки с загрузочным файлом не найден!");
+            logger.error("Аргумент командной строки с загрузочным файлом не найден!");
         }
         return new LinkedList<>();
     }
@@ -116,9 +116,9 @@ public class DumpManager<T> {
             FileWriter writer = new FileWriter(fileName);
             writer.write("");
             writer.close();
-            //console.println("Файл " + fileName + " успешно очищен!");
+            logger.info("Файл {} успешно очищен!", fileName);
         } catch (IOException exception) {
-            //console.printError("Ошибка при очистке файла " + fileName + ": " + exception.getMessage());
+            logger.error("Ошибка при очистке файла {}: {}", fileName, exception.getMessage());
         }
     }
 }

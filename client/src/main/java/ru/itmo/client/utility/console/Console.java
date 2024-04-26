@@ -21,7 +21,7 @@ public interface Console {
      * Выводит ошибку в консоль.
      * @param obj Ошибка для печати.
      */
-    void logError(Class<?> callingClass, Object obj);
+    void printError(Class<?> callingClass, Object obj);
 
     /**
      * Выводит два элемента в формате таблицы.
@@ -43,6 +43,4 @@ public interface Console {
 
 
     void println();
-
-    void log(String s);
 }

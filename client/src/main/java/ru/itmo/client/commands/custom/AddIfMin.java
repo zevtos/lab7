@@ -53,10 +53,10 @@ public class AddIfMin extends Command {
 //            return true;
 
         } catch (InvalidNumberOfElementsException exception) {
-            console.logError(getClass(), "Неправильное количество аргументов!");
+            console.printError(getClass(), "Неправильное количество аргументов!");
             console.println(getUsingError());
         } catch (InvalidFormException exception) {
-            console.logError(getClass(), "Поля билета не валидны! Продукт не создан!");
+            console.printError(getClass(), "Поля билета не валидны! Продукт не создан!");
         } catch (InvalidScriptInputException ignored) {}
         return new Request();
     }

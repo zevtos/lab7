@@ -27,11 +27,7 @@ public class Main {
     public static void main(String[] args) {
         Interrogator.setUserScanner(new Scanner(System.in));
         var console = new StandartConsole();
-        try {
-            var client = new TCPClient(InetAddress.getLocalHost().getHostAddress(), PORT, console);
-            new Runner(console, client).run();
-        } catch (UnknownHostException e) {
-            console.logError(Main.class, "");
-        }
+        var client = new TCPClient("localhost", PORT, console);
+        new Runner(console, client).run();
     }
 }

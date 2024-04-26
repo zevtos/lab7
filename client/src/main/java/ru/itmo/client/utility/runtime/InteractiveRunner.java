@@ -1,15 +1,12 @@
 package ru.itmo.client.utility.runtime;
 
 import ru.itmo.client.managers.CommandManager;
-import ru.itmo.client.network.ConnectionMonitor;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.Interrogator;
 import ru.itmo.client.utility.console.Console;
 
-import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -49,7 +46,7 @@ public class InteractiveRunner implements ModeRunner {
         try {
             tcpClient.connect();
         } catch (TimeoutException e) {
-            console.logError(getClass(), "Тайм-аут при подключении к серверу" + '\n' + "Подключение не установлено!");
+            console.printError(getClass(), "Тайм-аут при подключении к серверу" + '\n' + "Подключение не установлено!");
         }
         String[] userCommand;
         try (Scanner userScanner = Interrogator.getUserScanner()) {
@@ -64,19 +61,19 @@ public class InteractiveRunner implements ModeRunner {
                 try {
                     commandStatus = executeCommand(userCommand);
                 } catch (NoSuchElementException e) {
-                    console.logError(getClass(), "Команда '" + userCommand[0] + "' не найдена. Введите 'help' для помощи");
+                    console.printError(getClass(), "Команда '" + userCommand[0] + "' не найдена. Введите 'help' для помощи");
                     commandStatus = Runner.ExitCode.ERROR;
                 }
                 commandManager.addToHistory(userCommand[0]);
             } while (commandStatus != Runner.ExitCode.EXIT);
             return commandStatus;
         } catch (NoSuchElementException | IllegalStateException exception) {
-            console.logError(getClass(), "Ошибка ввода.");
+            console.printError(getClass(), "Ошибка ввода.");
             try {
                 Interrogator.getUserScanner().hasNext();
                 return run("");
             } catch (NoSuchElementException | IllegalStateException exception1) {
-                console.logError(getClass(), "Экстренное завершение программы");
+                console.printError(getClass(), "Экстренное завершение программы");
                 userCommand = new String[2];
                 userCommand[1] = "";
                 userCommand[0] = "exit";
@@ -114,7 +111,7 @@ public class InteractiveRunner implements ModeRunner {
                 if (response.isSuccess()) {
                     console.println(response.toString());
                 } else {
-                    console.logError(getClass(), response.toString());
+                    console.printError(getClass(), response.toString());
                 }
             }
         }

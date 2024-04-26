@@ -1,6 +1,9 @@
 package ru.itmo.server.managers.collections;
 
 
+import lombok.Getter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.itmo.general.exceptions.DuplicateException;
 import ru.itmo.general.models.Person;
 import ru.itmo.server.managers.DumpManager;
@@ -14,7 +17,14 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author zevtos
  */
 public class PersonCollectionManager implements CollectionManager<Person> {
+    private final Logger logger = LoggerFactory.getLogger(getClass().getSimpleName());
     private final List<Person> collection = new ArrayList<>();
+    /**
+     * -- GETTER --
+     *  Возвращает последнее время сохранения коллекции.
+     *
+     */
+    @Getter
     private LocalDateTime lastSaveTime;
     private final DumpManager<Person> dumpManager;
 
@@ -44,12 +54,12 @@ public class PersonCollectionManager implements CollectionManager<Person> {
         AtomicBoolean flag = new AtomicBoolean(true);
         collection.forEach(person -> {
             if (!person.validate()) {
-                //console.printError("Человек с паспортом " + person.getPassportID() + " имеет недопустимые поля.");
+                logger.error("Человек с паспортом {} имеет недопустимые поля.", person.getPassportID());
                 flag.set(false);
             }
         });
         if (flag.get()) {
-            //console.println("! Загруженные объекты Person валидны.");
+            logger.info("! Загруженные объекты Person валидны.");
         }
     }
 
@@ -62,19 +72,6 @@ public class PersonCollectionManager implements CollectionManager<Person> {
     public Person byId(int id) {
         return collection.stream()
                 .filter(person -> Objects.equals(person.getPassportID(), Integer.toString(id)))
-                .findFirst()
-                .orElse(null);
-    }
-
-    /**
-     * Получает объект типа Person по его паспортному идентификатору.
-     *
-     * @param id паспортный идентификатор объекта
-     * @return объект типа Person с указанным паспортным идентификатором или null, если объект не найден
-     */
-    public Person byId(String id) {
-        return collection.stream()
-                .filter(person -> Objects.equals(person.getPassportID(), id))
                 .findFirst()
                 .orElse(null);
     }
@@ -182,15 +179,6 @@ public class PersonCollectionManager implements CollectionManager<Person> {
     @Override
     public Person getFirst() {
         return collection.isEmpty() ? null : collection.get(0);
-    }
-
-    /**
-     * Возвращает последнее время сохранения коллекции.
-     *
-     * @return последнее время сохранения
-     */
-    public LocalDateTime getLastSaveTime() {
-        return lastSaveTime;
     }
 
     /**

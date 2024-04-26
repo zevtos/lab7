@@ -13,23 +13,47 @@ import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.misc.Signal;
 
-public class TCPServer extends Thread {
+public class TCPServer {
     private final int port;
     private ServerSocketChannel serverSocketChannel;
     private Selector selector;
-    private final CommandManager commandManager;
     private static final Logger logger = LoggerFactory.getLogger(TCPServer.class);
 
     public TCPServer(int port, TicketCollectionManager ticketCollectionManager) {
         this.port = port;
-        this.commandManager = new CommandManager(ticketCollectionManager);
+        // Instantiation of utility class
+        CommandManager.init(ticketCollectionManager);
     }
 
-    @Override
-    public void run() {
+    public void start() {
         try {
+            new Thread(() -> {
+                BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+                String input;
+                while (true) {
+                    try {
+                        input = in.readLine();
+                        if (input.equals("exit")) {
+                            CommandManager.handleServer(new Request(true, input, null));
+                            stop_server();
+                            break;
+                        } else if (input.equals("save")) {
+                            CommandManager.handleServer(new Request(true, input, null));
+                            logger.info("Билеты сохранены в файл");
+                        }
+                    } catch (Exception e) {
+                        logger.error("Ошибка чтения с консоли");
+                        try {
+                            stop_server();
+                            break;
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                }
+            }).start();
+
             serverSocketChannel = ServerSocketChannel.open();
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.socket().bind(new InetSocketAddress(port));
@@ -67,6 +91,8 @@ public class TCPServer extends Thread {
             }
         } catch (IOException e) {
             logger.error("Ошибка при запуске сервера", e);
+        } catch(RuntimeException e){
+            logger.info("Завершение работы сервера на порту: {}", e.getMessage());
         } finally {
             try {
                 stop_server();
@@ -177,7 +203,7 @@ public class TCPServer extends Thread {
     private Response processRequest(Request request) {
         Response response;
         try {
-            response = commandManager.handle(request);
+            response = CommandManager.handle(request);
             if ("exit".equals(request.getCommand())) {
                 logger.info("Получен запрос на завершение работы сервера.");
                 try {
@@ -191,20 +217,5 @@ public class TCPServer extends Thread {
             response = new Response(false, request.getCommand(), "Команда не найдена!");
         }
         return response;
-    }
-    private void setSignalProcessing(String... signalNames) {
-        for (String signalName : signalNames) {
-            try {
-                Signal.handle(new Signal(signalName), signal -> {
-                    try {
-                        this.stop_server();
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            } catch (IllegalArgumentException ignored) {
-                // Игнорируем исключение, если сигнал с таким названием уже существует или такого сигнала не существует
-            }
-        }
     }
 }

@@ -34,11 +34,11 @@ public class RemoveHead extends Command {
 //            return true;
 
         } catch (InvalidNumberOfElementsException exception) {
-            console.logError(getClass(), "Неправильное количество аргументов!");
+            console.printError(getClass(), "Неправильное количество аргументов!");
             return new Request(false, getName(), getUsingError());
         }
 //        catch (ResponseException e){
-//            console.logError(getClass(), e.getMessage());
+//            console.printError(getClass(), e.getMessage());
 //        }
     }
 }

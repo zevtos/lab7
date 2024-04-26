@@ -24,7 +24,6 @@ public class Update extends Command {
     /**
      * Выполняет команду
      *
-     * @param arguments Аргументы команды.
      * @return Успешность выполнения команды.
      */
     @Override

@@ -1,13 +1,6 @@
 package ru.itmo.client.utility.console;
 
-import java.io.PrintStream;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
-
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 /**
  * Обеспечивает ввод команд и вывод результатов в стандартной консоли.
  *
@@ -15,7 +8,6 @@ import org.slf4j.LoggerFactory;
  */
 public class StandartConsole implements Console {
     private static final String PROMPT = "$ ";
-    private static final Logger logger = LoggerFactory.getLogger(StandartConsole.class);
     /**
      * Выводит объект в консоль.
      *
@@ -37,17 +29,13 @@ public class StandartConsole implements Console {
         System.out.println();
     }
 
-    public void log(String string) {
-        System.out.print(string);
-    }
-
     /**
      * Выводит ошибку в консоль.
      *
      * @param obj Ошибка для печати.
      */
     @SneakyThrows
-    public void logError(Class<?> callingClass, Object obj) {
+    public void printError(Class<?> callingClass, Object obj) {
         System.err.print("Error:" + obj.toString() + '\n');
         Thread.sleep(20);
     }

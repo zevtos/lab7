@@ -1,11 +1,13 @@
 package ru.itmo.server.main;
 
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import ru.itmo.general.network.Request;
+import ru.itmo.server.managers.CommandManager;
 import ru.itmo.server.managers.collections.TicketCollectionManager;
 import ru.itmo.server.network.TCPServer;
 import sun.misc.Signal;
-
-import java.util.Scanner;
 
 /**
  * Главный класс приложения.
@@ -13,9 +15,10 @@ import java.util.Scanner;
  * @author zevtos
  */
 public class Main {
+    public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final int MISSING_FILE_ARGUMENT_EXIT_CODE = 1;
     private static final int PORT = 4093;
-    private static boolean flag = true;
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     /**
      * Точка входа в приложение.
@@ -25,7 +28,14 @@ public class Main {
     @SneakyThrows
     public static void main(String[] args) {
         // обработка сигналов
-
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            LOGGER.info("Сохранение перед завершением работы приложения...");
+            try {
+                CommandManager.handleServer(new Request(true, "save", null));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }));
         checkFileArgument(args);
 
         var ticketCollectionManager = new TicketCollectionManager(args);
@@ -34,16 +44,6 @@ public class Main {
 
         TCPServer tcpServer = new TCPServer(PORT, ticketCollectionManager);
         tcpServer.start();
-        Scanner scanner = new Scanner(System.in);
-        String input;
-        while(flag){
-            input = scanner.nextLine();
-            if(input.equalsIgnoreCase("exit")){
-                flag = false;
-            }
-        }
-        // Сделать класс для возврата Response который будет запускать новый поток и хранить этот цикл, а так всё збс
-        tcpServer.stop_server();
     }
 
     /**
@@ -53,14 +53,15 @@ public class Main {
      */
     private static void checkFileArgument(String[] args) {
         if (args.length != 1 && args.length != 2) {
-            //console.println("Введите имя загружаемого файла как аргумент командной строки");
+            logger.info("Введите имя загружаемого файла как аргумент командной строки");
             System.exit(MISSING_FILE_ARGUMENT_EXIT_CODE);
         }
     }
     private static void setSignalProcessing(String... signalNames) {
         for (String signalName : signalNames) {
             try {
-                Signal.handle(new Signal(signalName), signal -> flag = false);
+                Signal.handle(new Signal(signalName), signal -> {
+                });
             } catch (IllegalArgumentException ignored) {
                 // Игнорируем исключение, если сигнал с таким названием уже существует или такого сигнала не существует
             }
