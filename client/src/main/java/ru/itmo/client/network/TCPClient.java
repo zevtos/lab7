@@ -12,7 +12,7 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.concurrent.TimeoutException;
 
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.utility.console.Console;
 
 public class TCPClient {
     private final String serverAddress;
@@ -114,7 +114,6 @@ public class TCPClient {
         Selector selector = Selector.open();
         socketChannel.register(selector, socketChannel.validOps());
 
-        ByteBuffer buffer = ByteBuffer.allocate(10000);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         long startTime = System.currentTimeMillis();
 
@@ -124,14 +123,13 @@ public class TCPClient {
                 continue;
             }
 
-            int bytesRead = socketChannel.read(buffer);
-            if (bytesRead == -1) {
-                break;
+            ByteBuffer buffer = ByteBuffer.allocate(8192);
+            int bytesRead;
+            while ((bytesRead = socketChannel.read(buffer)) > 0) {
+                buffer.flip();
+                byteArrayOutputStream.write(buffer.array(), 0, bytesRead);
+                buffer.clear();
             }
-
-            buffer.flip();
-            byteArrayOutputStream.write(buffer.array(), 0, bytesRead);
-            buffer.clear();
 
             byte[] responseBytes = byteArrayOutputStream.toByteArray();
             if (responseBytes.length > 0) {
@@ -142,6 +140,7 @@ public class TCPClient {
 
         return null;
     }
+
 
     public Response sendCommand(Request request) {
         try {

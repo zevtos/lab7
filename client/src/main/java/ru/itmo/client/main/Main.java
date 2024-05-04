@@ -27,6 +27,8 @@ public class Main {
     public static void main(String[] args) {
         Interrogator.setUserScanner(new Scanner(System.in));
         var console = new StandartConsole();
+        console.setErr(System.err);
+        console.setOut(System.out);
         var client = new TCPClient("localhost", PORT, console);
         new Runner(console, client).run();
     }

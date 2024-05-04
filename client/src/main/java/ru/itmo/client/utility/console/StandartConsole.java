@@ -1,6 +1,12 @@
 package ru.itmo.client.utility.console;
 
 import lombok.SneakyThrows;
+import ru.itmo.general.utility.console.Console;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Обеспечивает ввод команд и вывод результатов в стандартной консоли.
  *
@@ -8,6 +14,9 @@ import lombok.SneakyThrows;
  */
 public class StandartConsole implements Console {
     private static final String PROMPT = "$ ";
+    private static List<OutputStream> streams = new ArrayList<>();
+    private static OutputStream lastStream = null;
+
     /**
      * Выводит объект в консоль.
      *
@@ -25,6 +34,7 @@ public class StandartConsole implements Console {
     public void println(Object obj) {
         System.out.println(obj);
     }
+
     public void println() {
         System.out.println();
     }
@@ -36,8 +46,7 @@ public class StandartConsole implements Console {
      */
     @SneakyThrows
     public void printError(Class<?> callingClass, Object obj) {
-        System.err.print("Error:" + obj.toString() + '\n');
-        Thread.sleep(20);
+        System.err.println("Error:" + obj);
     }
 
     /**
@@ -57,6 +66,14 @@ public class StandartConsole implements Console {
         print(PROMPT);
     }
 
+    public void setErr(OutputStream stream) {
+        System.setErr(new PrintStream(new FixedStream(stream)));
+    }
+
+    public void setOut(OutputStream stream) {
+        System.setOut(new PrintStream(new FixedStream(stream)));
+    }
+
     /**
      * Возвращает приглашение для ввода команды.
      *
@@ -66,4 +83,52 @@ public class StandartConsole implements Console {
         return PROMPT;
     }
 
+    private static class FixedStream extends OutputStream {
+        private final OutputStream target;
+
+        public FixedStream(OutputStream originalStream) {
+            target = originalStream;
+            streams.add(this);
+        }
+
+        @Override
+        public void write(int b) throws IOException {
+            if (lastStream != this) swap();
+            target.write(b);
+        }
+
+        @Override
+        public void write(byte[] b) throws IOException {
+            if (lastStream != this) swap();
+            target.write(b);
+        }
+
+        @Override
+        public void write(byte[] b, int off, int len) throws IOException {
+            if (lastStream != this) swap();
+            target.write(b, off, len);
+        }
+
+        private void swap() throws IOException {
+            if (lastStream != null) {
+                lastStream.flush();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ignored) {
+                }
+            }
+            lastStream = this;
+        }
+
+        @Override
+        public void close() throws IOException {
+            target.close();
+        }
+
+        @Override
+        public void flush() throws IOException {
+            target.flush();
+        }
+    }
 }
+

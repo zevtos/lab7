@@ -1,6 +1,6 @@
 package ru.itmo.client.network;
 
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.utility.console.Console;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;

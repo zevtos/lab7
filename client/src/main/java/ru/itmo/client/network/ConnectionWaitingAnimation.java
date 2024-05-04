@@ -1,6 +1,6 @@
 package ru.itmo.client.network;
 
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.utility.console.Console;
 
 public class ConnectionWaitingAnimation extends Thread {
     private final Console console;

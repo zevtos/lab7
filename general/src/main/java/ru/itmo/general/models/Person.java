@@ -1,7 +1,10 @@
 package ru.itmo.general.models;
 
+import lombok.Getter;
 import ru.itmo.general.utility.base.Element;
+import ru.itmo.general.utility.base.Validatable;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -9,11 +12,14 @@ import java.util.Objects;
  * Класс, представляющий объект персоны.
  * @author zevtos
  */
-public class Person extends Element {
-    private Integer id;
+public class Person implements Validatable, Serializable {
+    @Getter
     private LocalDateTime birthday; //Поле может быть null
+    @Getter
     private Float height; //Поле может быть null, Значение поля должно быть больше 0
+    @Getter
     private String passportID; //Поле не может быть null
+    @Getter
     private Color hairColor; //Поле не может быть null
 
     public Person(LocalDateTime birthday, Float height, String passportID, Color hairColor) {
@@ -30,7 +36,6 @@ public class Person extends Element {
     @Override
     public String toString() {
         return "Person{" +
-                "\n\t\tid=" + id +
                 "\n\t\tbirthday=" + (birthday == null ? "null" : birthday) +
                 "\n\t\theight=" + (height == null ? "null" : height) +
                 "\n\t\tpassportID='" + passportID + '\'' +
@@ -60,27 +65,5 @@ public class Person extends Element {
         if (o == null || getClass() != o.getClass()) return false;
         Person that = (Person) o;
         return Objects.equals(passportID, that.passportID);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(birthday, passportID);
-    }
-
-    public String getPassportID() {
-        return passportID;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-    public void setId(int newId){
-        this.id = newId;
-    }
-
-    @Override
-    public int compareTo(Element element) {
-        return Integer.compare(this.getId(), element.getId());
     }
 }

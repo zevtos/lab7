@@ -83,7 +83,7 @@ public class Ticket extends Element {
     }
     @Override
     public int compareTo(Element element) {
-        return Integer.compare(this.getId(), element.getId());
+        return CharSequence.compare(this.getName(), element.getName());
     }
     @Override
     public int getId() {

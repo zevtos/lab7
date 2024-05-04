@@ -1,5 +1,7 @@
 package ru.itmo.client.utility;
 
+import lombok.Getter;
+
 import java.util.Scanner;
 
 /**
@@ -8,16 +10,15 @@ import java.util.Scanner;
  */
 public class Interrogator {
 
-    private static Scanner userScanner;
-    private static boolean fileMode = false;
-
     /**
-     * Возвращает сканер для пользовательского ввода.
+     * -- GETTER --
+     *  Возвращает сканер для пользовательского ввода.
+     *
      * @return Сканер для пользовательского ввода.
      */
-    public static Scanner getUserScanner() {
-        return userScanner;
-    }
+    @Getter
+    private static Scanner userScanner;
+    private static boolean fileMode = false;
 
     /**
      * Устанавливает сканер для пользовательского ввода.

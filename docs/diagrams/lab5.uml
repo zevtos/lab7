@@ -1,0 +1,1163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>C:/Users/zevtos/itmo/labs/md/prog/lab5</OriginalElement>
+  <nodes>
+    <node x="10223.329646017699" y="298.0">ru.itmo.prog.lab5.commands.Add</node>
+    <node x="1397.896238938053" y="241.0">ru.itmo.prog.lab5.managers.DumpManager</node>
+    <node x="6557.0" y="3013.0">ru.itmo.prog.lab5.utility.Runner.ExitCode</node>
+    <node x="463.0" y="2782.0">ru.itmo.prog.lab5.models.forms.TicketTypeForm</node>
+    <node x="3751.0" y="3013.0">ru.itmo.prog.lab5.utility.adapters.LocalDateTimeAdapter</node>
+    <node x="5549.454646017699" y="284.0">ru.itmo.prog.lab5.commands.MaxByName</node>
+    <node x="760.25" y="1935.0">ru.itmo.prog.lab5.models.forms.Form</node>
+    <node x="960.8962389380531" y="762.0">ru.itmo.prog.lab5.models.Ticket</node>
+    <node x="4885.441150442478" y="2782.0">ru.itmo.prog.lab5.commands.core.Save</node>
+    <node x="4795.329646017699" y="1085.0">ru.itmo.prog.lab5.utility.Runner</node>
+    <node x="10221.191150442479" y="2782.0">ru.itmo.prog.lab5.commands.core.Show</node>
+    <node x="8175.829646017699" y="227.0">ru.itmo.prog.lab5.managers.CommandManager</node>
+    <node x="-48.25" y="-146.0">ru.itmo.prog.lab5.utility.base.Element</node>
+    <node x="8984.329646017699" y="284.0">ru.itmo.prog.lab5.commands.AddIfMin</node>
+    <node x="10542.329646017699" y="298.0">ru.itmo.prog.lab5.commands.Info</node>
+    <node x="4033.829646017699" y="116.0">ru.itmo.prog.lab5.managers.collections.CollectionManager</node>
+    <node x="8456.0" y="3013.0">ru.itmo.prog.lab5.exceptions.InvalidFormException</node>
+    <node x="8467.829646017699" y="298.0">ru.itmo.prog.lab5.commands.ExecuteScript</node>
+    <node x="4311.0" y="3013.0">ru.itmo.prog.lab5.utility.LocalDateTimeAdapter</node>
+    <node x="10700.566150442479" y="2782.0">ru.itmo.prog.lab5.commands.core.Info</node>
+    <node x="9084.829646017699" y="-395.0">ru.itmo.prog.lab5.commands.Describable</node>
+    <node x="509.0" y="3013.0">ru.itmo.prog.lab5.utility.StandardConsole</node>
+    <node x="7210.0" y="3013.0">ru.itmo.prog.lab5.exceptions.InvalidNumberOfElementsException</node>
+    <node x="8697.329646017699" y="298.0">ru.itmo.prog.lab5.commands.Save</node>
+    <node x="1865.0" y="3013.0">ru.itmo.prog.lab5.exceptions.DuplicateException</node>
+    <node x="8190.0" y="3013.0">ru.itmo.prog.lab5.exceptions.EmptyValueException</node>
+    <node x="11025.441150442479" y="2768.0">ru.itmo.prog.lab5.commands.custom.AddIfMin</node>
+    <node x="61.0" y="171.5">ru.itmo.prog.lab5.utility.console.StandardConsole</node>
+    <node x="1459.691150442478" y="2726.0">ru.itmo.prog.lab5.models.forms.PersonForm</node>
+    <node x="8039.454646017699" y="-188.0">ru.itmo.prog.lab5.models.Coordinates</node>
+    <node x="801.0" y="3013.0">ru.itmo.prog.lab5.utility.Console</node>
+    <node x="4431.329646017699" y="1099.0">ru.itmo.prog.lab5.utility.InteractiveRunner</node>
+    <node x="2133.0" y="3013.0">ru.itmo.prog.lab5.ticketmanagement.models.TicketType</node>
+    <node x="224.0" y="2754.0">ru.itmo.prog.lab5.models.forms.CoordinatesForm</node>
+    <node x="180.0" y="3013.0">ru.itmo.prog.lab5.Ask</node>
+    <node x="-248.25" y="-174.0">ru.itmo.prog.lab5.models.Color</node>
+    <node x="2711.0" y="-258.0">ru.itmo.prog.lab5.utility.console.Console</node>
+    <node x="6832.454646017699" y="298.0">ru.itmo.prog.lab5.commands.Clear</node>
+    <node x="-280.0" y="3013.0">ru.itmo.prog.lab5.ticketmanagement.models.Ticket</node>
+    <node x="8086.704646017699" y="1113.0">ru.itmo.prog.lab5.commands.core.Help</node>
+    <node x="9655.441150442479" y="2768.0">ru.itmo.prog.lab5.commands.custom.MinByDiscount</node>
+    <node x="1094.691150442478" y="2684.0">ru.itmo.prog.lab5.models.forms.TicketForm</node>
+    <node x="2619.0" y="3013.0">ru.itmo.prog.lab5.utility.adapters.ZonedDateAdapter</node>
+    <node x="6322.691150442478" y="2782.0">ru.itmo.prog.lab5.commands.custom.RemoveFirst</node>
+    <node x="8969.0" y="3013.0">ru.itmo.prog.lab5.utility.ModeRunner</node>
+    <node x="6403.454646017699" y="298.0">ru.itmo.prog.lab5.commands.core.Exit</node>
+    <node x="2493.271238938053" y="1921.0">ru.itmo.prog.lab5.utility.runtime.InteractiveRunner</node>
+    <node x="4871.0" y="3013.0">ru.itmo.prog.lab5.utility.adapters.LocalDateAdapter</node>
+    <node x="7212.691150442478" y="2782.0">ru.itmo.prog.lab5.commands.core.Add</node>
+    <node x="7459.454646017699" y="283.5">ru.itmo.prog.lab5.commands.SumOfPrice</node>
+    <node x="1582.0" y="3013.0">ru.itmo.prog.lab5.exceptions.InvalidRangeException</node>
+    <node x="2614.771238938053" y="1085.0">ru.itmo.prog.lab5.utility.runtime.ScriptRunner</node>
+    <node x="7893.0" y="3013.0">ru.itmo.prog.lab5.exceptions.ScriptRecursionException</node>
+    <node x="7584.0" y="3013.0">ru.itmo.prog.lab5.exceptions.InvalidScriptInputException</node>
+    <node x="9188.0" y="3013.0">ru.itmo.prog.lab5.utility.Validatable</node>
+    <node x="2394.0" y="3013.0">ru.itmo.prog.lab5.ticketmanagement.models.Color</node>
+    <node x="9917.329646017699" y="298.0">ru.itmo.prog.lab5.commands.Remove</node>
+    <node x="7531.691150442478" y="2768.0">ru.itmo.prog.lab5.commands.custom.MaxByName</node>
+    <node x="1034.896238938053" y="1654.0">ru.itmo.prog.lab5.managers.CollectionManager</node>
+    <node x="2060.271238938053" y="818.0">ru.itmo.prog.lab5.managers.collections.PersonCollectionManager</node>
+    <node x="1093.0" y="3013.0">ru.itmo.prog.lab5.managers.SignalManager</node>
+    <node x="8870.829646017699" y="-381.0">ru.itmo.prog.lab5.commands.Executable</node>
+    <node x="6804.0" y="3013.0">ru.itmo.prog.lab5.utility.runtime.Runner.ExitCode</node>
+    <node x="6294.0" y="3013.0">ru.itmo.prog.lab5.ticketmanagement.models.Coordinates</node>
+    <node x="2941.271238938053" y="1626.0">ru.itmo.prog.lab5.managers.collections.TicketCollectionManager</node>
+    <node x="9212.316150442479" y="2782.0">ru.itmo.prog.lab5.commands.core.Remove</node>
+    <node x="8443.316150442479" y="2767.5">ru.itmo.prog.lab5.commands.special.SumOfPrice</node>
+    <node x="5846.191150442478" y="2782.0">ru.itmo.prog.lab5.commands.update.Update</node>
+    <node x="5929.0" y="3013.0">ru.itmo.prog.lab5.ticketmanagement.models.Person</node>
+    <node x="1359.0" y="3013.0">ru.itmo.prog.lab5.utility.Interrogator</node>
+    <node x="5400.0" y="3013.0">ru.itmo.prog.lab5.utility.LocalDateAdapter</node>
+    <node x="3185.0" y="3013.0">ru.itmo.prog.lab5.utility.ZonedDateAdapter</node>
+    <node x="10601.829646017699" y="1113.0">ru.itmo.prog.lab5.commands.custom.History</node>
+    <node x="1731.896238938053" y="270.0">ru.itmo.prog.lab5.models.TicketType</node>
+    <node x="8810.316150442479" y="2782.0">ru.itmo.prog.lab5.commands.custom.RemoveHead</node>
+    <node x="3838.829646017699" y="312.5">ru.itmo.prog.lab5.utility.runtime.ModeRunner</node>
+    <node x="-280.0" y="185.0">ru.itmo.prog.lab5.models.Person</node>
+    <node x="8719.0" y="3013.0">ru.itmo.prog.lab5.exceptions.NotFoundException</node>
+    <node x="11109.829646017699" y="1113.0">ru.itmo.prog.lab5.commands.Help</node>
+    <node x="3752.5" y="-381.0">ru.itmo.prog.lab5.utility.base.Validatable</node>
+    <node x="8963.079646017699" y="-231.0">ru.itmo.prog.lab5.commands.Command</node>
+    <node x="6102.454646017699" y="298.0">ru.itmo.prog.lab5.commands.Update</node>
+    <node x="7798.954646017699" y="284.0">ru.itmo.prog.lab5.commands.MinByDiscount</node>
+    <node x="7121.454646017699" y="298.0">ru.itmo.prog.lab5.commands.RemoveHead</node>
+    <node x="697.0" y="2782.0">ru.itmo.prog.lab5.models.forms.ColorForm</node>
+    <node x="6617.454646017699" y="298.0">ru.itmo.prog.lab5.commands.Exit</node>
+    <node x="9585.329646017699" y="298.0">ru.itmo.prog.lab5.commands.RemoveFirst</node>
+    <node x="8763.829646017699" y="1113.0">ru.itmo.prog.lab5.commands.History</node>
+    <node x="260.0" y="3403.0">ru.itmo.prog.lab5.Ask.AskBreak</node>
+    <node x="4133.329646017699" y="1099.0">ru.itmo.prog.lab5.utility.runtime.Runner</node>
+    <node x="6851.691150442478" y="2782.0">ru.itmo.prog.lab5.commands.core.AddPerson</node>
+    <node x="5129.454646017699" y="1099.0">ru.itmo.prog.lab5.utility.ScriptRunner</node>
+    <node x="7051.0" y="3013.0">ru.itmo.prog.lab5.utility.Element</node>
+    <node x="7904.691150442479" y="2782.0">ru.itmo.prog.lab5.commands.core.Clear</node>
+    <node x="5883.454646017699" y="298.0">ru.itmo.prog.lab5.commands.core.ExecuteScript</node>
+    <node x="-251.0" y="1071.0">ru.itmo.prog.lab5.main.Main</node>
+    <node x="9294.329646017699" y="298.0">ru.itmo.prog.lab5.commands.Show</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ru.itmo.prog.lab5.commands.core.Info" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="10849.566" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.MinByDiscount" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="58.0" />
+      <point x="9838.941" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.RemoveFirst" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="2.2638495575220077" y="-44.0" />
+      <point x="6500.455" y="2364.5" />
+      <point x="7649.0" y="2364.5" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Help" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-44.0" />
+      <point x="11241.83" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Save" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-44.0" />
+      <point x="5108.941" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.ExecuteScript" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="49.5" y="-44.0" />
+      <point x="8616.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Exit" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="48.5" y="-44.0" />
+      <point x="6762.954646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.ScriptRunner" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-58.0" />
+      <point x="5328.955" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Help" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-44.0" />
+      <point x="8218.705" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Command" target="ru.itmo.prog.lab5.commands.Describable" relationship="REALIZATION">
+      <point x="0.0" y="-129.0" />
+      <point x="9065.579646017699" y="-283.0" />
+      <point x="9163.329646017699" y="-283.0" />
+      <point x="0.0" y="43.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.History" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="70.0" y="-44.0" />
+      <point x="10811.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.History" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-44.0" />
+      <point x="10741.83" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.RemoveFirst" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="9741.33" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.InteractiveRunner" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-58.0" />
+      <point x="4602.83" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" target="ru.itmo.prog.lab5.models.Person" relationship="TO_MANY">
+      <point x="-2.389380529166374E-4" y="-339.0" />
+      <point x="2245.271" y="675.0" />
+      <point x="-120.0" y="675.0" />
+      <point x="-0.0" y="157.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.RemoveHead" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-44.0" />
+      <point x="8988.316" y="2488.0" />
+      <point x="8562.0" y="2488.0" />
+      <point x="8562.0" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.ScriptRunner" target="ru.itmo.prog.lab5.utility.runtime.ModeRunner" relationship="REALIZATION">
+      <point x="99.75" y="-72.0" />
+      <point x="2914.021238938053" y="610.0" />
+      <point x="3925.829646017699" y="610.0" />
+      <point x="-0.0" y="29.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.PersonForm" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247788864595E-4" y="-100.0" />
+      <point x="1633.691" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.MaxByName" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="78.5" y="-58.0" />
+      <point x="5784.954646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.special.SumOfPrice" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="86.75" y="-58.5" />
+      <point x="8703.566150442479" y="2473.0" />
+      <point x="11806.271238938054" y="2473.0" />
+      <point x="11806.271238938054" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.Runner" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-72.0" />
+      <point x="4934.33" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Ticket" target="ru.itmo.prog.lab5.models.Coordinates" relationship="TO_ONE">
+      <point x="14.999761061946856" y="-395.0" />
+      <point x="1183.896" y="208.5" />
+      <point x="3608.5" y="208.5" />
+      <point x="3608.5" y="-102.0" />
+      <point x="-109.0" y="-0.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Show" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="67.5" y="-44.0" />
+      <point x="9496.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.SumOfPrice" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="58.5" />
+      <point x="7613.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.InteractiveRunner" target="ru.itmo.prog.lab5.utility.runtime.ModeRunner" relationship="REALIZATION">
+      <point x="-107.0" y="-58.0" />
+      <point x="2600.271238938053" y="1584.0" />
+      <point x="2593.271238938053" y="1584.0" />
+      <point x="2593.271238938053" y="610.0" />
+      <point x="3925.829646017699" y="610.0" />
+      <point x="-0.0" y="29.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Save" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="111.75" y="-44.0" />
+      <point x="5220.691150442478" y="2403.0" />
+      <point x="8686.829646017699" y="2403.0" />
+      <point x="8686.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.PersonForm" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="14.999849557522111" y="-100.0" />
+      <point x="1648.691" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.TicketTypeForm" target="ru.itmo.prog.lab5.models.forms.Form" relationship="GENERALIZATION">
+      <point x="53.5" y="-44.0" />
+      <point x="623.5" y="2663.0" />
+      <point x="822.25" y="2663.0" />
+      <point x="-0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Add" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="74.75" y="-44.0" />
+      <point x="7436.941150442478" y="2443.0" />
+      <point x="11062.079646017699" y="2443.0" />
+      <point x="11062.079646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.main.Main" target="ru.itmo.prog.lab5.utility.console.StandardConsole" relationship="TO_ONE">
+      <point x="156.0" y="-86.0" />
+      <point x="-0.0" y="170.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.AddPerson" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-44.0" />
+      <point x="7022.191" y="2364.5" />
+      <point x="7649.0" y="2364.5" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.AddIfMin" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="82.25" y="-58.0" />
+      <point x="11272.191150442479" y="2663.0" />
+      <point x="12920.941150442479" y="2663.0" />
+      <point x="12920.941150442479" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Info" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="89.49984955752188" y="-44.0" />
+      <point x="10939.066" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Ticket" target="ru.itmo.prog.lab5.models.TicketType" relationship="TO_ONE">
+      <point x="29.999761061946856" y="-395.0" />
+      <point x="1198.896" y="223.5" />
+      <point x="1839.896238938053" y="223.5" />
+      <point x="-0.0" y="-72.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.PersonForm" target="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" relationship="TO_ONE">
+      <point x="-15.000150442477889" y="-100.0" />
+      <point x="1618.691" y="2710.0" />
+      <point x="3409.0" y="2710.0" />
+      <point x="3409.0" y="2533.0" />
+      <point x="2245.271" y="2533.0" />
+      <point x="-2.389380529166374E-4" y="339.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.RemoveHead" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="89.0" y="-44.0" />
+      <point x="9077.316150442479" y="2483.0" />
+      <point x="12029.066150442479" y="2483.0" />
+      <point x="12029.066150442479" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Help" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-131.99964601769898" y="-0.0" />
+      <point x="7985.0" y="1157.0" />
+      <point x="7985.0" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.MinByDiscount" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="82.0" y="-58.0" />
+      <point x="8044.954646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Save" target="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" relationship="TO_ONE">
+      <point x="14.999849557521884" y="-44.0" />
+      <point x="5123.941" y="2710.0" />
+      <point x="3409.0" y="2710.0" />
+      <point x="3409.0" y="2533.0" />
+      <point x="2245.271" y="2533.0" />
+      <point x="-2.389380529166374E-4" y="339.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.MaxByName" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="58.0" />
+      <point x="5706.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.ScriptRunner" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="14.999761061947083" y="-72.0" />
+      <point x="2829.271" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" target="ru.itmo.prog.lab5.managers.DumpManager" relationship="TO_ONE">
+      <point x="14.999761061947083" y="339.0" />
+      <point x="2260.271" y="1568.0" />
+      <point x="1539.896" y="1568.0" />
+      <point x="-15.000238938053144" y="101.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Help" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-14.999646017698979" y="-44.0" />
+      <point x="11226.83" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Remove" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="71.25" y="-44.0" />
+      <point x="10131.079646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.SumOfPrice" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="77.0" y="-58.5" />
+      <point x="7690.454646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Clear" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247902551433E-4" y="44.0" />
+      <point x="8057.691" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.CollectionManager" target="ru.itmo.prog.lab5.managers.DumpManager" relationship="TO_ONE">
+      <point x="-2.3893805314401106E-4" y="-325.0" />
+      <point x="1168.896" y="1568.0" />
+      <point x="1539.896" y="1568.0" />
+      <point x="-15.000238938053144" y="101.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.MinByDiscount" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-58.0" />
+      <point x="9838.941" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Show" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="10375.691" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.History" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-44.0" />
+      <point x="8903.83" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" target="ru.itmo.prog.lab5.models.Ticket" relationship="TO_MANY">
+      <point x="-229.50023893805292" y="-75.5" />
+      <point x="2615.271" y="1903.5" />
+      <point x="2615.271" y="1625.0" />
+      <point x="1183.896" y="1625.0" />
+      <point x="14.999761061946856" y="395.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.RemoveFirst" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="6498.191" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.MaxByName" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="88.25" y="-58.0" />
+      <point x="7796.441150442478" y="2453.0" />
+      <point x="11384.329646017699" y="2453.0" />
+      <point x="11384.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.AddIfMin" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="58.0" />
+      <point x="9129.33" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Remove" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="81.0" y="-44.0" />
+      <point x="9455.316150442479" y="2493.0" />
+      <point x="12210.066150442479" y="2493.0" />
+      <point x="12210.066150442479" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.ExecuteScript" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="8566.83" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Command" target="ru.itmo.prog.lab5.commands.Executable" relationship="REALIZATION">
+      <point x="0.0" y="-129.0" />
+      <point x="9065.579646017699" y="-283.0" />
+      <point x="8967.829646017699" y="-283.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Help" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="66.0" y="-44.0" />
+      <point x="11307.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.MaxByName" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-58.0" />
+      <point x="7708.191" y="2508.0" />
+      <point x="7649.0" y="2508.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.PersonForm" target="ru.itmo.prog.lab5.models.forms.Form" relationship="GENERALIZATION">
+      <point x="-87.0" y="-100.0" />
+      <point x="1546.691150442478" y="2663.0" />
+      <point x="822.25" y="2663.0" />
+      <point x="-0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.RemoveFirst" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="87.75" y="-44.0" />
+      <point x="6585.941150442478" y="2423.0" />
+      <point x="10212.829646017699" y="2423.0" />
+      <point x="10212.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Coordinates" target="ru.itmo.prog.lab5.utility.base.Validatable" relationship="REALIZATION">
+      <point x="0.0" y="-86.0" />
+      <point x="8148.454646017699" y="-283.0" />
+      <point x="3833.5" y="-283.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.AddIfMin" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="58.0" />
+      <point x="11189.941" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.InteractiveRunner" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-14.999646017698979" y="-58.0" />
+      <point x="4587.83" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.InteractiveRunner" target="ru.itmo.prog.lab5.utility.runtime.ScriptRunner" relationship="TO_ONE">
+      <point x="107.0" y="-58.0" />
+      <point x="-0.0" y="72.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.RemoveHead" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="8988.316" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.CollectionManager" target="ru.itmo.prog.lab5.models.Ticket" relationship="TO_MANY">
+      <point x="14.999761061946856" y="-325.0" />
+      <point x="14.999761061946856" y="395.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Remove" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="10059.83" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Exit" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="6714.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.ExecuteScript" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="5982.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Show" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="9429.33" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.History" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-14.999646017698979" y="-44.0" />
+      <point x="10726.83" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.History" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="70.0" y="-44.0" />
+      <point x="8973.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Remove" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="9374.316" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Update" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="6242.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.special.SumOfPrice" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="58.5" />
+      <point x="8616.816" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.Ask.AskBreak" target="ru.itmo.prog.lab5.Ask" relationship="INNER_CLASS">
+      <point x="0.0" y="-29.5" />
+      <point x="0.0" y="170.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Add" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="104.76384955752201" y="-44.0" />
+      <point x="7466.955" y="2458.0" />
+      <point x="7649.0" y="2458.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.update.Update" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-44.0" />
+      <point x="6005.691" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.TicketForm" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="172.4998495575221" y="117.5" />
+      <point x="3132.5" y="2943.5" />
+      <point x="3132.5" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.CommandManager" target="ru.itmo.prog.lab5.commands.Command" relationship="TO_MANY">
+      <point x="-0.0" y="-115.0" />
+      <point x="8311.829646017699" y="-102.0" />
+      <point x="-102.5" y="-0.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Info" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="74.5" y="-44.0" />
+      <point x="10924.066150442479" y="2523.0" />
+      <point x="12745.316150442479" y="2523.0" />
+      <point x="12745.316150442479" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Clear" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="6966.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Add" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="74.75" y="-44.0" />
+      <point x="10447.579646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Person" target="ru.itmo.prog.lab5.models.Color" relationship="TO_ONE">
+      <point x="-38.25" y="-157.0" />
+      <point x="-0.0" y="72.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Clear" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="76.5" y="-44.0" />
+      <point x="8134.191150442479" y="2463.0" />
+      <point x="11558.204646017699" y="2463.0" />
+      <point x="11558.204646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.base.Element" target="ru.itmo.prog.lab5.utility.base.Validatable" relationship="REALIZATION">
+      <point x="0.0" y="-44.0" />
+      <point x="8.75" y="-283.0" />
+      <point x="3833.5" y="-283.0" />
+      <point x="0.0" y="29.5" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.TicketForm" target="ru.itmo.prog.lab5.models.forms.Form" relationship="GENERALIZATION">
+      <point x="-86.25" y="-142.0" />
+      <point x="1180.941150442478" y="2663.0" />
+      <point x="822.25" y="2663.0" />
+      <point x="-0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.DumpManager" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-2.3893805314401106E-4" y="101.0" />
+      <point x="1554.896" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.Runner" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="-58.0" />
+      <point x="4272.33" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.CoordinatesForm" target="ru.itmo.prog.lab5.models.forms.Form" relationship="GENERALIZATION">
+      <point x="54.75" y="-72.0" />
+      <point x="388.25" y="2663.0" />
+      <point x="822.25" y="2663.0" />
+      <point x="-0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Show" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-44.0" />
+      <point x="10375.691" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.MaxByName" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="58.0" />
+      <point x="7708.191" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Person" target="ru.itmo.prog.lab5.utility.base.Element" relationship="GENERALIZATION">
+      <point x="80.0" y="-157.0" />
+      <point x="-40.0" y="95.0" />
+      <point x="8.75" y="95.0" />
+      <point x="0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.ColorForm" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-43.25" y="-44.0" />
+      <point x="742.75" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Info" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="10671.83" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.ScriptRunner" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-2.389380529166374E-4" y="-72.0" />
+      <point x="2814.271" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Info" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="64.75" y="-44.0" />
+      <point x="10736.579646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Exit" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="6500.455" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.TicketForm" target="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247788864595E-4" y="-142.0" />
+      <point x="1267.191" y="2533.0" />
+      <point x="2245.271" y="2533.0" />
+      <point x="-2.389380529166374E-4" y="339.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.AddIfMin" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="72.5" y="-58.0" />
+      <point x="9201.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.InteractiveRunner" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-144.00023893805292" y="-58.0" />
+      <point x="2563.271" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.TicketTypeForm" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-0.0" y="-44.0" />
+      <point x="570.0" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Update" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="70.0" y="-44.0" />
+      <point x="6312.454646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Ticket" target="ru.itmo.prog.lab5.models.Person" relationship="TO_ONE">
+      <point x="-2.3893805314401106E-4" y="-395.0" />
+      <point x="1168.896" y="675.0" />
+      <point x="-120.0" y="675.0" />
+      <point x="-0.0" y="157.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Save" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="66.5" y="-44.0" />
+      <point x="8896.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.InteractiveRunner" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-129.00023893805292" y="-58.0" />
+      <point x="2578.271" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Show" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="77.25" y="-44.0" />
+      <point x="10452.941150442479" y="2513.0" />
+      <point x="12579.941150442479" y="2513.0" />
+      <point x="12579.941150442479" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Clear" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247902551433E-4" y="-44.0" />
+      <point x="8057.691" y="2508.0" />
+      <point x="7985.0" y="2508.0" />
+      <point x="7985.0" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.History" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-139.99964601769898" y="-0.0" />
+      <point x="8562.0" y="1157.0" />
+      <point x="8562.0" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" target="ru.itmo.prog.lab5.managers.DumpManager" relationship="TO_ONE">
+      <point x="-2.389380529166374E-4" y="-353.0" />
+      <point x="3170.771" y="1568.0" />
+      <point x="1539.896" y="1568.0" />
+      <point x="-15.000238938053144" y="101.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.RemoveHead" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="79.25" y="-44.0" />
+      <point x="7359.204646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.ScriptRunner" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-14.999646017698979" y="-58.0" />
+      <point x="5313.955" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.update.Update" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="79.75" y="-44.0" />
+      <point x="6085.441150442478" y="2413.0" />
+      <point x="9574.829646017699" y="2413.0" />
+      <point x="9574.829646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.ExecuteScript" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="49.5" y="-44.0" />
+      <point x="6031.954646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Clear" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="67.0" y="-44.0" />
+      <point x="7033.454646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.special.SumOfPrice" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-58.5" />
+      <point x="8616.816" y="2508.0" />
+      <point x="8562.0" y="2508.0" />
+      <point x="8562.0" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.Ticket" target="ru.itmo.prog.lab5.utility.base.Element" relationship="GENERALIZATION">
+      <point x="-104.0" y="-395.0" />
+      <point x="1064.896238938053" y="730.0" />
+      <point x="50.5" y="730.0" />
+      <point x="50.5" y="95.0" />
+      <point x="8.75" y="95.0" />
+      <point x="-0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" target="ru.itmo.prog.lab5.managers.collections.CollectionManager" relationship="REALIZATION">
+      <point x="92.5" y="-339.0" />
+      <point x="2337.771238938053" y="620.0" />
+      <point x="4147.829646017699" y="620.0" />
+      <point x="-0.0" y="226.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.runtime.Runner" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-14.999646017698979" y="-58.0" />
+      <point x="4257.33" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Exit" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="48.5" y="-44.0" />
+      <point x="6548.954646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.MinByDiscount" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="91.75" y="-58.0" />
+      <point x="9930.691150442479" y="2503.0" />
+      <point x="12403.191150442479" y="2503.0" />
+      <point x="12403.191150442479" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Save" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="5108.941" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.AddPerson" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="7022.191" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Remove" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="-44.0" />
+      <point x="9374.316" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Add" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="10372.83" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.Runner" target="ru.itmo.prog.lab5.managers.CommandManager" relationship="TO_ONE">
+      <point x="-14.999646017698979" y="-72.0" />
+      <point x="4919.33" y="915.0" />
+      <point x="8269.705" y="915.0" />
+      <point x="-42.12464601769898" y="115.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" target="ru.itmo.prog.lab5.managers.collections.PersonCollectionManager" relationship="TO_ONE">
+      <point x="42.7287610619469" y="353.0" />
+      <point x="3213.5" y="2533.0" />
+      <point x="2245.271" y="2533.0" />
+      <point x="-2.389380529166374E-4" y="339.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.CoordinatesForm" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-0.0" y="-72.0" />
+      <point x="333.5" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.update.Update" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="6005.691" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.TicketForm" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="127.20484955752204" y="-142.0" />
+      <point x="1394.396" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.RemoveFirst" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="78.0" y="-44.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.RemoveHead" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="7279.955" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.MinByDiscount" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="58.0" />
+      <point x="7962.955" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.models.forms.ColorForm" target="ru.itmo.prog.lab5.models.forms.Form" relationship="GENERALIZATION">
+      <point x="44.5" y="-44.0" />
+      <point x="830.5" y="2663.0" />
+      <point x="822.25" y="2663.0" />
+      <point x="-0.0" y="44.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Help" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="66.0" y="-44.0" />
+      <point x="8284.704646017699" y="700.0" />
+      <point x="8676.329646017699" y="700.0" />
+      <point x="8676.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.Add" target="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" relationship="TO_ONE">
+      <point x="-1.5044247811601963E-4" y="44.0" />
+      <point x="7362.191" y="2920.0" />
+      <point x="11371.941" y="2920.0" />
+      <point x="11371.941" y="2694.0" />
+      <point x="3170.771" y="2694.0" />
+      <point x="-2.389380529166374E-4" y="353.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.Save" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="3.5398230102146044E-4" y="44.0" />
+      <point x="8830.33" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.utility.console.StandardConsole" target="ru.itmo.prog.lab5.utility.console.Console" relationship="REALIZATION">
+      <point x="0.0" y="-170.5" />
+      <point x="184.5" y="85.0" />
+      <point x="2772.75" y="85.0" />
+      <point x="-61.75" y="156.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.managers.collections.TicketCollectionManager" target="ru.itmo.prog.lab5.managers.collections.CollectionManager" relationship="REALIZATION">
+      <point x="114.75" y="-353.0" />
+      <point x="3285.521238938053" y="620.0" />
+      <point x="4147.829646017699" y="620.0" />
+      <point x="-0.0" y="226.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.core.AddPerson" target="ru.itmo.prog.lab5.commands.Command" relationship="GENERALIZATION">
+      <point x="85.25" y="-44.0" />
+      <point x="7107.441150442478" y="2433.0" />
+      <point x="10892.329646017699" y="2433.0" />
+      <point x="10892.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="85.0" />
+      <point x="9819.329646017699" y="75.0" />
+      <point x="9116.829646017699" y="75.0" />
+      <point x="51.25" y="129.0" />
+    </edge>
+    <edge source="ru.itmo.prog.lab5.commands.custom.AddIfMin" target="ru.itmo.prog.lab5.utility.console.Console" relationship="TO_ONE">
+      <point x="-97.6111504424789" y="-58.0" />
+      <point x="11092.33" y="746.0" />
+      <point x="7649.0" y="746.0" />
+      <point x="7649.0" y="589.0" />
+      <point x="2834.5" y="589.0" />
+      <point x="-0.0" y="156.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.12291052114060963" showDependencies="true" x="6320.499999999999" y="1661.9999999999998" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

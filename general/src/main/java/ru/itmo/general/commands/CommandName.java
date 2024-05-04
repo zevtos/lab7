@@ -16,8 +16,9 @@ public enum CommandName {
     MIN_BY_DISCOUNT,
     MAX_BY_NAME,
     HISTORY,
-    ADD_PERSON,
-    GET_PERSON_BY_ID,
     EXECUTE_SCRIPT,
-    EXIT_SERVER, SAVE, PING
+    EXIT_SERVER, SAVE,
+    PING,
+    LOGIN,
+    REGISTER
 }

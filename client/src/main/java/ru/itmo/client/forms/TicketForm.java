@@ -1,7 +1,7 @@
 package ru.itmo.client.forms;
 
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
@@ -10,6 +10,7 @@ import ru.itmo.general.models.Coordinates;
 import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.TicketType;
+import ru.itmo.general.models.forms.Form;
 
 import java.util.NoSuchElementException;
 
@@ -39,6 +40,7 @@ public class TicketForm extends Form<Ticket> {
      */
     @Override
     public Ticket build() throws InvalidScriptInputException, InvalidFormException {
+        //todo:обработать ctrl d
         var ticket = new Ticket(
                 null,
                 askName(),
@@ -104,7 +106,7 @@ public class TicketForm extends Form<Ticket> {
                 name = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(name);
                 if (name.isEmpty()) throw new EmptyValueException();
-                break;
+                return name;
             } catch (NoSuchElementException exception) {
                 console.printError(getClass(), "Название не распознано!");
                 if (fileMode) throw new InvalidScriptInputException();
@@ -116,8 +118,6 @@ public class TicketForm extends Form<Ticket> {
                 System.exit(0);
             }
         }
-
-        return name;
     }
 
     private Coordinates askCoordinates() throws InvalidScriptInputException, InvalidFormException {

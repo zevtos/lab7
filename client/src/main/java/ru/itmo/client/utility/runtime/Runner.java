@@ -1,16 +1,11 @@
 package ru.itmo.client.utility.runtime;
 
 
-import ru.itmo.client.commands.core.*;
-import ru.itmo.client.commands.custom.*;
-import ru.itmo.client.commands.special.SumOfPrice;
-import ru.itmo.client.commands.update.Update;
-import ru.itmo.client.managers.CommandManager;
+import ru.itmo.client.forms.TicketForm;
+import ru.itmo.general.managers.CommandManager;
 import ru.itmo.client.network.TCPClient;
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.utility.console.Console;
 import sun.misc.Signal;
-
-import java.util.NoSuchElementException;
 
 /**
  * Запускает выполнение программы.
@@ -18,27 +13,19 @@ import java.util.NoSuchElementException;
  */
 public class Runner {
     Console console;
-    CommandManager commandManager;
     InteractiveRunner interactiveRunner;
     ScriptRunner scriptRunner;
 
     /**
      * Конструктор для Runner.
      * @param console Консоль.
-     * @param commandManager Менеджер команд.
+     * @param client TCPClient
      */
-    public Runner(Console console, CommandManager commandManager, TCPClient client) {
-        this.console = console;
-        this.commandManager = commandManager;
-        this.scriptRunner = new ScriptRunner(client, console, commandManager);
-        this.interactiveRunner = new InteractiveRunner(client, console, commandManager, scriptRunner);
-    }
-
     public Runner(Console console, TCPClient client) {
         this.console = console;
-        this.commandManager = this.createCommandManager(client);
-        this.scriptRunner = new ScriptRunner(client, console, commandManager);
-        this.interactiveRunner = new InteractiveRunner(client, console, commandManager, scriptRunner);
+        createCommandManager();
+        this.scriptRunner = new ScriptRunner(client, console);
+        this.interactiveRunner = new InteractiveRunner(client, console, scriptRunner);
     }
 
     /**
@@ -66,33 +53,15 @@ public class Runner {
     public enum ExitCode {
         OK,
         ERROR,
-        EXIT,
+        EXIT, ERROR_NULL_RESPONSE,
     }
     /**
      * Создает менеджер команд приложения.
      *
      * @return менеджер команд
      */
-    private CommandManager createCommandManager(TCPClient client) {
-        return new CommandManager() {{
-            register("help", new Help(console, this));
-            register("info", new Info(console));
-            register("show", new Show(console));
-            register("add", new Add(console));
-            register("update", new Update(console));
-            register("remove_by_id", new Remove(console));
-            register("clear", new Clear(console));
-            register("execute_script", new ExecuteScript(console));
-            register("exit", new Exit(console));
-            register("remove_first", new RemoveFirst(console));
-            register("remove_head", new RemoveHead(console));
-            register("add_if_min", new AddIfMin(console));
-            register("sum_of_price", new SumOfPrice(console));
-            register("min_by_discount", new MinByDiscount(console));
-            register("max_by_name", new MaxByName(console));
-            register("history", new History(console, this));
-            register("add_person", new AddPerson(console));
-        }};
+    private void createCommandManager() {
+        CommandManager.initClientCommands(console, new TicketForm(console));
     }
     private static void setSignalProcessing(String messageString, String... signalNames) {
         for (String signalName : signalNames) {

@@ -6,11 +6,13 @@ import org.slf4j.LoggerFactory;
 import ru.itmo.general.exceptions.DuplicateException;
 import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
-import ru.itmo.server.managers.DumpManager;
+import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.server.dao.TicketDAO;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Управляет коллекцией билетов.
@@ -20,69 +22,41 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class TicketCollectionManager implements CollectionManager<Ticket> {
     private final Logger logger = LoggerFactory.getLogger("TicketCollectionManager");
     private int currentId = 1;
-    /**
-     * -- GETTER --
-     *
-     */
     @Getter
     private final LinkedList<Ticket> collection = new LinkedList<>();
-    /**
-     * -- GETTER --
-     *
-     */
     @Getter
     private LocalDateTime lastSaveTime;
-    private final DumpManager<Ticket> dumpManager;
-    private final PersonCollectionManager personCollectionManager;
+    private final ReentrantLock lock = new ReentrantLock(); // Замок для синхронизации доступа
+    private final TicketDAO dao;
 
     /**
      * Создает менеджер коллекции билетов.
      *
-     * @param dumpManager             менеджер для записи и чтения данных из файла
-     * @param personCollectionManager менеджер коллекции персон
      */
-    public TicketCollectionManager(DumpManager<Ticket> dumpManager, PersonCollectionManager personCollectionManager) {
+    public TicketCollectionManager() {
         this.lastSaveTime = null;
-        this.dumpManager = dumpManager;
-
+        this.dao = new TicketDAO();
         this.loadCollection();
-        if (personCollectionManager == null) {
-            var personDumpManager = new DumpManager<Person>("data/persons.json", Person.class);
-            personCollectionManager = new PersonCollectionManager(personDumpManager);
-            personCollectionManager.loadCollection();
-            personCollectionManager.addAll(this.getAllPersons());
-        }
-        this.personCollectionManager = personCollectionManager;
+        update();
+    }
+
+    public TicketCollectionManager(TicketDAO ticketDAO) {
+        this.lastSaveTime = null;
+        this.dao = ticketDAO;
+        this.loadCollection();
+        update();
     }
 
     /**
      * Создает менеджер коллекции билетов.
      *
-     * @param args    аргументы командной строки
+     * @param args аргументы командной строки
      */
     public TicketCollectionManager(String[] args) {
         this.lastSaveTime = null;
-        this.dumpManager = new DumpManager<Ticket>(args[0], Ticket.class);
+        this.dao = new TicketDAO();
         this.loadCollection();
-        if (args.length == 2) {
-            this.personCollectionManager = new PersonCollectionManager(args[1]);
-        } else {
-            this.personCollectionManager = new PersonCollectionManager();
-        }
-        this.personCollectionManager.addAll(this.getAllPersons());
-    }
-
-    public void validateAll() {
-        AtomicBoolean flag = new AtomicBoolean(true);
-        collection.forEach(ticket -> {
-            if (!ticket.validate()) {
-                logger.error("Билет с id={} имеет недопустимые поля.", ticket.getId());
-                flag.set(false);
-            }
-        });
-        if (flag.get()) {
-            logger.info("! Загруженные билеты валидны.");
-        }
+        update();
     }
 
     /**
@@ -90,30 +64,105 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
      */
     @Override
     public Ticket byId(int id) {
-        if (collection.isEmpty()) return null;
-        return collection.stream()
-                .filter(ticket -> ticket.getId() == id)
-                .findFirst()
-                .orElse(null);
+        try {
+            lock.lock();
+            if (collection.isEmpty()) return null;
+            return collection.stream()
+                    .filter(ticket -> ticket.getId() == id)
+                    .findFirst()
+                    .orElse(null);
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /**
+     * Добавляет Ticket
+     */
+    @Override
+    public boolean add(Ticket ticket) {
+        try {
+            lock.lock();
+            if (contains(ticket)) {
+                return false;
+            }
+            TicketDAO ticketDAO = new TicketDAO();
+            if (!ticketDAO.addTicket(ticket, 1)) return false;
+            collection.add(ticket);
+            update();
+            return true;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /**
+     * Обновляет Ticket
+     */
+    @Override
+    public boolean update(Ticket ticket) {
+        try {
+            lock.lock();
+            if (!contains(ticket)) {
+                return false;
+            }
+            collection.remove(ticket);
+            collection.add(ticket);
+            update();
+            return true;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /**
+     * Удаляет Ticket по ID
+     */
+    @Override
+    public boolean remove(int id) {
+        try {
+            lock.lock();
+            Ticket ticket = byId(id);
+            if (ticket == null) {
+                return false;
+            }
+            collection.remove(ticket);
+            update();
+            return true;
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    /**
+     * Фиксирует изменения коллекции
+     */
+    public void update() {
+        Collections.sort(collection);
     }
 
     /**
      * Содержит ли коллекции Ticket
      */
     public boolean contains(Ticket ticket) {
-        for (Ticket t : collection) {
-            if (t.getId() == ticket.getId()) {
-                return true;
+        try {
+            lock.lock();
+            for (Ticket t : collection) {
+                if (t.getId() == ticket.getId()) {
+                    return true;
+                }
             }
+            return false;
+        } finally {
+            lock.unlock();
         }
-        return false;
     }
 
     /**
      * Получить свободный ID
      */
     @Override
-    public int getFreeId() {
+    public synchronized int getFreeId() {
         while (byId(currentId) != null) {
             currentId++;
         }
@@ -124,71 +173,25 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         return collection.getClass().getName();
     }
 
-    /**
-     * Добавляет Ticket
-     */
-    @Override
-    public boolean add(Ticket ticket) {
-        if (contains(ticket)) {
-            return false;
-        }
-        collection.add(ticket);
-        update();
-        return true;
-    }
-
-
-    /**
-     * Обновляет Ticket
-     */
-    @Override
-    public boolean update(Ticket ticket) {
-        if (!contains(ticket)) {
-            return false;
-        }
-        collection.remove(ticket);
-        collection.add(ticket);
-        update();
-        return true;
-    }
-
-    /**
-     * Удаляет Ticket по ID
-     */
-    @Override
-    public boolean remove(int id) {
-        Ticket ticket = byId(id);
-        if (ticket == null) {
-            return false;
-        }
-        collection.remove(ticket);
-        update();
-        return true;
-    }
 
     @Override
     public boolean remove(Ticket ticket) {
-        return collection.remove(ticket);
+        try {
+            lock.lock();
+            return collection.remove(ticket);
+        } finally {
+            lock.unlock();
+        }
     }
 
-
-    /**
-     * Фиксирует изменения коллекции
-     */
-    public void update() {
-        Collections.sort(collection);
-    }
-
-    /**
-     * Сохраняет коллекцию в файл
-     */
-    public void saveCollection() {
-        dumpManager.writeCollection(collection);
-        lastSaveTime = LocalDateTime.now();
-    }
 
     public void clearCollection() {
-        collection.clear();
+        try {
+            lock.lock();
+            collection.clear();
+        } finally {
+            lock.unlock();
+        }
     }
 
     public int collectionSize() {
@@ -208,24 +211,22 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
 
     @Override
     public boolean loadCollection() {
-        Collection<Ticket> loadedTickets = dumpManager.readCollection();
         try {
-            for (Ticket ticket : loadedTickets) {
-                if (ticket != null) {
-                    int id = ticket.getId();
-                    Ticket existingTicket = byId(id);
-                    if (existingTicket != null) {
-                        throw new DuplicateException();
-                    }
+            lock.lock();
+            Collection<Ticket> loadedTickets = dao.getAllTickets();
+            if (loadedTickets.isEmpty()) {
+                collection.clear();
+            } else {
+                boolean success = collection.addAll(loadedTickets);
+                if (success) {
+                    logger.info("Tickets added successfully.");
                 }
-                collection.add(ticket);
             }
             validateAll();
             return true;
-        } catch (DuplicateException e) {
-            //dumpManager.getConsole().printError("Ошибка загрузки коллекции: обнаружены дубликаты Ticket по полю id, загружены только первые значения.");
+        } finally {
+            lock.unlock();
         }
-        return false;
     }
 
 
@@ -254,7 +255,16 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         return allPersons;
     }
 
-    public PersonCollectionManager getPersonManager() {
-        return personCollectionManager;
+    public void validateAll() {
+        AtomicBoolean flag = new AtomicBoolean(true);
+        collection.forEach(ticket -> {
+            if (!ticket.validate()) {
+                logger.error("Билет с id={} имеет недопустимые поля.", ticket.getId());
+                flag.set(false);
+            }
+        });
+        if (flag.get()) {
+            logger.info("! Загруженные билеты валидны.");
+        }
     }
 }

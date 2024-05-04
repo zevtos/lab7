@@ -1,10 +1,11 @@
 package ru.itmo.client.forms;
 
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.exceptions.*;
 import ru.itmo.general.models.Color;
 import ru.itmo.general.models.Person;
+import ru.itmo.general.models.forms.Form;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,8 +36,7 @@ public class PersonForm extends Form<Person> {
      * @throws InvalidFormException        Если введенные данные неверны.
      */
     public Person build() throws InvalidScriptInputException, InvalidFormException {
-        console.println("Введите id=x, где id это passportID, чтобы использовать данные человека. " +
-                "Любой другой ввод приведет к добавлению нового человека");
+        console.println("Укажите человека на которого выписан билет, введите id=x, где id это passportID");
         console.prompt();
 
         var fileMode = Interrogator.fileMode();

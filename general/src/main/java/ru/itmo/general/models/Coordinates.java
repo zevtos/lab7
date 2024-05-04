@@ -2,6 +2,7 @@ package ru.itmo.general.models;
 
 
 
+import lombok.Getter;
 import ru.itmo.general.utility.base.Validatable;
 
 import java.io.Serializable;
@@ -12,7 +13,9 @@ import java.util.Objects;
  * @author zevtos
  */
 public class Coordinates implements Validatable, Serializable {
+    @Getter
     private double x;
+    @Getter
     private Float y; //Значение поля должно быть больше -420, Поле не может быть null
 
     /**

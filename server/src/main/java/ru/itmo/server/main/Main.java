@@ -4,9 +4,13 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.network.Request;
-import ru.itmo.server.managers.CommandManager;
+import ru.itmo.general.managers.CommandManager;
+
+import static ru.itmo.server.managers.DatabaseManager.*;
+
 import ru.itmo.server.managers.collections.TicketCollectionManager;
 import ru.itmo.server.network.TCPServer;
+import ru.itmo.server.utility.Runner;
 import sun.misc.Signal;
 
 /**
@@ -29,20 +33,24 @@ public class Main {
     public static void main(String[] args) {
         // обработка сигналов
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            LOGGER.info("Сохранение перед завершением работы приложения...");
-            try {
-                CommandManager.handleServer(new Request(true, "save", null));
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            if (CommandManager.getCommands() != null) {
+                LOGGER.info("Сохранение перед завершением работы приложения...");
+                try {
+                    CommandManager.handleServer(new Request(true, "save", null));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }));
         checkFileArgument(args);
-
+        createDatabaseIfNotExists();
+        Thread runner = new Runner();
+        runner.setDaemon(true);
+        runner.start();
         var ticketCollectionManager = new TicketCollectionManager(args);
-
         setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
-
-        TCPServer tcpServer = new TCPServer(PORT, ticketCollectionManager);
+        CommandManager.initServerCommands(ticketCollectionManager);
+        TCPServer tcpServer = new TCPServer(PORT);
         tcpServer.start();
     }
 
@@ -57,6 +65,7 @@ public class Main {
             System.exit(MISSING_FILE_ARGUMENT_EXIT_CODE);
         }
     }
+
     private static void setSignalProcessing(String... signalNames) {
         for (String signalName : signalNames) {
             try {
@@ -67,4 +76,5 @@ public class Main {
             }
         }
     }
+
 }

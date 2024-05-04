@@ -12,4 +12,5 @@ public abstract class Element implements Comparable<Element>, Validatable, Seria
      * @return Идентификатор элемента.
      */
     abstract public int getId();
+    abstract public String getName();
 }

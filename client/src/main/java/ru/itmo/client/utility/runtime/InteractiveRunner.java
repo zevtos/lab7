@@ -1,9 +1,10 @@
 package ru.itmo.client.utility.runtime;
 
-import ru.itmo.client.managers.CommandManager;
+import ru.itmo.general.managers.CommandManager;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.client.utility.console.Console;
+import ru.itmo.general.network.Request;
+import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -17,20 +18,18 @@ import java.util.concurrent.TimeoutException;
 public class InteractiveRunner implements ModeRunner {
     private final TCPClient tcpClient;
     private final Console console;
-    private final CommandManager commandManager;
     private final ScriptRunner scriptRunner;
+    private Request request = null;
 
     /**
      * Конструктор для InteractiveRunner.
      *
      * @param console        Консоль.
-     * @param commandManager Менеджер команд.
      * @param scriptRunner   Запускает выполнение скриптов.
      */
-    public InteractiveRunner(TCPClient tcpClient, Console console, CommandManager commandManager, ScriptRunner scriptRunner) {
+    public InteractiveRunner(TCPClient tcpClient, Console console, ScriptRunner scriptRunner) {
         this.tcpClient = tcpClient;
         this.console = console;
-        this.commandManager = commandManager;
         this.scriptRunner = scriptRunner;
     }
 
@@ -48,9 +47,9 @@ public class InteractiveRunner implements ModeRunner {
         } catch (TimeoutException e) {
             console.printError(getClass(), "Тайм-аут при подключении к серверу" + '\n' + "Подключение не установлено!");
         }
+        Runner.ExitCode commandStatus;
         String[] userCommand;
         try (Scanner userScanner = Interrogator.getUserScanner()) {
-            Runner.ExitCode commandStatus;
             do {
                 console.prompt();
                 String inputLine = "";
@@ -64,7 +63,14 @@ public class InteractiveRunner implements ModeRunner {
                     console.printError(getClass(), "Команда '" + userCommand[0] + "' не найдена. Введите 'help' для помощи");
                     commandStatus = Runner.ExitCode.ERROR;
                 }
-                commandManager.addToHistory(userCommand[0]);
+                if (commandStatus == Runner.ExitCode.ERROR) {
+                    if(request != null) {
+                        console.printError(getClass(), request.toString());
+                    }
+                } else if (commandStatus == Runner.ExitCode.ERROR_NULL_RESPONSE) {
+                    console.printError(getClass(), "Ответ от сервера не получен");
+                }
+                CommandManager.addToHistory(userCommand[0]);
             } while (commandStatus != Runner.ExitCode.EXIT);
             return commandStatus;
         } catch (NoSuchElementException | IllegalStateException exception) {
@@ -83,31 +89,40 @@ public class InteractiveRunner implements ModeRunner {
         }
     }
 
-    private Runner.ExitCode executeCommand(String[] userCommand) {
+    private Runner.ExitCode executeCommand(String[] userCommand) throws NoSuchElementException {
+        request = null;
         if (userCommand[0].isEmpty()) return Runner.ExitCode.OK;
-        var command = commandManager.getCommands().get(userCommand[0]);
+        var command = CommandManager.getCommands().get(userCommand[0]);
 
         if (command == null) throw new NoSuchElementException();
 
         switch (userCommand[0]) {
             case "execute_script" -> {
-                var req = command.execute(userCommand);
-                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
-                else return scriptRunner.run(userCommand[1]);
+                request = command.execute(userCommand);
+                if (!request.isSuccess()) return Runner.ExitCode.ERROR;
+                console.println("Выполнение скрипта '" + userCommand[1] + "'...");
+                return scriptRunner.run(userCommand[1]);
             }
             case "help", "history" -> {
-                var req = command.execute(userCommand);
-                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
-                else return Runner.ExitCode.OK;
+                request = command.execute(userCommand);
+                if (!request.isSuccess()) return Runner.ExitCode.ERROR;
+                if ("help".equals(request.getCommand())) {
+                    console.println("Справка по командам:");
+                    CommandManager.getCommands().values().forEach(com -> console.printTable(com.getName(), com.getDescription()));
+                } else {
+                    CommandManager.getCommandHistory().forEach(console::println);
+                }
+                return Runner.ExitCode.OK;
             }
             default -> {
-                var req = command.execute(userCommand);
-                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
-                if (req.getCommand().equals("exit")) {
-                    tcpClient.sendCommand(req);
+                request = command.execute(userCommand);
+                if (!request.isSuccess()) return Runner.ExitCode.ERROR;
+                if (request.getCommand().equals("exit")) {
+                    tcpClient.sendCommand(request);
                     return Runner.ExitCode.EXIT;
                 }
-                var response = tcpClient.sendCommand(req);
+                var response = tcpClient.sendCommand(request);
+                if(response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
                 if (response.isSuccess()) {
                     console.println(response.toString());
                 } else {
