@@ -45,30 +45,47 @@ class Handler extends Thread {
                 clientSocketChannel.close();
                 return;
             }
-            User user;
+
+            User user = null;
             if (request.getLogin() != null) {
                 user = userDAO.getUserByUsername(request.getLogin());
-            } else {
-                user = null;
             }
+
             if (user == null && !"register".equals(request.getCommand()) && !"login".equals(request.getCommand())) {
-                Response response = new Response(false, "Вы не вошли в систему." + '\n' +
-                        "Введите register для регистрации или login для входа");
-                sendResponse(clientSocketChannel, response);
+                // User is not registered and not attempting to login or register
+                sendUnauthorizedResponse(clientSocketChannel);
             } else {
-                if (user != null && userDAO.verifyUserPassword(user, request.getPassword()))
-                    request.setUserId(user.getId());
-                Response response = CommandManager.handle(request);
-                sendResponse(clientSocketChannel, response);
+                handleRequest(request, user);
             }
         } catch (Exception e) {
             logger.error("Error processing request: {}", e.getMessage());
-            Response response = new Response(false, "Invalid request");
-            sendResponse(clientSocketChannel, response);
+            sendErrorResponse(clientSocketChannel);
         }
         // Set interest back to OP_READ after parsing is complete
         key.interestOps(key.interestOps() | SelectionKey.OP_READ);
         // Wake up the selector to update interest operations
         key.selector().wakeup();
     }
+
+    private void handleRequest(Request request, User user) {
+        if (user != null && userDAO.verifyUserPassword(user, request.getPassword())) {
+            request.setUserId(user.getId());
+        } else if (user != null && !("login".equals(request.getCommand()) || "register".equals(request.getCommand()))) {
+            sendUnauthorizedResponse(clientSocketChannel);
+        }
+        Response response = CommandManager.handle(request);
+        sendResponse(clientSocketChannel, response);
+    }
+
+    private void sendUnauthorizedResponse(SocketChannel channel) {
+        Response response = new Response(false, "Вы не вошли в систему." + '\n' +
+                "Введите register для регистрации или login для входа");
+        sendResponse(channel, response);
+    }
+
+    private void sendErrorResponse(SocketChannel channel) {
+        Response response = new Response(false, "Invalid request");
+        sendResponse(channel, response);
+    }
+
 }

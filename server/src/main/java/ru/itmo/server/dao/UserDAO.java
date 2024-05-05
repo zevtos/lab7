@@ -23,8 +23,8 @@ public class UserDAO implements Registered {
             "registration_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP," +
             "last_login TIMESTAMP)";
     private static final String SELECT_ALL_USERS_SQL = "SELECT * FROM users";
-    private static final String SELECT_USER_BY_USERNAME_SQL = "SELECT * FROM users WHERE username = ?";
-    private static final String SELECT_USER_BY_ID_SQL = "SELECT * FROM users WHERE id = ?";
+    private static final String SELECT_USER_BY_USERNAME_SQL = "SELECT * FROM users " +
+            "WHERE username = ?";
     private static final String INSERT_USER_BY_SQL = "INSERT INTO users (username," +
             " password_hash," +
             " salt," +
@@ -35,7 +35,13 @@ public class UserDAO implements Registered {
             " password_hash = ?," +
             " last_login = ?" +
             " WHERE id = ?";
-    private static final String VERIFY_USER_SQL = "SELECT * FROM users WHERE username = ?";
+    private static final String SELECT_USER_BY_ID_SQL = "SELECT * FROM users WHERE username = ?";
+    private static final String UPDATE_USER_BY_USERNAME_AND_PASSWORD_SQL = "UPDATE users SET " +
+            "password_hash = ?," +
+            " last_login = ?" +
+            " WHERE username = ?";
+    private static final String SELECT_SALT_BY_USERNAME_SQL = "SELECT salt FROM users" +
+            " WHERE username = ?";
     private final Connection connection;
 
     public UserDAO() {
@@ -81,7 +87,8 @@ public class UserDAO implements Registered {
         User user = new User(username, hashedPassword, salt, registrationDate);
 
         // Insert the user into the database
-        if (insertUser(user.getUsername(), user.getPasswordHash(), user.getSalt(), registrationDate, registrationDate)) {
+        if (insertUser(user.getUsername(), user.getPasswordHash(),
+                user.getSalt(), registrationDate, registrationDate)) {
             return user;
         } else {
             return null;
@@ -141,8 +148,6 @@ public class UserDAO implements Registered {
     }
 
     public boolean updateUser(String username, String newPassword) {
-        String UPDATE_USER_BY_USERNAME_AND_PASSWORD_SQL = "UPDATE users SET password_hash = ?, last_login = ? WHERE username = ?";
-        String SELECT_SALT_BY_USERNAME_SQL = "SELECT salt FROM users WHERE username = ?";
 
         try {
             // Retrieve salt from the database
@@ -157,13 +162,16 @@ public class UserDAO implements Registered {
                         return false; // User not found
                     }
                 }
+            } catch (NullPointerException exception) {
+                LOGGER.error("Null pointer exception while fetching user by username: {}", exception.getMessage());
             }
 
             // Hash the new password using the retrieved salt
             String newPasswordHash = hashPassword(newPassword, salt);
 
             // Update the user's password in the database
-            try (PreparedStatement updateStatement = connection.prepareStatement(UPDATE_USER_BY_USERNAME_AND_PASSWORD_SQL)) {
+            try (PreparedStatement updateStatement =
+                         connection.prepareStatement(UPDATE_USER_BY_USERNAME_AND_PASSWORD_SQL)) {
                 updateStatement.setString(1, newPasswordHash);
                 updateStatement.setObject(2, LocalDateTime.now());
                 updateStatement.setString(3, username);
@@ -177,13 +185,12 @@ public class UserDAO implements Registered {
     }
 
 
-
     public void createTablesIfNotExist() {
         executeUpdate(connection, CREATE_USERS_TABLE_SQL);
     }
 
     public boolean verifyUserPassword(String username, String password) {
-        try (PreparedStatement statement = connection.prepareStatement(VERIFY_USER_SQL)) {
+        try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID_SQL)) {
             statement.setString(1, username);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {

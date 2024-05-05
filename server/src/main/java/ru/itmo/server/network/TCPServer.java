@@ -13,7 +13,7 @@ public class TCPServer {
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
     private final ExecutorService threadPool;
-    private static final Logger logger = LoggerFactory.getLogger(TCPServer.class);
+    private static final Logger logger = LoggerFactory.getLogger("TCPServer");
 
     public TCPServer(int port) {
         this.port = port;

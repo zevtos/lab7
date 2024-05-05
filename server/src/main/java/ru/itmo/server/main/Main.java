@@ -3,7 +3,6 @@ package ru.itmo.server.main;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.itmo.general.network.Request;
 import ru.itmo.general.managers.CommandManager;
 
 import static ru.itmo.server.managers.DatabaseManager.*;
@@ -15,15 +14,12 @@ import ru.itmo.server.network.TCPServer;
 import ru.itmo.server.utility.Runner;
 import sun.misc.Signal;
 
-import java.time.LocalDateTime;
-
 /**
  * Главный класс приложения.
  *
  * @author zevtos
  */
 public class Main {
-    public static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     private static final int MISSING_FILE_ARGUMENT_EXIT_CODE = 1;
     private static final int PORT = 4093;
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -43,7 +39,6 @@ public class Main {
         var ticketCollectionManager = new TicketCollectionManager();
         setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
         UserDAO userDAO = new UserDAO();
-        userDAO.updateUser("zevtos", "kop10VLAD");
         CommandManager.initServerCommands(ticketCollectionManager, new TicketDAO(), userDAO);
         TCPServer tcpServer = new TCPServer(PORT);
         tcpServer.start();

@@ -27,7 +27,7 @@ public class ScriptRunner implements ModeRunner {
     /**
      * Конструктор для ScriptRunner.
      *
-     * @param console        Консоль.
+     * @param console Консоль.
      */
     public ScriptRunner(TCPClient tcpClient, Console console) {
         this.tcpClient = tcpClient;
@@ -102,7 +102,7 @@ public class ScriptRunner implements ModeRunner {
 
     private Runner.ExitCode executeCommand(String[] userCommand) {
         request = null;
-        
+
         if (userCommand[0].isEmpty()) return Runner.ExitCode.OK;
         var command = CommandManager.getCommands().get(userCommand[0]);
 
@@ -120,7 +120,9 @@ public class ScriptRunner implements ModeRunner {
                 if (!request.isSuccess()) return Runner.ExitCode.ERROR;
                 if ("help".equals(request.getCommand())) {
                     console.println("Справка по командам:");
-                    CommandManager.getCommands().values().forEach(com -> console.printTable(com.getName(), com.getDescription()));
+                    CommandManager.getCommands().values().forEach(com ->
+                            console.printTable(com.getName(), com.getDescription()
+                            ));
                 } else {
                     CommandManager.getCommandHistory().forEach(console::println);
                 }
@@ -134,7 +136,7 @@ public class ScriptRunner implements ModeRunner {
                     return Runner.ExitCode.EXIT;
                 }
                 var response = tcpClient.sendCommand(request);
-                if(response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
+                if (response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
                 if (response.isSuccess()) {
                     console.println(response.toString());
                 } else {
@@ -143,22 +145,5 @@ public class ScriptRunner implements ModeRunner {
             }
         }
         return Runner.ExitCode.OK;
-    }
-    public void repairConnection() {
-        console.printError(getClass(), "Нет подключения к серверу. Попытка подключения...");
-        while (true) {
-            try {
-                tcpClient.connect();
-                if (tcpClient.isConnected()) {
-                    console.println("Соединение с сервером восстановлено.");
-                    break;
-                }
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e) {
-                console.printError(getClass(), "Ошибка при восстановлении соединения: " + e.getMessage());
-            } catch (TimeoutException e) {
-                console.printError(getClass(), "Тайм-аут при подключении к серверу");
-            }
-        }
     }
 }

@@ -81,15 +81,18 @@ public class TCPClient {
     }
 
 
-    public void ensureConnection() {
+    public boolean ensureConnection() {
         if (!isConnected()) {
+            console.println("Нет подключения к серверу.");
             try {
                 console.println("Попытка повторного подключения к серверу...");
                 connect();
             } catch (TimeoutException e) {
                 console.printError(getClass(), "Ошибка переподключения: " + e.getMessage());
+                return false;
             }
         }
+        return true;
     }
 
     public void disconnect() throws IOException {
@@ -99,7 +102,7 @@ public class TCPClient {
     }
 
     public void sendRequest(Request request) throws IOException {
-        ensureConnection();
+        if (!ensureConnection()) throw new IOException();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
         objectOutputStream.writeObject(request);
@@ -148,7 +151,13 @@ public class TCPClient {
             return receiveResponse();
         } catch (IOException | ClassNotFoundException ignored) {
         }
-        console.printError(getClass(), "Ошибка при отправки запроса серверу, пожалуйста повторите попытку позже");
+        console.println("Повторная попытка отправки");
+        try {
+            sendCommand(request);
+            return receiveResponse();
+        } catch (IOException | ClassNotFoundException ignored) {
+            console.printError(getClass(), "Запрос не отправлен. Повторите попытку позже.");
+        }
         try {
             disconnect();
         } catch (IOException e) {

@@ -91,6 +91,9 @@ public class TicketDAO implements Accessible {
                 LOGGER.error("No rows were affected while adding ticket");
                 return -1;
             }
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while adding ticket, continuing without adding ticket");
+            return -1;
         } catch (SQLException e) {
             LOGGER.error("Error while adding ticket {}", e.getMessage());
             return -1;
@@ -112,6 +115,8 @@ public class TicketDAO implements Accessible {
                     return; // At least one insertion failed
                 }
             }
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while adding tickets, continuing without adding tickets");
         } catch (SQLException e) {
             LOGGER.error("Error while adding tickets {}", e.getMessage());
         }
@@ -150,6 +155,8 @@ public class TicketDAO implements Accessible {
                 Ticket ticket = extractTicketFromResultSet(resultSet);
                 tickets.add(ticket);
             }
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while getting all tickets, continuing without getting all tickets");
         } catch (SQLException e) {
             LOGGER.error("Error while retrieving tickets from the database: {}", e.getMessage());
         }
@@ -161,6 +168,9 @@ public class TicketDAO implements Accessible {
              PreparedStatement statement = connection.prepareStatement(REMOVE_TICKET_SQL)) {
             statement.setInt(1, ticketId);
             return executePrepareUpdate(statement) > 0;
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while removing ticket, continuing without removing ticket");
+            return false;
         } catch (SQLException e) {
             LOGGER.error("Error while deleting ticket with ID {}: {}", ticketId, e.getMessage());
             return false;
@@ -174,6 +184,9 @@ public class TicketDAO implements Accessible {
             set(statement, ticket);
             statement.setInt(13, ticket.getId());
             return executePrepareUpdate(statement) > 0;
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while updating ticket, continuing without updating ticket");
+            return false;
         } catch (SQLException e) {
             LOGGER.error("Error while updating ticket {}: {}", ticket.getId(), e.getMessage());
             return false;
@@ -227,6 +240,10 @@ public class TicketDAO implements Accessible {
 
             statement.setInt(1, ticketId);
             return executePrepareUpdate(statement) > 0;
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while removing ticket with ID {}: {}",
+                    ticketId, exception.getMessage());
+            return false;
         } catch (SQLException e) {
             LOGGER.error("Error while deleting ticket with ID {}: {}", ticketId, e.getMessage());
             return false;
@@ -246,6 +263,10 @@ public class TicketDAO implements Accessible {
             } else {
                 return false;
             }
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while checking ownership of ticket with ID {}: {}",
+                    ticketId, exception.getMessage());
+            return false;
         } catch (SQLException e) {
             LOGGER.error("Error while checking ownership of ticket with ID {}: {}", ticketId, e.getMessage());
             return false;
