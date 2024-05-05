@@ -14,6 +14,7 @@ import ru.itmo.general.utility.console.Console;
  * @author [Your Name]
  */
 public class Register extends Command {
+    private static final int MAX_USERNAME_LENGTH = 50;
     private Console console;
     private Registered userDAO;
 
@@ -45,6 +46,9 @@ public class Register extends Command {
     @Override
     public Response execute(Request request) {
         try {
+            if (request.getLogin().length() >= MAX_USERNAME_LENGTH) {
+                return new Response(false, "Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
+            }
             var user = userDAO.insertUser(request.getLogin(), request.getPassword());
             if (request.getUserId() != null || user == null) {
                 return new Response(false, "Пользователь с таким именем уже существует", null);
@@ -73,7 +77,9 @@ public class Register extends Command {
             console.println("* Регистрация нового пользователя:");
 
             String username = arguments[1];
-
+            if (username.length() > MAX_USERNAME_LENGTH) {
+                return new Request(false, getName(), "Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
+            }
             // Use Console to read the password without echoing characters
             char[] passwordChars = console.readPassword("Enter password: ");
             if (passwordChars == null || passwordChars.length < 8) {
