@@ -5,13 +5,15 @@ import org.slf4j.LoggerFactory;
 import ru.itmo.general.models.User;
 import ru.itmo.general.utility.base.Registered;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
+
 import static ru.itmo.server.managers.ConnectionManager.*;
 import static ru.itmo.server.utility.crypto.PasswordHashing.hashPassword;
 import static ru.itmo.server.utility.crypto.SaltGenerator.generateSalt;
-
-import java.sql.*;
-import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 public class UserDAO implements Registered {
     private static final Logger LOGGER = LoggerFactory.getLogger("UserDAO");

@@ -2,15 +2,16 @@ package ru.itmo.client.forms;
 
 
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.TicketType;
 import ru.itmo.general.models.forms.Form;
+import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
  * Форма для ввода типа билета.
+ *
  * @author zevtos
  */
 public class TicketTypeForm extends Form<TicketType> {
@@ -18,6 +19,7 @@ public class TicketTypeForm extends Form<TicketType> {
 
     /**
      * Создает новый объект формы для ввода типа билета.
+     *
      * @param console Консоль для взаимодействия с пользователем.
      */
     public TicketTypeForm(Console console) {
@@ -26,6 +28,7 @@ public class TicketTypeForm extends Form<TicketType> {
 
     /**
      * Строит объект типа билета на основе введенных данных.
+     *
      * @return Введенный тип билета или null, если ввод не был произведен.
      * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
      */

@@ -6,9 +6,9 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 public class ConnectionManager {
-    private static final Logger LOGGER = LoggerFactory.getLogger("ConnectionManager");
     public static final String DB_URL = "jdbc:postgresql://localhost:5432/";
     public static final String DB_NAME = "studs";
+    private static final Logger LOGGER = LoggerFactory.getLogger("ConnectionManager");
     private static final String USER = "postgres";
     private static final String PASSWORD = "";
 

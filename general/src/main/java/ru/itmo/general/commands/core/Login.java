@@ -1,10 +1,10 @@
 package ru.itmo.general.commands.core;
 
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.commands.Command;
 import ru.itmo.general.utility.base.Registered;
 import ru.itmo.general.utility.console.Console;
 

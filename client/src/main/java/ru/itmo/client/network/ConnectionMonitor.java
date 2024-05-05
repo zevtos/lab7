@@ -22,7 +22,7 @@ public class ConnectionMonitor extends Thread {
             try {
                 connected = tcpClient.connect();
             } catch (TimeoutException e) {
-                console.printError(getClass(),"Тайм-аут при подключении к серверу");
+                console.printError(getClass(), "Тайм-аут при подключении к серверу");
             }
             if (connected) {
                 connect_flag = true;
@@ -61,7 +61,7 @@ public class ConnectionMonitor extends Thread {
                 connect_flag = false;
                 console.printError(getClass(), "Ошибка при восстановлении соединения: " + e.getMessage());
             } catch (TimeoutException e) {
-                if(connect_flag){
+                if (connect_flag) {
                     console.printError(getClass(), "Тайм-аут при подключении к серверу");
                 }
             }

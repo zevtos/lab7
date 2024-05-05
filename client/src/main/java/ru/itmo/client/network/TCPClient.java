@@ -2,6 +2,7 @@ package ru.itmo.client.network;
 
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
+import ru.itmo.general.utility.console.Console;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -12,13 +13,11 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.concurrent.TimeoutException;
 
-import ru.itmo.general.utility.console.Console;
-
 public class TCPClient {
     private final String serverAddress;
     private final int serverPort;
-    private SocketChannel socketChannel;
     private final Console console;
+    private SocketChannel socketChannel;
 
     public TCPClient(String serverAddress, int serverPort, Console console) {
         this.serverAddress = serverAddress;

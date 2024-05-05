@@ -15,6 +15,15 @@ public interface Executable {
      * @param arguments Аргументы команды.
      * @return true, если выполнение команды завершилось успешно, иначе false.
      */
-    default Response execute(Request arguments){return null;};
-    default Request execute(String[] arguments){return null;};
+    default Response execute(Request arguments) {
+        return null;
+    }
+
+    ;
+
+    default Request execute(String[] arguments) {
+        return null;
+    }
+
+    ;
 }

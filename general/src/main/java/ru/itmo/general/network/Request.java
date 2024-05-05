@@ -1,7 +1,5 @@
 package ru.itmo.general.network;
 
-import lombok.Getter;
-import lombok.Setter;
 import ru.itmo.general.commands.CommandName;
 
 import java.util.Objects;

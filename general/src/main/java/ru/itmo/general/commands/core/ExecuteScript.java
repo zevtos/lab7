@@ -1,7 +1,6 @@
 package ru.itmo.general.commands.core;
 
 import ru.itmo.general.commands.Command;
-import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.network.Request;
 

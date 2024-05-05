@@ -6,13 +6,13 @@ import ru.itmo.general.network.Request;
 
 /**
  * Команда 'history'. Выводит историю использованных команд.
+ *
  * @author zevtos
  */
 public class History extends Command {
 
     /**
      * Конструктор для создания экземпляра команды History.
-     *
      */
     public History() {
         super(CommandName.HISTORY, "вывести список использованных команд");

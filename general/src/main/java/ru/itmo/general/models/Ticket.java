@@ -10,6 +10,7 @@ import java.util.Objects;
 
 /**
  * Класс, представляющий объект билета.
+ *
  * @author zevtos
  */
 public class Ticket extends Element {
@@ -43,9 +44,20 @@ public class Ticket extends Element {
         this.type = type;
         this.person = person;
     }
+
     public Ticket(Integer nextId, String name, Coordinates coordinates, double price, Long discount, String comment, TicketType type, Person person) {
         this(nextId, name, coordinates, ZonedDateTime.now(), price, discount, comment, type, person);
     }
+
+    private static boolean validateTicket(String name, Coordinates coordinates, ZonedDateTime creationDate, double price, Long discount, Person person) {
+        if (name == null || name.isEmpty()) return false;
+        if (coordinates == null || !coordinates.validate()) return false;
+        if (creationDate == null) return false;
+        if (price <= 0) return false;
+        if (discount != null && (discount <= 0 || discount > 100)) return false;
+        return person != null && person.validate();
+    }
+
     @Override
     public String toString() {
         return "Ticket{" +
@@ -61,16 +73,9 @@ public class Ticket extends Element {
                 "\n}";
     }
 
-    private static boolean validateTicket(String name, Coordinates coordinates, ZonedDateTime creationDate, double price, Long discount, Person person) {
-        if (name == null || name.isEmpty()) return false;
-        if (coordinates == null || !coordinates.validate()) return false;
-        if (creationDate == null) return false;
-        if (price <= 0) return false;
-        if (discount != null && (discount <= 0 || discount > 100)) return false;
-        return person != null && person.validate();
-    }
     /**
      * Проверяет, является ли билет валидным.
+     *
      * @return true, если билет валиден, иначе false.
      */
     public boolean validate() {
@@ -81,10 +86,12 @@ public class Ticket extends Element {
     public boolean validateClient() {
         return validateTicket(name, coordinates, creationDate, price, discount, person);
     }
+
     @Override
     public int compareTo(Element element) {
         return CharSequence.compare(this.getName(), element.getName());
     }
+
     @Override
     public int getId() {
         return id;
@@ -102,6 +109,7 @@ public class Ticket extends Element {
     public int hashCode() {
         return Objects.hash(id, name, creationDate, coordinates, price, discount, comment, type, person);
     }
+
     public void update(Ticket Ticket) {
         this.name = Ticket.name;
         this.coordinates = Ticket.coordinates;

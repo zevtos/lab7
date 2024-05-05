@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Адаптер для сериализации и десериализации объектов LocalDateTime в формате JSON.
+ *
  * @author zevtos
  */
 public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, JsonDeserializer<LocalDateTime> {
@@ -16,9 +17,10 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
 
     /**
      * Сериализует объект LocalDateTime в формат JSON.
-     * @param date Объект LocalDateTime для сериализации.
+     *
+     * @param date      Объект LocalDateTime для сериализации.
      * @param typeOfSrc Тип объекта для сериализации.
-     * @param context Контекст сериализации JSON.
+     * @param context   Контекст сериализации JSON.
      * @return JsonElement, представляющий сериализованный объект LocalDateTime.
      */
     @Override
@@ -28,8 +30,9 @@ public class LocalDateTimeAdapter implements JsonSerializer<LocalDateTime>, Json
 
     /**
      * Десериализует объект LocalDateTime из формата JSON.
-     * @param json Элемент JSON для десериализации.
-     * @param type Тип объекта для десериализации.
+     *
+     * @param json    Элемент JSON для десериализации.
+     * @param type    Тип объекта для десериализации.
      * @param context Контекст десериализации JSON.
      * @return Десериализованный объект LocalDateTime.
      * @throws JsonParseException Если не удалось десериализовать объект.

@@ -1,12 +1,11 @@
 package ru.itmo.general.commands.core;
 
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
+import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.managers.CollectionManager;
-import ru.itmo.general.commands.Command;
-import ru.itmo.general.utility.console.Console;
 
 /**
  * Команда 'show'. Выводит все элементы коллекции.

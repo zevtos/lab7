@@ -1,15 +1,16 @@
 package ru.itmo.client.forms;
 
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.Color;
 import ru.itmo.general.models.forms.Form;
+import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
  * Форма для ввода цвета волос.
+ *
  * @author zevtos
  */
 public class ColorForm extends Form<Color> {

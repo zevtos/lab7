@@ -1,7 +1,6 @@
 package ru.itmo.general.models;
 
 import lombok.Getter;
-import ru.itmo.general.utility.base.Element;
 import ru.itmo.general.utility.base.Validatable;
 
 import java.io.Serializable;
@@ -10,6 +9,7 @@ import java.util.Objects;
 
 /**
  * Класс, представляющий объект персоны.
+ *
  * @author zevtos
  */
 public class Person implements Validatable, Serializable {
@@ -31,6 +31,7 @@ public class Person implements Validatable, Serializable {
 
     /**
      * Представляет персону в виде строки.
+     *
      * @return Строковое представление персоны.
      */
     @Override
@@ -45,10 +46,11 @@ public class Person implements Validatable, Serializable {
 
     /**
      * Проверяет, является ли персона валидной.
+     *
      * @return true, если персона валидна, иначе false.
      */
     public boolean validate() {
-        if(birthday != null && birthday.isAfter(LocalDateTime.now())) return false;
+        if (birthday != null && birthday.isAfter(LocalDateTime.now())) return false;
         if (height != null && height <= 0) return false;
         if (passportID == null) return false;
         return hairColor != null;
@@ -56,6 +58,7 @@ public class Person implements Validatable, Serializable {
 
     /**
      * Проверяет равенство персон по паспортному ID.
+     *
      * @param o Объект для сравнения.
      * @return true, если объекты равны по паспортному ID, иначе false.
      */

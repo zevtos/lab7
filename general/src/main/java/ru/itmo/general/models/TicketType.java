@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Перечисление типов билетов.
+ *
  * @author zevtos
  */
 public enum TicketType implements Serializable {
@@ -13,6 +14,7 @@ public enum TicketType implements Serializable {
 
     /**
      * Возвращает строку со всеми именами типов билетов.
+     *
      * @return Строка со всеми именами типов билетов, разделенными запятыми.
      */
     public static String names() {
@@ -20,6 +22,6 @@ public enum TicketType implements Serializable {
         for (var ticketType : values()) {
             nameList.append(ticketType.name()).append(", ");
         }
-        return nameList.substring(0, nameList.length()-2);
+        return nameList.substring(0, nameList.length() - 2);
     }
 }

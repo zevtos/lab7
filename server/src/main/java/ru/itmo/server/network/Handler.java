@@ -3,10 +3,10 @@ package ru.itmo.server.network;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.managers.CommandManager;
+import ru.itmo.general.models.User;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.server.dao.UserDAO;
-import ru.itmo.general.models.User;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

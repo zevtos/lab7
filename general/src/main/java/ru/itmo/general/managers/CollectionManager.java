@@ -5,8 +5,9 @@ import java.util.List;
 
 /**
  * Интерфейс для управления коллекцией объектов.
- * @author zevtos
+ *
  * @param <T> тип объектов в коллекции
+ * @author zevtos
  */
 public interface CollectionManager<T> {
     /**

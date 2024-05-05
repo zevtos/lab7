@@ -1,19 +1,20 @@
 package ru.itmo.server.network;
 
-import java.io.*;
-import java.net.*;
-import java.nio.channels.*;
-import java.util.concurrent.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.channels.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class TCPServer {
+    private static final Logger logger = LoggerFactory.getLogger("TCPServer");
     private final int port;
+    private final ExecutorService threadPool;
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
-    private final ExecutorService threadPool;
-    private static final Logger logger = LoggerFactory.getLogger("TCPServer");
 
     public TCPServer(int port) {
         this.port = port;

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Перечисление, представляющее возможные цвета.
+ *
  * @author zevtos
  */
 public enum Color implements Serializable {
@@ -14,6 +15,7 @@ public enum Color implements Serializable {
 
     /**
      * Возвращает строку с перечислением всех цветов.
+     *
      * @return Строка с перечислением всех цветов.
      */
     public static String names() {
@@ -21,6 +23,6 @@ public enum Color implements Serializable {
         for (var color : values()) {
             nameList.append(color.name()).append(", ");
         }
-        return nameList.substring(0, nameList.length()-2);
+        return nameList.substring(0, nameList.length() - 2);
     }
 }

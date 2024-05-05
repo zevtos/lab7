@@ -5,4 +5,5 @@ package ru.itmo.general.exceptions;
  *
  * @author zevtos
  */
-public class EmptyValueException extends Exception {}
+public class EmptyValueException extends Exception {
+}

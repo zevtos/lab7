@@ -1,9 +1,9 @@
 package ru.itmo.client.utility.runtime;
 
 import ru.itmo.client.forms.TicketForm;
-import ru.itmo.general.managers.CommandManager;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.Interrogator;
+import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.utility.console.Console;
 

@@ -1,7 +1,6 @@
 package ru.itmo.general.commands;
 
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Objects;
 
@@ -13,15 +12,13 @@ import java.util.Objects;
 public abstract class Command implements Describable, Executable {
     /**
      * -- GETTER --
-     *  Получить название команды.
-     *
+     * Получить название команды.
      */
     @Getter
     private final String name;
     /**
      * -- GETTER --
-     *  Получить описание команды.
-     *
+     * Получить описание команды.
      */
     @Getter
     private final String description;
@@ -37,9 +34,10 @@ public abstract class Command implements Describable, Executable {
         this.description = description;
     }
 
-    public String getUsingError(){
+    public String getUsingError() {
         return "Неправильное количество аргументов!" + '\n' + "Использование: '" + getName() + getDescription() + "'";
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -1,7 +1,6 @@
 package ru.itmo.client.forms;
 
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
@@ -11,11 +10,13 @@ import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.TicketType;
 import ru.itmo.general.models.forms.Form;
+import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
  * Форма для создания билета.
+ *
  * @author zevtos
  */
 public class TicketForm extends Form<Ticket> {

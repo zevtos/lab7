@@ -7,9 +7,11 @@ package ru.itmo.general.exceptions;
  */
 public class ResponseException extends Exception {
     private String message;
-    public ResponseException(){
+
+    public ResponseException() {
         this.message = "";
     }
+
     public ResponseException(String message) {
         this.message = message;
     }

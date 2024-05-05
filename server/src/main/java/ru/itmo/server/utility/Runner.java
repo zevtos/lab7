@@ -7,7 +7,6 @@ import ru.itmo.general.network.Request;
 import ru.itmo.server.network.TCPServer;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Runner extends Thread {

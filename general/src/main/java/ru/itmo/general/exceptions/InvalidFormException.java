@@ -5,4 +5,5 @@ package ru.itmo.general.exceptions;
  *
  * @author zevtos
  */
-public class InvalidFormException extends Exception {}
+public class InvalidFormException extends Exception {
+}

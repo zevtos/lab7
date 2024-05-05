@@ -1,7 +1,6 @@
 package ru.itmo.general.models;
 
 
-
 import lombok.Getter;
 import ru.itmo.general.utility.base.Validatable;
 
@@ -10,6 +9,7 @@ import java.util.Objects;
 
 /**
  * Класс, представляющий координаты.
+ *
  * @author zevtos
  */
 public class Coordinates implements Validatable, Serializable {

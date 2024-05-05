@@ -1,13 +1,13 @@
 package ru.itmo.general.commands.custom;
 
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
+import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.managers.CollectionManager;
-import ru.itmo.general.commands.Command;
 
 /**
  * Команда 'max_by_name'. Выводит элемент с максимальным именем.
@@ -16,10 +16,12 @@ import ru.itmo.general.commands.Command;
  */
 public class MaxByName extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
-    public MaxByName(){
+
+    public MaxByName() {
         super(CommandName.MAX_BY_NAME, "вывести любой объект из коллекции, значение поля name которого является максимальным");
 
     }
+
     public MaxByName(CollectionManager<Ticket> ticketCollectionManager) {
         this();
         this.ticketCollectionManager = ticketCollectionManager;

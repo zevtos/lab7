@@ -5,8 +5,6 @@ import org.slf4j.LoggerFactory;
 import ru.itmo.general.models.*;
 import ru.itmo.general.utility.base.Accessible;
 
-import static ru.itmo.server.managers.ConnectionManager.*;
-
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -14,6 +12,8 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static ru.itmo.server.managers.ConnectionManager.*;
 
 public class TicketDAO implements Accessible {
     private static final Logger LOGGER = LoggerFactory.getLogger("TicketDAO");

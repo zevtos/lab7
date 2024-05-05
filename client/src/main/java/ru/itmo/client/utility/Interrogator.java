@@ -6,13 +6,14 @@ import java.util.Scanner;
 
 /**
  * Отвечает за режим ввода пользовательских данных
+ *
  * @author zevtos
  */
 public class Interrogator {
 
     /**
      * -- GETTER --
-     *  Возвращает сканер для пользовательского ввода.
+     * Возвращает сканер для пользовательского ввода.
      *
      * @return Сканер для пользовательского ввода.
      */
@@ -22,6 +23,7 @@ public class Interrogator {
 
     /**
      * Устанавливает сканер для пользовательского ввода.
+     *
      * @param userScanner Сканер для пользовательского ввода.
      */
     public static void setUserScanner(Scanner userScanner) {
@@ -30,6 +32,7 @@ public class Interrogator {
 
     /**
      * Проверяет, находится ли программа в режиме ввода из файла.
+     *
      * @return true, если программа находится в режиме ввода из файла, иначе false.
      */
     public static boolean fileMode() {

@@ -4,15 +4,14 @@ import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.managers.CommandManager;
-
-import static ru.itmo.server.managers.DatabaseManager.*;
-
 import ru.itmo.server.dao.TicketDAO;
 import ru.itmo.server.dao.UserDAO;
 import ru.itmo.server.managers.collections.TicketCollectionManager;
 import ru.itmo.server.network.TCPServer;
 import ru.itmo.server.utility.Runner;
 import sun.misc.Signal;
+
+import static ru.itmo.server.managers.DatabaseManager.createDatabaseIfNotExists;
 
 /**
  * Главный класс приложения.

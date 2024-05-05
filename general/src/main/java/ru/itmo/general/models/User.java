@@ -6,7 +6,8 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 public class User {
-    @Getter @Setter
+    @Getter
+    @Setter
     private Integer id;
     @Getter
     private String username;

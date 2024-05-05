@@ -1,24 +1,27 @@
 package ru.itmo.general.commands.custom;
 
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
+import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.managers.CollectionManager;
-import ru.itmo.general.commands.Command;
 
 /**
  * Команда 'min_by_discount'. выводит элемент с минимальным discount.
+ *
  * @author zevtos
  */
 public class MinByDiscount extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
+
     public MinByDiscount() {
         super(CommandName.MIN_BY_DISCOUNT, "вывести любой объект из коллекции, значение поля discount которого является минимальным");
 
     }
+
     public MinByDiscount(CollectionManager<Ticket> ticketCollectionManager) {
         this();
         this.ticketCollectionManager = ticketCollectionManager;
@@ -41,6 +44,7 @@ public class MinByDiscount extends Command {
             return new Response(false, "Коллекция пуста!", null);
         }
     }
+
     /**
      * Выполняет команду
      *
@@ -58,7 +62,7 @@ public class MinByDiscount extends Command {
         }
     }
 
-    private Ticket minByDiscount(){
+    private Ticket minByDiscount() {
         long minDiscount = 101;
         int ticketId = -1;
         for (Ticket c : ticketCollectionManager.getCollection()) {
@@ -67,7 +71,7 @@ public class MinByDiscount extends Command {
                 ticketId = c.getId();
             }
         }
-        if(ticketId == -1) return ticketCollectionManager.getFirst();
+        if (ticketId == -1) return ticketCollectionManager.getFirst();
         return ticketCollectionManager.byId(ticketId);
     }
 }

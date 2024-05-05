@@ -3,12 +3,14 @@ package ru.itmo.server.managers.collections;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.itmo.general.models.Ticket;
 import ru.itmo.general.managers.CollectionManager;
+import ru.itmo.general.models.Ticket;
 import ru.itmo.server.dao.TicketDAO;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -19,13 +21,13 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class TicketCollectionManager implements CollectionManager<Ticket> {
     private final Logger logger = LoggerFactory.getLogger("TicketCollectionManager");
-    private int currentId = 1;
     @Getter
     private final LinkedList<Ticket> collection = new LinkedList<>();
-    @Getter
-    private LocalDateTime lastSaveTime;
     private final ReentrantLock lock = new ReentrantLock(); // Замок для синхронизации доступа
     private final TicketDAO dao;
+    private int currentId = 1;
+    @Getter
+    private LocalDateTime lastSaveTime;
 
     /**
      * Создает менеджер коллекции билетов.

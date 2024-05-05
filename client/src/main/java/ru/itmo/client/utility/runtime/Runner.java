@@ -1,14 +1,14 @@
 package ru.itmo.client.utility.runtime;
 
 
-import ru.itmo.client.forms.TicketForm;
-import ru.itmo.general.managers.CommandManager;
 import ru.itmo.client.network.TCPClient;
+import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.utility.console.Console;
 import sun.misc.Signal;
 
 /**
  * Запускает выполнение программы.
+ *
  * @author zevtos
  */
 public class Runner {
@@ -18,14 +18,25 @@ public class Runner {
 
     /**
      * Конструктор для Runner.
+     *
      * @param console Консоль.
-     * @param client TCPClient
+     * @param client  TCPClient
      */
     public Runner(Console console, TCPClient client) {
         this.console = console;
         createCommandManager();
         this.scriptRunner = new ScriptRunner(client, console);
         this.interactiveRunner = new InteractiveRunner(client, console, scriptRunner);
+    }
+
+    private static void setSignalProcessing(String messageString, String... signalNames) {
+        for (String signalName : signalNames) {
+            try {
+                Signal.handle(new Signal(signalName), signal -> System.out.print(messageString));
+            } catch (IllegalArgumentException ignored) {
+                // Игнорируем исключение, если сигнал с таким названием уже существует или такого сигнала не существует
+            }
+        }
     }
 
     /**
@@ -41,10 +52,20 @@ public class Runner {
 
     /**
      * Запускает выполнение скрипта.
+     *
      * @param argument Аргумент - путь к файлу скрипта.
      */
-    public void run_script(String argument){
+    public void run_script(String argument) {
         scriptRunner.run(argument);
+    }
+
+    /**
+     * Создает менеджер команд приложения.
+     *
+     * @return менеджер команд
+     */
+    private void createCommandManager() {
+        CommandManager.initClientCommandsBeforeRegistration(console);
     }
 
     /**
@@ -54,22 +75,5 @@ public class Runner {
         OK,
         ERROR,
         EXIT, ERROR_NULL_RESPONSE,
-    }
-    /**
-     * Создает менеджер команд приложения.
-     *
-     * @return менеджер команд
-     */
-    private void createCommandManager() {
-        CommandManager.initClientCommandsBeforeRegistration(console);
-    }
-    private static void setSignalProcessing(String messageString, String... signalNames) {
-        for (String signalName : signalNames) {
-            try {
-                Signal.handle(new Signal(signalName), signal -> System.out.print(messageString));
-            } catch (IllegalArgumentException ignored) {
-                // Игнорируем исключение, если сигнал с таким названием уже существует или такого сигнала не существует
-            }
-        }
     }
 }

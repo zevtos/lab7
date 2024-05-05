@@ -2,16 +2,16 @@ package ru.itmo.general.managers;
 
 
 import lombok.Getter;
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.core.*;
 import ru.itmo.general.commands.custom.*;
-import ru.itmo.general.utility.base.Accessible;
+import ru.itmo.general.commands.special.SumOfPrice;
+import ru.itmo.general.commands.update.Update;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.commands.Command;
-import ru.itmo.general.commands.special.SumOfPrice;
-import ru.itmo.general.commands.update.Update;
+import ru.itmo.general.utility.base.Accessible;
 import ru.itmo.general.utility.base.Registered;
 import ru.itmo.general.utility.console.Console;
 
@@ -28,16 +28,16 @@ import java.util.Map;
 public class CommandManager {
     /**
      * -- GETTER --
-     * Получает словарь команд.
-     */
-    @Getter
-    private static Map<String, Command> commands;
-    /**
-     * -- GETTER --
      * Получает историю команд.
      */
     @Getter
     private static final List<String> commandHistory = new ArrayList<>();
+    /**
+     * -- GETTER --
+     * Получает словарь команд.
+     */
+    @Getter
+    private static Map<String, Command> commands;
 
     /**
      * Регистрирует команду.

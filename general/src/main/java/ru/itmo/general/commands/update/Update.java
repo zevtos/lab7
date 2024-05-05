@@ -1,14 +1,14 @@
 package ru.itmo.general.commands.update;
 
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
-import ru.itmo.general.utility.base.Accessible;
 import ru.itmo.general.exceptions.*;
+import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.managers.CollectionManager;
-import ru.itmo.general.commands.Command;
+import ru.itmo.general.utility.base.Accessible;
 import ru.itmo.general.utility.console.Console;
 
 import java.rmi.AccessException;

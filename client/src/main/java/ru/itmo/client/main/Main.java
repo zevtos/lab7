@@ -6,9 +6,6 @@ import ru.itmo.client.utility.Interrogator;
 import ru.itmo.client.utility.console.StandartConsole;
 import ru.itmo.client.utility.runtime.Runner;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 /**

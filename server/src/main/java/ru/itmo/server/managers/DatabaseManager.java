@@ -7,7 +7,6 @@ import ru.itmo.server.dao.UserDAO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.time.LocalDateTime;
 
 import static ru.itmo.server.managers.ConnectionManager.*;

@@ -1,17 +1,18 @@
 package ru.itmo.client.forms;
 
 import ru.itmo.client.utility.Interrogator;
-import ru.itmo.general.utility.console.Console;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.Coordinates;
 import ru.itmo.general.models.forms.Form;
+import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
  * Форма для ввода координат.
+ *
  * @author zevtos
  */
 public class CoordinatesForm extends Form<Coordinates> {

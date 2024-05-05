@@ -5,4 +5,5 @@ package ru.itmo.general.exceptions;
  *
  * @author zevtos
  */
-public class InvalidNumberOfElementsException extends Exception {}
+public class InvalidNumberOfElementsException extends Exception {
+}

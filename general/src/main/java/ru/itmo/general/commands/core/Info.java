@@ -1,11 +1,11 @@
 package ru.itmo.general.commands.core;
 
+import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
+import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.managers.CollectionManager;
-import ru.itmo.general.commands.Command;
 
 import java.time.LocalDateTime;
 
@@ -16,9 +16,11 @@ import java.time.LocalDateTime;
  */
 public class Info extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
-    public Info(){
+
+    public Info() {
         super(CommandName.INFO, "вывести информацию о коллекции");
     }
+
     /**
      * Конструктор для создания экземпляра команды Info.
      *
@@ -44,9 +46,9 @@ public class Info extends Command {
 
         String message;
 
-        message = "Сведения о коллекции:" +'\n' +
+        message = "Сведения о коллекции:" + '\n' +
                 " Тип: " + ticketCollectionManager.collectionType() + '\n' +
-                " Количество элементов Ticket: " + ticketCollectionManager.collectionSize() +'\n' +
+                " Количество элементов Ticket: " + ticketCollectionManager.collectionSize() + '\n' +
                 " Дата последнего сохранения:" + ticketLastSaveTimeString;
 
         return new Response(true, null, message);

@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Адаптер для сериализации и десериализации объектов ZonedDateTime в формате JSON.
+ *
  * @author zevtos
  */
 public class ZonedDateAdapter implements JsonSerializer<ZonedDateTime>, JsonDeserializer<ZonedDateTime> {
@@ -15,9 +16,10 @@ public class ZonedDateAdapter implements JsonSerializer<ZonedDateTime>, JsonDese
 
     /**
      * Сериализует объект ZonedDateTime в формат JSON.
-     * @param date Объект ZonedDateTime для сериализации.
+     *
+     * @param date      Объект ZonedDateTime для сериализации.
      * @param typeOfSrc Тип объекта для сериализации.
-     * @param context Контекст сериализации JSON.
+     * @param context   Контекст сериализации JSON.
      * @return JsonElement, представляющий сериализованный объект ZonedDateTime.
      */
     @Override
@@ -27,8 +29,9 @@ public class ZonedDateAdapter implements JsonSerializer<ZonedDateTime>, JsonDese
 
     /**
      * Десериализует объект ZonedDateTime из формата JSON.
-     * @param json Элемент JSON для десериализации.
-     * @param type Тип объекта для десериализации.
+     *
+     * @param json    Элемент JSON для десериализации.
+     * @param type    Тип объекта для десериализации.
      * @param context Контекст десериализации JSON.
      * @return Десериализованный объект ZonedDateTime.
      * @throws JsonParseException Если не удалось десериализовать объект.

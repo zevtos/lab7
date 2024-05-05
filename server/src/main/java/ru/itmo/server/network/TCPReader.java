@@ -12,8 +12,8 @@ import java.nio.channels.SocketChannel;
 
 public class TCPReader implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger("TCPReader");
-    private final SelectionKey key;
     private static final UserDAO userDAO = new UserDAO();
+    private final SelectionKey key;
 
     public TCPReader(SelectionKey key) {
         this.key = key;

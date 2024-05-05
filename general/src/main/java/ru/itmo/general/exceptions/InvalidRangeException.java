@@ -11,7 +11,8 @@ public class InvalidRangeException extends Exception {
     /**
      * Конструктор по умолчанию.
      */
-    public InvalidRangeException() {}
+    public InvalidRangeException() {
+    }
 
     /**
      * Конструктор с сообщением об ошибке.

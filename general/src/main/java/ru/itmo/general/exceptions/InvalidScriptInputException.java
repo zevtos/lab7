@@ -5,4 +5,5 @@ package ru.itmo.general.exceptions;
  *
  * @author zevtos
  */
-public class InvalidScriptInputException extends Exception {}
+public class InvalidScriptInputException extends Exception {
+}
