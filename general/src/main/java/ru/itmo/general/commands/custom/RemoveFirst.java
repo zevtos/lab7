@@ -1,6 +1,7 @@
 package ru.itmo.general.commands.custom;
 
 import ru.itmo.general.commands.CommandName;
+import ru.itmo.general.utility.base.Accessible;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
 import ru.itmo.general.exceptions.NotFoundException;
@@ -10,18 +11,25 @@ import ru.itmo.general.network.Response;
 import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.general.commands.Command;
 
+import java.rmi.AccessException;
+
 /**
  * Команда 'remove_first'. Удаляет первый элемент из коллекции.
+ *
  * @author zevtos
  */
 public class RemoveFirst extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
-    public RemoveFirst(){
+    private Accessible dao;
+
+    public RemoveFirst() {
         super(CommandName.REMOVE_FIRST, "удалить первый элемент из коллекции");
     }
-    public RemoveFirst(CollectionManager<Ticket> ticketCollectionManager) {
+
+    public RemoveFirst(CollectionManager<Ticket> ticketCollectionManager, Accessible dao) {
         this();
         this.ticketCollectionManager = ticketCollectionManager;
+        this.dao = dao;
     }
 
     /**
@@ -34,21 +42,25 @@ public class RemoveFirst extends Command {
         try {
             if (ticketCollectionManager.collectionSize() == 0) throw new EmptyValueException();
 
-            var productToRemove = ticketCollectionManager.getFirst();
-            if (productToRemove == null) throw new NotFoundException();
-
-            ticketCollectionManager.remove(productToRemove);
+            var ticketToRemove = ticketCollectionManager.getFirst();
+            if (ticketToRemove == null) throw new NotFoundException();
+            if (!dao.checkOwnership(ticketToRemove.getId(), request.getUserId()))
+                throw new AccessException("У вас нет доступа к этому билету");
+            ticketCollectionManager.remove(ticketToRemove);
             return new Response(true, "Билет успешно удален.");
 
         } catch (EmptyValueException exception) {
             return new Response(false, "Коллекция пуста!");
         } catch (NotFoundException exception) {
             return new Response(false, "Билета с таким ID в коллекции нет!");
+        } catch (AccessException exception) {
+            return new Response(false, exception.getMessage());
         }
     }
 
     /**
      * Выполняет команду
+     *
      * @return Успешность выполнения команды.
      */
     @Override
@@ -56,8 +68,7 @@ public class RemoveFirst extends Command {
         try {
             if (arguments.length > 1 && !arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
             return new Request(getName(), null);
-        }
-        catch (InvalidNumberOfElementsException exception) {
+        } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         }
     }

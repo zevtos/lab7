@@ -50,7 +50,7 @@ public interface CollectionManager<T> {
      * @param item объект для добавления
      * @return true, если объект успешно добавлен, иначе false
      */
-    boolean add(T item);
+    boolean add(T item, int userID);
 
     /**
      * Обновляет информацию об объекте в коллекции.
@@ -63,10 +63,10 @@ public interface CollectionManager<T> {
     /**
      * Удаляет объект из коллекции по его идентификатору.
      *
-     * @param id идентификатор объекта для удаления
+     * @param integer идентификатор объекта для удаления
      * @return true, если объект успешно удален, иначе false
      */
-    boolean remove(int id);
+    boolean remove(Integer integer);
 
     /**
      * Удаляет указанный объект из коллекции.
@@ -111,4 +111,6 @@ public interface CollectionManager<T> {
     LocalDateTime getLastSaveTime();
 
     String collectionType();
+
+    T getLast();
 }

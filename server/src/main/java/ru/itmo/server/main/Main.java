@@ -8,10 +8,14 @@ import ru.itmo.general.managers.CommandManager;
 
 import static ru.itmo.server.managers.DatabaseManager.*;
 
+import ru.itmo.server.dao.TicketDAO;
+import ru.itmo.server.dao.UserDAO;
 import ru.itmo.server.managers.collections.TicketCollectionManager;
 import ru.itmo.server.network.TCPServer;
 import ru.itmo.server.utility.Runner;
 import sun.misc.Signal;
+
+import java.time.LocalDateTime;
 
 /**
  * Главный класс приложения.
@@ -31,25 +35,16 @@ public class Main {
      */
     @SneakyThrows
     public static void main(String[] args) {
-        // обработка сигналов
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            if (CommandManager.getCommands() != null) {
-                LOGGER.info("Сохранение перед завершением работы приложения...");
-                try {
-                    CommandManager.handleServer(new Request(true, "save", null));
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }));
         checkFileArgument(args);
         createDatabaseIfNotExists();
         Thread runner = new Runner();
         runner.setDaemon(true);
         runner.start();
-        var ticketCollectionManager = new TicketCollectionManager(args);
+        var ticketCollectionManager = new TicketCollectionManager();
         setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
-        CommandManager.initServerCommands(ticketCollectionManager);
+        UserDAO userDAO = new UserDAO();
+        userDAO.updateUser("zevtos", "kop10VLAD");
+        CommandManager.initServerCommands(ticketCollectionManager, new TicketDAO(), userDAO);
         TCPServer tcpServer = new TCPServer(PORT);
         tcpServer.start();
     }

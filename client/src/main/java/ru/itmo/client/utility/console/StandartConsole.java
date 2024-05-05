@@ -6,6 +6,7 @@ import ru.itmo.general.utility.console.Console;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Обеспечивает ввод команд и вывод результатов в стандартной консоли.
@@ -38,6 +39,19 @@ public class StandartConsole implements Console {
     public void println() {
         System.out.println();
     }
+
+    @Override
+    public char[] readPassword(String prompt) {
+        java.io.Console console = System.console();
+        if (console != null) {
+            return console.readPassword(prompt);
+        } else {
+            Scanner scanner = new Scanner(System.in);
+            System.out.print(prompt);
+            return scanner.nextLine().toCharArray();
+        }
+    }
+
 
     /**
      * Выводит ошибку в консоль.

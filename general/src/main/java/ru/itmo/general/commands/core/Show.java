@@ -10,6 +10,7 @@ import ru.itmo.general.utility.console.Console;
 
 /**
  * Команда 'show'. Выводит все элементы коллекции.
+ *
  * @author zevtos
  */
 public class Show extends Command {
@@ -18,6 +19,7 @@ public class Show extends Command {
     public Show() {
         super(CommandName.SHOW, "вывести все элементы коллекции Ticket");
     }
+
     /**
      * Конструктор для создания экземпляра команды Show.
      *
@@ -40,6 +42,7 @@ public class Show extends Command {
         String message = ticketCollectionManager.toString();
         return new Response(true, null, message);
     }
+
     /**
      * Выполняет команду
      *

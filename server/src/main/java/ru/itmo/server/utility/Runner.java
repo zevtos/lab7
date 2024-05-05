@@ -30,6 +30,16 @@ public class Runner extends Thread {
 
     @Override
     public void run() {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (CommandManager.getCommands() != null) {
+                logger.info("Сохранение перед завершением работы приложения...");
+                try {
+                    CommandManager.handleServer(new Request(true, "save", null));
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }));
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         String input;
         while (true) {

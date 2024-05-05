@@ -61,7 +61,7 @@ public class Runner {
      * @return менеджер команд
      */
     private void createCommandManager() {
-        CommandManager.initClientCommands(console, new TicketForm(console));
+        CommandManager.initClientCommandsBeforeRegistration(console);
     }
     private static void setSignalProcessing(String messageString, String... signalNames) {
         for (String signalName : signalNames) {

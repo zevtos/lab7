@@ -10,7 +10,7 @@ public class ConnectionManager {
     public static final String DB_URL = "jdbc:postgresql://localhost:5432/";
     public static final String DB_NAME = "studs";
     private static final String USER = "postgres";
-    private static final String PASSWORD = "kop10VLAD";
+    private static final String PASSWORD = "";
 
     // Method to get a database connection
     public static Connection getConnection() {

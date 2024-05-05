@@ -2,45 +2,36 @@ package ru.itmo.server.network;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.itmo.general.managers.CommandManager;
-import ru.itmo.general.network.Request;
-import ru.itmo.general.network.Response;
+import ru.itmo.server.dao.UserDAO;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
-import java.util.concurrent.Callable;
 
-import static ru.itmo.server.network.TCPWriter.sendResponse;
-
-public class TCPReader implements Callable<Response> {
-    private static Logger logger = LoggerFactory.getLogger("TCPReader");
+public class TCPReader implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger("TCPReader");
     private final SelectionKey key;
+    private static final UserDAO userDAO = new UserDAO();
 
     public TCPReader(SelectionKey key) {
         this.key = key;
     }
 
     @Override
-    public Response call() {
-        Response response = parseRequest(key);
-        // Set interest back to OP_READ after parsing is complete
-        key.interestOps(key.interestOps() | SelectionKey.OP_READ);
-
-        // Wake up the selector to update interest operations
-        key.selector().wakeup();
-
-        return response;
+    public void run() {
+        if (!readRequest(key)) {
+            // Set interest back to OP_READ after parsing is complete
+            key.interestOps(key.interestOps() | SelectionKey.OP_READ);
+            // Wake up the selector to update interest operations
+            key.selector().wakeup();
+        }
     }
 
-
-    public synchronized Response parseRequest(SelectionKey key) {
+    public boolean readRequest(SelectionKey key) {
         SocketChannel clientSocketChannel = (SocketChannel) key.channel();
-        ByteBuffer buffer = ByteBuffer.allocate(8192); // Increased buffer size
+        ByteBuffer buffer = ByteBuffer.allocate(8192);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         int bytesRead;
         try {
@@ -54,7 +45,7 @@ public class TCPReader implements Callable<Response> {
                 key.cancel();
                 clientSocketChannel.close();
                 logger.error("Client disconnected");
-                return null;
+                return false;
             }
         } catch (IOException e) {
             logger.error("Error reading data: {}", e.getMessage());
@@ -65,32 +56,9 @@ public class TCPReader implements Callable<Response> {
             } catch (IOException ce) {
                 logger.error("Error closing channel: {}", ce.getMessage());
             }
-            return null;
+            return false;
         }
-
-        try {
-            byte[] requestBytes = byteArrayOutputStream.toByteArray();
-            ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(requestBytes));
-            Request request = (Request) objectInputStream.readObject();
-
-            if ("ping".equals(request.getCommand())) {
-                Response pingResponse = new Response(true, "Ping successful");
-                sendResponse(clientSocketChannel, pingResponse);
-                return pingResponse;
-            }
-            if ("exit".equals(request.getCommand())) {
-                logger.info("Client {} terminated", clientSocketChannel.getRemoteAddress());
-                clientSocketChannel.close();
-                return null;
-            }
-            Response response = CommandManager.handle(request);
-            sendResponse(clientSocketChannel, response);
-            return response;
-        } catch (Exception e) {
-            logger.error("Error processing request: {}", e.getMessage());
-            Response response = new Response(false, "Invalid request");
-            sendResponse(clientSocketChannel, response);
-            return response;
-        }
+        new Handler(clientSocketChannel, byteArrayOutputStream, key, userDAO).start();
+        return true;
     }
 }

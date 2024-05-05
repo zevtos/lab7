@@ -3,6 +3,7 @@ package ru.itmo.server.dao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.models.*;
+import ru.itmo.general.utility.base.Accessible;
 
 import static ru.itmo.server.managers.ConnectionManager.*;
 
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class TicketDAO {
+public class TicketDAO implements Accessible {
     private static final Logger LOGGER = LoggerFactory.getLogger("TicketDAO");
     private static final String SELECT_ALL_TICKETS_SQL = "SELECT * FROM tickets";
     private static final String CREATE_TICKETS_TABLE_SQL = "CREATE TABLE IF NOT EXISTS tickets (" +
@@ -34,24 +35,68 @@ public class TicketDAO {
             "user_id INT," +
             "FOREIGN KEY (user_id) REFERENCES users(id))";
     private static final String INSERT_TICKET_SQL = "INSERT INTO tickets (" +
-            "name, coordinates_x, coordinates_y, creation_date, price, discount, comment, type, person_birthday, person_height, person_passport_id, person_hair_color, user_id) " +
+            " name," +
+            " coordinates_x," +
+            " coordinates_y," +
+            " creation_date," +
+            " price," +
+            " discount," +
+            " comment," +
+            " type," +
+            " person_birthday," +
+            " person_height," +
+            " person_passport_id," +
+            " person_hair_color," +
+            " user_id) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String REMOVE_TICKET_SQL = "DELETE FROM tickets WHERE id = ?";
+    private static final String CHECK_TICKET_OWNERSHIP_SQL = "SELECT user_id FROM tickets WHERE id = ?";
+    private static final String UPDATE_TICKET_SQL = "UPDATE tickets SET " +
+            "name = ?, " +
+            "coordinates_x = ?, " +
+            "coordinates_y = ?, " +
+            "creation_date = ?, " +
+            "price = ?, " +
+            "discount = ?, " +
+            "comment = ?, " +
+            "type = ?, " +
+            "person_birthday = ?, " +
+            "person_height = ?, " +
+            "person_passport_id = ?, " +
+            "person_hair_color = ? " +
+            "WHERE id = ?";
 
     public TicketDAO() {
     }
 
-    public boolean addTicket(Ticket ticket, int userId) {
+    public int addTicket(Ticket ticket, int userId) {
         try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_TICKET_SQL)) {
+             PreparedStatement statement =
+                     connection.prepareStatement(INSERT_TICKET_SQL, Statement.RETURN_GENERATED_KEYS)) {
             set(userId, statement, ticket);
 
-            return executePrepareUpdate(statement) > 0;
+            int rowsAffected = executePrepareUpdate(statement);
+            if (rowsAffected > 0) {
+                // Get the generated keys (which include the ID of the newly added ticket)
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    // Return the ID of the newly added ticket
+                    return generatedKeys.getInt(1);
+                } else {
+                    // No generated keys found
+                    LOGGER.error("Failed to retrieve generated keys after adding ticket");
+                    return -1;
+                }
+            } else {
+                LOGGER.error("No rows were affected while adding ticket");
+                return -1;
+            }
         } catch (SQLException e) {
             LOGGER.error("Error while adding ticket {}", e.getMessage());
-            return false;
+            return -1;
         }
     }
+
 
     public void addTickets(Collection<Ticket> tickets, int userId) {
         try (Connection connection = getConnection();
@@ -73,6 +118,11 @@ public class TicketDAO {
     }
 
     private void set(int userId, PreparedStatement statement, Ticket ticket) throws SQLException {
+        set(statement, ticket);
+        statement.setInt(13, userId); // User's ID who added the ticket
+    }
+
+    private void set(PreparedStatement statement, Ticket ticket) throws SQLException {
         statement.setString(1, ticket.getName());
         statement.setDouble(2, ticket.getCoordinates().getX());
         statement.setFloat(3, ticket.getCoordinates().getY());
@@ -89,7 +139,6 @@ public class TicketDAO {
         statement.setFloat(10, ticket.getPerson().getHeight());
         statement.setString(11, ticket.getPerson().getPassportID());
         statement.setString(12, ticket.getPerson().getHairColor().toString());
-        statement.setInt(13, userId); // User's ID who added the ticket
     }
 
     public List<Ticket> getAllTickets() {
@@ -114,6 +163,19 @@ public class TicketDAO {
             return executePrepareUpdate(statement) > 0;
         } catch (SQLException e) {
             LOGGER.error("Error while deleting ticket with ID {}: {}", ticketId, e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean updateTicket(Ticket ticket) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_TICKET_SQL)) {
+
+            set(statement, ticket);
+            statement.setInt(13, ticket.getId());
+            return executePrepareUpdate(statement) > 0;
+        } catch (SQLException e) {
+            LOGGER.error("Error while updating ticket {}: {}", ticket.getId(), e.getMessage());
             return false;
         }
     }
@@ -152,4 +214,43 @@ public class TicketDAO {
         return new Ticket(id, name, new Coordinates(coordinatesX, coordinatesY), creationDate, price,
                 discount, comment, type, new Person(personBirthday, personHeight, personPassportID, personHairColor));
     }
+
+    public boolean removeTicketById(int ticketId, int userID) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(REMOVE_TICKET_SQL)) {
+
+            // Add a check to ensure that the ticket belongs to the specified user
+            if (!checkOwnership(ticketId, userID)) {
+                LOGGER.error("Ticket with ID {} does not belong to user {}", ticketId, userID);
+                return false;
+            }
+
+            statement.setInt(1, ticketId);
+            return executePrepareUpdate(statement) > 0;
+        } catch (SQLException e) {
+            LOGGER.error("Error while deleting ticket with ID {}: {}", ticketId, e.getMessage());
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkOwnership(int ticketId, int userId) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(CHECK_TICKET_OWNERSHIP_SQL)) {
+            statement.setInt(1, ticketId);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int ownerId = resultSet.getInt("user_id");
+                return ownerId == userId;
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Error while checking ownership of ticket with ID {}: {}", ticketId, e.getMessage());
+            return false;
+        }
+    }
+
+
 }

@@ -7,12 +7,6 @@ import ru.itmo.general.commands.CommandName;
 import java.util.Objects;
 
 public class Request extends Networkable {
-    @Getter
-    @Setter
-    private static String login = "unauthenticated";
-    @Getter
-    @Setter
-    private static String password = "unauthenticated";
 
     public Request(boolean succsess, String name, Object data) {
         super(succsess, name, data);

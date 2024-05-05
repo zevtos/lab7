@@ -60,7 +60,7 @@ public class AddIfMin extends Command {
 
             var minPrice = minPrice();
             if (ticket.getPrice() < minPrice) {
-                ticketCollectionManager.add(ticket);
+                ticketCollectionManager.add(ticket, request.getUserId());
                 return new Response(true, "Билет успешно добавлен!", minPrice);
             } else {
                 return new Response(false, null, minPrice);

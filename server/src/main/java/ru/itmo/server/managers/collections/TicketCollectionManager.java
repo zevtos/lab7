@@ -3,8 +3,6 @@ package ru.itmo.server.managers.collections;
 import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.itmo.general.exceptions.DuplicateException;
-import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.managers.CollectionManager;
 import ru.itmo.server.dao.TicketDAO;
@@ -31,7 +29,6 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
 
     /**
      * Создает менеджер коллекции билетов.
-     *
      */
     public TicketCollectionManager() {
         this.lastSaveTime = null;
@@ -43,18 +40,6 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
     public TicketCollectionManager(TicketDAO ticketDAO) {
         this.lastSaveTime = null;
         this.dao = ticketDAO;
-        this.loadCollection();
-        update();
-    }
-
-    /**
-     * Создает менеджер коллекции билетов.
-     *
-     * @param args аргументы командной строки
-     */
-    public TicketCollectionManager(String[] args) {
-        this.lastSaveTime = null;
-        this.dao = new TicketDAO();
         this.loadCollection();
         update();
     }
@@ -80,14 +65,12 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
      * Добавляет Ticket
      */
     @Override
-    public boolean add(Ticket ticket) {
+    public boolean add(Ticket ticket, int userID) {
         try {
             lock.lock();
-            if (contains(ticket)) {
-                return false;
-            }
-            TicketDAO ticketDAO = new TicketDAO();
-            if (!ticketDAO.addTicket(ticket, 1)) return false;
+            int newID = dao.addTicket(ticket, userID);
+            if (newID < 0) return false;
+            ticket.setId(newID);
             collection.add(ticket);
             update();
             return true;
@@ -106,7 +89,9 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
             if (!contains(ticket)) {
                 return false;
             }
+            if (!dao.removeTicketById(ticket.getId())) return false;
             collection.remove(ticket);
+            if (!dao.updateTicket(ticket)) return false;
             collection.add(ticket);
             update();
             return true;
@@ -119,13 +104,14 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
      * Удаляет Ticket по ID
      */
     @Override
-    public boolean remove(int id) {
+    public boolean remove(Integer id) {
         try {
             lock.lock();
             Ticket ticket = byId(id);
             if (ticket == null) {
                 return false;
             }
+            if (!dao.removeTicketById(ticket.getId())) return false;
             collection.remove(ticket);
             update();
             return true;
@@ -173,12 +159,19 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         return collection.getClass().getName();
     }
 
+    @Override
+    public Ticket getLast() {
+        return collection.getLast();
+    }
+
 
     @Override
     public boolean remove(Ticket ticket) {
         try {
             lock.lock();
-            return collection.remove(ticket);
+            if (!dao.removeTicketById(ticket.getId())) return false;
+            collection.remove(ticket);
+            return true;
         } finally {
             lock.unlock();
         }
@@ -232,27 +225,7 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
 
     public Ticket getFirst() {
         if (collection.isEmpty()) return null;
-        return collection.peek();
-    }
-
-    public Collection<Person> getAllPersons() {
-        // Получаем коллекцию всех билетов
-        Collection<Ticket> tickets = getCollection();
-        // Создаем новую коллекцию для хранения всех персон
-        List<Person> allPersons = new ArrayList<>();
-
-        // Проходим по каждому билету и добавляем его персону в список всех персон
-        for (Ticket ticket : tickets) {
-            if (ticket == null) {
-                continue;
-            }
-            Person person = ticket.getPerson();
-            if (person != null) {
-                allPersons.add(person);
-            }
-        }
-
-        return allPersons;
+        return collection.getFirst();
     }
 
     public void validateAll() {

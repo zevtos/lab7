@@ -8,6 +8,7 @@ import ru.itmo.general.utility.console.Console;
 
 /**
  * Команда 'exit'. Завершает выполнение программы (без сохранения в файл).
+ *
  * @author zevtos
  */
 public class Exit extends Command {
@@ -15,11 +16,11 @@ public class Exit extends Command {
 
     /**
      * Конструктор для создания экземпляра команды Exit.
-     *
      */
     public Exit() {
         super(CommandName.EXIT, "завершить работу приложения");
     }
+
     /**
      * Конструктор для создания экземпляра команды Exit.
      *
@@ -29,6 +30,7 @@ public class Exit extends Command {
         this();
         this.console = console;
     }
+
     /**
      * Выполняет команду.
      *
@@ -39,10 +41,11 @@ public class Exit extends Command {
     public Response execute(Request arguments) {
         try {
             return new Response(true, null);
-        } catch (Exception e){
+        } catch (Exception e) {
             return new Response(false, e.toString());
         }
     }
+
     /**
      * Выполняет команду
      *
@@ -50,7 +53,7 @@ public class Exit extends Command {
      */
     @Override
     public Request execute(String[] arguments) {
-        if (arguments[1].isEmpty()) {
+        if (!arguments[1].isEmpty()) {
             return new Request(false, getName(), getUsingError());
         }
 

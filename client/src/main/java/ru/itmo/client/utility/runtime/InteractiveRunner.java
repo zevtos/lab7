@@ -1,5 +1,6 @@
 package ru.itmo.client.utility.runtime;
 
+import ru.itmo.client.forms.TicketForm;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.Interrogator;
@@ -20,12 +21,14 @@ public class InteractiveRunner implements ModeRunner {
     private final Console console;
     private final ScriptRunner scriptRunner;
     private Request request = null;
+    private String login = null;
+    private String password = null;
 
     /**
      * Конструктор для InteractiveRunner.
      *
-     * @param console        Консоль.
-     * @param scriptRunner   Запускает выполнение скриптов.
+     * @param console      Консоль.
+     * @param scriptRunner Запускает выполнение скриптов.
      */
     public InteractiveRunner(TCPClient tcpClient, Console console, ScriptRunner scriptRunner) {
         this.tcpClient = tcpClient;
@@ -64,7 +67,7 @@ public class InteractiveRunner implements ModeRunner {
                     commandStatus = Runner.ExitCode.ERROR;
                 }
                 if (commandStatus == Runner.ExitCode.ERROR) {
-                    if(request != null) {
+                    if (request != null) {
                         console.printError(getClass(), request.toString());
                     }
                 } else if (commandStatus == Runner.ExitCode.ERROR_NULL_RESPONSE) {
@@ -114,19 +117,50 @@ public class InteractiveRunner implements ModeRunner {
                 }
                 return Runner.ExitCode.OK;
             }
-            default -> {
+            case "register", "login" -> {
+                if (login != null || password != null) {
+                    console.printError(getClass(), "Вы уже авторизованы");
+                    return Runner.ExitCode.ERROR;
+                }
                 request = command.execute(userCommand);
                 if (!request.isSuccess()) return Runner.ExitCode.ERROR;
+                login = request.getLogin();
+                password = request.getPassword();
+                var response = tcpClient.sendCommand(request);
+                if (response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
+                if (response.isSuccess()) {
+                    console.println(response.toString());
+                } else {
+                    console.printError(getClass(), response.toString());
+                    login = null;
+                    password = null;
+                    request = null;
+                    return Runner.ExitCode.ERROR;
+                }
+                CommandManager.initClientCommandsAfterRegistration(console, new TicketForm(console));
+                return Runner.ExitCode.OK;
+            }
+            default -> {
+                if (login == null || password == null) {
+                    console.printError(getClass(), "Вы не авторизованы");
+                    return Runner.ExitCode.ERROR;
+                }
+                request = command.execute(userCommand);
+                if (!request.isSuccess()) return Runner.ExitCode.ERROR;
+                request.setLogin(login);
+                request.setPassword(password);
                 if (request.getCommand().equals("exit")) {
                     tcpClient.sendCommand(request);
                     return Runner.ExitCode.EXIT;
                 }
                 var response = tcpClient.sendCommand(request);
-                if(response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
+                if (response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
                 if (response.isSuccess()) {
                     console.println(response.toString());
                 } else {
                     console.printError(getClass(), response.toString());
+                    request = null;
+                    return Runner.ExitCode.ERROR;
                 }
             }
         }

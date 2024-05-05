@@ -22,9 +22,10 @@ public class Add extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
     private Form<Ticket> ticketForm;
 
-    public Add(){
+    public Add() {
         super(CommandName.ADD, "{element} добавить новый объект Ticket в коллекцию");
     }
+
     /**
      * Конструктор для создания экземпляра команды Add.
      *
@@ -34,6 +35,7 @@ public class Add extends Command {
         this();
         this.ticketCollectionManager = ticketCollectionManager;
     }
+
     public Add(Console console, Form<Ticket> ticketForm) {
         this();
         this.console = console;
@@ -49,18 +51,20 @@ public class Add extends Command {
     @Override
     public Response execute(Request request) {
         try {
-            var ticket = ((Ticket)request.getData());
+            var ticket = ((Ticket) request.getData());
             ticket.setId(ticketCollectionManager.getFreeId());
             if (!ticket.validate()) {
                 return new Response(false, "Билет не добавлен, поля билета не валидны!");
             }
-            ticket.setId(ticketCollectionManager.getFreeId());
-            if(!ticketCollectionManager.add(ticket)) return new Response(false, "Билет уже существует", -1);
-            return new Response(true, null, ticketCollectionManager.getFreeId());
+
+            if (!ticketCollectionManager.add(ticket, request.getUserId()))
+                return new Response(false, "Билет уже существует", -1);
+            return new Response(true, null, null);
         } catch (Exception e) {
             return new Response(false, e.toString(), -1);
         }
     }
+
     /**
      * Выполняет команду.
      *

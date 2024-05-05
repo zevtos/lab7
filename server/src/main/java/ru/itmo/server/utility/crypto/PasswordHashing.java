@@ -42,4 +42,9 @@ public class PasswordHashing {
             return null;
         }
     }
+
+    public static boolean verifyPassword(String inputPassword, String salt, String hashedPassword) {
+        String hashedInputPassword = hashPassword(inputPassword, salt);
+        return hashedInputPassword != null && hashedInputPassword.equals(hashedPassword);
+    }
 }

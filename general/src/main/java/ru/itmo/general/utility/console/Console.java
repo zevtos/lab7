@@ -43,4 +43,6 @@ public interface Console {
 
 
     void println();
+
+    char[] readPassword(String s);
 }
