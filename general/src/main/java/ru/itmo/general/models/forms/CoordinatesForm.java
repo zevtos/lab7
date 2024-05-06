@@ -1,17 +1,17 @@
-package ru.itmo.client.forms;
+package ru.itmo.general.models.forms;
 
-import ru.itmo.client.utility.Interrogator;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.Coordinates;
-import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
- * Форма для ввода координат.
+ * Form for inputting coordinates.
+ * Handles user input to gather coordinates.
  *
  * @author zevtos
  */
@@ -19,14 +19,21 @@ public class CoordinatesForm extends Form<Coordinates> {
     private final Console console;
 
     /**
-     * Конструктор формы координат.
+     * Constructs a new coordinates form.
      *
-     * @param console консоль для взаимодействия с пользователем
+     * @param console the console for interacting with the user
      */
     public CoordinatesForm(Console console) {
         this.console = console;
     }
 
+    /**
+     * Builds a Coordinates object based on the entered data.
+     *
+     * @return The created Coordinates object.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
+     * @throws InvalidFormException        If the entered data is invalid.
+     */
     @Override
     public Coordinates build() throws InvalidScriptInputException, InvalidFormException {
         var coordinates = new Coordinates(askX(), askY());
@@ -35,17 +42,17 @@ public class CoordinatesForm extends Form<Coordinates> {
     }
 
     /**
-     * Запрашивает у пользователя координату X.
+     * Requests the user to input the X coordinate.
      *
-     * @return Координата X
-     * @throws InvalidScriptInputException если возникает ошибка ввода при выполнении скрипта
+     * @return The X coordinate.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
      */
     public double askX() throws InvalidScriptInputException {
         var fileMode = Interrogator.fileMode();
         double x;
         while (true) {
             try {
-                console.println("Введите координату X:");
+                console.println("Enter the X coordinate:");
                 console.prompt();
                 var strX = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(strX);
@@ -53,13 +60,13 @@ public class CoordinatesForm extends Form<Coordinates> {
                 x = Double.parseDouble(strX);
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Координата X не распознана!");
+                console.printError(getClass(), "X coordinate not recognized!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError(getClass(), "Координата X должна быть числом!");
+                console.printError(getClass(), "X coordinate must be a number!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError(getClass(), "Непредвиденная ошибка!");
+                console.printError(getClass(), "An unexpected error occurred!");
                 System.exit(0);
             }
         }
@@ -67,34 +74,34 @@ public class CoordinatesForm extends Form<Coordinates> {
     }
 
     /**
-     * Запрашивает у пользователя координату Y.
+     * Requests the user to input the Y coordinate.
      *
-     * @return Координата Y
-     * @throws InvalidScriptInputException если возникает ошибка ввода при выполнении скрипта
+     * @return The Y coordinate.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
      */
     public Float askY() throws InvalidScriptInputException {
         var fileMode = Interrogator.fileMode();
         float y;
         while (true) {
             try {
-                console.println("Введите координату Y:");
+                console.println("Enter the Y coordinate:");
                 console.prompt();
                 var strY = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(strY);
 
                 y = Float.parseFloat(strY);
-                if (y <= -420) throw new InvalidRangeException("Значение Y должно быть больше -420");
+                if (y <= -420) throw new InvalidRangeException("Y value must be greater than -420");
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Координата Y не распознана!");
+                console.printError(getClass(), "Y coordinate not recognized!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError(getClass(), "Координата Y должна быть числом!");
+                console.printError(getClass(), "Y coordinate must be a number!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (InvalidRangeException exception) {
                 console.printError(getClass(), exception.getMessage());
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError(getClass(), "Непредвиденная ошибка!");
+                console.printError(getClass(), "An unexpected error occurred!");
                 System.exit(0);
             }
         }

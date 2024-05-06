@@ -3,7 +3,8 @@ package ru.itmo.general.models;
 import java.io.Serializable;
 
 /**
- * Перечисление типов билетов.
+ * The {@code TicketType} enum represents the types of tickets available.
+ * It includes the types VIP, USUAL, and CHEAP.
  *
  * @author zevtos
  */
@@ -13,9 +14,9 @@ public enum TicketType implements Serializable {
     CHEAP;
 
     /**
-     * Возвращает строку со всеми именами типов билетов.
+     * Returns a string containing all the names of ticket types.
      *
-     * @return Строка со всеми именами типов билетов, разделенными запятыми.
+     * @return A string containing all the names of ticket types, separated by commas.
      */
     public static String names() {
         StringBuilder nameList = new StringBuilder();

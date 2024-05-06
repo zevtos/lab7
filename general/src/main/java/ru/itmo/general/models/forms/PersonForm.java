@@ -1,13 +1,12 @@
-package ru.itmo.client.forms;
+package ru.itmo.general.models.forms;
 
-import ru.itmo.client.utility.Interrogator;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.Color;
 import ru.itmo.general.models.Person;
-import ru.itmo.general.models.forms.Form;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.utility.console.Console;
 
 import java.time.LocalDateTime;
@@ -16,27 +15,30 @@ import java.time.format.DateTimeParseException;
 import java.util.NoSuchElementException;
 
 /**
- * Форма для создания объекта Person.
+ * Form for creating a Person object.
+ * Handles user input to create a Person object.
+ *
+ * @author zevtos
  */
 public class PersonForm extends Form<Person> {
     private final Console console;
     private final float MIN_HEIGHT = 0;
 
     /**
-     * Создает новую форму для создания объекта Person.
+     * Constructs a new form for creating a Person object.
      *
-     * @param console Консоль для взаимодействия с пользователем.
+     * @param console The console for interacting with the user.
      */
     public PersonForm(Console console) {
         this.console = console;
     }
 
     /**
-     * Строит объект Person на основе введенных данных.
+     * Builds a Person object based on the entered data.
      *
-     * @return Созданный объект Person.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
-     * @throws InvalidFormException        Если введенные данные неверны.
+     * @return The created Person object.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
+     * @throws InvalidFormException        If the entered data is invalid.
      */
     public Person build() throws InvalidScriptInputException, InvalidFormException {
         console.println("Укажите человека на которого выписан билет, введите id=x, где id это passportID");
@@ -73,20 +75,20 @@ public class PersonForm extends Form<Person> {
     }
 
     /**
-     * Запрашивает цвет волос.
+     * Requests hair color.
      *
-     * @return Цвет волос.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
+     * @return Hair color.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
      */
     private Color askHairColor() throws InvalidScriptInputException {
         return new ColorForm(console).build();
     }
 
     /**
-     * Запрашивает passportID.
+     * Requests passportID.
      *
      * @return PassportID.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
      */
     private String askPassportID() throws InvalidScriptInputException {
         String passportID;
@@ -116,10 +118,10 @@ public class PersonForm extends Form<Person> {
     }
 
     /**
-     * Запрашивает рост.
+     * Requests height.
      *
-     * @return Рост.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
+     * @return Height.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
      */
     private Float askHeight() throws InvalidScriptInputException {
         var fileMode = Interrogator.fileMode();
@@ -153,10 +155,10 @@ public class PersonForm extends Form<Person> {
     }
 
     /**
-     * Запрашивает дату рождения.
+     * Requests the date of birth.
      *
-     * @return Дата рождения.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
+     * @return Date of birth.
+     * @throws InvalidScriptInputException If an error occurred while executing the script.
      */
     private LocalDateTime askBirthday() throws InvalidScriptInputException {
         LocalDateTime birthday;

@@ -1,6 +1,6 @@
-package ru.itmo.client.forms;
+package ru.itmo.general.models.forms;
 
-import ru.itmo.client.utility.Interrogator;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.EmptyValueException;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
@@ -9,13 +9,13 @@ import ru.itmo.general.models.Coordinates;
 import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.TicketType;
-import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
- * Форма для создания билета.
+ * Form for creating a ticket.
+ * Handles user input to create a ticket object.
  *
  * @author zevtos
  */
@@ -24,20 +24,20 @@ public class TicketForm extends Form<Ticket> {
     private final Console console;
 
     /**
-     * Создает новую форму для создания билета.
+     * Constructs a new form for creating a ticket.
      *
-     * @param console Консоль для взаимодействия с пользователем.
+     * @param console The console for interacting with the user.
      */
     public TicketForm(Console console) {
         this.console = console;
     }
 
     /**
-     * Строит объект билета на основе введенных данных.
+     * Builds a ticket object based on the entered data.
      *
-     * @return Созданный билет.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
-     * @throws InvalidFormException        Если введенные данные неверны.
+     * @return The created ticket.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
+     * @throws InvalidFormException        If the entered data is invalid.
      */
     @Override
     public Ticket build() throws InvalidScriptInputException, InvalidFormException {
@@ -52,15 +52,15 @@ public class TicketForm extends Form<Ticket> {
                 askTicketType(),
                 askPerson()
         );
-        if (!ticket.validateClient()) throw new InvalidFormException();
+        if (!ticket.validate()) throw new InvalidFormException();
         return ticket;
     }
 
     /**
-     * Запрашивает скидку на билет.
+     * Requests a discount on the ticket.
      *
-     * @return Скидка на билет.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
+     * @return discount on the ticket.
+     * @throws InvalidScriptInputException if an error occurred while executing the script.
      */
     public Long askDiscount() throws InvalidScriptInputException {
         var fileMode = Interrogator.fileMode();

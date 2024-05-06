@@ -4,114 +4,129 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * Интерфейс для управления коллекцией объектов.
+ * Interface for managing a collection of objects.
  *
- * @param <T> тип объектов в коллекции
+ * @param <T> the type of objects in the collection
  * @author zevtos
  */
 public interface CollectionManager<T> {
     /**
-     * Проверяет валидность всех объектов в коллекции.
+     * Validates all objects in the collection.
      */
     void validateAll();
 
     /**
-     * Получает коллекцию объектов.
+     * Gets the collection of objects.
      *
-     * @return коллекция объектов
+     * @return the collection of objects
      */
     List<T> getCollection();
 
     /**
-     * Получает объект по его идентификатору.
+     * Gets an object by its identifier.
      *
-     * @param id идентификатор объекта
-     * @return объект с указанным идентификатором или null, если такой объект не найден
+     * @param id the identifier of the object
+     * @return the object with the specified identifier, or null if no such object is found
      */
     T byId(int id);
 
     /**
-     * Проверяет, содержит ли коллекция указанный объект.
+     * Checks if the collection contains the specified object.
      *
-     * @param item объект для проверки
-     * @return true, если коллекция содержит указанный объект, иначе false
+     * @param item the object to check
+     * @return true if the collection contains the specified object, otherwise false
      */
     boolean contains(T item);
 
     /**
-     * Получает свободный идентификатор для нового объекта.
+     * Gets a free identifier for a new object.
      *
-     * @return свободный идентификатор
+     * @return the free identifier
      */
     int getFreeId();
 
     /**
-     * Добавляет объект в коллекцию.
+     * Adds an object to the collection.
      *
-     * @param item объект для добавления
-     * @return true, если объект успешно добавлен, иначе false
+     * @param item   the object to add
+     * @param userID the ID of the user adding the object
+     * @return true if the object is successfully added, otherwise false
      */
     boolean add(T item, int userID);
 
     /**
-     * Обновляет информацию об объекте в коллекции.
+     * Updates the information about an object in the collection.
      *
-     * @param item объект для обновления
-     * @return true, если объект успешно обновлен, иначе false
+     * @param item the object to update
+     * @return true if the object is successfully updated, otherwise false
      */
     boolean update(T item);
 
     /**
-     * Удаляет объект из коллекции по его идентификатору.
+     * Removes an object from the collection by its identifier.
      *
-     * @param integer идентификатор объекта для удаления
-     * @return true, если объект успешно удален, иначе false
+     * @param id the identifier of the object to remove
+     * @return true if the object is successfully removed, otherwise false
      */
-    boolean remove(Integer integer);
+    boolean remove(Integer id);
 
     /**
-     * Удаляет указанный объект из коллекции.
+     * Removes the specified object from the collection.
      *
-     * @param item объект для удаления
-     * @return true, если объект успешно удален, иначе false
+     * @param item the object to remove
+     * @return true if the object is successfully removed, otherwise false
      */
     boolean remove(T item);
 
     /**
-     * Обновляет состояние коллекции.
+     * Updates the state of the collection.
      */
     void update();
 
     /**
-     * Загружает коллекцию из файла.
+     * Loads the collection from a file.
      *
-     * @return true, если коллекция успешно загружена, иначе false
+     * @return true if the collection is successfully loaded, otherwise false
      */
     boolean loadCollection();
 
-
     /**
-     * Очищает коллекцию.
+     * Clears the collection.
      */
     void clearCollection();
 
     /**
-     * Возвращает размер коллекции.
+     * Gets the size of the collection.
      *
-     * @return размер коллекции
+     * @return the size of the collection
      */
     int collectionSize();
 
     /**
-     * Получает первый объект в коллекции.
+     * Gets the first object in the collection.
      *
-     * @return первый объект в коллекции или null, если коллекция пуста
+     * @return the first object in the collection, or null if the collection is empty
      */
     T getFirst();
 
+    /**
+     * Gets the date and time of the last save operation.
+     *
+     * @return the date and time of the last save operation
+     */
     LocalDateTime getLastSaveTime();
 
+    /**
+     * Gets the type of the collection.
+     *
+     * @return the type of the collection
+     */
     String collectionType();
 
+    /**
+     * Gets the last object in the collection.
+     *
+     * @return the last object in the collection, or null if the collection is empty
+     */
     T getLast();
 }

@@ -1,9 +1,8 @@
-package ru.itmo.client.forms;
+package ru.itmo.general.models.forms;
 
-import ru.itmo.client.utility.Interrogator;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.Color;
-import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;

@@ -1,38 +1,33 @@
 package ru.itmo.general.models;
 
-
-import lombok.Getter;
 import ru.itmo.general.utility.base.Validatable;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Класс, представляющий координаты.
+ * The {@code Coordinates} class represents a set of coordinates.
+ * It encapsulates the x and y coordinates of a point.
  *
+ * @param x The x-coordinate of the point.
+ * @param y The y-coordinate of the point.
  * @author zevtos
  */
-public class Coordinates implements Validatable, Serializable {
-    @Getter
-    private double x;
-    @Getter
-    private Float y; //Значение поля должно быть больше -420, Поле не может быть null
+public record Coordinates(double x, Float y) implements Validatable, Serializable {
 
     /**
-     * Создает объект координат с заданными значениями x и y.
+     * Validates the coordinates.
      *
-     * @param x1 Значение координаты x.
-     * @param y1 Значение координаты y.
+     * @return true if the coordinates are valid, false otherwise.
      */
-    public Coordinates(double x1, Float y1) {
-        x = x1;
-        y = y1;
+    public boolean validate() {
+        return y != null && y > -420;
     }
 
     /**
-     * Представляет координаты в виде строки.
+     * Represents the coordinates as a string.
      *
-     * @return Строковое представление координат.
+     * @return String representation of the coordinates.
      */
     @Override
     public String toString() {
@@ -40,25 +35,27 @@ public class Coordinates implements Validatable, Serializable {
     }
 
     /**
-     * Проверяет валидность координат.
+     * Checks the equality of coordinates.
      *
-     * @return true, если координаты валидны, иначе false.
+     * @param o The object to compare.
+     * @return true if the objects are equal, false otherwise.
      */
-    public boolean validate() {
-        return y != null && y > -420;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Coordinates that = (Coordinates) o;
-        return Double.compare(that.x, x) == 0 &&
-                Objects.equals(y, that.y);
+        return Double.compare(that.x, x) == 0 && Objects.equals(y, that.y);
     }
 
+    /**
+     * Computes the hash code of the coordinates.
+     *
+     * @return The hash code value of the coordinates.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(x, y);
     }
+
 }

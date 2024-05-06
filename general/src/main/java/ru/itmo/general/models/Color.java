@@ -3,7 +3,8 @@ package ru.itmo.general.models;
 import java.io.Serializable;
 
 /**
- * Перечисление, представляющее возможные цвета.
+ * The {@code Color} enum represents possible colors.
+ * It includes the colors GREEN, BLACK, BLUE, and YELLOW.
  *
  * @author zevtos
  */
@@ -14,9 +15,9 @@ public enum Color implements Serializable {
     YELLOW;
 
     /**
-     * Возвращает строку с перечислением всех цветов.
+     * Returns a string containing all the names of colors.
      *
-     * @return Строка с перечислением всех цветов.
+     * @return A string containing all the names of colors.
      */
     public static String names() {
         StringBuilder nameList = new StringBuilder();

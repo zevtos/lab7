@@ -15,6 +15,12 @@ import static ru.itmo.server.managers.ConnectionManager.*;
 import static ru.itmo.server.utility.crypto.PasswordHashing.hashPassword;
 import static ru.itmo.server.utility.crypto.SaltGenerator.generateSalt;
 
+/**
+ * The UserDAO class provides methods for interacting with the users table in the database.
+ * It handles user creation, retrieval, updating, and password verification.
+ *
+ * @author zevtos
+ */
 public class UserDAO implements Registered {
     private static final Logger LOGGER = LoggerFactory.getLogger("UserDAO");
     private static final String CREATE_USERS_TABLE_SQL = "CREATE TABLE IF NOT EXISTS users (" +
@@ -46,37 +52,21 @@ public class UserDAO implements Registered {
             " WHERE username = ?";
     private final Connection connection;
 
+    /**
+     * Constructs a new UserDAO object.
+     * Initializes the database connection.
+     */
     public UserDAO() {
         connection = getConnection();
     }
 
-    public void getAllUsers() {
-        Connection connection = getConnection();
-        assert connection != null : "Connection is null";
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_USERS_SQL);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String username = resultSet.getString("username");
-                String passwordHash = resultSet.getString("password_hash");
-                String salt = resultSet.getString("salt");
-                String registrationDate = resultSet.getString("registration_date");
-                String lastLogin = resultSet.getString("last_login");
-
-                // Output user details
-                System.out.println("User ID: " + id);
-                System.out.println("Username: " + username);
-                System.out.println("Password Hash: " + passwordHash);
-                System.out.println("Salt: " + salt);
-                System.out.println("Registration Date: " + registrationDate);
-                System.out.println("Last Login: " + lastLogin);
-                System.out.println();
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Error while fetching users: {}", e.getMessage());
-        }
-    }
-
+    /**
+     * Inserts a new user into the database.
+     *
+     * @param username The username of the new user.
+     * @param password The password of the new user.
+     * @return The created User object if successful, otherwise null.
+     */
     public User insertUser(String username, String password) {
         // Generate a random salt
         String salt = generateSalt(16);
@@ -97,6 +87,16 @@ public class UserDAO implements Registered {
         }
     }
 
+    /**
+     * Inserts a new user into the database with specified details.
+     *
+     * @param username         The username of the new user.
+     * @param passwordHash     The hashed password of the new user.
+     * @param salt             The salt used for hashing the password.
+     * @param registrationDate The registration date of the new user.
+     * @param lastLoginDate    The last login date of the new user.
+     * @return true if the user was successfully inserted, otherwise false.
+     */
     public boolean insertUser(String username, String passwordHash,
                               String salt, LocalDateTime registrationDate,
                               LocalDateTime lastLoginDate) {
@@ -113,6 +113,12 @@ public class UserDAO implements Registered {
         }
     }
 
+    /**
+     * Retrieves a user from the database by their username.
+     *
+     * @param username The username of the user to retrieve.
+     * @return The User object if found, otherwise null.
+     */
     public User getUserByUsername(String username) {
         try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_USERNAME_SQL)) {
             statement.setString(1, username);
@@ -125,7 +131,7 @@ public class UserDAO implements Registered {
                     LocalDateTime registrationDate = resultSet.getTimestamp("registration_date").toLocalDateTime();
                     LocalDateTime lastLoginDate = resultSet.getTimestamp("last_login").toLocalDateTime();
 
-                    return new User(id, storedUsername, passwordHash, salt, registrationDate, lastLoginDate);
+                    return new User(id, storedUsername, passwordHash, salt, registrationDate);
                 } else {
                     return null; // User not found
                 }
@@ -136,6 +142,15 @@ public class UserDAO implements Registered {
         }
     }
 
+    /**
+     * Updates a user in the database with new details.
+     *
+     * @param userId           The ID of the user to update.
+     * @param newUsername      The new username of the user.
+     * @param newPasswordHash  The new hashed password of the user.
+     * @param newLastLoginDate The new last login date of the user.
+     * @return true if the user was successfully updated, otherwise false.
+     */
     public boolean updateUser(int userId, String newUsername, String newPasswordHash, LocalDateTime newLastLoginDate) {
         try (PreparedStatement statement = connection.prepareStatement(UPDATE_USER_BY_ID_SQL)) {
             statement.setString(1, newUsername);
@@ -149,6 +164,13 @@ public class UserDAO implements Registered {
         }
     }
 
+    /**
+     * Updates the password of a user in the database.
+     *
+     * @param username    The username of the user.
+     * @param newPassword The new password to set for the user.
+     * @return true if the password was successfully updated, otherwise false.
+     */
     public boolean updateUser(String username, String newPassword) {
 
         try {
@@ -186,11 +208,20 @@ public class UserDAO implements Registered {
         }
     }
 
-
+    /**
+     * Creates the users table in the database if it doesn't exist.
+     */
     public void createTablesIfNotExist() {
         executeUpdate(connection, CREATE_USERS_TABLE_SQL);
     }
 
+    /**
+     * Verifies the password of a user by their username.
+     *
+     * @param username The username of the user.
+     * @param password The password to verify.
+     * @return true if the password is correct, otherwise false.
+     */
     public boolean verifyUserPassword(String username, String password) {
         try (PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID_SQL)) {
             statement.setString(1, username);
@@ -213,6 +244,13 @@ public class UserDAO implements Registered {
         }
     }
 
+    /**
+     * Verifies the password of a user.
+     *
+     * @param user     The User object representing the user.
+     * @param password The password to verify.
+     * @return true if the password is correct, otherwise false.
+     */
     public boolean verifyUserPassword(User user, String password) {
         String storedPasswordHash = user.getPasswordHash();
         String storedSalt = user.getSalt();

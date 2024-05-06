@@ -9,30 +9,73 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
- * Класс, представляющий объект билета.
+ * The {@code Ticket} class represents a ticket object.
+ * It encapsulates information about the ticket, including its name, coordinates, creation date, price, discount,
+ * comment, ticket type, and associated person.
  *
  * @author zevtos
  */
+@Getter
+@Setter
 public class Ticket extends Element {
-    @Setter
-    private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    @Getter
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    @Getter
-    private Coordinates coordinates; //Поле не может быть null
-    @Getter
-    private ZonedDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    @Getter
-    private double price; //Значение поля должно быть больше 0
-    @Getter
-    private Long discount; //Поле может быть null, Значение поля должно быть больше 0, Максимальное значение поля: 100
-    @Getter
-    private String comment; //Поле может быть null
-    @Getter
-    private TicketType type; //Поле может быть null
-    @Getter
-    private Person person; //Поле не может быть null
+    /**
+     * The unique identifier of the ticket.
+     */
+    private Integer id;
 
+    /**
+     * The name of the ticket.
+     */
+    private String name;
+
+    /**
+     * The coordinates of the ticket.
+     */
+    private Coordinates coordinates;
+
+    /**
+     * The creation date of the ticket.
+     */
+    private ZonedDateTime creationDate;
+
+    /**
+     * The price of the ticket.
+     */
+    private double price;
+
+    /**
+     * The discount percentage applied to the ticket, if any.
+     */
+    private Long discount;
+
+    /**
+     * Any additional comment associated with the ticket.
+     */
+    private String comment;
+
+    /**
+     * The type of the ticket.
+     */
+    private TicketType type;
+
+    /**
+     * The person associated with the ticket.
+     */
+    private Person person;
+
+    /**
+     * Constructs a ticket object with the specified parameters.
+     *
+     * @param nextId       the next available ID for the ticket
+     * @param name         the name of the ticket
+     * @param coordinates  the coordinates of the ticket
+     * @param creationDate the creation date of the ticket
+     * @param price        the price of the ticket
+     * @param discount     the discount percentage applied to the ticket
+     * @param comment      any additional comment associated with the ticket
+     * @param type         the type of the ticket
+     * @param person       the person associated with the ticket
+     */
     public Ticket(Integer nextId, String name, Coordinates coordinates, ZonedDateTime creationDate, double price, Long discount, String comment, TicketType type, Person person) {
         this.id = nextId;
         this.name = name;
@@ -45,46 +88,34 @@ public class Ticket extends Element {
         this.person = person;
     }
 
+    /**
+     * Constructs a ticket object with the specified parameters, using the current date and time as the creation date.
+     *
+     * @param nextId      the next available ID for the ticket
+     * @param name        the name of the ticket
+     * @param coordinates the coordinates of the ticket
+     * @param price       the price of the ticket
+     * @param discount    the discount percentage applied to the ticket
+     * @param comment     any additional comment associated with the ticket
+     * @param type        the type of the ticket
+     * @param person      the person associated with the ticket
+     */
     public Ticket(Integer nextId, String name, Coordinates coordinates, double price, Long discount, String comment, TicketType type, Person person) {
         this(nextId, name, coordinates, ZonedDateTime.now(), price, discount, comment, type, person);
     }
 
-    private static boolean validateTicket(String name, Coordinates coordinates, ZonedDateTime creationDate, double price, Long discount, Person person) {
+    /**
+     * Validates whether the ticket is valid.
+     *
+     * @return {@code true} if the ticket is valid, {@code false} otherwise
+     */
+    public boolean validate() {
         if (name == null || name.isEmpty()) return false;
         if (coordinates == null || !coordinates.validate()) return false;
         if (creationDate == null) return false;
         if (price <= 0) return false;
         if (discount != null && (discount <= 0 || discount > 100)) return false;
         return person != null && person.validate();
-    }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "\n\tid=" + id +
-                "\n\tname='" + name + '\'' +
-                "\n\tcoordinates=" + coordinates +
-                "\n\tcreationDate='" + creationDate.format(DateTimeFormatter.ISO_DATE_TIME) + '\'' +
-                "\n\tprice=" + price +
-                "\n\tdiscount=" + (discount == null ? "null" : discount) +
-                "\n\tcomment='" + (comment == null ? "null" : comment) + '\'' +
-                "\n\tticketType='" + (type == null ? "null" : type) + '\'' +
-                "\n\t" + (person == null ? "null" : person.toString()) +
-                "\n}";
-    }
-
-    /**
-     * Проверяет, является ли билет валидным.
-     *
-     * @return true, если билет валиден, иначе false.
-     */
-    public boolean validate() {
-        if (id <= 0) return false;
-        return validateTicket(name, coordinates, creationDate, price, discount, person);
-    }
-
-    public boolean validateClient() {
-        return validateTicket(name, coordinates, creationDate, price, discount, person);
     }
 
     @Override
@@ -110,14 +141,34 @@ public class Ticket extends Element {
         return Objects.hash(id, name, creationDate, coordinates, price, discount, comment, type, person);
     }
 
-    public void update(Ticket Ticket) {
-        this.name = Ticket.name;
-        this.coordinates = Ticket.coordinates;
-        this.creationDate = Ticket.creationDate;
-        this.price = Ticket.price;
-        this.discount = Ticket.discount;
-        this.comment = Ticket.comment;
-        this.type = Ticket.type;
-        this.person = Ticket.person;
+    /**
+     * Updates the ticket with the information from the specified ticket object.
+     *
+     * @param ticket the ticket object containing updated information
+     */
+    public void update(Ticket ticket) {
+        this.name = ticket.name;
+        this.coordinates = ticket.coordinates;
+        this.creationDate = ticket.creationDate;
+        this.price = ticket.price;
+        this.discount = ticket.discount;
+        this.comment = ticket.comment;
+        this.type = ticket.type;
+        this.person = ticket.person;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "\n\tid=" + id +
+                "\n\tname='" + name + '\'' +
+                "\n\tcoordinates=" + coordinates +
+                "\n\tcreationDate='" + creationDate.format(DateTimeFormatter.ISO_DATE_TIME) + '\'' +
+                "\n\tprice=" + price +
+                "\n\tdiscount=" + (discount == null ? "null" : discount) +
+                "\n\tcomment='" + (comment == null ? "null" : comment) + '\'' +
+                "\n\tticketType='" + (type == null ? "null" : type) + '\'' +
+                "\n\t" + (person == null ? "null" : person.toString()) +
+                "\n}";
     }
 }

@@ -4,18 +4,19 @@ import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 
 /**
- * Абстрактный класс формы для ввода пользовательских данных.
+ * The {@code Form} class represents an abstract form for collecting user input data.
+ * It is used to build an object based on the user's input data.
  *
- * @param <T> тип создаваемого объекта
+ * @param <T> the type of object to be created
  * @author zevtos
  */
 public abstract class Form<T> {
     /**
-     * Метод для построения объекта на основе введенных пользовательских данных.
+     * Builds an object based on the user's input data.
      *
-     * @return созданный объект
-     * @throws InvalidScriptInputException если введены некорректные данные в скрипте
-     * @throws InvalidFormException        если введены некорректные данные вручную
+     * @return the created object
+     * @throws InvalidScriptInputException if invalid data is entered in a script
+     * @throws InvalidFormException        if invalid data is entered manually
      */
     public abstract T build() throws InvalidScriptInputException, InvalidFormException;
 }

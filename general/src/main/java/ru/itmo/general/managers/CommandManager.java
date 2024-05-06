@@ -1,6 +1,5 @@
 package ru.itmo.general.managers;
 
-
 import lombok.Getter;
 import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.core.*;
@@ -21,29 +20,30 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Управляет командами.
+ * Manages commands.
+ * Handles registration and execution of commands.
  *
  * @author zevtos
  */
 public class CommandManager {
     /**
      * -- GETTER --
-     * Получает историю команд.
+     * Retrieves the command history.
      */
     @Getter
     private static final List<String> commandHistory = new ArrayList<>();
     /**
      * -- GETTER --
-     * Получает словарь команд.
+     * Retrieves the command dictionary.
      */
     @Getter
     private static Map<String, Command> commands;
 
     /**
-     * Регистрирует команду.
+     * Registers a command.
      *
-     * @param commandName Название команды.
-     * @param command     Команда
+     * @param commandName The name of the command.
+     * @param command     The command object.
      */
     public static void register(String commandName, Command command) {
         commands.put(commandName, command);
@@ -117,27 +117,43 @@ public class CommandManager {
         register("history", new History());
     }
 
-    // Обработать команду, поступившую от клиента
+    /**
+     * Processes the command received from the client.
+     * Executes the command if it exists in the command dictionary.
+     * If the command does not exist, returns a Response indicating that the command was not found.
+     * If the command is "exit" or "save", returns a Response indicating that the command is unknown.
+     *
+     * @param request The request containing the command to be processed.
+     * @return The Response generated after processing the command.
+     */
     public static Response handle(Request request) {
         var command = getCommands().get(request.getCommand());
-        if (command == null) return new Response(false, request.getCommand(), "Команда не найдена!");
+        if (command == null) return new Response(false, request.getCommand(), "Command not found!");
         if (!"exit".equals(request.getCommand()) && !"save".equals(request.getCommand())) {
             return command.execute(request);
         }
-        return new Response(false, "Неизвестная команда");
+        return new Response(false, "Unknown command");
     }
 
-    // Обработать команду, поступившую из консоли сервера
+    /**
+     * Processes the command received from the server console.
+     * Executes the command if it exists in the command dictionary.
+     * If the command does not exist, returns without performing any action.
+     * If the command is "exit" or "save", executes the command.
+     *
+     * @param request The request containing the command to be processed.
+     */
     public static void handleServer(Request request) {
         var command = getCommands().get(request.getCommand());
         if (command == null) return;
         if ("exit".equals(request.getCommand()) || "save".equals(request.getCommand())) command.execute(request);
     }
 
+
     /**
-     * Добавляет команду в историю.
+     * Adds a command to the history.
      *
-     * @param command Команда.
+     * @param command The command.
      */
     public static void addToHistory(String command) {
         commandHistory.add(command);

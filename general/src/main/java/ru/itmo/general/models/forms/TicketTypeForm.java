@@ -1,16 +1,15 @@
-package ru.itmo.client.forms;
+package ru.itmo.general.models.forms;
 
-
-import ru.itmo.client.utility.Interrogator;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.TicketType;
-import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
 
 /**
- * Форма для ввода типа билета.
+ * Form for inputting the ticket type.
+ * Handles user input to determine the type of ticket.
  *
  * @author zevtos
  */
@@ -18,19 +17,19 @@ public class TicketTypeForm extends Form<TicketType> {
     private final Console console;
 
     /**
-     * Создает новый объект формы для ввода типа билета.
+     * Constructs a new form object for inputting the ticket type.
      *
-     * @param console Консоль для взаимодействия с пользователем.
+     * @param console The console for interacting with the user.
      */
     public TicketTypeForm(Console console) {
         this.console = console;
     }
 
     /**
-     * Строит объект типа билета на основе введенных данных.
+     * Builds a ticket type object based on the entered data.
      *
-     * @return Введенный тип билета или null, если ввод не был произведен.
-     * @throws InvalidScriptInputException Если произошла ошибка при выполнении скрипта.
+     * @return The entered ticket type, or null if no input was provided.
+     * @throws InvalidScriptInputException If an error occurs while executing the script.
      */
     @Override
     public TicketType build() throws InvalidScriptInputException {
@@ -40,8 +39,8 @@ public class TicketTypeForm extends Form<TicketType> {
         TicketType ticketType;
         while (true) {
             try {
-                console.println("Список типов билетов - " + TicketType.names());
-                console.println("Введите тип билета (или 'null' для отмены):");
+                console.println("List of ticket types - " + TicketType.names());
+                console.println("Enter the ticket type (or 'null' to cancel):");
                 console.prompt();
 
                 strTicketType = Interrogator.getUserScanner().nextLine().trim();
@@ -51,13 +50,13 @@ public class TicketTypeForm extends Form<TicketType> {
                 ticketType = TicketType.valueOf(strTicketType.toUpperCase());
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Тип билета не распознан!");
+                console.printError(getClass(), "Ticket type not recognized!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalArgumentException exception) {
-                console.printError(getClass(), "Тип билета отсутствует в списке!");
+                console.printError(getClass(), "Ticket type is not in the list!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError(getClass(), "Произошла непредвиденная ошибка!");
+                console.printError(getClass(), "An unexpected error occurred!");
                 System.exit(0);
             }
         }

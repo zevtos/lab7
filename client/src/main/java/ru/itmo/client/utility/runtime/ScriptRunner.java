@@ -1,7 +1,7 @@
 package ru.itmo.client.utility.runtime;
 
 import ru.itmo.client.network.TCPClient;
-import ru.itmo.client.utility.Interrogator;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.ScriptRecursionException;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.network.Request;

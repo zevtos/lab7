@@ -7,7 +7,7 @@ import ru.itmo.general.managers.CommandManager;
 import ru.itmo.server.dao.TicketDAO;
 import ru.itmo.server.dao.UserDAO;
 import ru.itmo.server.managers.collections.TicketCollectionManager;
-import ru.itmo.server.network.TCPServer;
+import ru.itmo.server.utility.network.TCPServer;
 import ru.itmo.server.utility.Runner;
 import sun.misc.Signal;
 
@@ -30,13 +30,17 @@ public class Main {
      */
     @SneakyThrows
     public static void main(String[] args) {
-        checkFileArgument(args);
+        setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
+
         createDatabaseIfNotExists();
+
         Thread runner = new Runner();
         runner.setDaemon(true);
         runner.start();
+
         var ticketCollectionManager = new TicketCollectionManager();
-        setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
+
+
         UserDAO userDAO = new UserDAO();
         CommandManager.initServerCommands(ticketCollectionManager, new TicketDAO(), userDAO);
         TCPServer tcpServer = new TCPServer(PORT);
@@ -44,17 +48,10 @@ public class Main {
     }
 
     /**
-     * Проверяет наличие аргумента файла в командной строке.
+     * Обработка сигналов, таких как ctrl z, ctrl c...
      *
-     * @param args аргументы командной строки
+     * @param signalNames названия сигналов
      */
-    private static void checkFileArgument(String[] args) {
-        if (args.length != 1 && args.length != 2) {
-            logger.info("Введите имя загружаемого файла как аргумент командной строки");
-            System.exit(MISSING_FILE_ARGUMENT_EXIT_CODE);
-        }
-    }
-
     private static void setSignalProcessing(String... signalNames) {
         for (String signalName : signalNames) {
             try {

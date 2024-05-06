@@ -15,6 +15,12 @@ import java.util.List;
 
 import static ru.itmo.server.managers.ConnectionManager.*;
 
+/**
+ * The TicketDAO class provides methods for interacting with the tickets table in the database.
+ * It handles ticket creation, retrieval, updating, and removal.
+ *
+ * @author zevtos
+ */
 public class TicketDAO implements Accessible {
     private static final Logger LOGGER = LoggerFactory.getLogger("TicketDAO");
     private static final String SELECT_ALL_TICKETS_SQL = "SELECT * FROM tickets";
@@ -66,9 +72,13 @@ public class TicketDAO implements Accessible {
             "person_hair_color = ? " +
             "WHERE id = ?";
 
-    public TicketDAO() {
-    }
-
+    /**
+     * Adds a new ticket to the database.
+     *
+     * @param ticket The ticket to be added.
+     * @param userId The ID of the user adding the ticket.
+     * @return The ID of the newly added ticket if successful, otherwise -1.
+     */
     public int addTicket(Ticket ticket, int userId) {
         try (Connection connection = getConnection();
              PreparedStatement statement =
@@ -100,7 +110,12 @@ public class TicketDAO implements Accessible {
         }
     }
 
-
+    /**
+     * Adds a collection of tickets to the database.
+     *
+     * @param tickets The collection of tickets to be added.
+     * @param userId  The ID of the user adding the tickets.
+     */
     public void addTickets(Collection<Ticket> tickets, int userId) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_TICKET_SQL)) {
@@ -129,8 +144,8 @@ public class TicketDAO implements Accessible {
 
     private void set(PreparedStatement statement, Ticket ticket) throws SQLException {
         statement.setString(1, ticket.getName());
-        statement.setDouble(2, ticket.getCoordinates().getX());
-        statement.setFloat(3, ticket.getCoordinates().getY());
+        statement.setDouble(2, ticket.getCoordinates().x());
+        statement.setFloat(3, ticket.getCoordinates().y());
         statement.setTimestamp(4, Timestamp.from(ticket.getCreationDate().toInstant()));
         statement.setDouble(5, ticket.getPrice());
         if (ticket.getDiscount() != null) {
@@ -140,12 +155,17 @@ public class TicketDAO implements Accessible {
         }
         statement.setString(7, ticket.getComment());
         statement.setString(8, ticket.getType().toString());
-        statement.setTimestamp(9, Timestamp.from(ticket.getPerson().getBirthday().toInstant(ZoneOffset.UTC)));
-        statement.setFloat(10, ticket.getPerson().getHeight());
-        statement.setString(11, ticket.getPerson().getPassportID());
-        statement.setString(12, ticket.getPerson().getHairColor().toString());
+        statement.setTimestamp(9, Timestamp.from(ticket.getPerson().birthday().toInstant(ZoneOffset.UTC)));
+        statement.setFloat(10, ticket.getPerson().height());
+        statement.setString(11, ticket.getPerson().passportID());
+        statement.setString(12, ticket.getPerson().hairColor().toString());
     }
 
+    /**
+     * Retrieves all tickets from the database.
+     *
+     * @return A list of all tickets retrieved from the database.
+     */
     public List<Ticket> getAllTickets() {
         List<Ticket> tickets = new ArrayList<>();
         try (Connection connection = getConnection();
@@ -163,6 +183,12 @@ public class TicketDAO implements Accessible {
         return tickets;
     }
 
+    /**
+     * Removes a ticket from the database by its ID.
+     *
+     * @param ticketId The ID of the ticket to be removed.
+     * @return true if the ticket was successfully removed, false otherwise.
+     */
     public boolean removeTicketById(int ticketId) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(REMOVE_TICKET_SQL)) {
@@ -177,6 +203,12 @@ public class TicketDAO implements Accessible {
         }
     }
 
+    /**
+     * Updates a ticket in the database.
+     *
+     * @param ticket The ticket with updated information.
+     * @return true if the ticket was successfully updated, false otherwise.
+     */
     public boolean updateTicket(Ticket ticket) {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(UPDATE_TICKET_SQL)) {
@@ -193,6 +225,9 @@ public class TicketDAO implements Accessible {
         }
     }
 
+    /**
+     * Creates the tickets table in the database if it does not already exist.
+     */
     public void createTablesIfNotExist() {
         Connection connection = getConnection();
         executeUpdate(connection, CREATE_TICKETS_TABLE_SQL);
@@ -228,28 +263,13 @@ public class TicketDAO implements Accessible {
                 discount, comment, type, new Person(personBirthday, personHeight, personPassportID, personHairColor));
     }
 
-    public boolean removeTicketById(int ticketId, int userID) {
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(REMOVE_TICKET_SQL)) {
-
-            // Add a check to ensure that the ticket belongs to the specified user
-            if (!checkOwnership(ticketId, userID)) {
-                LOGGER.error("Ticket with ID {} does not belong to user {}", ticketId, userID);
-                return false;
-            }
-
-            statement.setInt(1, ticketId);
-            return executePrepareUpdate(statement) > 0;
-        } catch (NullPointerException exception) {
-            LOGGER.error("Null pointer exception while removing ticket with ID {}: {}",
-                    ticketId, exception.getMessage());
-            return false;
-        } catch (SQLException e) {
-            LOGGER.error("Error while deleting ticket with ID {}: {}", ticketId, e.getMessage());
-            return false;
-        }
-    }
-
+    /**
+     * Checks if a ticket belongs to a specific user.
+     *
+     * @param ticketId The ID of the ticket.
+     * @param userId   The ID of the user.
+     * @return true if the ticket belongs to the user, false otherwise.
+     */
     @Override
     public boolean checkOwnership(int ticketId, int userId) {
         try (Connection connection = getConnection();

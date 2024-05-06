@@ -1,6 +1,5 @@
 package ru.itmo.general.models;
 
-import lombok.Getter;
 import ru.itmo.general.utility.base.Validatable;
 
 import java.io.Serializable;
@@ -8,46 +7,32 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Класс, представляющий объект персоны.
+ * The {@code Person} class represents a person object.
+ * It encapsulates information about the person, including their birthday, height, passport ID, and hair color.
  *
+ * @param birthday   The birthday of the person.
+ * @param height     The height of the person.
+ * @param passportID The passport ID of the person.
+ * @param hairColor  The hair color of the person.
  * @author zevtos
  */
-public class Person implements Validatable, Serializable {
-    @Getter
-    private LocalDateTime birthday; //Поле может быть null
-    @Getter
-    private Float height; //Поле может быть null, Значение поля должно быть больше 0
-    @Getter
-    private String passportID; //Поле не может быть null
-    @Getter
-    private Color hairColor; //Поле не может быть null
-
-    public Person(LocalDateTime birthday, Float height, String passportID, Color hairColor) {
-        this.birthday = birthday;
-        this.height = height;
-        this.passportID = passportID;
-        this.hairColor = hairColor;
-    }
-
+public record Person(LocalDateTime birthday, Float height, String passportID,
+                     Color hairColor) implements Validatable, Serializable {
     /**
-     * Представляет персону в виде строки.
+     * Constructs a person object with the specified parameters.
      *
-     * @return Строковое представление персоны.
+     * @param birthday   the birthday of the person
+     * @param height     the height of the person
+     * @param passportID the passport ID of the person
+     * @param hairColor  the hair color of the person
      */
-    @Override
-    public String toString() {
-        return "Person{" +
-                "\n\t\tbirthday=" + (birthday == null ? "null" : birthday) +
-                "\n\t\theight=" + (height == null ? "null" : height) +
-                "\n\t\tpassportID='" + passportID + '\'' +
-                "\n\t\thairColor=" + hairColor +
-                "\n\t}";
+    public Person {
     }
 
     /**
-     * Проверяет, является ли персона валидной.
+     * Validates whether the person is valid.
      *
-     * @return true, если персона валидна, иначе false.
+     * @return true if the person is valid, false otherwise
      */
     public boolean validate() {
         if (birthday != null && birthday.isAfter(LocalDateTime.now())) return false;
@@ -57,10 +42,10 @@ public class Person implements Validatable, Serializable {
     }
 
     /**
-     * Проверяет равенство персон по паспортному ID.
+     * Checks the equality of persons based on passport ID.
      *
-     * @param o Объект для сравнения.
-     * @return true, если объекты равны по паспортному ID, иначе false.
+     * @param o the object to compare
+     * @return true if the objects are equal based on passport ID, false otherwise
      */
     @Override
     public boolean equals(Object o) {
@@ -68,5 +53,20 @@ public class Person implements Validatable, Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Person that = (Person) o;
         return Objects.equals(passportID, that.passportID);
+    }
+
+    /**
+     * Represents the person as a string.
+     *
+     * @return String representation of the person.
+     */
+    @Override
+    public String toString() {
+        return "Person{" +
+                "\n\t\tbirthday=" + (birthday == null ? "null" : birthday) +
+                "\n\t\theight=" + (height == null ? "null" : height) +
+                "\n\t\tpassportID='" + passportID + '\'' +
+                "\n\t\thairColor=" + hairColor +
+                "\n\t}";
     }
 }

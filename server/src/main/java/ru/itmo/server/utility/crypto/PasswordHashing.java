@@ -6,17 +6,24 @@ import java.util.Base64;
 
 import static ru.itmo.server.utility.crypto.SaltGenerator.generateSalt;
 
+/**
+ * A utility class for hashing passwords using SHA-256 algorithm with salt.
+ *
+ * @author zevtos
+ */
 public class PasswordHashing {
+
+    /**
+     * Hashes the given password using SHA-256 algorithm with a randomly generated salt.
+     *
+     * @param password The password to hash.
+     * @return An array containing the hashed password and the salt used for hashing.
+     */
     public static String[] hashPassword(String password) {
         try {
-            // Create MessageDigest instance for SHA-256
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-
             String salt = generateSalt(16);
-
             String hashedPassword = hashPassword(password, salt);
-
             return new String[]{hashedPassword, salt};
         } catch (NoSuchAlgorithmException ignored) {
             System.err.println("Algorithm SHA-256 not found");
@@ -24,18 +31,18 @@ public class PasswordHashing {
         }
     }
 
+    /**
+     * Hashes the given password using SHA-256 algorithm with the provided salt.
+     *
+     * @param password The password to hash.
+     * @param salt     The salt used for hashing.
+     * @return The hashed password.
+     */
     public static String hashPassword(String password, String salt) {
         try {
-            // Create MessageDigest instance for SHA-256
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-            // Add salt and password bytes to digest
             md.update((salt + password).getBytes());
-
-            // Get the hashed bytes
             byte[] hashedBytes = md.digest();
-
-            // Convert byte array to base64 representation
             return Base64.getEncoder().encodeToString(hashedBytes);
         } catch (NoSuchAlgorithmException e) {
             System.err.println("Algorithm SHA-256 not found");
@@ -43,6 +50,14 @@ public class PasswordHashing {
         }
     }
 
+    /**
+     * Verifies the given input password against the hashed password using the provided salt.
+     *
+     * @param inputPassword  The input password to verify.
+     * @param salt           The salt used for hashing.
+     * @param hashedPassword The hashed password to compare against.
+     * @return true if the input password matches the hashed password, false otherwise.
+     */
     public static boolean verifyPassword(String inputPassword, String salt, String hashedPassword) {
         String hashedInputPassword = hashPassword(inputPassword, salt);
         return hashedInputPassword != null && hashedInputPassword.equals(hashedPassword);

@@ -5,37 +5,31 @@ import lombok.Getter;
 import java.util.Objects;
 
 /**
- * Абстрактная команда с именем и описанием.
- *
- * @author zevtos
+ * Abstract command with a name and description.
  */
+@Getter
 public abstract class Command implements Describable, Executable {
-    /**
-     * -- GETTER --
-     * Получить название команды.
-     */
-    @Getter
     private final String name;
-    /**
-     * -- GETTER --
-     * Получить описание команды.
-     */
-    @Getter
     private final String description;
 
     /**
-     * Конструктор для создания команды с именем и описанием.
+     * Constructor for creating a command with a name and description.
      *
-     * @param name        Название команды.
-     * @param description Описание команды.
+     * @param name        The name of the command.
+     * @param description The description of the command.
      */
     public Command(CommandName name, String description) {
         this.name = name.toString().toLowerCase();
         this.description = description;
     }
 
+    /**
+     * Get the error message for using the command with the wrong number of arguments.
+     *
+     * @return The error message for using the command with the wrong number of arguments.
+     */
     public String getUsingError() {
-        return "Неправильное количество аргументов!" + '\n' + "Использование: '" + getName() + getDescription() + "'";
+        return "Incorrect number of arguments!\nUsage: '" + getName() + getDescription() + "'";
     }
 
     @Override
@@ -59,3 +53,4 @@ public abstract class Command implements Describable, Executable {
                 '}';
     }
 }
+

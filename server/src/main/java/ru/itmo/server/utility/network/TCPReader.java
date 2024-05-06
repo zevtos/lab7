@@ -1,4 +1,4 @@
-package ru.itmo.server.network;
+package ru.itmo.server.utility.network;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,15 +10,30 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 
+/**
+ * A runnable task for reading incoming requests from a client's socket channel.
+ * It reads data from the channel, parses it, and delegates further processing to a handler.
+ *
+ * @author zevtos
+ */
 public class TCPReader implements Runnable {
     private static final Logger logger = LoggerFactory.getLogger("TCPReader");
     private static final UserDAO userDAO = new UserDAO();
     private final SelectionKey key;
 
+    /**
+     * Constructs a TCPReader with the given selection key.
+     *
+     * @param key The selection key associated with the client's socket channel.
+     */
     public TCPReader(SelectionKey key) {
         this.key = key;
     }
 
+    /**
+     * Reads data from the client's socket channel and delegates further processing to a handler.
+     * If parsing is complete, it sets the interest back to OP_READ and wakes up the selector.
+     */
     @Override
     public void run() {
         if (!readRequest(key)) {
@@ -29,6 +44,12 @@ public class TCPReader implements Runnable {
         }
     }
 
+    /**
+     * Reads the incoming request from the client's socket channel.
+     *
+     * @param key The selection key associated with the client's socket channel.
+     * @return true if the reading and parsing of the request is successful, false otherwise.
+     */
     public boolean readRequest(SelectionKey key) {
         SocketChannel clientSocketChannel = (SocketChannel) key.channel();
         ByteBuffer buffer = ByteBuffer.allocate(8192);
@@ -42,6 +63,7 @@ public class TCPReader implements Runnable {
                 buffer.clear();
             }
             if (bytesRead == -1) {
+                // Connection closed by client
                 key.cancel();
                 clientSocketChannel.close();
                 logger.error("Client disconnected");
@@ -58,6 +80,7 @@ public class TCPReader implements Runnable {
             }
             return false;
         }
+        // Start a new handler to process the request
         new Handler(clientSocketChannel, byteArrayOutputStream, key, userDAO).start();
         return true;
     }
