@@ -1,8 +1,8 @@
 package ru.itmo.general.models.forms;
 
-import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.TicketType;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;

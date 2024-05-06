@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
  */
 @Getter
 public class User {
-    @Setter
-    private Integer id;
     private final String username;
     private final String passwordHash;
     private final String salt;
     private final LocalDateTime registrationDate;
+    @Setter
+    private Integer id;
 
     /**
      * Constructs a new user object with the specified parameters.

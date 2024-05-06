@@ -1,10 +1,10 @@
 package ru.itmo.general.models.forms;
 
-import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidRangeException;
 import ru.itmo.general.exceptions.InvalidScriptInputException;
 import ru.itmo.general.models.Coordinates;
+import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;

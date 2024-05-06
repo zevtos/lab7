@@ -2,8 +2,12 @@ package ru.itmo.server.managers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.itmo.general.utility.console.Console;
+import ru.itmo.general.utility.console.StandartConsole;
 
 import java.sql.*;
+import java.util.Arrays;
+import java.util.Scanner;
 
 /**
  * Manages database connections and statements.
@@ -11,11 +15,19 @@ import java.sql.*;
  * @author zevtos
  */
 public class ConnectionManager {
-    public static final String DB_URL = "jdbc:postgresql://localhost:5432/";
+    public static final String DB_URL = "jdbc:postgresql://pg:5432/";
     public static final String DB_NAME = "studs";
     private static final Logger LOGGER = LoggerFactory.getLogger("ConnectionManager");
-    private static final String USER = "postgres";
-    private static final String PASSWORD = "";
+    private static String USER;
+    private static String PASSWORD;
+
+    public ConnectionManager() {
+        Console console = new StandartConsole();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your username: ");
+        USER = scanner.nextLine();
+        PASSWORD = Arrays.toString(console.readPassword("Please enter your password: "));
+    }
 
     /**
      * Retrieves a database connection.
