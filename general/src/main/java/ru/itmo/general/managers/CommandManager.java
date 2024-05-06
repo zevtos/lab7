@@ -146,7 +146,7 @@ public class CommandManager {
     public static void handleServer(Request request) {
         var command = getCommands().get(request.getCommand());
         if (command == null) return;
-        if ("exit".equals(request.getCommand()) || "save".equals(request.getCommand())) command.execute(request);
+        if ("exit".equals(request.getCommand())) command.execute(request);
     }
 
 

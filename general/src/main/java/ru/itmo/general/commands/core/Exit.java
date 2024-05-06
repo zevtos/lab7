@@ -57,6 +57,6 @@ public class Exit extends Command {
             return new Request(false, getName(), getUsingError());
         }
 
-        return new Request(getName(), "Выполнение скрипта '" + arguments[1] + "'...");
+        return new Request(getName(), "Завершение работы приложения...");
     }
 }

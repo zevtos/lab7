@@ -29,11 +29,11 @@ public class DatabaseManager {
                 boolean databaseExists = checkDatabaseExists(connection);
                 if (!databaseExists) {
                     executeUpdate(connection, "CREATE DATABASE " + DB_NAME);
-                    createTablesIfNotExist(connection);
                     logger.info("Database and tables created successfully.");
                 } else {
                     logger.info("Database already exists.");
                 }
+                createTablesIfNotExist(connection);
             } else {
                 logger.error("Failed to establish connection to the database.");
             }
@@ -59,7 +59,7 @@ public class DatabaseManager {
      *
      * @param connection The database connection.
      */
-    private static void createTablesIfNotExist(Connection connection) {
+    public static void createTablesIfNotExist(Connection connection) {
         if (connection != null) {
             userDAO.createTablesIfNotExist();
             ticketDAO.createTablesIfNotExist();

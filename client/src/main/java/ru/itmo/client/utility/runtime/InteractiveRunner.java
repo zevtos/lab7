@@ -7,6 +7,7 @@ import ru.itmo.general.network.Request;
 import ru.itmo.general.utility.Interrogator;
 import ru.itmo.general.utility.console.Console;
 
+import java.io.IOException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.concurrent.TimeoutException;
@@ -141,6 +142,15 @@ public class InteractiveRunner implements ModeRunner {
                 return Runner.ExitCode.OK;
             }
             default -> {
+                if (userCommand[0].equals("exit")) {
+                    request = command.execute(userCommand);
+                    try {
+                        tcpClient.sendRequest(request);
+                    } catch (IOException ignored) {
+                    }
+                    console.println(request.getData());
+                    return Runner.ExitCode.EXIT;
+                }
                 if (login == null || password == null) {
                     console.printError(getClass(), "Вы не авторизованы");
                     return Runner.ExitCode.ERROR;
@@ -149,10 +159,6 @@ public class InteractiveRunner implements ModeRunner {
                 if (!request.isSuccess()) return Runner.ExitCode.ERROR;
                 request.setLogin(login);
                 request.setPassword(password);
-                if (request.getCommand().equals("exit")) {
-                    tcpClient.sendCommand(request);
-                    return Runner.ExitCode.EXIT;
-                }
                 var response = tcpClient.sendCommand(request);
                 if (response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
                 if (response.isSuccess()) {
