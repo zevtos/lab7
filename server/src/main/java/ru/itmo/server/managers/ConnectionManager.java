@@ -14,7 +14,7 @@ public class ConnectionManager {
     public static final String DB_URL = "jdbc:postgresql://pg:5432/";
     public static final String DB_NAME = "studs";
     private static final Logger LOGGER = LoggerFactory.getLogger("ConnectionManager");
-    private static final String USER = "s409315";
+    private static String USER = "s409315";
     private static String PASSWORD;
 
     /**

@@ -2,11 +2,14 @@ package ru.itmo.general.commands.core;
 
 import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
+import ru.itmo.general.exceptions.InvalidFormException;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.base.Registered;
 import ru.itmo.general.utility.console.Console;
+
+import javax.management.InstanceAlreadyExistsException;
 
 /**
  * Command 'register'. Registers a new user in the system.
@@ -15,6 +18,7 @@ import ru.itmo.general.utility.console.Console;
  */
 public class Register extends Command {
     private static final int MAX_USERNAME_LENGTH = 50;
+    public static final int MIN_PASSWORD_LENGTH = 8;
     private Console console;
     private Registered userDAO;
 
@@ -46,19 +50,26 @@ public class Register extends Command {
     @Override
     public Response execute(Request request) {
         try {
-            if (request.getLogin().length() >= MAX_USERNAME_LENGTH) {
-                return new Response(false, "Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
-            }
-            var user = userDAO.insertUser(request.getLogin(), request.getPassword());
-            if (request.getUserId() != null || user == null) {
-                return new Response(false, "Пользователь с таким именем уже существует", null);
-            }
-            System.out.println(user.toString());
-            if (!user.validate() || request.getPassword().length() < 8) {
-                return new Response(false, "Пользователь не зарегистрирован, поля пользователя не валидны!");
-            }
+            if (request.getLogin().length() >= MAX_USERNAME_LENGTH)
+                throw new InvalidFormException("Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
 
-            return new Response(true, null, null);
+            if (request.getPassword().length() < MIN_PASSWORD_LENGTH)
+                throw new InvalidFormException("Длина пароля меньше " + MIN_PASSWORD_LENGTH);
+
+            if (request.getUserId() != null) throw new InstanceAlreadyExistsException("User already exists");
+
+            var user = userDAO.insertUser(request.getLogin(), request.getPassword());
+
+            if (user == null) throw new InstanceAlreadyExistsException("User already exists");
+
+            if (!user.validate())
+                throw new InvalidFormException("Пользователь не зарегистрирован, поля пользователя не валидны!");
+
+            return new Response(true, "Пользователь успешно зарегистрирован", null);
+        } catch (InstanceAlreadyExistsException ex) {
+            return new Response(false, ex.getMessage(), null);
+        } catch (InvalidFormException invalid) {
+            return new Response(false, invalid.getMessage());
         } catch (Exception e) {
             return new Response(false, e.toString(), -1);
         }
@@ -77,20 +88,24 @@ public class Register extends Command {
             console.println("* Регистрация нового пользователя:");
 
             String username = arguments[1];
-            if (username.length() > MAX_USERNAME_LENGTH) {
-                return new Request(false, getName(), "Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
-            }
+            if (username.length() > MAX_USERNAME_LENGTH)
+                throw new InvalidFormException("Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
+
             // Use Console to read the password without echoing characters
-            char[] passwordChars = console.readPassword("Enter password: ");
-            if (passwordChars == null || passwordChars.length < 8) {
-                return new Request(false, getName(), "Cannot read password.");
-            }
+            char[] passwordChars = console.readPassword("Введите пароль: ", MIN_PASSWORD_LENGTH);
+
+            if (passwordChars == null)
+                throw new InvalidFormException("Невозможно прочитать пароль.");
+            if (passwordChars.length < MIN_PASSWORD_LENGTH)
+                throw new InvalidFormException("Длина пароля должна быть >= " + MIN_PASSWORD_LENGTH);
             String password = new String(passwordChars);
             Request request = new Request(true, getName(), null);
             request.setLogin(username);
             request.setPassword(password);
             return request;
 
+        } catch (InvalidFormException invalid) {
+            return new Request(false, getName(), invalid.getMessage());
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         }

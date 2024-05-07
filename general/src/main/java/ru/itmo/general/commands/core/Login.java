@@ -70,12 +70,13 @@ public class Login extends Command {
             console.println("* Вход в систему:");
             Request request = new Request(true, getName(), null);
             request.setLogin(arguments[1]);
-            char[] passwordChars = console.readPassword("Enter password: ");
+            char[] passwordChars = console.readPassword("Введите пароль: ", Register.MIN_PASSWORD_LENGTH);
             if (passwordChars == null) {
                 return new Request(false, getName(), "Cannot read password.");
             }
             if (passwordChars.length < 8) {
-                return new Request(false, getName(), "Пароль слишком короткий. Введите более 8 символов");
+                return new Request(false, getName(), "Пароль слишком короткий. Введите не менее "
+                        + Register.MIN_PASSWORD_LENGTH + " символов");
             }
             request.setPassword(new String(passwordChars));
             return request;

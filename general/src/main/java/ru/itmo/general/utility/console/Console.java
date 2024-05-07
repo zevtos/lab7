@@ -62,5 +62,5 @@ public interface Console {
      * @param prompt the prompt for the user to input the password
      * @return a char array containing the characters of the password
      */
-    char[] readPassword(String prompt);
+    char[] readPassword(String prompt, int minLength);
 }
