@@ -25,7 +25,6 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
     private final LinkedList<Ticket> collection = new LinkedList<>();
     private final ReentrantLock lock = new ReentrantLock(); // Замок для синхронизации доступа
     private final TicketDAO dao;
-    private int currentId = 1;
     @Getter
     private LocalDateTime lastSaveTime;
 
@@ -144,17 +143,6 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         } finally {
             lock.unlock();
         }
-    }
-
-    /**
-     * Получить свободный ID
-     */
-    @Override
-    public synchronized int getFreeId() {
-        while (byId(currentId) != null) {
-            currentId++;
-        }
-        return currentId;
     }
 
     public String collectionType() {

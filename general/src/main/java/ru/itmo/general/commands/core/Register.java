@@ -17,8 +17,8 @@ import javax.management.InstanceAlreadyExistsException;
  * @author [Your Name]
  */
 public class Register extends Command {
-    private static final int MAX_USERNAME_LENGTH = 50;
     public static final int MIN_PASSWORD_LENGTH = 8;
+    private static final int MAX_USERNAME_LENGTH = 50;
     private Console console;
     private Registered userDAO;
 

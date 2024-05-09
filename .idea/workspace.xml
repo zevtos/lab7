@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.2 some fix + converted to connect to the helios database">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.3 fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/InvalidFormException.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/exceptions/InvalidFormException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/console/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/console/Console.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/console/StandartConsole.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/console/StandartConsole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/ConnectionManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +121,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.client1">
+  <component name="RunManager" selected="Application.server">
     <configuration name="client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.main.Main" />
       <module name="client" />
@@ -253,8 +249,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.15989.150" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-IU-241.15989.150" />
       </set>
     </attachedChunks>
   </component>
@@ -314,7 +310,9 @@
       <workItem from="1714938293216" duration="841000" />
       <workItem from="1714985871725" duration="1049000" />
       <workItem from="1715001918789" duration="16025000" />
-      <workItem from="1715060345748" duration="1794000" />
+      <workItem from="1715060345748" duration="2279000" />
+      <workItem from="1715080419832" duration="65000" />
+      <workItem from="1715238141181" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -412,7 +410,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715016802823</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="2.7.3 fix">
+      <option name="closed" value="true" />
+      <created>1715062231501</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715062231501</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -444,7 +450,8 @@
     <MESSAGE value="2.7.1 update start server" />
     <MESSAGE value="2.7.1 some fix + converted to connect to the helios database" />
     <MESSAGE value="2.7.2 some fix + converted to connect to the helios database" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.7.2 some fix + converted to connect to the helios database" />
+    <MESSAGE value="2.7.3 fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.7.3 fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -52,7 +52,6 @@ public class Add extends Command {
     public Response execute(Request request) {
         try {
             var ticket = ((Ticket) request.getData());
-            ticket.setId(ticketCollectionManager.getFreeId());
             if (!ticket.validate()) {
                 return new Response(false, "Билет не добавлен, поля билета не валидны!");
             }

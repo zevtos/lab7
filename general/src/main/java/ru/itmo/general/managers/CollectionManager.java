@@ -39,13 +39,6 @@ public interface CollectionManager<T> {
     boolean contains(T item);
 
     /**
-     * Gets a free identifier for a new object.
-     *
-     * @return the free identifier
-     */
-    int getFreeId();
-
-    /**
      * Adds an object to the collection.
      *
      * @param item   the object to add

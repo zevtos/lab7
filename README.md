@@ -1,4 +1,5 @@
 To run the program:
+
 ```
 git cloone https://github.com/zevtos/lab6
 
@@ -10,15 +11,19 @@ mvn install
 // Depending on which part of the application to run
 mvn exec:java
 ```
+
 For tunneling to helios(to run the server part on helios, and the client part on a PC and redirect requests to helios):
+
 ```
 ssh -p 2222 -L XXXX:localhost:YYYY s'SSSSSS'@helios.cs.ifmo.ru
 ```
+
 XXXX - the port that accepts requests from the local computer
 YYYY - The port to which requests are redirected (on the server we are connecting to)
 'SSSSSS' - student identification number to connect helios
 
 And so the task itself is:
+
 # Лабораторная работа #7
 
 ## Вариант 9413989'
@@ -33,7 +38,8 @@ And so the task itself is:
 6. Пароли при хранении хэшировать алгоритмом `SHA-256`
 7. Запретить выполнение команд не авторизованным пользователям.
 8. При хранении объектов сохранять информацию о пользователе, который создал этот объект.
-9. Пользователи должны иметь возможность просмотра всех объектов коллекции, но модифицировать могут только принадлежащие им.
+9. Пользователи должны иметь возможность просмотра всех объектов коллекции, но модифицировать могут только принадлежащие
+   им.
 10. Для идентификации пользователя отправлять логин и пароль с каждым запросом.
 
 ### Необходимо реализовать многопоточную обработку запросов.
@@ -41,12 +47,14 @@ And so the task itself is:
 1. Для многопоточного чтения запросов использовать `Fixed thread pool`
 2. Для многопотчной обработки полученного запроса использовать `создание нового потока (java.lang.Thread)`
 3. Для многопоточной отправки ответа использовать `создание нового потока (java.lang.Thread)`
-4. Для синхронизации доступа к коллекции использовать `синхронизацию чтения и записи с помощью java.util.concurrent.locks.ReentrantLock`
+4. Для синхронизации доступа к коллекции
+   использовать `синхронизацию чтения и записи с помощью java.util.concurrent.locks.ReentrantLock`
 
 ### Порядок выполнения работы:
 
 1. В качестве базы данных использовать PostgreSQL.
-2. Для подключения к БД на кафедральном сервере использовать хост `pg`, имя базы данных - `studs`, имя пользователя/пароль совпадают с таковыми для подключения к серверу.
+2. Для подключения к БД на кафедральном сервере использовать хост `pg`, имя базы данных - `studs`, имя
+   пользователя/пароль совпадают с таковыми для подключения к серверу.
 
 ### Отчёт по работе должен содержать:
 
