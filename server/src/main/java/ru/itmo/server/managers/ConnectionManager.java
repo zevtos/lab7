@@ -11,7 +11,7 @@ import java.sql.*;
  * @author zevtos
  */
 public class ConnectionManager {
-    public static final String DB_URL = "jdbc:postgresql://pg:5432/";
+    public static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432:5432/";
     public static final String DB_NAME = "studs";
     private static final Logger LOGGER = LoggerFactory.getLogger("ConnectionManager");
     private static String USER = "s409315";
