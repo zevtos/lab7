@@ -1,6 +1,5 @@
 package ru.itmo.server.main;
 
-import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.itmo.general.managers.CommandManager;
@@ -28,7 +27,6 @@ public class Main {
      *
      * @param args аргументы командной строки
      */
-    @SneakyThrows
     public static void main(String[] args) {
         setSignalProcessing("INT", "TERM", "TSTP", "BREAK", "EOF");
 
@@ -39,7 +37,6 @@ public class Main {
         runner.start();
 
         var ticketCollectionManager = new TicketCollectionManager();
-
 
         UserDAO userDAO = new UserDAO();
         CommandManager.initServerCommands(ticketCollectionManager, new TicketDAO(), userDAO);

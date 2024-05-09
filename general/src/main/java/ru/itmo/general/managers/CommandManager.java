@@ -121,7 +121,6 @@ public class CommandManager {
      * Processes the command received from the client.
      * Executes the command if it exists in the command dictionary.
      * If the command does not exist, returns a Response indicating that the command was not found.
-     * If the command is "exit" or "save", returns a Response indicating that the command is unknown.
      *
      * @param request The request containing the command to be processed.
      * @return The Response generated after processing the command.

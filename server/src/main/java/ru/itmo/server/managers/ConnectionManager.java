@@ -24,7 +24,7 @@ public class ConnectionManager {
      */
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(DB_URL);
+            return DriverManager.getConnection(DB_URL + DB_NAME);
             //return DriverManager.getConnection(DB_URL + DB_NAME, USER, PASSWORD);
         } catch (SQLException e) {
             logError("Connection failed", e);

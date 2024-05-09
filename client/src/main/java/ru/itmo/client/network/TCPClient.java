@@ -150,13 +150,7 @@ public class TCPClient {
             return receiveResponse();
         } catch (IOException | ClassNotFoundException ignored) {
         }
-        console.println("Повторная попытка отправки");
-        try {
-            sendCommand(request);
-            return receiveResponse();
-        } catch (IOException | ClassNotFoundException ignored) {
-            console.printError(getClass(), "Запрос не отправлен. Повторите попытку позже.");
-        }
+        console.printError(getClass(), "Запрос не отправлен. Повторите попытку позже.");
         try {
             disconnect();
         } catch (IOException e) {

@@ -21,8 +21,6 @@ public enum CommandName {
     HISTORY,             // Command to display command history
     EXECUTE_SCRIPT,      // Command to execute commands from a script file
     EXIT_SERVER,         // Command to exit the server
-    SAVE,                // Command to save the collection to a file
-    PING,                // Command to ping the server
     LOGIN,               // Command to log in
     REGISTER             // Command to register a new user
 }

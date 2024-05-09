@@ -9,6 +9,7 @@ import ru.itmo.general.utility.console.Console;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -24,7 +25,8 @@ public class ScriptRunner implements ModeRunner {
     private final Console console;
     private final Set<String> scriptSet = new HashSet<>();
     private Request request = null;
-
+    protected static String login;
+    protected static String password;
     /**
      * Конструктор для ScriptRunner.
      *
@@ -130,18 +132,31 @@ public class ScriptRunner implements ModeRunner {
                 return Runner.ExitCode.OK;
             }
             default -> {
-                request = command.execute(userCommand);
-                if (!request.isSuccess()) return Runner.ExitCode.ERROR;
-                if (request.getCommand().equals("exit")) {
-                    tcpClient.sendCommand(request);
+                if (userCommand[0].equals("exit")) {
+                    request = command.execute(userCommand);
+                    try {
+                        tcpClient.sendRequest(request);
+                    } catch (IOException ignored) {
+                    }
+                    console.println(request.getData());
                     return Runner.ExitCode.EXIT;
                 }
+                if (login == null || password == null) {
+                    console.printError(getClass(), "Вы не авторизованы");
+                    return Runner.ExitCode.ERROR;
+                }
+                request = command.execute(userCommand);
+                if (!request.isSuccess()) return Runner.ExitCode.ERROR;
+                request.setLogin(login);
+                request.setPassword(password);
                 var response = tcpClient.sendCommand(request);
                 if (response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
                 if (response.isSuccess()) {
                     console.println(response.toString());
                 } else {
                     console.printError(getClass(), response.toString());
+                    request = null;
+                    return Runner.ExitCode.ERROR;
                 }
             }
         }

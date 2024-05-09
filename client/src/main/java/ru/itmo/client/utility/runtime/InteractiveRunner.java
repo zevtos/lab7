@@ -22,8 +22,8 @@ public class InteractiveRunner implements ModeRunner {
     private final Console console;
     private final ScriptRunner scriptRunner;
     private Request request = null;
-    private String login = null;
-    private String password = null;
+    protected String login = null;
+    protected String password = null;
 
     /**
      * Конструктор для InteractiveRunner.
@@ -127,6 +127,8 @@ public class InteractiveRunner implements ModeRunner {
                 if (!request.isSuccess()) return Runner.ExitCode.ERROR;
                 login = request.getLogin();
                 password = request.getPassword();
+                ScriptRunner.login = request.getLogin();
+                ScriptRunner.password = request.getPassword();
                 var response = tcpClient.sendCommand(request);
                 if (response == null) return Runner.ExitCode.ERROR_NULL_RESPONSE;
                 if (response.isSuccess()) {
