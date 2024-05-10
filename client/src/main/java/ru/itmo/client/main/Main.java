@@ -4,7 +4,7 @@ package ru.itmo.client.main;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.general.utility.Interrogator;
-import ru.itmo.general.utility.console.StandartConsole;
+import ru.itmo.client.utility.console.StandartConsole;
 
 import java.util.Scanner;
 

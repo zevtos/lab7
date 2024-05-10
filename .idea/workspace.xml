@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.5.1 fix and simplification">
-      <change afterPath="$PROJECT_DIR$/data/addMany.txt" afterDir="false" />
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.6 fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ModeRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/script.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/script2.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,45 +56,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.UserDAO.executor": "Run",
-    "Application.client.executor": "Run",
-    "Application.client1.executor": "Run",
-    "Application.client2.executor": "Run",
-    "Application.server.executor": "Run",
-    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
-    "Maven.client [exec:java].executor": "Run",
-    "Maven.client.executor": "Run",
-    "Maven.general.executor": "Run",
-    "Maven.lab6 [compile,package].executor": "Run",
-    "Maven.lab6 [exec:java].executor": "Run",
-    "Maven.server [compile,package].executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/zevtos/itmo/labs/md/prog/lab6/data",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.stylelint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.stylelint": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.intentionPowerPack",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.UserDAO.executor&quot;: &quot;Run&quot;,
+    &quot;Application.client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.client1.executor&quot;: &quot;Run&quot;,
+    &quot;Application.client2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.server.executor&quot;: &quot;Run&quot;,
+    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client [exec:java].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.general.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab6 [compile,package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.lab6 [exec:java].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.server [compile,package].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zevtos/itmo/labs/md/prog/lab6/data&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.intentionPowerPack&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\data" />
@@ -321,7 +316,7 @@
       <workItem from="1715247506067" duration="435000" />
       <workItem from="1715248114375" duration="1031000" />
       <workItem from="1715276806122" duration="2567000" />
-      <workItem from="1715322086773" duration="4420000" />
+      <workItem from="1715322086773" duration="4757000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -459,7 +454,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715324149672</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="2.7.6 fix">
+      <option name="closed" value="true" />
+      <created>1715326822320</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1715326822320</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -496,7 +499,8 @@
     <MESSAGE value="2.7.5 fix troubles" />
     <MESSAGE value="2.7.5.1 fix merge" />
     <MESSAGE value="2.7.5.1 fix and simplification" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.7.5.1 fix and simplification" />
+    <MESSAGE value="2.7.6 fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.7.6 fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

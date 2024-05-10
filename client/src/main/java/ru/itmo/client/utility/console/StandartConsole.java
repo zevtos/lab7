@@ -1,6 +1,7 @@
-package ru.itmo.general.utility.console;
+package ru.itmo.client.utility.console;
 
 import lombok.SneakyThrows;
+import ru.itmo.general.utility.console.Console;
 
 import java.io.IOException;
 import java.io.OutputStream;
