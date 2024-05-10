@@ -23,7 +23,7 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
     private final Logger logger = LoggerFactory.getLogger("TicketCollectionManager");
     @Getter
     private final LinkedList<Ticket> collection = new LinkedList<>();
-    private final ReentrantLock lock = new ReentrantLock(); // Замок для синхронизации доступа
+    private final ReentrantLock lock = new ReentrantLock(true); // Замок для синхронизации доступа
     private final TicketDAO dao;
     @Getter
     private LocalDateTime lastSaveTime;
