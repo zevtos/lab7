@@ -124,7 +124,11 @@ public class TCPClient {
             if (readyChannels == 0) {
                 continue;
             }
-
+            //todo:Исправить чтение не полного количества байтов
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+            }
             int bytesRead;
             while ((bytesRead = socketChannel.read(buffer)) > 0) {
                 buffer.flip();
