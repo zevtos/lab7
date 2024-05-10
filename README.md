@@ -1,7 +1,7 @@
 To run the program:
 
 ```
-git cloone https://github.com/zevtos/lab6
+git cloone https://github.com/zevtos/lab7
 
 
 // located in lab6
