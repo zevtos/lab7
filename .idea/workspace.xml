@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.6 fix">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-    </list>
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.8 move StandartConsole" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,7 +118,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.client1">
+  <component name="RunManager" selected="Application.client2">
     <configuration name="client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.main.Main" />
       <module name="client" />
@@ -317,6 +314,7 @@
       <workItem from="1715248114375" duration="1031000" />
       <workItem from="1715276806122" duration="2567000" />
       <workItem from="1715322086773" duration="4757000" />
+      <workItem from="1715330893192" duration="380000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -462,7 +460,23 @@
       <option name="project" value="LOCAL" />
       <updated>1715326822320</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="2.7.7 fix working with helios(temp)">
+      <option name="closed" value="true" />
+      <created>1715330933287</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1715330933287</updated>
+    </task>
+    <task id="LOCAL-00020" summary="2.7.8 move StandartConsole">
+      <option name="closed" value="true" />
+      <created>1715331148713</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1715331148713</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,7 +514,9 @@
     <MESSAGE value="2.7.5.1 fix merge" />
     <MESSAGE value="2.7.5.1 fix and simplification" />
     <MESSAGE value="2.7.6 fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.7.6 fix" />
+    <MESSAGE value="2.7.7 fix working with helios(temp)" />
+    <MESSAGE value="2.7.8 move StandartConsole" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.7.8 move StandartConsole" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

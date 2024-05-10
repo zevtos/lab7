@@ -230,9 +230,6 @@ public class UserDAO implements Registered {
                     String storedPasswordHash = resultSet.getString("password_hash");
                     String storedSalt = resultSet.getString("salt");
                     String enteredPasswordHash = hashPassword(password, storedSalt);
-                    System.out.println("Password Hash: " + storedPasswordHash);
-                    System.out.println("Salt Hash: " + storedSalt);
-                    System.out.println("Entered Password Hash: " + enteredPasswordHash);
                     return storedPasswordHash.equals(enteredPasswordHash);
                 } else {
                     return false; // User not found
