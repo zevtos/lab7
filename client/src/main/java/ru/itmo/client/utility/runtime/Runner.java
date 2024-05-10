@@ -250,7 +250,6 @@ public class Runner {
                     console.println(response.toString());
                 } else {
                     console.printError(response.toString());
-                    request = null;
                     return Runner.ExitCode.ERROR;
                 }
             }

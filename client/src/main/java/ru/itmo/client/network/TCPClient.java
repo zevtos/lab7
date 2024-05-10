@@ -114,41 +114,40 @@ public class TCPClient {
     public Response receiveResponse() throws IOException, ClassNotFoundException {
         ensureConnection();
         Selector selector = Selector.open();
+        socketChannel.configureBlocking(false);
         socketChannel.register(selector, socketChannel.validOps());
-
+        ByteBuffer buffer = ByteBuffer.allocate(16384);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         long startTime = System.currentTimeMillis();
-
         while (System.currentTimeMillis() - startTime < 10000) { // Ожидаем ответ не больше 10 секунд
             int readyChannels = selector.select();
             if (readyChannels == 0) {
                 continue;
             }
 
-            ByteBuffer buffer = ByteBuffer.allocate(8192);
             int bytesRead;
             while ((bytesRead = socketChannel.read(buffer)) > 0) {
                 buffer.flip();
                 byteArrayOutputStream.write(buffer.array(), 0, bytesRead);
                 buffer.clear();
             }
-
             byte[] responseBytes = byteArrayOutputStream.toByteArray();
             if (responseBytes.length > 0) {
                 ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(responseBytes));
                 return (Response) objectInputStream.readObject();
             }
+
         }
 
         return null;
     }
-
 
     public Response sendCommand(Request request) {
         try {
             sendRequest(request);
             return receiveResponse();
         } catch (IOException | ClassNotFoundException ignored) {
+            console.printError(ignored.getMessage());
         }
         console.printError("Запрос не отправлен. Повторите попытку позже.");
         try {
@@ -164,3 +163,6 @@ public class TCPClient {
     }
 
 }
+
+
+
