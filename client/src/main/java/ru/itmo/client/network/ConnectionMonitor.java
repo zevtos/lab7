@@ -22,14 +22,14 @@ public class ConnectionMonitor extends Thread {
             try {
                 connected = tcpClient.connect();
             } catch (TimeoutException e) {
-                console.printError(getClass(), "Тайм-аут при подключении к серверу");
+                console.printError("Тайм-аут при подключении к серверу");
             }
             if (connected) {
                 connect_flag = true;
                 console.println("Подключение установлено.");
             } else {
                 connect_flag = false;
-                console.printError(getClass(), "Соединение с сервером не установлено");
+                console.printError("Соединение с сервером не установлено");
                 repairConnection();
             }
         }
@@ -37,12 +37,12 @@ public class ConnectionMonitor extends Thread {
             try {
                 if (!tcpClient.isConnected()) {
                     connect_flag = false;
-                    console.printError(getClass(), "Потеряно соединение с сервером. Попытка восстановления...");
+                    console.printError("Потеряно соединение с сервером. Попытка восстановления...");
                     repairConnection();
                 }
                 TimeUnit.SECONDS.sleep(10);
             } catch (InterruptedException e) {
-                console.printError(getClass(), "Ошибка в приостановлении потока");
+                console.printError("Ошибка в приостановлении потока");
             }
         }
     }
@@ -59,10 +59,10 @@ public class ConnectionMonitor extends Thread {
                 TimeUnit.SECONDS.sleep(5);
             } catch (InterruptedException e) {
                 connect_flag = false;
-                console.printError(getClass(), "Ошибка при восстановлении соединения: " + e.getMessage());
+                console.printError("Ошибка при восстановлении соединения: " + e.getMessage());
             } catch (TimeoutException e) {
                 if (connect_flag) {
-                    console.printError(getClass(), "Тайм-аут при подключении к серверу");
+                    console.printError("Тайм-аут при подключении к серверу");
                 }
             }
         }

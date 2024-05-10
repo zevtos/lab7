@@ -60,13 +60,13 @@ public class CoordinatesForm extends Form<Coordinates> {
                 x = Double.parseDouble(strX);
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "X coordinate not recognized!");
+                console.printError("X coordinate not recognized!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError(getClass(), "X coordinate must be a number!");
+                console.printError("X coordinate must be a number!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError(getClass(), "An unexpected error occurred!");
+                console.printError("An unexpected error occurred!");
                 System.exit(0);
             }
         }
@@ -93,15 +93,15 @@ public class CoordinatesForm extends Form<Coordinates> {
                 if (y <= -420) throw new InvalidRangeException("Y value must be greater than -420");
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Y coordinate not recognized!");
+                console.printError("Y coordinate not recognized!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError(getClass(), "Y coordinate must be a number!");
+                console.printError("Y coordinate must be a number!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (InvalidRangeException exception) {
-                console.printError(getClass(), exception.getMessage());
+                console.printError(exception.getMessage());
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError(getClass(), "An unexpected error occurred!");
+                console.printError("An unexpected error occurred!");
                 System.exit(0);
             }
         }

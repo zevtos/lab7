@@ -42,13 +42,13 @@ public class ColorForm extends Form<Color> {
                 color = Color.valueOf(strColor.toUpperCase());
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Цвет волос не распознан!");
+                console.printError("Цвет волос не распознан!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalArgumentException exception) {
-                console.printError(getClass(), "Такого цвета волос нет в списке!");
+                console.printError("Такого цвета волос нет в списке!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError(getClass(), "Произошла непредвиденная ошибка!");
+                console.printError("Произошла непредвиденная ошибка!");
                 System.exit(0);
             }
         }

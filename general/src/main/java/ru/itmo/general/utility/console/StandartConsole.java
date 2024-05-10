@@ -57,7 +57,7 @@ public class StandartConsole implements Console {
                 }
                 return password;
             } catch (Exception e) {
-                printError(getClass(), "Ошибка чтения пароля: " + e.getMessage());
+                printError("Ошибка чтения пароля: " + e.getMessage());
             }
             i++;
             if (i >= password.length) {
@@ -74,7 +74,7 @@ public class StandartConsole implements Console {
      * @param obj Ошибка для печати.
      */
     @SneakyThrows
-    public void printError(Class<?> callingClass, Object obj) {
+    public void printError(Object obj) {
         System.err.println("Error:" + obj);
     }
 

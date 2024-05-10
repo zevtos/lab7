@@ -50,13 +50,13 @@ public class TicketTypeForm extends Form<TicketType> {
                 ticketType = TicketType.valueOf(strTicketType.toUpperCase());
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Ticket type not recognized!");
+                console.printError("Ticket type not recognized!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalArgumentException exception) {
-                console.printError(getClass(), "Ticket type is not in the list!");
+                console.printError("Ticket type is not in the list!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError(getClass(), "An unexpected error occurred!");
+                console.printError("An unexpected error occurred!");
                 System.exit(0);
             }
         }

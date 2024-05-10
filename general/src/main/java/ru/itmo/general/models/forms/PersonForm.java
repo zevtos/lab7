@@ -103,13 +103,13 @@ public class PersonForm extends Form<Person> {
                 if (passportID.isEmpty()) throw new EmptyValueException();
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "PassportID не распознан!");
+                console.printError("PassportID не распознан!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (EmptyValueException exception) {
-                console.printError(getClass(), "PassportID не может быть пустым!");
+                console.printError("PassportID не может быть пустым!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (IllegalStateException exception) {
-                console.printError(getClass(), "Непредвиденная ошибка!");
+                console.printError("Непредвиденная ошибка!");
                 System.exit(0);
             }
         }
@@ -138,16 +138,16 @@ public class PersonForm extends Form<Person> {
                 if (height <= MIN_HEIGHT) throw new InvalidRangeException();
                 break;
             } catch (NoSuchElementException exception) {
-                console.printError(getClass(), "Рост не распознан!");
+                console.printError("Рост не распознан!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (InvalidRangeException exception) {
-                console.printError(getClass(), "Рост должен быть больше нуля!");
+                console.printError("Рост должен быть больше нуля!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NumberFormatException exception) {
-                console.printError(getClass(), "Рост должен быть представлен числом!");
+                console.printError("Рост должен быть представлен числом!");
                 if (fileMode) throw new InvalidScriptInputException();
             } catch (NullPointerException | IllegalStateException exception) {
-                console.printError(getClass(), "Непредвиденная ошибка!");
+                console.printError("Непредвиденная ошибка!");
                 System.exit(0);
             }
         }
@@ -185,20 +185,20 @@ public class PersonForm extends Form<Person> {
                         break;
                     } catch (DateTimeParseException ignored1) {
                     } catch (InvalidRangeException e) {
-                        console.printError(getClass(), "Дата рождения не может быть позже текущей");
+                        console.printError("Дата рождения не может быть позже текущей");
                         continue;
                     }
-                    console.printError(getClass(), "Ошибка чтения даты. Некорректный формат. Требуемый формат: " +
+                    console.printError("Ошибка чтения даты. Некорректный формат. Требуемый формат: " +
                             LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME) +
                             " или YYYY-MM-DD");
                 } catch (InvalidRangeException e) {
-                    console.printError(getClass(), "Дата рождения не может быть позже текущей");
+                    console.printError("Дата рождения не может быть позже текущей");
                 }
 
             }
             return birthday;
         } catch (NoSuchElementException | IllegalStateException e) {
-            console.printError(getClass(), "Ошибка чтения");
+            console.printError("Ошибка чтения");
             return null;
         }
     }

@@ -58,7 +58,7 @@ public class Add extends Command {
 
             if (!ticketCollectionManager.add(ticket, request.getUserId()))
                 return new Response(false, "Билет уже существует", -1);
-            return new Response(true, null, null);
+            return new Response(true, "Билет успешно добавлен", null);
         } catch (Exception e) {
             return new Response(false, e.toString(), -1);
         }

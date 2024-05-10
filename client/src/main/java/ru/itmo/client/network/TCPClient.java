@@ -87,7 +87,7 @@ public class TCPClient {
                 console.println("Попытка повторного подключения к серверу...");
                 connect();
             } catch (TimeoutException e) {
-                console.printError(getClass(), "Ошибка переподключения: " + e.getMessage());
+                console.printError("Ошибка переподключения: " + e.getMessage());
                 return false;
             }
         }
@@ -150,11 +150,11 @@ public class TCPClient {
             return receiveResponse();
         } catch (IOException | ClassNotFoundException ignored) {
         }
-        console.printError(getClass(), "Запрос не отправлен. Повторите попытку позже.");
+        console.printError("Запрос не отправлен. Повторите попытку позже.");
         try {
             disconnect();
         } catch (IOException e) {
-            console.printError(getClass(), "Не удалось закрыть соединение");
+            console.printError("Не удалось закрыть соединение");
         }
         return new Response(false, "Команда не выполнена!", null);
     }

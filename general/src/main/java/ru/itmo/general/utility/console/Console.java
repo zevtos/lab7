@@ -26,10 +26,9 @@ public interface Console {
     /**
      * Prints an error message to the console.
      *
-     * @param callingClass the class where the error occurred
-     * @param obj          the error object to be printed
+     * @param obj the error object to be printed
      */
-    void printError(Class<?> callingClass, Object obj);
+    void printError(Object obj);
 
     /**
      * Prints two objects in a tabular format.
