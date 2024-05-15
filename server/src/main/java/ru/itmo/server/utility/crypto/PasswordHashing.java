@@ -20,15 +20,9 @@ public class PasswordHashing {
      * @return An array containing the hashed password and the salt used for hashing.
      */
     public static String[] hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            String salt = generateSalt(16);
-            String hashedPassword = hashPassword(password, salt);
-            return new String[]{hashedPassword, salt};
-        } catch (NoSuchAlgorithmException ignored) {
-            System.err.println("Algorithm SHA-256 not found");
-            return null;
-        }
+        String salt = generateSalt(16);
+        String hashedPassword = hashPassword(password, salt);
+        return new String[]{hashedPassword, salt};
     }
 
     /**
