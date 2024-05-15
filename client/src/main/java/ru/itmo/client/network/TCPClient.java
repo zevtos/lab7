@@ -151,8 +151,7 @@ public class TCPClient {
             if (responseBytes.length > 0) {
                 try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(responseBytes))) {
                     return (Response) objectInputStream.readObject();
-                } catch (Exception e) {
-                    throw new IOException("Ошибка при чтении ответа от сервера: " + e.getMessage());
+                } catch (Exception ignore) {
                 }
             }
         }
