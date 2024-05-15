@@ -11,6 +11,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 public class TCPClient {
@@ -115,36 +116,51 @@ public class TCPClient {
         ensureConnection();
         Selector selector = Selector.open();
         socketChannel.configureBlocking(false);
-        socketChannel.register(selector, socketChannel.validOps());
+        socketChannel.register(selector, SelectionKey.OP_READ);
         ByteBuffer buffer = ByteBuffer.allocate(16384);
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         long startTime = System.currentTimeMillis();
+
         while (System.currentTimeMillis() - startTime < 10000) { // Ожидаем ответ не больше 10 секунд
-            int readyChannels = selector.select();
+            int readyChannels = selector.select(10000); // Ожидаем события не больше 10 секунд
             if (readyChannels == 0) {
                 continue;
             }
-            //todo:Исправить чтение не полного количества байтов
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
+
+            Set<SelectionKey> selectedKeys = selector.selectedKeys();
+            Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
+
+            while (keyIterator.hasNext()) {
+                SelectionKey key = keyIterator.next();
+                if (key.isReadable()) {
+                    int bytesRead;
+                    while ((bytesRead = socketChannel.read(buffer)) > 0) {
+                        buffer.flip();
+                        byteArrayOutputStream.write(buffer.array(), 0, bytesRead);
+                        buffer.clear();
+                    }
+                    if (bytesRead == -1) {
+                        // Закрытие канала
+                        socketChannel.close();
+                    }
+                }
+                keyIterator.remove();
             }
-            int bytesRead;
-            while ((bytesRead = socketChannel.read(buffer)) > 0) {
-                buffer.flip();
-                byteArrayOutputStream.write(buffer.array(), 0, bytesRead);
-                buffer.clear();
-            }
+
             byte[] responseBytes = byteArrayOutputStream.toByteArray();
             if (responseBytes.length > 0) {
-                ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(responseBytes));
-                return (Response) objectInputStream.readObject();
+                try (ObjectInputStream objectInputStream = new ObjectInputStream(new ByteArrayInputStream(responseBytes))) {
+                    return (Response) objectInputStream.readObject();
+                } catch (Exception e) {
+                    throw new IOException("Ошибка при чтении ответа от сервера: " + e.getMessage());
+                }
             }
-
         }
 
+        // Если за 10 секунд не получили ответ, возвращаем null или генерируем исключение
         return null;
     }
+
 
     public Response sendCommand(Request request) {
         try {
