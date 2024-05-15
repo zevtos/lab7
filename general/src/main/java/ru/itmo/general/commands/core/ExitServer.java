@@ -35,10 +35,6 @@ public class ExitServer extends Command {
      */
     @Override
     public Response execute(Request arguments) {
-        try {
-            return new Response(true, null);
-        } catch (Exception e) {
-            return new Response(false, e.toString());
-        }
+        return new Response(true, null);
     }
 }
