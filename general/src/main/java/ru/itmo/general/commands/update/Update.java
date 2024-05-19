@@ -33,7 +33,7 @@ public class Update extends Command {
         this.dao = dao;
     }
 
-    public Update(Console console, Form<Ticket> ticketForm) {
+    public Update(Form<Ticket> ticketForm) {
         this();
         this.ticketForm = ticketForm;
     }

@@ -1,5 +1,8 @@
 package ru.itmo.general.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 
 /**
@@ -24,5 +27,8 @@ public enum TicketType implements Serializable {
             nameList.append(ticketType.name()).append(", ");
         }
         return nameList.substring(0, nameList.length() - 2);
+    }
+    public static ObservableList<TicketType> getValues() {
+        return FXCollections.observableArrayList(TicketType.values());
     }
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.MainController" stylesheets="@../css/style.css">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <spacing>15</spacing>
+    <styleClass>main-screen</styleClass>
+    <children>
+        <TableView fx:id="dataTable" prefHeight="400" prefWidth="600" styleClass="table-view">
+            <columns>
+                <TableColumn fx:id="idColumn" text="%main.id" styleClass="table-column"/>
+                <TableColumn fx:id="nameColumn" text="%main.name" styleClass="table-column"/>
+                <TableColumn fx:id="coordinatesColumn" text="%main.coordinates" styleClass="table-column"/>
+                <TableColumn fx:id="creationDateColumn" text="%main.creationDate" styleClass="table-column"/>
+                <TableColumn fx:id="priceColumn" text="%main.price" styleClass="table-column"/>
+                <TableColumn fx:id="discountColumn" text="%main.discount" styleClass="table-column"/>
+                <TableColumn fx:id="commentColumn" text="%main.comment" styleClass="table-column"/>
+                <TableColumn fx:id="typeColumn" text="%main.type" styleClass="table-column"/>
+                <TableColumn fx:id="columnBirthday" text="%main.column.birthday" styleClass="table-column"/>
+                <TableColumn fx:id="columnHeight" text="%main.column.height" styleClass="table-column"/>
+                <TableColumn fx:id="columnPassportID" text="%main.column.passportID" styleClass="table-column"/>
+                <TableColumn fx:id="columnHairColor" text="%main.column.hairColor" styleClass="table-column"/>
+            </columns>
+        </TableView>
+        <HBox spacing="10" alignment="CENTER">
+            <Button text="%main.add.button" fx:id="addButton" onAction="#handleAdd" styleClass="button-add"/>
+            <Button text="%main.update.button" fx:id="updateButton" onAction="#handleUpdate" styleClass="button-update"/>
+            <Button text="%main.delete.button" fx:id="deleteButton" onAction="#handleDelete" styleClass="button-delete"/>
+        </HBox>
+    </children>
+</VBox>

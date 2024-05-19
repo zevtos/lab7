@@ -9,6 +9,7 @@ import ru.itmo.general.models.Person;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.TicketType;
 import ru.itmo.general.utility.Interrogator;
+import ru.itmo.general.utility.MessageOutput;
 import ru.itmo.general.utility.console.Console;
 
 import java.util.NoSuchElementException;
@@ -21,14 +22,14 @@ import java.util.NoSuchElementException;
  */
 public class TicketForm extends Form<Ticket> {
     private static final int nextId = 0;
-    private final Console console;
+    private final MessageOutput console;
 
     /**
      * Constructs a new form for creating a ticket.
      *
      * @param console The console for interacting with the user.
      */
-    public TicketForm(Console console) {
+    public TicketForm(MessageOutput console) {
         this.console = console;
     }
 
@@ -68,7 +69,7 @@ public class TicketForm extends Form<Ticket> {
         while (true) {
             try {
                 console.println("Введите скидку на билет:");
-                console.prompt();
+                //console.prompt();
 
                 var strDiscount = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(strDiscount);
@@ -102,7 +103,7 @@ public class TicketForm extends Form<Ticket> {
         while (true) {
             try {
                 console.println("Введите название билета:");
-                console.prompt();
+                //console.prompt();
 
                 name = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(name);
@@ -122,7 +123,7 @@ public class TicketForm extends Form<Ticket> {
     }
 
     private Coordinates askCoordinates() throws InvalidScriptInputException, InvalidFormException {
-        return new CoordinatesForm(console).build();
+        return null; // new CoordinatesForm(console).build();
     }
 
     private Double askPrice() throws InvalidScriptInputException {
@@ -131,7 +132,7 @@ public class TicketForm extends Form<Ticket> {
         while (true) {
             try {
                 console.println("Введите цену билета:");
-                console.prompt();
+                //console.prompt();
 
                 var strPrice = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(strPrice);
@@ -163,7 +164,7 @@ public class TicketForm extends Form<Ticket> {
         while (true) {
             try {
                 console.println("Введите комментарий билета:");
-                console.prompt();
+                //console.prompt();
 
                 partNumber = Interrogator.getUserScanner().nextLine().trim();
                 if (fileMode) console.println(partNumber);
@@ -184,10 +185,10 @@ public class TicketForm extends Form<Ticket> {
     }
 
     private TicketType askTicketType() throws InvalidScriptInputException {
-        return new TicketTypeForm(console).build();
+        return null; // new TicketTypeForm(console).build();
     }
 
     private Person askPerson() throws InvalidScriptInputException, InvalidFormException {
-        return new PersonForm(console).build();
+        return null; //new PersonForm(console).build();
     }
 }

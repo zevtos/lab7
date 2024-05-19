@@ -40,7 +40,7 @@ public class AddIfMin extends Command {
      *
      * @param console объект для взаимодействия с консолью
      */
-    public AddIfMin(Console console, Form<Ticket> ticketForm) {
+    public AddIfMin(Form<Ticket> ticketForm) {
         this();
         this.ticketForm = ticketForm;
     }

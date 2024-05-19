@@ -72,19 +72,19 @@ public class CommandManager {
         register("login", new Login(userDao));
     }
 
-    public static void initClientCommands(Console console, Form<Ticket> ticketForm) {
+    public static void initClientCommands(Form<Ticket> ticketForm) {
         init();
         register("help", new Help());
         register("info", new Info());
         register("show", new Show());
         register("add", new Add(ticketForm));
-        register("update", new Update(console, ticketForm));
+        register("update", new Update(ticketForm));
         register("remove_by_id", new Remove());
         register("clear", new Clear());
         register("execute_script", new ExecuteScript());
         register("remove_first", new RemoveFirst());
         register("remove_head", new RemoveHead());
-        register("add_if_min", new AddIfMin(console, ticketForm));
+        register("add_if_min", new AddIfMin(ticketForm));
         register("sum_of_price", new SumOfPrice());
         register("min_by_discount", new MinByDiscount());
         register("max_by_name", new MaxByName());
@@ -93,24 +93,24 @@ public class CommandManager {
         register("login", new Login());
     }
 
-    public static void initClientCommandsBeforeRegistration(Console console) {
+    public static void initClientCommandsBeforeRegistration() {
         init();
         register("help", new Help());
         register("register", new Register());
         register("login", new Login());
     }
 
-    public static void initClientCommandsAfterRegistration(Console console, Form<Ticket> ticketForm) {
+    public static void initClientCommandsAfterRegistration(Form<Ticket> ticketForm) {
         register("info", new Info());
         register("show", new Show());
         register("add", new Add(ticketForm));
-        register("update", new Update(console, ticketForm));
+        register("update", new Update(ticketForm));
         register("remove_by_id", new Remove());
         register("clear", new Clear());
         register("execute_script", new ExecuteScript());
         register("remove_first", new RemoveFirst());
         register("remove_head", new RemoveHead());
-        register("add_if_min", new AddIfMin(console, ticketForm));
+        register("add_if_min", new AddIfMin(ticketForm));
         register("sum_of_price", new SumOfPrice());
         register("min_by_discount", new MinByDiscount());
         register("max_by_name", new MaxByName());

@@ -1,0 +1,56 @@
+/* style.css */
+
+.main-screen {
+    -fx-background-color: #f4f4f4;
+}
+
+.table-view {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+    -fx-background-color: #ffffff;
+}
+
+.table-column {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+.button-add {
+    -fx-background-color: #4CAF50; /* зеленый */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.button-update {
+    -fx-background-color: #FFA500; /* оранжевый */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.button-delete {
+    -fx-background-color: #f44336; /* красный */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.data-visualization {
+    -fx-background-color: #f4f4f4;
+}
+
+.canvas {
+    -fx-border-color: #cccccc;
+    -fx-border-width: 1px;
+}
+
+.menu-bar {
+    -fx-background-color: #333333;
+}
+
+.menu {
+    -fx-text-fill: white;
+}
+
+.menu-item {
+    -fx-text-fill: white;
+}

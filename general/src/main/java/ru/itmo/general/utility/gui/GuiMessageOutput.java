@@ -1,4 +1,4 @@
-package ru.itmo.client.utility.console;
+package ru.itmo.general.utility.gui;
 
 import ru.itmo.general.utility.MessageOutput;
 
@@ -28,5 +28,14 @@ public class GuiMessageOutput implements MessageOutput {
     @Override
     public void printError(String errorMessage) {
         textArea.append("ERROR: " + errorMessage + "\n");
+    }
+
+    public void printTable(String name, String description) {
+        textArea.append("<table border=\"1\">\n");
+        textArea.append("<tr>\n");
+        textArea.append("<th>" + name + "</th>\n");
+        textArea.append("<th>" + description + "</th>\n");
+        textArea.append("</tr>\n");
+        textArea.append("</table>\n");
     }
 }

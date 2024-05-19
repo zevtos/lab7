@@ -2,7 +2,7 @@ package ru.itmo.client.main;
 
 
 import ru.itmo.client.network.TCPClient;
-import ru.itmo.client.utility.console.GuiMessageOutput;
+import ru.itmo.general.utility.gui.GuiMessageOutput;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.general.utility.Interrogator;
 import ru.itmo.client.utility.console.StandartConsole;
@@ -27,6 +27,6 @@ public class Main {
         Interrogator.setUserScanner(new Scanner(System.in));
         var gui = new GuiMessageOutput(new JTextArea());
         var client = new TCPClient("localhost", PORT, gui);
-        new Runner(new StandartConsole(), client).run();
+        //new Runner(new StandartConsole(), client).run();
     }
 }

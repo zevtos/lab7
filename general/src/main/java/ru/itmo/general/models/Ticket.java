@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import ru.itmo.general.utility.base.Element;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
@@ -63,6 +64,18 @@ public class Ticket extends Element {
      */
     private Person person;
 
+    public Ticket() {
+        this.id = -1; // или другой способ генерации ID
+        this.name = "";
+        this.coordinates = new Coordinates(0, 0f);
+        this.creationDate = ZonedDateTime.now();
+        this.price = 0.0;
+        this.discount = 0L;
+        this.comment = "";
+        this.type = TicketType.USUAL; // или другой тип по умолчанию
+        this.person = new Person(LocalDateTime.now(), 0f, "", Color.BLACK); // или другие значения по умолчанию
+    }
+
     /**
      * Constructs a ticket object with the specified parameters.
      *
@@ -87,6 +100,7 @@ public class Ticket extends Element {
         this.type = type;
         this.person = person;
     }
+
 
     /**
      * Constructs a ticket object with the specified parameters, using the current date and time as the creation date.

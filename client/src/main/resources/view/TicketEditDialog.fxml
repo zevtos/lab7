@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.TicketEditDialogController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <children>
+        <GridPane hgap="10" vgap="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20">
+            <children>
+                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Coordinates:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="coordinatesField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Creation Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="creationDateField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Price:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <TextField fx:id="priceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Discount:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="discountField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Comment:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="commentField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Type:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="typeComboBox" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                <Label text="Birthday:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="birthdayField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <Label text="Height:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <TextField fx:id="heightField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                <Label text="Passport ID:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <TextField fx:id="passportIDField" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+                <Label text="Hair Color:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <ComboBox fx:id="hairColorComboBox" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+            </children>
+        </GridPane>
+        <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10px;" AnchorPane.bottomAnchor="10" AnchorPane.leftAnchor="10">
+            <Button text="OK" onAction="#handleOk"/>
+            <Button text="Cancel" onAction="#handleCancel"/>
+        </HBox>
+    </children>
+</AnchorPane>
