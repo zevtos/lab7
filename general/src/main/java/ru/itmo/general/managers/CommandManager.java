@@ -77,7 +77,7 @@ public class CommandManager {
         register("help", new Help());
         register("info", new Info());
         register("show", new Show());
-        register("add", new Add(console, ticketForm));
+        register("add", new Add(ticketForm));
         register("update", new Update(console, ticketForm));
         register("remove_by_id", new Remove());
         register("clear", new Clear());
@@ -89,21 +89,21 @@ public class CommandManager {
         register("min_by_discount", new MinByDiscount());
         register("max_by_name", new MaxByName());
         register("history", new History());
-        register("register", new Register(console));
-        register("login", new Login(console));
+        register("register", new Register());
+        register("login", new Login());
     }
 
     public static void initClientCommandsBeforeRegistration(Console console) {
         init();
         register("help", new Help());
-        register("register", new Register(console));
-        register("login", new Login(console));
+        register("register", new Register());
+        register("login", new Login());
     }
 
     public static void initClientCommandsAfterRegistration(Console console, Form<Ticket> ticketForm) {
         register("info", new Info());
         register("show", new Show());
-        register("add", new Add(console, ticketForm));
+        register("add", new Add(ticketForm));
         register("update", new Update(console, ticketForm));
         register("remove_by_id", new Remove());
         register("clear", new Clear());

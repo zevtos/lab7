@@ -2,7 +2,7 @@ package ru.itmo.client.network;
 
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.utility.console.Console;
+import ru.itmo.general.utility.MessageOutput;
 
 import java.io.*;
 import java.net.InetSocketAddress;
@@ -15,15 +15,15 @@ import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
 public class TCPClient {
+    private final MessageOutput output;
     private final String serverAddress;
     private final int serverPort;
-    private final Console console;
     private SocketChannel socketChannel;
 
-    public TCPClient(String serverAddress, int serverPort, Console console) {
+    public TCPClient(String serverAddress, int serverPort, MessageOutput output) {
         this.serverAddress = serverAddress;
         this.serverPort = serverPort;
-        this.console = console;
+        this.output = output;
     }
 
     public boolean connect() throws TimeoutException {
@@ -54,7 +54,7 @@ public class TCPClient {
                         } catch (IOException ignored) {
                         }
                         if (connect_flag) {
-                            System.out.println("Подключено к серверу: " + serverAddress + ":" + serverPort);
+                            output.println("Подключено к серверу: " + serverAddress + ":" + serverPort);
                             return true;
                         }
                     }
@@ -62,7 +62,7 @@ public class TCPClient {
             }
             throw new TimeoutException("Не удалось подключиться в течение 10 секунд");
         } catch (IOException e) {
-            System.out.println("Ошибка при подключении к серверу: " + e.getMessage());
+            output.println("Ошибка при подключении к серверу: " + e.getMessage());
             return false;
         } finally {
             if (!connect_flag) {
@@ -74,7 +74,7 @@ public class TCPClient {
                         selector.close();
                     }
                 } catch (IOException e) {
-                    System.out.println("Ошибка при закрытии ресурсов: " + e.getMessage());
+                    output.println("Ошибка при закрытии ресурсов: " + e.getMessage());
                 }
             }
         }
@@ -83,12 +83,12 @@ public class TCPClient {
 
     public boolean ensureConnection() {
         if (!isConnected()) {
-            console.println("Нет подключения к серверу.");
+            output.println("Нет подключения к серверу.");
             try {
-                console.println("Попытка повторного подключения к серверу...");
+                output.println("Попытка повторного подключения к серверу...");
                 connect();
             } catch (TimeoutException e) {
-                console.printError("Ошибка переподключения: " + e.getMessage());
+                output.printError("Ошибка переподключения: " + e.getMessage());
                 return false;
             }
         }
@@ -166,13 +166,13 @@ public class TCPClient {
             sendRequest(request);
             return receiveResponse();
         } catch (IOException | ClassNotFoundException ignored) {
-            console.printError(ignored.getMessage());
+            output.printError(ignored.getMessage());
         }
-        console.printError("Запрос не отправлен. Повторите попытку позже.");
+        output.printError("Запрос не отправлен. Повторите попытку позже.");
         try {
             disconnect();
         } catch (IOException e) {
-            console.printError("Не удалось закрыть соединение");
+            output.printError("Не удалось закрыть соединение");
         }
         return new Response(false, "Команда не выполнена!", null);
     }

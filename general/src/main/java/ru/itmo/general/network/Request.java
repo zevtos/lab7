@@ -10,6 +10,7 @@ import java.util.Objects;
  * @author zevtos
  */
 public class Request extends Sendable {
+    private static final long serialVersionUID = 1L;
 
     /**
      * Constructs a request with the specified success status, command name, and data payload.

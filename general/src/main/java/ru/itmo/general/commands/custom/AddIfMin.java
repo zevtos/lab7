@@ -19,7 +19,6 @@ import ru.itmo.general.utility.console.Console;
  */
 public class AddIfMin extends Command {
     private Form<Ticket> ticketForm;
-    private Console console;
     private CollectionManager<Ticket> ticketCollectionManager;
 
     public AddIfMin() {
@@ -43,7 +42,6 @@ public class AddIfMin extends Command {
      */
     public AddIfMin(Console console, Form<Ticket> ticketForm) {
         this();
-        this.console = console;
         this.ticketForm = ticketForm;
     }
 
@@ -80,7 +78,6 @@ public class AddIfMin extends Command {
     public Request execute(String[] arguments) {
         try {
             if (!arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
-            console.println("* Создание нового билета (add_if_min):");
             var ticket = ticketForm.build();
 
             return new Request(getName(), ticket);

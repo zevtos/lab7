@@ -20,7 +20,6 @@ import java.rmi.AccessException;
  * @author zevtos
  */
 public class Remove extends Command {
-    private Console console;
     private CollectionManager<Ticket> ticketCollectionManager;
     private Accessible dao;
 
@@ -36,11 +35,6 @@ public class Remove extends Command {
     public Remove(CollectionManager<Ticket> ticketCollectionManager, Accessible dao) {
         this();
         this.ticketCollectionManager = ticketCollectionManager;
-        this.dao = dao;
-    }
-
-    public Remove(Accessible dao) {
-        this();
         this.dao = dao;
     }
 

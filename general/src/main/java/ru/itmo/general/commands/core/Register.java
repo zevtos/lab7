@@ -7,19 +7,17 @@ import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.base.Registered;
-import ru.itmo.general.utility.console.Console;
 
 import javax.management.InstanceAlreadyExistsException;
 
 /**
  * Command 'register'. Registers a new user in the system.
  *
- * @author [Your Name]
+ * @author zevtos
  */
 public class Register extends Command {
     public static final int MIN_PASSWORD_LENGTH = 8;
     private static final int MAX_USERNAME_LENGTH = 50;
-    private Console console;
     private Registered userDAO;
 
     public Register() {
@@ -34,11 +32,6 @@ public class Register extends Command {
     public Register(Registered userDAO) {
         this();
         this.userDAO = userDAO;
-    }
-
-    public Register(Console console) {
-        this();
-        this.console = console;
     }
 
     /**
@@ -84,21 +77,17 @@ public class Register extends Command {
     @Override
     public Request execute(String[] arguments) {
         try {
-            if (arguments.length < 2 || arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
-            console.println("* Регистрация нового пользователя:");
+            if (arguments.length < 3 || arguments[1].isEmpty() || arguments[2].isEmpty())
+                throw new InvalidNumberOfElementsException();
 
             String username = arguments[1];
             if (username.length() > MAX_USERNAME_LENGTH)
                 throw new InvalidFormException("Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
 
-            // Use Console to read the password without echoing characters
-            char[] passwordChars = console.readPassword("Введите пароль: ", MIN_PASSWORD_LENGTH);
-
-            if (passwordChars == null)
-                throw new InvalidFormException("Невозможно прочитать пароль.");
-            if (passwordChars.length < MIN_PASSWORD_LENGTH)
+            String password = arguments[2];
+            if (password.length() < MIN_PASSWORD_LENGTH)
                 throw new InvalidFormException("Длина пароля должна быть >= " + MIN_PASSWORD_LENGTH);
-            String password = new String(passwordChars);
+
             Request request = new Request(true, getName(), null);
             request.setLogin(username);
             request.setPassword(password);

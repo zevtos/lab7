@@ -18,7 +18,6 @@ import ru.itmo.general.utility.console.Console;
  * @author zevtos
  */
 public class Add extends Command {
-    private Console console;
     private CollectionManager<Ticket> ticketCollectionManager;
     private Form<Ticket> ticketForm;
 
@@ -36,9 +35,8 @@ public class Add extends Command {
         this.ticketCollectionManager = ticketCollectionManager;
     }
 
-    public Add(Console console, Form<Ticket> ticketForm) {
+    public Add(Form<Ticket> ticketForm) {
         this();
-        this.console = console;
         this.ticketForm = ticketForm;
     }
 
@@ -74,7 +72,6 @@ public class Add extends Command {
     public Request execute(String[] arguments) {
         try {
             if (!arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
-            console.println("* Создание нового продукта:");
 
             var newTicket = ticketForm.build();
             return new Request(getName(), newTicket);

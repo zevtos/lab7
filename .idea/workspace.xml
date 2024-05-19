@@ -4,10 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.8 remove output">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.7.exactly_last">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/GuiMessageOutput.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/MessageOutput.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/report.docx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/report.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/collections/TicketCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/collections/TicketCollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/ConnectionMonitor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/ConnectionWaitingAnimation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Exit.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Exit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Remove.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Remove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/AddIfMin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/update/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/update/Update.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/network/Request.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,12 +38,14 @@
       <list>
         <option value="Class" />
         <option value="Interface" />
+        <option value="FxmlFile" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -59,12 +75,17 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainApp.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
     &quot;Application.UserDAO.executor&quot;: &quot;Run&quot;,
     &quot;Application.client.executor&quot;: &quot;Run&quot;,
     &quot;Application.client1.executor&quot;: &quot;Run&quot;,
     &quot;Application.client2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ru.itmo.client.ui.MainApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.server.executor&quot;: &quot;Run&quot;,
     &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client [clean,javafx:run].executor&quot;: &quot;Run&quot;,
     &quot;Maven.client [exec:java].executor&quot;: &quot;Run&quot;,
     &quot;Maven.client.executor&quot;: &quot;Run&quot;,
     &quot;Maven.general.executor&quot;: &quot;Run&quot;,
@@ -76,7 +97,7 @@
     &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/zevtos/itmo/labs/md/prog/lab6/data&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/zevtos/itmo/labs/md/prog/lab6/client/src/main/resources/ru/itmo/client/ui/i18n/Bundle_ru_RU.properties&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.stylelint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -84,10 +105,10 @@
     &quot;node.js.selected.package.stylelint&quot;: &quot;&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.intentionPowerPack&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -105,7 +126,11 @@
       <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\server\src\main\java\ru\itmo" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\general\src\main\java\ru\itmo\general\network" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\client\src\main\resources\ru\itmo" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\client\src\main\resources\ru\itmo\client\ui" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\client\src\main\resources\ru\itmo\client" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\client\src\main\resources" />
+      <recent name="C:\Users\zevtos\itmo\labs\md\prog\lab6\client\src\main\resources\ru\itmo\ui\client" />
     </key>
     <key name="MoveInnerDialog.RECENTS_KEY">
       <recent name="ru.itmo.server.network" />
@@ -122,7 +147,20 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.client2">
+  <component name="RunManager" selected="Application.client1">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ru.itmo.client.ui.Main" />
+      <module name="client" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="ru.itmo.client.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="client1" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.main.Main" />
       <module name="client" />
@@ -145,7 +183,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="client" type="MavenRunConfiguration" factoryName="Maven">
+    <configuration name="client [clean,javafx:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -158,38 +196,7 @@
             <option name="goals">
               <list>
                 <option value="clean" />
-                <option value="install" />
-              </list>
-            </option>
-            <option name="multimoduleDir" />
-            <option name="pomFileName" value="server/pom.xml" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="projectsCmdOptionValues">
-              <list />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2" />
-    </configuration>
-    <configuration name="general" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="cmdOptions" />
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="compile" />
-                <option value="package" />
+                <option value="javafx:run" />
               </list>
             </option>
             <option name="multimoduleDir" />
@@ -201,38 +208,7 @@
               <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$/general" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method v="2" />
-    </configuration>
-    <configuration name="server [compile,package]" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="cmdOptions" />
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list>
-                <option value="compile" />
-                <option value="package" />
-              </list>
-            </option>
-            <option name="multimoduleDir" />
-            <option name="pomFileName" value="client/pom.xml" />
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="projectsCmdOptionValues">
-              <list />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="$PROJECT_DIR$" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/client" />
           </MavenRunnerParameters>
         </option>
       </MavenSettings>
@@ -242,10 +218,14 @@
       <item itemvalue="Application.client1" />
       <item itemvalue="Application.client2" />
       <item itemvalue="Application.server" />
-      <item itemvalue="Maven.client" />
-      <item itemvalue="Maven.general" />
-      <item itemvalue="Maven.server [compile,package]" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Maven.client [clean,javafx:run]" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -318,7 +298,35 @@
       <workItem from="1715248114375" duration="1031000" />
       <workItem from="1715276806122" duration="2567000" />
       <workItem from="1715322086773" duration="4757000" />
-      <workItem from="1715330893192" duration="2427000" />
+      <workItem from="1715330893192" duration="5378000" />
+      <workItem from="1715348430451" duration="1676000" />
+      <workItem from="1715357705577" duration="364000" />
+      <workItem from="1715358841873" duration="28000" />
+      <workItem from="1715451408715" duration="636000" />
+      <workItem from="1715492409559" duration="446000" />
+      <workItem from="1715496842547" duration="39000" />
+      <workItem from="1715497958041" duration="237000" />
+      <workItem from="1715541104914" duration="77000" />
+      <workItem from="1715541191029" duration="6000" />
+      <workItem from="1715610063856" duration="5000" />
+      <workItem from="1715675954880" duration="3000" />
+      <workItem from="1715687779196" duration="34000" />
+      <workItem from="1715716534250" duration="51000" />
+      <workItem from="1715716612339" duration="1256000" />
+      <workItem from="1715757727039" duration="2948000" />
+      <workItem from="1715761623334" duration="319000" />
+      <workItem from="1715762091845" duration="2369000" />
+      <workItem from="1715972893002" duration="773000" />
+      <workItem from="1716025191947" duration="9000" />
+      <workItem from="1716026083897" duration="13000" />
+      <workItem from="1716029835438" duration="4000" />
+      <workItem from="1716055604615" duration="263000" />
+      <workItem from="1716057069879" duration="10000" />
+      <workItem from="1716057237779" duration="42000" />
+      <workItem from="1716059879851" duration="14000" />
+      <workItem from="1716110236940" duration="11455000" />
+      <workItem from="1716130607843" duration="423000" />
+      <workItem from="1716131045017" duration="3417000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -488,7 +496,31 @@
       <option name="project" value="LOCAL" />
       <updated>1715331502347</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="2.7.9 add fair to handling requests">
+      <option name="closed" value="true" />
+      <created>1715333372700</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1715333372700</updated>
+    </task>
+    <task id="LOCAL-00023" summary="2.7.pre_last">
+      <option name="closed" value="true" />
+      <created>1715759449816</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1715759449816</updated>
+    </task>
+    <task id="LOCAL-00024" summary="2.7.exactly_last">
+      <option name="closed" value="true" />
+      <created>1715763515193</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1715763515193</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,8 +538,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.0" />
-    <MESSAGE value="1.1" />
     <MESSAGE value="1.2" />
     <MESSAGE value="1.3" />
     <MESSAGE value="1.3.update" />
@@ -529,7 +559,11 @@
     <MESSAGE value="2.7.7 fix working with helios(temp)" />
     <MESSAGE value="2.7.8 move StandartConsole" />
     <MESSAGE value="2.7.8 remove output" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.7.8 remove output" />
+    <MESSAGE value="2.7.9 add fair to handling requests" />
+    <MESSAGE value="2.7.last" />
+    <MESSAGE value="2.7.pre_last" />
+    <MESSAGE value="2.7.exactly_last" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.7.exactly_last" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -538,11 +572,6 @@
           <properties class="java.net.BindException" package="java.net" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/server/src/main/java/ru/itmo/server/utility/network/Handler.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java</url>
           <line>100</line>
@@ -555,5 +584,9 @@
         <watch expression="((TCPClient)this).socketChannel" language="JAVA" custom="ru.itmo.client.network.TCPClient" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -12,23 +12,12 @@ import ru.itmo.general.utility.console.Console;
  * @author zevtos
  */
 public class Exit extends Command {
-    private Console console;
 
     /**
      * Конструктор для создания экземпляра команды Exit.
      */
     public Exit() {
         super(CommandName.EXIT, "завершить работу приложения");
-    }
-
-    /**
-     * Конструктор для создания экземпляра команды Exit.
-     *
-     * @param console объект для взаимодействия с консолью
-     */
-    public Exit(Console console) {
-        this();
-        this.console = console;
     }
 
     /**

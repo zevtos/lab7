@@ -6,42 +6,24 @@ import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.base.Registered;
-import ru.itmo.general.utility.console.Console;
 
 /**
  * Command 'login'. Logs in a user to the system.
  *
- * @author [Your Name]
+ * @author zevtos
  */
 public class Login extends Command {
-    private Console console;
     private Registered userDAO;
 
     public Login() {
         super(CommandName.LOGIN, "{username} вход в систему");
     }
 
-    /**
-     * Constructor for creating an instance of the Login command.
-     *
-     * @param userDAO the user manager
-     */
     public Login(Registered userDAO) {
         this();
         this.userDAO = userDAO;
     }
 
-    public Login(Console console) {
-        this();
-        this.console = console;
-    }
-
-    /**
-     * Executes the command.
-     *
-     * @param request the request to log in a user
-     * @return the response indicating the success or failure of the command execution
-     */
     @Override
     public Response execute(Request request) {
         try {
@@ -57,30 +39,15 @@ public class Login extends Command {
         }
     }
 
-    /**
-     * Executes the command.
-     *
-     * @param arguments the command arguments (expects the username and password)
-     * @return the request indicating the success or failure of the command execution
-     */
     @Override
     public Request execute(String[] arguments) {
         try {
             if (arguments.length < 2 || arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
-            console.println("* Вход в систему:");
             Request request = new Request(true, getName(), null);
             request.setLogin(arguments[1]);
-            char[] passwordChars = console.readPassword("Введите пароль: ", Register.MIN_PASSWORD_LENGTH);
-            if (passwordChars == null) {
-                return new Request(false, getName(), "Cannot read password.");
-            }
-            if (passwordChars.length < 8) {
-                return new Request(false, getName(), "Пароль слишком короткий. Введите не менее "
-                        + Register.MIN_PASSWORD_LENGTH + " символов");
-            }
-            request.setPassword(new String(passwordChars));
+            if (arguments.length < 3 || arguments[2].isEmpty()) throw new InvalidNumberOfElementsException();
+            request.setPassword(arguments[2]);
             return request;
-
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         }

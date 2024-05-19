@@ -20,7 +20,6 @@ import java.rmi.AccessException;
  */
 public class Update extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
-    private Console console;
     private Form<Ticket> ticketForm;
     private Accessible dao;
 
@@ -36,7 +35,6 @@ public class Update extends Command {
 
     public Update(Console console, Form<Ticket> ticketForm) {
         this();
-        this.console = console;
         this.ticketForm = ticketForm;
     }
 
@@ -81,9 +79,6 @@ public class Update extends Command {
             if (arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
 
             var id = Integer.parseInt(arguments[1]);
-
-            console.println("* Введите данные обновленного билета:");
-            console.prompt();
 
             var newTicket = ticketForm.build();
             newTicket.setId(id);
