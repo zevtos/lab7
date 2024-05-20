@@ -39,9 +39,16 @@ public class ServerConnection {
         if (!request.isSuccess()) {
             return new Response(false, "Ошибка выполнения команды: " + userCommand[0]);
         }
-
-        Response response = sendCommand(request);
-        return response;
+        if (request.getCommand().equals("login") || request.getCommand().equals("register")) {
+            Response response = sendCommand(request);
+            if (response == null) {
+                return null;
+            }
+            login = request.getLogin();
+            password = request.getPassword();
+            currentUserId = (Integer) response.getData();
+        }
+        return sendCommand(request);
     }
 
     public Response sendCommand(String command, Object data) {
