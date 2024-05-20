@@ -1,6 +1,5 @@
 package ru.itmo.client.utility.runtime;
 
-import ru.itmo.client.network.TCPClient;
 import ru.itmo.general.exceptions.ScriptRecursionException;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.models.Ticket;
@@ -10,11 +9,7 @@ import ru.itmo.general.utility.Interrogator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashSet;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.Set;
-import java.util.concurrent.TimeoutException;
+import java.util.*;
 
 /**
  * Запускает выполнение программы.
@@ -24,27 +19,16 @@ public class Runner {
     protected String login;
     protected String password;
     private Request request;
-    private TCPClient tcpClient;
+    private ServerConnection connection;
 
     /**
      * Конструктор для Runner.
      *
-     * @param client TCPClient
+     * @param connection TCPClient
      */
-    public Runner(TCPClient client) {
-        this.tcpClient = client;
+    public Runner(ServerConnection connection) {
+        this.connection = connection;
         createCommandManager();
-    }
-
-    /**
-     * Запускает подключение к серверу.
-     */
-    public void run() {
-        try {
-            tcpClient.connect();
-        } catch (TimeoutException e) {
-            showError("Тайм-аут при подключении к серверу. Подключение не установлено!");
-        }
     }
 
     public ExitCode scriptMode(String argument) {
@@ -103,20 +87,21 @@ public class Runner {
         return executeCommand(new String[]{"login", username, password});
     }
 
-    public Response sendCommand(Request request) {
-        return tcpClient.sendCommand(request);
+    public List<Ticket> fetchTickets() {
+        List<Ticket> tickets = connection.receiveTickets();
+        return tickets != null ? tickets : new ArrayList<>();
     }
 
-    public void addTicket(Ticket newTicket){
-        tcpClient.sendCommand(new Request(true, "add", newTicket));
+    public void addTicket(Ticket newTicket) {
+        connection.sendCommand("add", newTicket);
     }
 
     public void updateTicket(Ticket selectedTicket) {
-        sendCommand(new Request(true, "update", selectedTicket));
+        connection.sendCommand("update", selectedTicket);
     }
 
     public void deleteTicket(Ticket selectedTicket) {
-        sendCommand(new Request(true, "remove_by_id", selectedTicket));
+        connection.sendCommand("remove_by_id", selectedTicket);
     }
 
     /**
@@ -149,7 +134,7 @@ public class Runner {
         if ("execute_script".equals(userCommand[0])) {
             return scriptMode(userCommand[1]);
         }
-        Response response = tcpClient.sendCommand(request);
+        Response response = connection.sendCommand(request);
         System.out.println(response);
         if (response.isSuccess()) {
             return ExitCode.OK;

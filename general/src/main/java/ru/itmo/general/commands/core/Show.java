@@ -7,6 +7,8 @@ import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 
+import java.util.List;
+
 /**
  * Команда 'show'. Выводит все элементы коллекции.
  *
@@ -37,9 +39,8 @@ public class Show extends Command {
      */
     @Override
     public Response execute(Request arguments) {
-
-        String message = ticketCollectionManager.toString();
-        return new Response(true, null, message);
+        List<Ticket> tickets = ticketCollectionManager.getCollection();
+        return new Response(true, null, tickets);
     }
 
     /**

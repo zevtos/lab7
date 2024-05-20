@@ -11,10 +11,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import ru.itmo.client.controller.*;
-import ru.itmo.client.network.TCPClient;
 import ru.itmo.client.utility.runtime.Runner;
+import ru.itmo.client.utility.runtime.ServerConnection;
+import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.models.Ticket;
+import ru.itmo.general.models.forms.TicketForm;
 import ru.itmo.general.utility.gui.GuiMessageOutput;
 
 import javax.swing.*;
@@ -25,28 +28,30 @@ import java.util.ResourceBundle;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private TCPClient tcpClient;
     @Getter
     private Runner runner;
     private ResourceBundle bundle;
 
     @Override
     public void start(Stage primaryStage) {
+        CommandManager.initClientCommandsBeforeRegistration();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Ticket Management System");
 
         Locale.setDefault(new Locale("ru"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
 
-        tcpClient = new TCPClient("localhost", 4093, new GuiMessageOutput(new JTextArea()));
-        runner = new Runner(tcpClient);
+        ServerConnection connection = new ServerConnection("localhost", 4093); // Укажите хост и порт вашего сервера
+        runner = new Runner(connection);
         this.bundle = bundle;
         initRootLayout(bundle);
         showLoginScreen(bundle);
     }
+
     public void setRunner(Runner runner) {
         this.runner = runner;
     }
+
     public void initRootLayout(ResourceBundle bundle) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -102,7 +107,9 @@ public class MainApp extends Application {
         }
     }
 
+    @SneakyThrows
     public void showMainScreen(ResourceBundle bundle) {
+        CommandManager.initClientCommandsAfterRegistration(new TicketForm(new GuiMessageOutput(new JTextArea())));
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/MainScreen.fxml"));
@@ -114,10 +121,14 @@ public class MainApp extends Application {
             MainController controller = loader.getController();
             controller.setMainApp(this);
             controller.setRunner(runner);
+            controller.setBundle(bundle); // добавим установку bundle
+            Thread.sleep(100);
+            controller.fetchTickets(); // вызов метода для заполнения таблицы данными
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public boolean showTicketEditDialog(Ticket ticket) {
         try {
@@ -144,7 +155,6 @@ public class MainApp extends Application {
             return false;
         }
     }
-
 
     public static void main(String[] args) {
         Application.launch(args);

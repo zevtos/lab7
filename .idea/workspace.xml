@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.2 tables, register, add, update, remove">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.2.1 remove javafx from general">
+      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ServerConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -329,7 +333,7 @@
       <workItem from="1716131045017" duration="15857000" />
       <workItem from="1716151388630" duration="66000" />
       <workItem from="1716192723242" duration="1744000" />
-      <workItem from="1716200779830" duration="2950000" />
+      <workItem from="1716200779830" duration="6128000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -547,7 +551,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716202797793</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="2.8.2.1 remove javafx from general">
+      <option name="closed" value="true" />
+      <created>1716204002963</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1716204002963</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -565,7 +577,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.4" />
     <MESSAGE value="1.5" />
     <MESSAGE value="1.6 reformat files" />
     <MESSAGE value="2.7.0 adding a login length check" />
@@ -590,7 +601,8 @@
     <MESSAGE value="2.8.0 init GUI base update" />
     <MESSAGE value="2.8.1 added simple windows" />
     <MESSAGE value="2.8.2 tables, register, add, update, remove" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.2 tables, register, add, update, remove" />
+    <MESSAGE value="2.8.2.1 remove javafx from general" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.2.1 remove javafx from general" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

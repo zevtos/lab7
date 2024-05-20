@@ -84,6 +84,10 @@ public class MainController {
         this.runner = runner;
     }
 
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
+    }
+
     @FXML
     private void initialize() {
         addButton.setOnAction(event -> handleAdd());
@@ -202,5 +206,10 @@ public class MainController {
         alert.setContentText(content);
 
         alert.showAndWait();
+    }
+
+    public void fetchTickets() {
+        ObservableList<Ticket> tickets = FXCollections.observableArrayList(runner.fetchTickets());
+        dataTable.setItems(tickets);
     }
 }
