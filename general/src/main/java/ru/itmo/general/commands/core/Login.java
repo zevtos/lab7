@@ -31,15 +31,33 @@ public class Login extends Command {
             String username = request.getLogin();
             String password = request.getPassword();
 
+            System.out.println("Received login request for username: " + username); // Debug message
+
             if (!userDAO.verifyUserPassword(username, password)) {
+                System.out.println("Invalid username or password for username: " + username); // Debug message
                 return new Response(false, "Неверное имя пользователя или пароль", null);
             }
+
             User user = userDAO.getUserByUsername(username);
+
+            if (user == null) {
+                System.out.println("User not found for username: " + username); // Debug message
+                return new Response(false, "User not found", null);
+            }
+
+            if (user.getId() == null) {
+                System.out.println("User ID is null for username: " + username); // Debug message
+                return new Response(false, "User ID is null", null);
+            }
+
+            System.out.println("User logged in successfully: " + user); // Debug message
             return new Response(true, "Вы успешно вошли в систему", user.getId());
         } catch (Exception e) {
+            System.out.println("Exception during login: " + e); // Debug message
             return new Response(false, e.toString(), null);
         }
     }
+
 
     @Override
     public Request execute(String[] arguments) {
