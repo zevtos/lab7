@@ -1,8 +1,5 @@
 package ru.itmo.general.models;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.io.Serializable;
 
 /**
@@ -28,9 +25,5 @@ public enum Color implements Serializable {
             nameList.append(color.name()).append(", ");
         }
         return nameList.substring(0, nameList.length() - 2);
-    }
-
-    public static ObservableList<Color> getValues() {
-        return FXCollections.observableArrayList(Color.values());
     }
 }
