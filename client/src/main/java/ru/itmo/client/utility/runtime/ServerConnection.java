@@ -53,8 +53,8 @@ public class ServerConnection {
             request.setLogin(login);
             request.setPassword(password);
         } else {
-            request.setLogin(login);
-            request.setPassword(password);
+            login = request.getLogin();
+            password = request.getPassword();
         }
         Response response = null;
         try {

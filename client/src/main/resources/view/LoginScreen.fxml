@@ -6,41 +6,34 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.LoginController">
-    <top>
-        <Label text="%login.title" style="-fx-font-size: 24px; -fx-padding: 10px;"/>
-    </top>
-    <center>
-        <GridPane hgap="10" vgap="10">
-            <columnConstraints>
-                <ColumnConstraints minWidth="100"/>
-                <ColumnConstraints minWidth="200"/>
-            </columnConstraints>
-            <children>
-                <Label text="%login.username" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label text="%login.password" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-            </children>
-        </GridPane>
-    </center>
-    <bottom>
-        <VBox spacing="10">
-            <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10px;">
-                <Button text="%login.button" fx:id="loginButton" onAction="#handleLogin" style="-fx-font-size: 14px;"/>
-                <Button text="%login.register.button" onAction="#handleRegister" style="-fx-font-size: 14px;"/>
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.LoginController" stylesheets="@../css/style.css">
+    <center>
+        <VBox spacing="20" alignment="CENTER" styleClass="login-container">
+            <Label text="%login.title" styleClass="title-label"/>
+            <GridPane hgap="10" vgap="10" styleClass="login-grid">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="100" />
+                    <ColumnConstraints minWidth="200" />
+                </columnConstraints>
+                <children>
+                    <Label text="%login.username" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="input-label"/>
+                    <TextField fx:id="usernameField" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="input-field"/>
+
+                    <Label text="%login.password" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="input-label"/>
+                    <PasswordField fx:id="passwordField" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="input-field"/>
+                </children>
+            </GridPane>
+            <HBox spacing="20" alignment="CENTER" styleClass="button-container">
+                <Button text="%login.button" fx:id="loginButton" onAction="#handleLogin" styleClass="login-button"/>
+                <Button text="%login.register.button" onAction="#handleRegister" styleClass="register-button"/>
             </HBox>
-            <TextArea fx:id="messageOutput" editable="false" wrapText="true" prefRowCount="3"/>
+            <TextArea fx:id="messageOutput" editable="false" wrapText="true" prefRowCount="3" styleClass="message-output"/>
         </VBox>
-    </bottom>
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+    </center>
 </BorderPane>

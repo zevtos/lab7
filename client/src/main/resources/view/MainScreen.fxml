@@ -9,12 +9,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-
 <?import javafx.scene.layout.VBox?>
+
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.MainController" stylesheets="@../css/style.css">
     <top>
-        <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 10px;">
-            <CheckBox fx:id="filterCheckBox" text="%main.filter.checkbox" />
+        <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
+            <CheckBox fx:id="filterCheckBox" text="%main.filter.checkbox" styleClass="filter-checkbox"/>
         </HBox>
     </top>
     <center>
@@ -37,52 +37,54 @@
         </TableView>
     </center>
     <bottom>
-        <VBox spacing="10">
-            <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10px;">
-                <Button text="%main.add.button" fx:id="addButton" onAction="#handleAdd" styleClass="button-add"/>
-                <Button text="%main.update.button" fx:id="updateButton" onAction="#handleUpdate" styleClass="button-update"/>
-                <Button text="%main.delete.button" fx:id="deleteButton" onAction="#handleDelete" styleClass="button-delete"/>
-                <Button text="%main.clear.button" fx:id="clearButton" onAction="#handleClear" styleClass="button-clear"/>
-            </HBox>
+        <HBox spacing="10" alignment="CENTER" styleClass="button-bar">
+            <Button text="%main.add.button" fx:id="addButton" onAction="#handleAdd" styleClass="button-add"/>
+            <Button text="%main.update.button" fx:id="updateButton" onAction="#handleUpdate" styleClass="button-update"/>
+            <Button text="%main.delete.button" fx:id="deleteButton" onAction="#handleDelete" styleClass="button-delete"/>
+            <Button text="%main.clear.button" fx:id="clearButton" onAction="#handleClear" styleClass="button-clear"/>
+        </HBox>
+    </bottom>
+    <right>
+        <VBox spacing="10" styleClass="details-pane">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
             <GridPane hgap="10" vgap="10">
                 <children>
-                    <Label text="%main.name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                    <Label fx:id="nameLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label text="%main.name" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="nameLabel" GridPane.rowIndex="0" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.coordinates" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                    <Label fx:id="coordinatesLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <Label text="%main.coordinates" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="coordinatesLabel" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.creationDate" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                    <Label fx:id="creationDateLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    <Label text="%main.creationDate" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="creationDateLabel" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.price" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                    <Label fx:id="priceLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                    <Label text="%main.price" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="priceLabel" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.discount" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                    <Label fx:id="discountLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    <Label text="%main.discount" GridPane.rowIndex="4" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="discountLabel" GridPane.rowIndex="4" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.comment" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
-                    <Label fx:id="commentLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                    <Label text="%main.comment" GridPane.rowIndex="5" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="commentLabel" GridPane.rowIndex="5" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.type" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
-                    <Label fx:id="typeLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+                    <Label text="%main.type" GridPane.rowIndex="6" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="typeLabel" GridPane.rowIndex="6" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.column.birthday" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
-                    <Label fx:id="birthdayLabel" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+                    <Label text="%main.column.birthday" GridPane.rowIndex="7" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="birthdayLabel" GridPane.rowIndex="7" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.column.height" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
-                    <Label fx:id="heightLabel" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+                    <Label text="%main.column.height" GridPane.rowIndex="8" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="heightLabel" GridPane.rowIndex="8" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.column.passportID" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
-                    <Label fx:id="passportIDLabel" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+                    <Label text="%main.column.passportID" GridPane.rowIndex="9" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="passportIDLabel" GridPane.rowIndex="9" GridPane.columnIndex="1" styleClass="details-value"/>
 
-                    <Label text="%main.column.hairColor" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
-                    <Label fx:id="hairColorLabel" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
+                    <Label text="%main.column.hairColor" GridPane.rowIndex="10" GridPane.columnIndex="0" styleClass="details-label"/>
+                    <Label fx:id="hairColorLabel" GridPane.rowIndex="10" GridPane.columnIndex="1" styleClass="details-value"/>
                 </children>
             </GridPane>
         </VBox>
-    </bottom>
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
+    </right>
 </BorderPane>

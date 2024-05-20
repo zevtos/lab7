@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,6 +17,7 @@ import ru.itmo.general.models.Ticket;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainApp extends Application {
@@ -73,9 +75,9 @@ public class MainApp extends Application {
             rootLayout.setCenter(loginScreen);
 
             LoginController controller = loader.getController();
+            controller.setRunner(runner);
             controller.setMainApp(this);
             controller.setBundle(bundle);
-            controller.setRunner(runner);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -112,6 +114,7 @@ public class MainApp extends Application {
             controller.setMainApp(this);
             controller.setRunner(runner);
             controller.setBundle(bundle);
+            controller.fetchTickets();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -159,4 +162,14 @@ public class MainApp extends Application {
     public Window getPrimaryStage() {
         return primaryStage;
     }
+    public static boolean showConfirmationDialog(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
+    }
+
 }

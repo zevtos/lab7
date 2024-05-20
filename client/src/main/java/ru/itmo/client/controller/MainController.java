@@ -222,19 +222,30 @@ public class MainController {
 
     @FXML
     private void handleClear() {
-        boolean cleared = runner.clearTickets();
-        if (cleared) {
-            ticketData.clear();
-            dataTable.setItems(ticketData);
-            dataTable.refresh();
-        } else {
-            showAlert(
-                    bundle.getString("clear.error.title"),
-                    bundle.getString("clear.error.header"),
-                    bundle.getString("clear.error.content")
-            );
+        boolean confirmed = MainApp.showConfirmationDialog(
+                bundle.getString("clear.confirm.title"),
+                bundle.getString("clear.confirm.header"),
+                bundle.getString("clear.confirm.content")
+        );
+        if (confirmed) {
+            boolean success = runner.clearTickets();
+            if (success) {
+                ticketData.clear();
+                MainApp.showAlert(
+                        bundle.getString("clear.success.title"),
+                        bundle.getString("clear.success.header"),
+                        bundle.getString("clear.success.content")
+                );
+            } else {
+                MainApp.showAlert(
+                        bundle.getString("clear.error.title"),
+                        bundle.getString("clear.error.header"),
+                        bundle.getString("clear.error.content")
+                );
+            }
         }
     }
+
 
     private void showTicketDetails(Ticket ticket) {
         if (ticket != null) {
@@ -243,7 +254,8 @@ public class MainController {
             coordinatesLabel.setText(ticket.getCoordinates().toString());
             creationDateLabel.setText(ticket.getCreationDate().toString());
             priceLabel.setText(Double.toString(ticket.getPrice()));
-            discountLabel.setText(ticket.getDiscount().toString());
+            discountLabel.setText(ticket.getDiscount() != null ? ticket.getDiscount().toString() : ""); // Обработка null
+            commentLabel.setText(ticket.getComment());
             commentLabel.setText(ticket.getComment());
             typeLabel.setText(ticket.getType().toString());
 

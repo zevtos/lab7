@@ -1,48 +1,262 @@
-/* Общие стили для всего приложения */
+/* Основные стили для всего приложения */
 .root {
-    -fx-font-family: "Arial";
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #F0F4F8;
 }
 
 /* Стили для меню */
 .menu-bar {
-    -fx-background-color: #2E3B4E;
+    -fx-background-color: #344955;
     -fx-text-fill: #ffffff;
 }
 
 .menu {
-    -fx-background-color: #2E3B4E;
+    -fx-background-color: #344955;
     -fx-text-fill: #ffffff;
 }
 
 .menu-item {
-    -fx-background-color: #2E3B4E;
+    -fx-background-color: #344955;
     -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
 }
 
-/* Стили для кнопок */
+/* Стили для боковой панели */
+.sidebar {
+    -fx-background-color: #232F34;
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+}
+
+.sidebar-title {
+    -fx-text-fill: #F9AA33;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-item {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.sidebar-item:hover {
+    -fx-text-fill: #F9AA33;
+}
+
+/* Стили для панели подробностей */
+.details-panel {
+    -fx-background-color: #F9AA33;
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+}
+
+/* Стили для статусной строки */
+.status-bar {
+    -fx-background-color: #344955;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+/* Основные стили для всего приложения */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #F0F4F8;
+}
+
+/* Стили для верхней панели */
+.top-bar {
+    -fx-background-color: #3E4E5E;
+    -fx-padding: 10px;
+}
+
+.filter-checkbox {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+/* Стили для таблицы */
+.table-view {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1px;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #2E3B4E;
+    -fx-font-size: 14px;
+}
+
+/* Стили для панели кнопок */
+.button-bar {
+    -fx-background-color: #3E4E5E;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
 .button-add {
     -fx-background-color: #4CAF50; /* Зеленый */
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
 }
 
 .button-update {
     -fx-background-color: #2196F3; /* Синий */
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
 }
 
 .button-delete {
     -fx-background-color: #f44336; /* Красный */
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
 }
 
 .button-clear {
     -fx-background-color: #ff9800; /* Оранжевый */
     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+/* Стили для панели подробностей */
+.details-panel {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #dfe6e9;
+    -fx-border-width: 1px;
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+}
+
+.label {
+    -fx-text-fill: #2E3B4E;
+    -fx-font-size: 14px;
+}
+
+.label-value {
+    -fx-text-fill: #2E3B4E;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Общие стили для всего приложения */
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: #F4F4F9;
+}
+
+/* Стили для контейнера логина */
+.login-container {
+    -fx-background-color: white;
+    -fx-padding: 30;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
+}
+
+/* Стили для заголовка */
+.title-label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2E3B4E;
+    -fx-padding: 10px 0;
+}
+
+/* Стили для сетки ввода */
+.login-grid {
+    -fx-padding: 20 0;
+}
+
+/* Стили для меток ввода */
+.input-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #2E3B4E;
+}
+
+/* Стили для полей ввода */
+.input-field {
+    -fx-pref-width: 200px;
+    -fx-padding: 5px;
+    -fx-border-color: #d3d3d3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Стили для контейнера кнопок */
+.button-container {
+    -fx-padding: 20 0;
+}
+
+/* Стили для кнопок */
+.login-button {
+    -fx-background-color: #4CAF50; /* Зеленый */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.register-button {
+    -fx-background-color: #2196F3; /* Синий */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #45a049;
+}
+
+.register-button:hover {
+    -fx-background-color: #1e88e5;
+}
+
+/* Стили для текстового поля вывода сообщений */
+.message-output {
+    -fx-background-color: #f8f8f8;
+    -fx-border-color: #d3d3d3;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+}
+
+/* Общие стили для всего приложения */
+.root {
+    -fx-font-family: "Arial";
+    -fx-background-color: #F4F4F9;
+}
+
+/* Стили для заголовка */
+.header-bar {
+    -fx-background-color: #2E3B4E;
+    -fx-padding: 10px;
 }
 
 /* Стили для таблицы */
 .table-view {
     -fx-border-color: #2E3B4E;
+    -fx-background-color: white;
+    -fx-padding: 10px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
 }
 
 .table-column {
@@ -50,7 +264,94 @@
     -fx-text-fill: #2E3B4E;
 }
 
-/* Стили для меток */
-.label {
+/* Стили для кнопок */
+.button-bar {
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-background-color: #2E3B4E;
+}
+
+.button-add {
+    -fx-background-color: #4CAF50; /* Зеленый */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-update {
+    -fx-background-color: #2196F3; /* Синий */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-delete {
+    -fx-background-color: #f44336; /* Красный */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-clear {
+    -fx-background-color: #ff9800; /* Оранжевый */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-add:hover {
+    -fx-background-color: #45a049;
+}
+
+.button-update:hover {
+    -fx-background-color: #1e88e5;
+}
+
+.button-delete:hover {
+    -fx-background-color: #e53935;
+}
+
+.button-clear:hover {
+    -fx-background-color: #fb8c00;
+}
+
+/* Стили для чекбокса фильтра */
+.filter-checkbox {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+/* Стили для панели с деталями */
+.details-pane {
+    -fx-background-color: white;
+    -fx-padding: 20px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 10, 0.5, 0, 0);
+}
+
+.details-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #2E3B4E;
+}
+
+.details-value {
+    -fx-font-size: 14px;
     -fx-text-fill: #2E3B4E;
 }

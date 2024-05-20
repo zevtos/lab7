@@ -8,7 +8,4 @@
     <center>
         <Canvas fx:id="canvas" width="600" height="400" styleClass="canvas"/>
     </center>
-    <padding>
-        <Insets top="20" right="20" bottom="20" left="20"/>
-    </padding>
 </BorderPane>
