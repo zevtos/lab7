@@ -258,6 +258,7 @@ public class TicketDAO implements Accessible {
         Ticket ticket = new Ticket(id, name, new Coordinates(coordinatesX, coordinatesY), creationDate, price,
                 discount, comment, type, new Person(personBirthday, personHeight, personPassportID, personHairColor));
         ticket.setUserId(userId);
+        LOGGER.info("ticket created: {}", ticket);
         return ticket;
     }
 
