@@ -4,9 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 import ru.itmo.client.MainApp;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.general.models.Ticket;
@@ -14,6 +16,7 @@ import ru.itmo.general.models.Ticket;
 import java.util.ResourceBundle;
 
 public class MainController {
+
     private MainApp mainApp;
     private Runner runner;
     private ResourceBundle bundle;
@@ -44,6 +47,8 @@ public class MainController {
     private TableColumn<Ticket, String> columnPassportID;
     @FXML
     private TableColumn<Ticket, String> columnHairColor;
+    @FXML
+    public TableColumn userIdColumn;
     @FXML
     private Button addButton;
     @FXML
@@ -107,9 +112,10 @@ public class MainController {
         columnHeight.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPerson().height().toString()));
         columnPassportID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPerson().passportID()));
         columnHairColor.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPerson().hairColor().toString()));
-
+        userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
         // Set the observable list data to the table
         dataTable.setItems(ticketData);
+        System.out.println("Table initialized with data: " + ticketData);
 
         // Listen for selection changes and show the ticket details when changed
         dataTable.getSelectionModel().selectedItemProperty().addListener(
@@ -119,20 +125,37 @@ public class MainController {
     @FXML
     private void handleAdd() {
         Ticket newTicket = new Ticket();
+        System.out.println("Ticket before sending: " + newTicket); // Debug message
+
         boolean okClicked = mainApp.showTicketEditDialog(newTicket);
         System.out.println("Dialog OK clicked: " + okClicked); // Debug message
 
         if (okClicked) {
+            newTicket.setUserId(runner.getCurrentUserId()); // Устанавливаем идентификатор пользователя
             boolean added = runner.addTicket(newTicket); // Assuming you have a runner that handles the business logic
             System.out.println("Ticket added to server: " + added); // Debug message
 
             if (added) {
                 ticketData.add(newTicket);
-                dataTable.refresh(); // Ensure the table view is refreshed
                 System.out.println("Ticket added to table: " + newTicket); // Debug message
+                System.out.println("Current table data: " + ticketData); // Debug message
+
+                dataTable.getItems().add(newTicket); // Add the ticket directly to the table
+                dataTable.refresh(); // Ensure the table view is refreshed
+                dataTable.sort();
+
+                // Create and show notification
+                Notifications.create()
+                        .title("Ticket Added")
+                        .text("The ticket was successfully added." + '\n'
+                                + "Assigned id: " + newTicket.getId())
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.BOTTOM_RIGHT)
+                        .showInformation();
             }
         }
     }
+
 
 
     @FXML
@@ -143,6 +166,7 @@ public class MainController {
             if (okClicked) {
                 runner.updateTicket(selectedTicket);  // Assuming you have a runner that handles the business logic
                 showTicketDetails(selectedTicket);
+                dataTable.refresh(); // Ensure the table view is refreshed
             }
         } else {
             showAlert(
@@ -160,6 +184,7 @@ public class MainController {
             Ticket selectedTicket = dataTable.getItems().get(selectedIndex);
             runner.deleteTicket(selectedTicket);  // Assuming you have a runner that handles the business logic
             dataTable.getItems().remove(selectedIndex);
+            dataTable.refresh(); // Ensure the table view is refreshed
         } else {
             showAlert(
                     bundle.getString("delete.error.title"),
@@ -222,3 +247,4 @@ public class MainController {
         dataTable.setItems(tickets);
     }
 }
+

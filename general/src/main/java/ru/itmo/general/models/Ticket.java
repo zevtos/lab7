@@ -64,6 +64,8 @@ public class Ticket extends Element {
      */
     private Person person;
 
+    private Integer userId;
+
     public Ticket() {
         this.id = -1; // или другой способ генерации ID
         this.name = "";
@@ -184,6 +186,7 @@ public class Ticket extends Element {
                 "\n\tcomment='" + (comment == null ? "null" : comment) + '\'' +
                 "\n\tticketType='" + (type == null ? "null" : type) + '\'' +
                 "\n\t" + (person == null ? "null" : person.toString()) +
+                "\n userId=" + userId +
                 "\n}";
     }
 }

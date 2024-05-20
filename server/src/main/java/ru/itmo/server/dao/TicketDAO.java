@@ -83,7 +83,7 @@ public class TicketDAO implements Accessible {
         try (Connection connection = getConnection();
              PreparedStatement statement =
                      connection.prepareStatement(INSERT_TICKET_SQL, Statement.RETURN_GENERATED_KEYS)) {
-            set(userId, statement, ticket);
+            set(statement, ticket);
 
             int rowsAffected = executePrepareUpdate(statement);
             if (rowsAffected > 0) {
@@ -120,7 +120,7 @@ public class TicketDAO implements Accessible {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_TICKET_SQL)) {
             for (Ticket ticket : tickets) {
-                set(userId, statement, ticket);
+                set(statement, ticket);
                 statement.addBatch();
             }
             int[] results = statement.executeBatch();
@@ -135,11 +135,6 @@ public class TicketDAO implements Accessible {
         } catch (SQLException e) {
             LOGGER.error("Error while adding tickets {}", e.getMessage());
         }
-    }
-
-    private void set(int userId, PreparedStatement statement, Ticket ticket) throws SQLException {
-        set(statement, ticket);
-        statement.setInt(13, userId); // User's ID who added the ticket
     }
 
     private void set(PreparedStatement statement, Ticket ticket) throws SQLException {
@@ -159,6 +154,7 @@ public class TicketDAO implements Accessible {
         statement.setFloat(10, ticket.getPerson().height());
         statement.setString(11, ticket.getPerson().passportID());
         statement.setString(12, ticket.getPerson().hairColor().toString());
+        statement.setInt(13, ticket.getUserId());
     }
 
     /**

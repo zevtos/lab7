@@ -58,7 +58,7 @@ public class Register extends Command {
             if (!user.validate())
                 throw new InvalidFormException("Пользователь не зарегистрирован, поля пользователя не валидны!");
 
-            return new Response(true, "Пользователь успешно зарегистрирован", null);
+            return new Response(true, "Пользователь успешно зарегистрирован", user.getId());
         } catch (InstanceAlreadyExistsException ex) {
             return new Response(false, ex.getMessage(), null);
         } catch (InvalidFormException invalid) {

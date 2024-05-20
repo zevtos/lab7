@@ -49,7 +49,13 @@ public class Runner {
                 if (userCommand[0].equals("execute_script")) {
                     if (scriptSet.contains(userCommand[1])) throw new ScriptRecursionException();
                 }
-                ExitCode commandStatus = executeCommand(userCommand);
+                Response response = connection.sendCommand(userCommand);
+                ExitCode commandStatus;
+                if (response.isSuccess()) {
+                    commandStatus = ExitCode.OK;
+                } else {
+                    commandStatus = ExitCode.ERROR;
+                }
                 if (commandStatus != ExitCode.OK) return commandStatus;
             } while (scriptScanner.hasNextLine());
 
@@ -79,17 +85,23 @@ public class Runner {
     }
 
     public ExitCode executeRegister(String username, String password) {
-        ExitCode exitCode = executeCommand(new String[]{"register", username, password});
-        connection.setLogin(username);
-        connection.setPassword(password);
-        return exitCode;
+        Response response = connection.sendCommand(new String[]{"register", username, password});
+        if (response.isSuccess()) {
+            return ExitCode.OK;
+        } else {
+            MainApp.showAlert("Ошибка регистрации", response.getMessage(), (response.getData() == null) ? "" : response.getData().toString());
+            return ExitCode.ERROR;
+        }
     }
 
     public ExitCode executeLogin(String username, String password) {
-        ExitCode exitCode = executeCommand(new String[]{"login", username, password});
-        connection.setLogin(username);
-        connection.setPassword(password);
-        return exitCode;
+        Response response = connection.sendCommand(new String[]{"login", username, password});
+        if (response.isSuccess()) {
+            return ExitCode.OK;
+        } else {
+            MainApp.showAlert("Ошибка входа", response.getMessage(), (response.getData() == null) ? "" : response.getData().toString());
+            return ExitCode.ERROR;
+        }
     }
 
     public List<Ticket> fetchTickets() {
@@ -119,6 +131,17 @@ public class Runner {
         connection.sendCommand("remove_by_id", selectedTicket);
     }
 
+    // В классе Runner
+    public String getInfo() {
+        Response response = connection.sendCommand("info", null);
+        return (String) response.getData();
+    }
+
+    public Integer getCurrentUserId() {
+        return connection.getCurrentUserId();
+    }
+
+
     /**
      * Коды завершения выполнения программы.
      */
@@ -127,36 +150,6 @@ public class Runner {
         ERROR,
         EXIT,
         ERROR_NULL_RESPONSE,
-    }
-
-    private ExitCode executeCommand(String[] userCommand) {
-        request = null;
-        if (userCommand[0].isEmpty()) return ExitCode.OK;
-        var command = CommandManager.getCommands().get(userCommand[0]);
-
-        if (command == null) {
-            showError("Команда '" + userCommand[0] + "' не найдена. Наберите 'help' для справки");
-            return ExitCode.ERROR;
-        }
-
-        request = command.execute(userCommand);
-        System.out.println(request);
-        if (!request.isSuccess()) {
-            showError("Ошибка выполнения команды: " + userCommand[0]);
-            return ExitCode.ERROR;
-        }
-
-        if ("execute_script".equals(userCommand[0])) {
-            return scriptMode(userCommand[1]);
-        }
-        Response response = connection.sendCommand(request);
-        System.out.println(response);
-        if (response.isSuccess()) {
-            return ExitCode.OK;
-        } else {
-            showError(response.getMessage());
-            return ExitCode.ERROR;
-        }
     }
 
     private void showError(String message) {

@@ -30,12 +30,13 @@ public class Clear extends Command {
      * @return Успешность выполнения команды.
      */
     @Override
-    public Response execute(Request arguments) {
+    public Response execute(Request request) {
         try {
-            ticketCollectionManager.clearCollection();
-            return new Response(true, "Коллекция очищена!");
-        } catch (Exception e) {
-            return new Response(false, e.toString());
+            int userId = request.getUserId();
+            ticketCollectionManager.getCollection().removeIf(ticket -> ticket.getUserId() == userId);
+            return new Response(true, "Коллекция очищена от билетов текущего пользователя.");
+        } catch (Exception e){
+            return new Response(false, e.getMessage());
         }
     }
 

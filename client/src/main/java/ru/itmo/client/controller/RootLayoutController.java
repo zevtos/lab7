@@ -27,6 +27,7 @@ public class RootLayoutController {
 
     @FXML
     private void handleAbout() {
-        // Реализуйте логику отображения информации о программе
+        String infoMessage = mainApp.getRunner().getInfo();
+        MainApp.showAlert("Информация о коллекции", null, infoMessage);
     }
 }

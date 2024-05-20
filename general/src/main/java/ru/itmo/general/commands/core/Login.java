@@ -3,6 +3,7 @@ package ru.itmo.general.commands.core;
 import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.exceptions.InvalidNumberOfElementsException;
+import ru.itmo.general.models.User;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.base.Registered;
@@ -31,7 +32,8 @@ public class Login extends Command {
             String password = request.getPassword();
 
             if (!userDAO.verifyUserPassword(username, password)) {
-                return new Response(false, "Неверное имя пользователя или пароль", null);
+                User user = userDAO.getUserByUsername(username);
+                return new Response(false, "Неверное имя пользователя или пароль", user.getId());
             }
             return new Response(true, "Вы успешно вошли в систему", null);
         } catch (Exception e) {

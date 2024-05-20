@@ -1,8 +1,8 @@
 package ru.itmo.client.utility.runtime;
 
+import lombok.Getter;
 import lombok.Setter;
 import ru.itmo.client.network.TCPClient;
-import ru.itmo.general.commands.core.Show;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
@@ -18,18 +18,43 @@ public class ServerConnection {
     private String login;
     @Setter
     private String password;
+    @Getter
+    private Integer currentUserId;
+
     public ServerConnection(String host, int port) {
         this.tcpClient = new TCPClient(host, port, new GuiMessageOutput(new JTextArea()));
+    }
+
+    public Response sendCommand(String[] userCommand) {
+        Request request;
+        if (userCommand[0].isEmpty()) return new Response(false, "UserCommand is empty");
+        var command = CommandManager.getCommands().get(userCommand[0]);
+
+        if (command == null) {
+            return new Response(false, "Команда '" + userCommand[0] + "' не найдена. Наберите 'help' для справки");
+        }
+
+        request = command.execute(userCommand);
+        System.out.println(request);
+        if (!request.isSuccess()) {
+            return new Response(false, "Ошибка выполнения команды: " + userCommand[0]);
+        }
+
+        Response response = sendCommand(request);
+        return response;
     }
 
     public Response sendCommand(String command, Object data) {
         try {
             Request request = new Request(command, data);
-            System.out.println(request);
-            if(request.getCommand().equals("login") || request.getCommand().equals("register")){
-                System.out.println("login: " + login + "   password: " + password);
+            if (request.getCommand().equals("login") || request.getCommand().equals("register")) {
+                Response response = sendCommand(request);
+                if (response == null) {
+                    return null;
+                }
                 login = request.getLogin();
                 password = request.getPassword();
+                currentUserId = (Integer) response.getData();
             }
             return sendCommand(request);
         } catch (Exception e) {
@@ -38,12 +63,10 @@ public class ServerConnection {
         return null;
     }
 
-    public Response sendCommand(Request request) {
-        if(request.getLogin() == null){
+    private Response sendCommand(Request request) {
+        if (request.getLogin() == null) {
             request.setLogin(login);
             request.setPassword(password);
-            System.out.println(login);
-            System.out.println(password);
         }
         try {
             Response response = tcpClient.sendCommand(request);
@@ -59,8 +82,6 @@ public class ServerConnection {
         try {
             System.out.println("Ticekts");
             Response response = sendCommand("show", null);
-            System.out.println("Ticekts");
-            System.out.println(response.getData().toString());
             return (List<Ticket>) response.getData();
         } catch (Exception e) {
             e.printStackTrace();

@@ -53,6 +53,7 @@ public class Add extends Command {
             if (!ticket.validate()) {
                 return new Response(false, "Билет не добавлен, поля билета не валидны!");
             }
+            ticket.setUserId(request.getUserId());
             Integer newID = ticketCollectionManager.add(ticket, request.getUserId());
             if (newID == -1)
                 return new Response(false, "Билет уже существует", -1);

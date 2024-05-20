@@ -84,11 +84,6 @@ public interface CollectionManager<T> {
     boolean loadCollection();
 
     /**
-     * Clears the collection.
-     */
-    void clearCollection();
-
-    /**
      * Gets the size of the collection.
      *
      * @return the size of the collection

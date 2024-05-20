@@ -30,6 +30,7 @@
                 <TableColumn fx:id="columnHeight" text="%main.column.height" styleClass="table-column"/>
                 <TableColumn fx:id="columnPassportID" text="%main.column.passportID" styleClass="table-column"/>
                 <TableColumn fx:id="columnHairColor" text="%main.column.hairColor" styleClass="table-column"/>
+                <TableColumn fx:id="userIdColumn" text="%main.userId" />
             </columns>
         </TableView>
         <HBox spacing="10" alignment="CENTER">

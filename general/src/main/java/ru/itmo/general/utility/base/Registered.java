@@ -27,4 +27,10 @@ public interface Registered {
      * @return {@code true} if the password is correct for the given username, {@code false} otherwise
      */
     boolean verifyUserPassword(String userName, String password);
+
+    /**
+     * @param username
+     * @return
+     */
+    public User getUserByUsername(String username);
 }

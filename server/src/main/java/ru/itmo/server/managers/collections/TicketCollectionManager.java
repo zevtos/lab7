@@ -167,16 +167,6 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         }
     }
 
-
-    public void clearCollection() {
-        try {
-            lock.lock();
-            collection.clear();
-        } finally {
-            lock.unlock();
-        }
-    }
-
     public int collectionSize() {
         return collection.size();
     }

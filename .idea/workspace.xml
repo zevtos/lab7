@@ -4,19 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.2.2 switch String data to List Tickets(for adding to table)">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.2.3 update add to return id + some useful updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ServerConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Clear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/collections/TicketCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/collections/TicketCollectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/base/Registered.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/base/Registered.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/TicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/TicketDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -339,7 +342,7 @@
       <workItem from="1716131045017" duration="15857000" />
       <workItem from="1716151388630" duration="66000" />
       <workItem from="1716192723242" duration="1744000" />
-      <workItem from="1716200779830" duration="9974000" />
+      <workItem from="1716200779830" duration="15323000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -573,7 +576,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716207096053</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="2.8.2.3 update add to return id + some useful updates">
+      <option name="closed" value="true" />
+      <created>1716210853374</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1716210853374</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -591,7 +602,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.6 reformat files" />
     <MESSAGE value="2.7.0 adding a login length check" />
     <MESSAGE value="2.7.1 removing unnecessary classes, documentation, replacing Coordinates and Person with record, renaming" />
     <MESSAGE value="2.7.1" />
@@ -616,7 +626,8 @@
     <MESSAGE value="2.8.2 tables, register, add, update, remove" />
     <MESSAGE value="2.8.2.1 remove javafx from general" />
     <MESSAGE value="2.8.2.2 switch String data to List Tickets(for adding to table)" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.2.2 switch String data to List Tickets(for adding to table)" />
+    <MESSAGE value="2.8.2.3 update add to return id + some useful updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.2.3 update add to return id + some useful updates" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
