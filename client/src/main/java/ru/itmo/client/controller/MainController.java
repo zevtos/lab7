@@ -120,11 +120,20 @@ public class MainController {
     private void handleAdd() {
         Ticket newTicket = new Ticket();
         boolean okClicked = mainApp.showTicketEditDialog(newTicket);
+        System.out.println("Dialog OK clicked: " + okClicked); // Debug message
+
         if (okClicked) {
-            runner.addTicket(newTicket);  // Assuming you have a runner that handles the business logic
-            ticketData.add(newTicket);
+            boolean added = runner.addTicket(newTicket); // Assuming you have a runner that handles the business logic
+            System.out.println("Ticket added to server: " + added); // Debug message
+
+            if (added) {
+                ticketData.add(newTicket);
+                dataTable.refresh(); // Ensure the table view is refreshed
+                System.out.println("Ticket added to table: " + newTicket); // Debug message
+            }
         }
     }
+
 
     @FXML
     private void handleUpdate() {

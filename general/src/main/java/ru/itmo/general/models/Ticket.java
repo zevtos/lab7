@@ -69,12 +69,13 @@ public class Ticket extends Element {
         this.name = "";
         this.coordinates = new Coordinates(0, 0f);
         this.creationDate = ZonedDateTime.now();
-        this.price = 0.0;
-        this.discount = 0L;
+        this.price = 1.0; // Минимальная валидная цена
+        this.discount = 1L; // Минимальная валидная скидка
         this.comment = "";
         this.type = TicketType.USUAL; // или другой тип по умолчанию
-        this.person = new Person(LocalDateTime.now(), 0f, "", Color.BLACK); // или другие значения по умолчанию
+        this.person = new Person(LocalDateTime.now(), 1.0f, "", Color.BLACK); // или другие значения по умолчанию
     }
+
 
     /**
      * Constructs a ticket object with the specified parameters.

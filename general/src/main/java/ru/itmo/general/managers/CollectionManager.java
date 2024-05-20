@@ -45,7 +45,7 @@ public interface CollectionManager<T> {
      * @param userID the ID of the user adding the object
      * @return true if the object is successfully added, otherwise false
      */
-    boolean add(T item, int userID);
+    Integer add(T item, int userID);
 
     /**
      * Updates the information about an object in the collection.

@@ -40,7 +40,7 @@ public class Show extends Command {
     @Override
     public Response execute(Request arguments) {
         List<Ticket> tickets = ticketCollectionManager.getCollection();
-        return new Response(true, null, tickets);
+        return new Response(true, "Collection fetched successfully", tickets);
     }
 
     /**

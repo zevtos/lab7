@@ -1,5 +1,6 @@
 package ru.itmo.client.utility.runtime;
 
+import ru.itmo.client.MainApp;
 import ru.itmo.general.exceptions.ScriptRecursionException;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.models.Ticket;
@@ -16,8 +17,6 @@ import java.util.*;
  */
 public class Runner {
     private final Set<String> scriptSet = new HashSet<>();
-    protected String login;
-    protected String password;
     private Request request;
     private ServerConnection connection;
 
@@ -80,11 +79,17 @@ public class Runner {
     }
 
     public ExitCode executeRegister(String username, String password) {
-        return null;
+        ExitCode exitCode = executeCommand(new String[]{"register", username, password});
+        connection.setLogin(username);
+        connection.setPassword(password);
+        return exitCode;
     }
 
     public ExitCode executeLogin(String username, String password) {
-        return executeCommand(new String[]{"login", username, password});
+        ExitCode exitCode = executeCommand(new String[]{"login", username, password});
+        connection.setLogin(username);
+        connection.setPassword(password);
+        return exitCode;
     }
 
     public List<Ticket> fetchTickets() {
@@ -92,9 +97,19 @@ public class Runner {
         return tickets != null ? tickets : new ArrayList<>();
     }
 
-    public void addTicket(Ticket newTicket) {
-        connection.sendCommand("add", newTicket);
+    public boolean addTicket(Ticket newTicket) {
+        Response response = connection.sendCommand("add", newTicket);
+        System.out.println("Server response: " + response); // Debug message
+
+        if (response.isSuccess()) {
+            newTicket.setId((Integer) response.getData());
+            return true;
+        } else {
+            MainApp.showAlert("Ошибка добавления", "Билет не был добавлен", response.getMessage());
+            return false;
+        }
     }
+
 
     public void updateTicket(Ticket selectedTicket) {
         connection.sendCommand("update", selectedTicket);

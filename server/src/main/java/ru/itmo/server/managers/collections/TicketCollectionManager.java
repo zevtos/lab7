@@ -66,15 +66,15 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
      * Добавляет Ticket
      */
     @Override
-    public boolean add(Ticket ticket, int userID) {
+    public Integer add(Ticket ticket, int userID) {
         try {
             lock.lock();
             int newID = dao.addTicket(ticket, userID);
-            if (newID < 0) return false;
+            if (newID < 0) return -1;
             ticket.setId(newID);
             collection.add(ticket);
             update();
-            return true;
+            return newID;
         } finally {
             lock.unlock();
         }
