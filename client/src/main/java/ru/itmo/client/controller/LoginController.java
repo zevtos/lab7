@@ -44,7 +44,9 @@ public class LoginController {
     @FXML
     private void handleLogin() {
         String username = usernameField.getText();
+        System.out.println(username);
         String password = passwordField.getText();
+        System.out.println(password);
         Runner.ExitCode result = runner.executeLogin(username, password);
         if (result == Runner.ExitCode.OK) {
             mainApp.showMainScreen(bundle);

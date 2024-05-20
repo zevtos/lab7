@@ -4,10 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ru.itmo.client.MainApp;
@@ -40,14 +37,6 @@ public class MainController {
     @FXML
     private TableColumn<Ticket, String> typeColumn;
     @FXML
-    private TableColumn<Ticket, String> personColumn;
-    @FXML
-    private Button addButton;
-    @FXML
-    private Button updateButton;
-    @FXML
-    private Button deleteButton;
-    @FXML
     private TableColumn<Ticket, String> columnBirthday;
     @FXML
     private TableColumn<Ticket, String> columnHeight;
@@ -55,6 +44,35 @@ public class MainController {
     private TableColumn<Ticket, String> columnPassportID;
     @FXML
     private TableColumn<Ticket, String> columnHairColor;
+    @FXML
+    private Button addButton;
+    @FXML
+    private Button updateButton;
+    @FXML
+    private Button deleteButton;
+    // Labels for ticket details
+    @FXML
+    private Label nameLabel;
+    @FXML
+    private Label coordinatesLabel;
+    @FXML
+    private Label creationDateLabel;
+    @FXML
+    private Label priceLabel;
+    @FXML
+    private Label discountLabel;
+    @FXML
+    private Label commentLabel;
+    @FXML
+    private Label typeLabel;
+    @FXML
+    private Label birthdayLabel;
+    @FXML
+    private Label heightLabel;
+    @FXML
+    private Label passportIDLabel;
+    @FXML
+    private Label hairColorLabel;
 
     private ObservableList<Ticket> ticketData = FXCollections.observableArrayList();
 
@@ -88,13 +106,18 @@ public class MainController {
 
         // Set the observable list data to the table
         dataTable.setItems(ticketData);
+
+        // Listen for selection changes and show the ticket details when changed
+        dataTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showTicketDetails(newValue));
     }
 
     @FXML
     private void handleAdd() {
-        Ticket newTicket = new Ticket(); // Create a new Ticket object
+        Ticket newTicket = new Ticket();
         boolean okClicked = mainApp.showTicketEditDialog(newTicket);
         if (okClicked) {
+            runner.addTicket(newTicket);  // Assuming you have a runner that handles the business logic
             ticketData.add(newTicket);
         }
     }
@@ -105,13 +128,15 @@ public class MainController {
         if (selectedTicket != null) {
             boolean okClicked = mainApp.showTicketEditDialog(selectedTicket);
             if (okClicked) {
-                // Обновление таблицы для отображения изменений
-                dataTable.refresh();
+                runner.updateTicket(selectedTicket);  // Assuming you have a runner that handles the business logic
+                showTicketDetails(selectedTicket);
             }
         } else {
-            showAlert(bundle.getString("update.error.title"),
+            showAlert(
+                    bundle.getString("update.error.title"),
                     bundle.getString("update.error.header"),
-                    bundle.getString("update.error.content"));
+                    bundle.getString("update.error.content")
+            );
         }
     }
 
@@ -119,13 +144,56 @@ public class MainController {
     private void handleDelete() {
         int selectedIndex = dataTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
+            Ticket selectedTicket = dataTable.getItems().get(selectedIndex);
+            runner.deleteTicket(selectedTicket);  // Assuming you have a runner that handles the business logic
             dataTable.getItems().remove(selectedIndex);
         } else {
-            showAlert(bundle.getString("delete.error.title"),
+            showAlert(
+                    bundle.getString("delete.error.title"),
                     bundle.getString("delete.error.header"),
-                    bundle.getString("delete.error.content"));
+                    bundle.getString("delete.error.content")
+            );
         }
     }
+
+    private void showTicketDetails(Ticket ticket) {
+        if (ticket != null) {
+            // Fill the labels with info from the ticket object
+            nameLabel.setText(ticket.getName());
+            coordinatesLabel.setText(ticket.getCoordinates().toString());
+            creationDateLabel.setText(ticket.getCreationDate().toString());
+            priceLabel.setText(Double.toString(ticket.getPrice()));
+            discountLabel.setText(ticket.getDiscount().toString());
+            commentLabel.setText(ticket.getComment());
+            typeLabel.setText(ticket.getType().toString());
+
+            if (ticket.getPerson() != null) {
+                birthdayLabel.setText(ticket.getPerson().birthday().toString());
+                heightLabel.setText(ticket.getPerson().height().toString());
+                passportIDLabel.setText(ticket.getPerson().passportID());
+                hairColorLabel.setText(ticket.getPerson().hairColor().toString());
+            } else {
+                birthdayLabel.setText("");
+                heightLabel.setText("");
+                passportIDLabel.setText("");
+                hairColorLabel.setText("");
+            }
+        } else {
+            // Ticket is null, remove all the text
+            nameLabel.setText("");
+            coordinatesLabel.setText("");
+            creationDateLabel.setText("");
+            priceLabel.setText("");
+            discountLabel.setText("");
+            commentLabel.setText("");
+            typeLabel.setText("");
+            birthdayLabel.setText("");
+            heightLabel.setText("");
+            passportIDLabel.setText("");
+            hairColorLabel.setText("");
+        }
+    }
+
     private void showAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.initOwner(mainApp.getPrimaryStage());

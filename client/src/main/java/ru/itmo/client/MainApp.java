@@ -38,13 +38,15 @@ public class MainApp extends Application {
         Locale.setDefault(new Locale("ru"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
 
-        tcpClient = new TCPClient("localhost", 6789, new GuiMessageOutput(new JTextArea()));
+        tcpClient = new TCPClient("localhost", 4093, new GuiMessageOutput(new JTextArea()));
         runner = new Runner(tcpClient);
         this.bundle = bundle;
         initRootLayout(bundle);
         showLoginScreen(bundle);
     }
-
+    public void setRunner(Runner runner) {
+        this.runner = runner;
+    }
     public void initRootLayout(ResourceBundle bundle) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -111,6 +113,7 @@ public class MainApp extends Application {
 
             MainController controller = loader.getController();
             controller.setMainApp(this);
+            controller.setRunner(runner);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,11 +122,9 @@ public class MainApp extends Application {
     public boolean showTicketEditDialog(Ticket ticket) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/view/TicketEditDialog.fxml")); // Убедитесь, что путь правильный
-            loader.setResources(bundle);
+            loader.setLocation(MainApp.class.getResource("/view/TicketEditDialog.fxml"));
             AnchorPane page = loader.load();
 
-            // Создание диалогового окна Stage.
             Stage dialogStage = new Stage();
             dialogStage.setTitle(bundle.getString("edit.title"));
             dialogStage.initModality(Modality.WINDOW_MODAL);
@@ -131,15 +132,12 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Передача объекта ticket в контроллер.
             TicketEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setTicket(ticket);
             controller.setBundle(bundle);
 
-            // Отображение диалогового окна и ожидание, пока пользователь его не закроет.
             dialogStage.showAndWait();
-
             return controller.isOkClicked();
         } catch (IOException e) {
             e.printStackTrace();
@@ -148,13 +146,11 @@ public class MainApp extends Application {
     }
 
 
-
-
     public static void main(String[] args) {
         Application.launch(args);
     }
 
-    public void showAlert(String title, String header, String content) {
+    public static void showAlert(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(header);

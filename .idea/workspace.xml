@@ -4,36 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.0 init GUI base update">
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RegisterController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/css/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/view/LoginScreen.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/view/RegisterScreen.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/view/RootLayout.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" afterDir="false" />
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.1 added simple windows">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/main/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/console/GuiMessageOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/utility/gui/GuiMessageOutput.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/AddIfMin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/update/Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/update/Update.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Color.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/TicketType.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/TicketType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,6 +334,9 @@
       <workItem from="1716110236940" duration="11455000" />
       <workItem from="1716130607843" duration="423000" />
       <workItem from="1716131045017" duration="15857000" />
+      <workItem from="1716151388630" duration="66000" />
+      <workItem from="1716192723242" duration="1744000" />
+      <workItem from="1716200779830" duration="1636000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -555,7 +538,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716134526634</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="2.8.1 added simple windows">
+      <option name="closed" value="true" />
+      <created>1716151431517</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1716151431517</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +564,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1.3" />
     <MESSAGE value="1.3.update" />
     <MESSAGE value="1.4" />
     <MESSAGE value="1.5" />
@@ -598,7 +588,8 @@
     <MESSAGE value="2.7.pre_last" />
     <MESSAGE value="2.7.exactly_last" />
     <MESSAGE value="2.8.0 init GUI base update" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.0 init GUI base update" />
+    <MESSAGE value="2.8.1 added simple windows" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.1 added simple windows" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

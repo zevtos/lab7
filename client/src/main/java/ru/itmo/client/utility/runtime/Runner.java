@@ -3,6 +3,7 @@ package ru.itmo.client.utility.runtime;
 import ru.itmo.client.network.TCPClient;
 import ru.itmo.general.exceptions.ScriptRecursionException;
 import ru.itmo.general.managers.CommandManager;
+import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.Interrogator;
@@ -99,7 +100,23 @@ public class Runner {
     }
 
     public ExitCode executeLogin(String username, String password) {
-        return executeCommand(new String[]{"login", "username", password});
+        return executeCommand(new String[]{"login", username, password});
+    }
+
+    public Response sendCommand(Request request) {
+        return tcpClient.sendCommand(request);
+    }
+
+    public void addTicket(Ticket newTicket){
+        tcpClient.sendCommand(new Request(true, "add", newTicket));
+    }
+
+    public void updateTicket(Ticket selectedTicket) {
+        sendCommand(new Request(true, "update", selectedTicket));
+    }
+
+    public void deleteTicket(Ticket selectedTicket) {
+        sendCommand(new Request(true, "remove_by_id", selectedTicket));
     }
 
     /**
@@ -123,6 +140,7 @@ public class Runner {
         }
 
         request = command.execute(userCommand);
+        System.out.println(request);
         if (!request.isSuccess()) {
             showError("Ошибка выполнения команды: " + userCommand[0]);
             return ExitCode.ERROR;
@@ -130,8 +148,14 @@ public class Runner {
 
         if ("execute_script".equals(userCommand[0])) {
             return scriptMode(userCommand[1]);
-        } else {
+        }
+        Response response = tcpClient.sendCommand(request);
+        System.out.println(response);
+        if (response.isSuccess()) {
             return ExitCode.OK;
+        } else {
+            showError(response.getMessage());
+            return ExitCode.ERROR;
         }
     }
 

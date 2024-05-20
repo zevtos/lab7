@@ -2,13 +2,16 @@ package ru.itmo.client.controller;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import ru.itmo.client.MainApp;
 import ru.itmo.general.models.*;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
 public class TicketEditDialogController {
@@ -40,8 +43,10 @@ public class TicketEditDialogController {
     private boolean okClicked = false;
     private ResourceBundle bundle;
 
-    public void setDialogStage(Stage dialogStage) {
-        this.dialogStage = dialogStage;
+    @FXML
+    private void initialize() {
+        typeComboBox.setItems(FXCollections.observableArrayList(TicketType.values()));
+        hairColorComboBox.setItems(FXCollections.observableArrayList(Color.values()));
     }
 
     public void setTicket(Ticket ticket) {
@@ -51,14 +56,14 @@ public class TicketEditDialogController {
         coordinatesField.setText(ticket.getCoordinates().toString());
         creationDateField.setValue(ticket.getCreationDate().toLocalDate());
         priceField.setText(Double.toString(ticket.getPrice()));
-        discountField.setText(ticket.getDiscount().toString());
+        discountField.setText(Long.toString(ticket.getDiscount()));
         commentField.setText(ticket.getComment());
         typeComboBox.setItems(FXCollections.observableArrayList(TicketType.values()));
         typeComboBox.setValue(ticket.getType());
 
         if (ticket.getPerson() != null) {
             birthdayField.setValue(ticket.getPerson().birthday().toLocalDate());
-            heightField.setText(ticket.getPerson().height().toString());
+            heightField.setText(Float.toString(ticket.getPerson().height()));
             passportIDField.setText(ticket.getPerson().passportID());
             hairColorComboBox.setItems(FXCollections.observableArrayList(Color.values()));
             hairColorComboBox.setValue(ticket.getPerson().hairColor());
@@ -96,6 +101,10 @@ public class TicketEditDialogController {
 
             okClicked = true;
             dialogStage.close();
+        } else {
+            MainApp.showAlert(bundle.getString("ticket.edit.invalid.title"),
+                    bundle.getString("ticket.edit.invalid.header"),
+                    bundle.getString("ticket.edit.invalid.content"));
         }
     }
 
@@ -107,50 +116,50 @@ public class TicketEditDialogController {
     private boolean isInputValid() {
         String errorMessage = "";
 
-        if (nameField.getText() == null || nameField.getText().isEmpty()) {
-            errorMessage += "No valid name!\n";
+        if (nameField.getText() == null || nameField.getText().length() == 0) {
+            errorMessage += bundle.getString("ticket.edit.invalid.name") + "\n";
         }
-        if (coordinatesField.getText() == null || coordinatesField.getText().isEmpty()) {
-            errorMessage += "No valid coordinates!\n";
+        if (coordinatesField.getText() == null || coordinatesField.getText().length() == 0) {
+            errorMessage += bundle.getString("ticket.edit.invalid.coordinates") + "\n";
+        } else {
+            try {
+                String[] coords = coordinatesField.getText().split(";");
+                Double.parseDouble(coords[0]);
+                Float.parseFloat(coords[1]);
+            } catch (NumberFormatException e) {
+                errorMessage += bundle.getString("ticket.edit.invalid.coordinates.format") + "\n";
+            }
         }
-        if (priceField.getText() == null || priceField.getText().isEmpty()) {
-            errorMessage += "No valid price!\n";
+        if (priceField.getText() == null || priceField.getText().length() == 0) {
+            errorMessage += bundle.getString("ticket.edit.invalid.price") + "\n";
+        } else {
+            try {
+                Double.parseDouble(priceField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += bundle.getString("ticket.edit.invalid.price.format") + "\n";
+            }
         }
-        if (discountField.getText() == null || discountField.getText().isEmpty()) {
-            errorMessage += "No valid discount!\n";
-        }
-        if (commentField.getText() == null || commentField.getText().isEmpty()) {
-            errorMessage += "No valid comment!\n";
-        }
-        if (typeComboBox.getValue() == null) {
-            errorMessage += "No valid type!\n";
-        }
-        if (birthdayField.getValue() == null) {
-            errorMessage += "No valid birthday!\n";
-        }
-        if (heightField.getText() == null || heightField.getText().isEmpty()) {
-            errorMessage += "No valid height!\n";
-        }
-        if (passportIDField.getText() == null || passportIDField.getText().isEmpty()) {
-            errorMessage += "No valid passport ID!\n";
-        }
-        if (hairColorComboBox.getValue() == null) {
-            errorMessage += "No valid hair color!\n";
+        if (discountField.getText() == null || discountField.getText().length() == 0) {
+            errorMessage += bundle.getString("ticket.edit.invalid.discount") + "\n";
+        } else {
+            try {
+                Long.parseLong(discountField.getText());
+            } catch (NumberFormatException e) {
+                errorMessage += bundle.getString("ticket.edit.invalid.discount.format") + "\n";
+            }
         }
 
-        if (errorMessage.isEmpty()) {
+        if (errorMessage.length() == 0) {
             return true;
         } else {
-            showAlert(errorMessage);
+            MainApp.showAlert(bundle.getString("ticket.edit.invalid.title"),
+                    bundle.getString("ticket.edit.invalid.header"),
+                    errorMessage);
             return false;
         }
     }
 
-    private void showAlert(String errorMessage) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Invalid Fields");
-        alert.setHeaderText("Please correct invalid fields");
-        alert.setContentText(errorMessage);
-        alert.showAndWait();
+    public void setDialogStage(Stage dialogStage) {
+        this.dialogStage = dialogStage;
     }
 }
