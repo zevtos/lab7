@@ -1,56 +1,56 @@
-/* style.css */
-
-.main-screen {
-    -fx-background-color: #f4f4f4;
+/* Общие стили для всего приложения */
+.root {
+    -fx-font-family: "Arial";
 }
 
-.table-view {
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-    -fx-background-color: #ffffff;
-}
-
-.table-column {
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-}
-
-.button-add {
-    -fx-background-color: #4CAF50; /* зеленый */
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-}
-
-.button-update {
-    -fx-background-color: #FFA500; /* оранжевый */
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-}
-
-.button-delete {
-    -fx-background-color: #f44336; /* красный */
-    -fx-text-fill: white;
-    -fx-font-size: 14px;
-}
-
-.data-visualization {
-    -fx-background-color: #f4f4f4;
-}
-
-.canvas {
-    -fx-border-color: #cccccc;
-    -fx-border-width: 1px;
-}
-
+/* Стили для меню */
 .menu-bar {
-    -fx-background-color: #333333;
+    -fx-background-color: #2E3B4E;
+    -fx-text-fill: #ffffff;
 }
 
 .menu {
-    -fx-text-fill: white;
+    -fx-background-color: #2E3B4E;
+    -fx-text-fill: #ffffff;
 }
 
 .menu-item {
+    -fx-background-color: #2E3B4E;
+    -fx-text-fill: #ffffff;
+}
+
+/* Стили для кнопок */
+.button-add {
+    -fx-background-color: #4CAF50; /* Зеленый */
     -fx-text-fill: white;
+}
+
+.button-update {
+    -fx-background-color: #2196F3; /* Синий */
+    -fx-text-fill: white;
+}
+
+.button-delete {
+    -fx-background-color: #f44336; /* Красный */
+    -fx-text-fill: white;
+}
+
+.button-clear {
+    -fx-background-color: #ff9800; /* Оранжевый */
+    -fx-text-fill: white;
+}
+
+/* Стили для таблицы */
+.table-view {
+    -fx-border-color: #2E3B4E;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #2E3B4E;
+}
+
+/* Стили для меток */
+.label {
+    -fx-text-fill: #2E3B4E;
 }

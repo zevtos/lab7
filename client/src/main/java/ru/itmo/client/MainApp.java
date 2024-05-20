@@ -4,23 +4,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import lombok.Getter;
-import lombok.SneakyThrows;
 import ru.itmo.client.controller.*;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.client.utility.runtime.ServerConnection;
-import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.models.Ticket;
-import ru.itmo.general.models.forms.TicketForm;
-import ru.itmo.general.utility.gui.GuiMessageOutput;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -34,7 +27,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        CommandManager.initClientCommandsBeforeRegistration();
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Ticket Management System");
 
@@ -76,7 +68,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/LoginScreen.fxml"));
             loader.setResources(bundle);
-            VBox loginScreen = loader.load();
+            BorderPane loginScreen = loader.load();
 
             rootLayout.setCenter(loginScreen);
 
@@ -94,7 +86,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/RegisterScreen.fxml"));
             loader.setResources(bundle);
-            VBox registerScreen = loader.load();
+            BorderPane registerScreen = loader.load();
 
             rootLayout.setCenter(registerScreen);
 
@@ -107,34 +99,29 @@ public class MainApp extends Application {
         }
     }
 
-    @SneakyThrows
     public void showMainScreen(ResourceBundle bundle) {
-        CommandManager.initClientCommandsAfterRegistration(new TicketForm(new GuiMessageOutput(new JTextArea())));
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/MainScreen.fxml"));
             loader.setResources(bundle);
-            VBox mainScreen = loader.load();
+            BorderPane mainScreen = loader.load();
 
             rootLayout.setCenter(mainScreen);
 
             MainController controller = loader.getController();
             controller.setMainApp(this);
             controller.setRunner(runner);
-            controller.setBundle(bundle); // добавим установку bundle
-            Thread.sleep(100);
-            controller.fetchTickets(); // вызов метода для заполнения таблицы данными
+            controller.setBundle(bundle);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     public boolean showTicketEditDialog(Ticket ticket) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/TicketEditDialog.fxml"));
-            AnchorPane page = loader.load();
+            BorderPane page = loader.load();
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle(bundle.getString("edit.title"));

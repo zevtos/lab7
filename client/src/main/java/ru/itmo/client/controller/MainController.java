@@ -48,13 +48,17 @@ public class MainController {
     @FXML
     private TableColumn<Ticket, String> columnHairColor;
     @FXML
-    public TableColumn userIdColumn;
+    private TableColumn<Ticket, Integer> userIdColumn;
+    @FXML
+    private CheckBox filterCheckBox;
     @FXML
     private Button addButton;
     @FXML
     private Button updateButton;
     @FXML
     private Button deleteButton;
+    @FXML
+    private Button clearButton;
     // Labels for ticket details
     @FXML
     private Label nameLabel;
@@ -98,6 +102,15 @@ public class MainController {
         addButton.setOnAction(event -> handleAdd());
         updateButton.setOnAction(event -> handleUpdate());
         deleteButton.setOnAction(event -> handleDelete());
+        clearButton.setOnAction(event -> handleClear());
+
+        filterCheckBox.setOnAction(event -> {
+            if (filterCheckBox.isSelected()) {
+                fetchUserTickets();
+            } else {
+                fetchTickets();
+            }
+        });
 
         // Initialize the table columns
         idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -120,6 +133,21 @@ public class MainController {
         // Listen for selection changes and show the ticket details when changed
         dataTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTicketDetails(newValue));
+    }
+
+    private void handleFilter() {
+        if (filterCheckBox.isSelected()) {
+            ObservableList<Ticket> filteredData = FXCollections.observableArrayList();
+            for (Ticket ticket : runner.fetchTickets()) {
+                if (ticket.getUserId().equals(runner.getCurrentUserId())) {
+                    filteredData.add(ticket);
+                }
+            }
+            dataTable.setItems(filteredData);
+        } else {
+            fetchTickets();
+        }
+        dataTable.refresh();
     }
 
     @FXML
@@ -156,8 +184,6 @@ public class MainController {
         }
     }
 
-
-
     @FXML
     private void handleUpdate() {
         Ticket selectedTicket = dataTable.getSelectionModel().getSelectedItem();
@@ -190,6 +216,22 @@ public class MainController {
                     bundle.getString("delete.error.title"),
                     bundle.getString("delete.error.header"),
                     bundle.getString("delete.error.content")
+            );
+        }
+    }
+
+    @FXML
+    private void handleClear() {
+        boolean cleared = runner.clearTickets();
+        if (cleared) {
+            ticketData.clear();
+            dataTable.setItems(ticketData);
+            dataTable.refresh();
+        } else {
+            showAlert(
+                    bundle.getString("clear.error.title"),
+                    bundle.getString("clear.error.header"),
+                    bundle.getString("clear.error.content")
             );
         }
     }
@@ -244,7 +286,16 @@ public class MainController {
 
     public void fetchTickets() {
         ObservableList<Ticket> tickets = FXCollections.observableArrayList(runner.fetchTickets());
-        dataTable.setItems(tickets);
+        ticketData.setAll(tickets);
+        dataTable.setItems(ticketData);
+        dataTable.refresh();
+    }
+
+    public void fetchUserTickets() {
+        ObservableList<Ticket> userTickets = FXCollections.observableArrayList(runner.fetchTickets()
+                .stream().filter(ticket -> ticket.getUserId() == runner.getCurrentUserId()).toList());
+        ticketData.setAll(userTickets);
+        dataTable.setItems(ticketData);
+        dataTable.refresh();
     }
 }
-

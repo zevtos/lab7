@@ -2,15 +2,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
 
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.DataVisualizationController" stylesheets="@../css/style.css">
+<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.DataVisualizationController" stylesheets="@../css/style.css">
+    <center>
+        <Canvas fx:id="canvas" width="600" height="400" styleClass="canvas"/>
+    </center>
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
-    <spacing>15</spacing>
-    <styleClass>data-visualization</styleClass>
-    <children>
-        <Canvas fx:id="canvas" width="600" height="400" styleClass="canvas"/>
-    </children>
-</VBox>
+</BorderPane>

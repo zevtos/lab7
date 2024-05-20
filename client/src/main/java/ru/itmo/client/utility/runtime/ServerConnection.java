@@ -35,34 +35,12 @@ public class ServerConnection {
         }
 
         request = command.execute(userCommand);
-        System.out.println(request);
-        if (!request.isSuccess()) {
-            return new Response(false, "Ошибка выполнения команды: " + userCommand[0]);
-        }
-        if (request.getCommand().equals("login") || request.getCommand().equals("register")) {
-            Response response = sendCommand(request);
-            if (response == null) {
-                return null;
-            }
-            login = request.getLogin();
-            password = request.getPassword();
-            currentUserId = (Integer) response.getData();
-        }
         return sendCommand(request);
     }
 
     public Response sendCommand(String command, Object data) {
         try {
             Request request = new Request(command, data);
-            if (request.getCommand().equals("login") || request.getCommand().equals("register")) {
-                Response response = sendCommand(request);
-                if (response == null) {
-                    return null;
-                }
-                login = request.getLogin();
-                password = request.getPassword();
-                currentUserId = (Integer) response.getData();
-            }
             return sendCommand(request);
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,14 +53,22 @@ public class ServerConnection {
             request.setLogin(login);
             request.setPassword(password);
         }
+        Response response = null;
         try {
-            Response response = tcpClient.sendCommand(request);
-            System.out.println(response);
-            return response;
+            response = tcpClient.sendCommand(request);
+            System.out.println("response: " + response);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        if (request.getCommand().equals("login") || request.getCommand().equals("register")) {
+            if (response == null) {
+                return response;
+            }
+            login = request.getLogin();
+            password = request.getPassword();
+            currentUserId = (Integer) response.getData();
+        }
+        return response;
     }
 
     public List<Ticket> receiveTickets() {

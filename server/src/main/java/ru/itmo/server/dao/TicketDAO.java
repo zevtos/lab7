@@ -253,10 +253,12 @@ public class TicketDAO implements Accessible {
         String personPassportID = resultSet.getString("person_passport_id");
         String personHairColorStr = resultSet.getString("person_hair_color");
         Color personHairColor = Color.valueOf(personHairColorStr);
-
+        Integer userId = resultSet.getInt("user_id");
         // Assuming Ticket constructor accepts all these parameters
-        return new Ticket(id, name, new Coordinates(coordinatesX, coordinatesY), creationDate, price,
+        Ticket ticket = new Ticket(id, name, new Coordinates(coordinatesX, coordinatesY), creationDate, price,
                 discount, comment, type, new Person(personBirthday, personHeight, personPassportID, personHairColor));
+        ticket.setUserId(userId);
+        return ticket;
     }
 
     /**

@@ -131,6 +131,16 @@ public class Runner {
         connection.sendCommand("remove_by_id", selectedTicket);
     }
 
+    public boolean clearTickets() {
+        Response response = connection.sendCommand("clear", null);
+        if (response.isSuccess()) {
+            return true;
+        } else {
+            MainApp.showAlert("Ошибка очистки билетов", "Билеты не были добавлены", response.getMessage());
+            return false;
+        }
+    }
+
     // В классе Runner
     public String getInfo() {
         Response response = connection.sendCommand("info", null);
