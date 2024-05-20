@@ -32,10 +32,10 @@ public class Login extends Command {
             String password = request.getPassword();
 
             if (!userDAO.verifyUserPassword(username, password)) {
-                User user = userDAO.getUserByUsername(username);
-                return new Response(false, "Неверное имя пользователя или пароль", user.getId());
+                return new Response(false, "Неверное имя пользователя или пароль", null);
             }
-            return new Response(true, "Вы успешно вошли в систему", null);
+            User user = userDAO.getUserByUsername(username);
+            return new Response(true, "Вы успешно вошли в систему", user.getId());
         } catch (Exception e) {
             return new Response(false, e.toString(), null);
         }

@@ -52,6 +52,9 @@ public class ServerConnection {
         if (request.getLogin() == null) {
             request.setLogin(login);
             request.setPassword(password);
+        } else {
+            request.setLogin(login);
+            request.setPassword(password);
         }
         Response response = null;
         try {
@@ -59,14 +62,6 @@ public class ServerConnection {
             System.out.println("response: " + response);
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        if (request.getCommand().equals("login") || request.getCommand().equals("register")) {
-            if (response == null) {
-                return response;
-            }
-            login = request.getLogin();
-            password = request.getPassword();
-            currentUserId = (Integer) response.getData();
         }
         return response;
     }
