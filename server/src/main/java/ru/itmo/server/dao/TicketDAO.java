@@ -56,6 +56,7 @@ public class TicketDAO implements Accessible {
             " user_id) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String REMOVE_TICKET_SQL = "DELETE FROM tickets WHERE id = ?";
+    private static final String REMOVE_TICKETS_BY_USER_ID_SQL = "DELETE FROM tickets WHERE user_id = ?";
     private static final String CHECK_TICKET_OWNERSHIP_SQL = "SELECT user_id FROM tickets WHERE id = ?";
     private static final String UPDATE_TICKET_SQL = "UPDATE tickets SET " +
             "name = ?, " +
@@ -292,5 +293,21 @@ public class TicketDAO implements Accessible {
         }
     }
 
+
+    public boolean removeTicketsByUserId(int userId) {
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(REMOVE_TICKETS_BY_USER_ID_SQL)) {
+            statement.setInt(1, userId);
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (NullPointerException exception) {
+            LOGGER.error("Null pointer exception while removing tickets for user with ID {}: {}",
+                    userId, exception.getMessage());
+            return false;
+        } catch (SQLException e) {
+            LOGGER.error("Error while removing tickets for user with ID {}: {}", userId, e.getMessage());
+            return false;
+        }
+    }
 
 }

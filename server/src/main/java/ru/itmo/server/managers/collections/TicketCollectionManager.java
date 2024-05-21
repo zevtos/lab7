@@ -167,6 +167,20 @@ public class TicketCollectionManager implements CollectionManager<Ticket> {
         }
     }
 
+    @Override
+    public boolean clear(int userId) {
+        try {
+            lock.lock();
+            boolean result = dao.removeTicketsByUserId(userId);
+            if (result) {
+                collection.removeIf(ticket -> ticket.getUserId() == userId);
+            }
+            return result;
+        } finally {
+            lock.unlock();
+        }
+    }
+
     public int collectionSize() {
         return collection.size();
     }

@@ -117,4 +117,6 @@ public interface CollectionManager<T> {
      * @return the last object in the collection, or null if the collection is empty
      */
     T getLast();
+
+    boolean clear(int userId);
 }

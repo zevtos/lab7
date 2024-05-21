@@ -33,7 +33,7 @@ public class Clear extends Command {
     public Response execute(Request request) {
         try {
             int userId = request.getUserId();
-            ticketCollectionManager.getCollection().removeIf(ticket -> ticket.getUserId() == userId);
+            ticketCollectionManager.clear(userId);
             return new Response(true, "Коллекция очищена от билетов текущего пользователя.");
         } catch (Exception e){
             return new Response(false, e.getMessage());
