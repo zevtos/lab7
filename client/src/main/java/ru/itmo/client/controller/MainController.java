@@ -13,6 +13,7 @@ import ru.itmo.client.MainApp;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.general.models.Ticket;
 
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController {
@@ -128,7 +129,6 @@ public class MainController {
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
         // Set the observable list data to the table
         dataTable.setItems(ticketData);
-        System.out.println("Table initialized with data: " + ticketData);
 
         // Listen for selection changes and show the ticket details when changed
         dataTable.getSelectionModel().selectedItemProperty().addListener(
@@ -153,20 +153,15 @@ public class MainController {
     @FXML
     private void handleAdd() {
         Ticket newTicket = new Ticket();
-        System.out.println("Ticket before sending: " + newTicket); // Debug message
 
         boolean okClicked = mainApp.showTicketEditDialog(newTicket);
-        System.out.println("Dialog OK clicked: " + okClicked); // Debug message
 
         if (okClicked) {
             newTicket.setUserId(runner.getCurrentUserId()); // Устанавливаем идентификатор пользователя
             boolean added = runner.addTicket(newTicket); // Assuming you have a runner that handles the business logic
-            System.out.println("Ticket added to server: " + added); // Debug message
 
             if (added) {
                 ticketData.add(newTicket);
-                System.out.println("Ticket added to table: " + newTicket); // Debug message
-                System.out.println("Current table data: " + ticketData); // Debug message
 
                 dataTable.getItems().add(newTicket); // Add the ticket directly to the table
                 dataTable.refresh(); // Ensure the table view is refreshed
@@ -305,7 +300,7 @@ public class MainController {
 
     public void fetchUserTickets() {
         ObservableList<Ticket> userTickets = FXCollections.observableArrayList(runner.fetchTickets()
-                .stream().filter(ticket -> ticket.getUserId() == runner.getCurrentUserId()).toList());
+                .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
         ticketData.setAll(userTickets);
         dataTable.setItems(ticketData);
         dataTable.refresh();

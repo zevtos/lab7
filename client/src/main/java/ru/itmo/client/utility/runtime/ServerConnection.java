@@ -19,6 +19,7 @@ public class ServerConnection {
     @Setter
     private String password;
     @Getter
+    @Setter
     private Integer currentUserId;
 
     public ServerConnection(String host, int port) {
@@ -59,9 +60,14 @@ public class ServerConnection {
         Response response = null;
         try {
             response = tcpClient.sendCommand(request);
-            System.out.println("response: " + response);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        if(request.getCommand().equals("login") || request.getCommand().equals("register")) {
+            try {
+                currentUserId = (Integer) response.getData();
+            } catch (Exception ignored){
+            }
         }
         return response;
     }

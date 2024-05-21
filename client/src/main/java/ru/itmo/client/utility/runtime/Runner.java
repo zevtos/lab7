@@ -111,7 +111,6 @@ public class Runner {
 
     public boolean addTicket(Ticket newTicket) {
         Response response = connection.sendCommand("add", newTicket);
-        System.out.println("Server response: " + response); // Debug message
 
         if (response.isSuccess()) {
             newTicket.setId((Integer) response.getData());

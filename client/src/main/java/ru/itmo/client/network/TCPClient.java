@@ -164,11 +164,7 @@ public class TCPClient {
     public Response sendCommand(Request request) {
         try {
             sendRequest(request);
-            System.out.println("sended");
-            Response res = receiveResponse();
-            System.out.println("received");
-            System.out.println(res.toString());
-            return res;
+            return receiveResponse();
         } catch (IOException | ClassNotFoundException ignored) {
             output.printError(ignored.getMessage());
         }
