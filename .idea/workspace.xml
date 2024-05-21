@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.4.1 fix userId and filter by userId">
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Clear.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CollectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/TicketDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/TicketDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/collections/TicketCollectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/managers/collections/TicketCollectionManager.java" afterDir="false" />
-    </list>
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.4.2 fix Clear" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -334,7 +329,7 @@
       <workItem from="1716200779830" duration="16134000" />
       <workItem from="1716229647151" duration="7952000" />
       <workItem from="1716237744056" duration="763000" />
-      <workItem from="1716283048819" duration="1319000" />
+      <workItem from="1716283048819" duration="1451000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -640,7 +635,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716284212446</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="2.8.4.2 fix Clear">
+      <option name="closed" value="true" />
+      <created>1716284502649</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1716284502649</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -658,7 +661,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.7.5 fix troubles" />
     <MESSAGE value="2.7.5.1 fix merge" />
     <MESSAGE value="2.7.5.1 fix and simplification" />
     <MESSAGE value="2.7.6 fix" />
@@ -683,7 +685,8 @@
     <MESSAGE value="2.8.3.5 debug Login.java" />
     <MESSAGE value="2.8.4 styling" />
     <MESSAGE value="2.8.4.1 fix userId and filter by userId" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.4.1 fix userId and filter by userId" />
+    <MESSAGE value="2.8.4.2 fix Clear" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.4.2 fix Clear" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

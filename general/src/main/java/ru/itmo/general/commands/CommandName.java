@@ -20,7 +20,6 @@ public enum CommandName {
     MAX_BY_NAME,         // Command to find the element with the maximum name in the collection
     HISTORY,             // Command to display command history
     EXECUTE_SCRIPT,      // Command to execute commands from a script file
-    EXIT_SERVER,         // Command to exit the server
     LOGIN,               // Command to log in
     REGISTER             // Command to register a new user
 }
