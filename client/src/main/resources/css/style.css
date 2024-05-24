@@ -355,3 +355,73 @@
     -fx-font-size: 14px;
     -fx-text-fill: #2E3B4E;
 }
+
+.root {
+    -fx-font-family: "Arial";
+}
+
+.main-title {
+    -fx-font-size: 24px;
+    -fx-padding: 10px;
+}
+
+.table-view {
+    -fx-border-color: #2E3B4E;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #2E3B4E;
+}
+
+.button-add {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.button-update {
+    -fx-background-color: #2196F3;
+    -fx-text-fill: white;
+}
+
+.button-delete {
+    -fx-background-color: #f44336;
+    -fx-text-fill: white;
+}
+
+.button-clear {
+    -fx-background-color: #ff9800;
+    -fx-text-fill: white;
+}
+
+.help-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 50%;
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffffff;
+    -fx-padding: 10px;
+}
+.button-add-if-min {
+    -fx-background-color: #4CAF50; /* Зеленый */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-sum-of-price {
+    -fx-background-color: #2196F3; /* Синий */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-execute-script {
+    -fx-background-color: #FF5722; /* Оранжевый */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}

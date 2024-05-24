@@ -30,14 +30,15 @@ public class Runner {
         createCommandManager();
     }
 
-    public ExitCode scriptMode(String argument) {
+    public ExitCode scriptMode(File file) {
+        String argument = file.getAbsolutePath();
         scriptSet.add(argument);
-        if (!new File(argument).exists()) {
-            argument = "../" + argument;
+        if (!file.exists()) {
+            return ExitCode.ERROR;
         }
 
         String[] userCommand;
-        try (Scanner scriptScanner = new Scanner(new File(argument))) {
+        try (Scanner scriptScanner = new Scanner(file)) {
             if (!scriptScanner.hasNext()) throw new NoSuchElementException();
             Scanner tmpScanner = Interrogator.getUserScanner();
             Interrogator.setUserScanner(scriptScanner);
@@ -148,6 +149,22 @@ public class Runner {
 
     public Integer getCurrentUserId() {
         return connection.getCurrentUserId();
+    }
+
+    public boolean addTicketIfMin(Ticket newTicket) {
+        Response response = connection.sendCommand("add_if_min", newTicket);
+
+        if (response.isSuccess()) {
+            newTicket.setId((Integer) response.getData());
+            return true;
+        } else {
+            MainApp.showAlert("Ошибка добавления", "Билет не был добавлен", response.getMessage());
+            return false;
+        }
+    }
+
+    public Response sumOfPrice() {
+        return connection.sendCommand("sum_of_price", null);
     }
 
 

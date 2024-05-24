@@ -14,6 +14,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.MainController" stylesheets="@../css/style.css">
     <top>
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
+            <Button fx:id="helpButton" text="?" onAction="#handleHelp" styleClass="help-button"/>
             <CheckBox fx:id="filterCheckBox" text="%main.filter.checkbox" styleClass="filter-checkbox"/>
         </HBox>
     </top>
@@ -42,6 +43,10 @@
             <Button text="%main.update.button" fx:id="updateButton" onAction="#handleUpdate" styleClass="button-update"/>
             <Button text="%main.delete.button" fx:id="deleteButton" onAction="#handleDelete" styleClass="button-delete"/>
             <Button text="%main.clear.button" fx:id="clearButton" onAction="#handleClear" styleClass="button-clear"/>
+            <Button text="%main.addIfMin.button" fx:id="addIfMinButton" onAction="#handleAddIfMin" styleClass="button-add-if-min"/>
+            <Button text="%main.sumOfPrice.button" fx:id="sumOfPriceButton" onAction="#handleSumOfPrice" styleClass="button-sum-of-price"/>
+            <Button text="%main.executeScript.button" fx:id="executeScriptButton" onAction="#handleExecuteScript" styleClass="button-execute-script"/>
+
         </HBox>
     </bottom>
     <right>
