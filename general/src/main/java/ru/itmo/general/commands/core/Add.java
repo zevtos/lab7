@@ -10,7 +10,6 @@ import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.utility.console.Console;
 
 /**
  * Команда 'add'. Добавляет новый элемент в коллекцию.

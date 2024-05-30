@@ -31,26 +31,33 @@ public class Runner {
     }
 
     public ExitCode scriptMode(File file) {
+        System.out.println("Script mode: " + file.getAbsolutePath());
         String argument = file.getAbsolutePath();
         scriptSet.add(argument);
         if (!file.exists()) {
             return ExitCode.ERROR;
         }
-
         String[] userCommand;
         try (Scanner scriptScanner = new Scanner(file)) {
+            System.out.println("started successfully");
             if (!scriptScanner.hasNext()) throw new NoSuchElementException();
-            Scanner tmpScanner = Interrogator.getUserScanner();
             Interrogator.setUserScanner(scriptScanner);
             Interrogator.setFileMode();
-
             do {
+                System.out.println("starting script");
                 userCommand = (scriptScanner.nextLine().trim() + " ").split(" ", 2);
                 userCommand[1] = userCommand[1].trim();
                 if (userCommand[0].equals("execute_script")) {
                     if (scriptSet.contains(userCommand[1])) throw new ScriptRecursionException();
                 }
-                Response response = connection.sendCommand(userCommand);
+                var command = CommandManager.getCommands().get(userCommand[0]);
+                if (command == null) {
+                    return ExitCode.ERROR;
+                }
+                var req = command.execute(userCommand);
+                if (!req.isSuccess()) return Runner.ExitCode.ERROR;
+                Response response = connection.sendCommand(req);
+                System.out.println(response.toString());
                 ExitCode commandStatus;
                 if (response.isSuccess()) {
                     commandStatus = ExitCode.OK;
@@ -59,9 +66,6 @@ public class Runner {
                 }
                 if (commandStatus != ExitCode.OK) return commandStatus;
             } while (scriptScanner.hasNextLine());
-
-            Interrogator.setUserScanner(tmpScanner);
-            Interrogator.setUserMode();
 
         } catch (NoSuchElementException | IllegalStateException exception) {
             showError("Ошибка чтения из скрипта.");
@@ -165,6 +169,10 @@ public class Runner {
 
     public Response sumOfPrice() {
         return connection.sendCommand("sum_of_price", null);
+    }
+
+    public String getCurrentUsername() {
+        return connection.getLogin();
     }
 
 

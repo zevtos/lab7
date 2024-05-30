@@ -425,3 +425,13 @@
     -fx-padding: 10px;
     -fx-border-radius: 5px;
 }
+
+/* Основные стили для информации о пользователе */
+.user-info {
+    -fx-text-fill: #ffffff; /* Белый текст */
+    -fx-font-size: 14px;    /* Размер шрифта */
+    -fx-padding: 5px 10px;  /* Внутренние отступы */
+    -fx-background-color: #344955; /* Цвет фона */
+    -fx-border-radius: 5px;  /* Радиус границ */
+    -fx-background-radius: 5px; /* Радиус фона */
+}

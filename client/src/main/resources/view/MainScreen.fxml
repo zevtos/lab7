@@ -16,6 +16,10 @@
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
             <Button fx:id="helpButton" text="?" onAction="#handleHelp" styleClass="help-button"/>
             <CheckBox fx:id="filterCheckBox" text="%main.filter.checkbox" styleClass="filter-checkbox"/>
+            <HBox spacing="10" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
+                <Label text="%main.user.info" styleClass="user-info"/>
+                <Label fx:id="userInfoLabel" styleClass="user-info"/>
+            </HBox>
         </HBox>
     </top>
     <center>
@@ -46,7 +50,6 @@
             <Button text="%main.addIfMin.button" fx:id="addIfMinButton" onAction="#handleAddIfMin" styleClass="button-add-if-min"/>
             <Button text="%main.sumOfPrice.button" fx:id="sumOfPriceButton" onAction="#handleSumOfPrice" styleClass="button-sum-of-price"/>
             <Button text="%main.executeScript.button" fx:id="executeScriptButton" onAction="#handleExecuteScript" styleClass="button-execute-script"/>
-
         </HBox>
     </bottom>
     <right>

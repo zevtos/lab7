@@ -100,6 +100,8 @@ public class MainController {
     private Label passportIDLabel;
     @FXML
     private Label hairColorLabel;
+    @FXML
+    private Label userInfoLabel;
 
 
     private ObservableList<Ticket> ticketData = FXCollections.observableArrayList();
@@ -147,7 +149,6 @@ public class MainController {
         userIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
         // Set the observable list data to the table
         dataTable.setItems(ticketData);
-
         // Listen for selection changes and show the ticket details when changed
         dataTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTicketDetails(newValue));
@@ -344,6 +345,7 @@ public class MainController {
         fileChooser.setTitle("Select Script File");
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
         if (file != null) {
+            System.out.println("got commands execute");
             Runner.ExitCode exitCode = runner.scriptMode(file);
             if (exitCode == Runner.ExitCode.OK) {
                 showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
@@ -404,6 +406,14 @@ public class MainController {
     }
 
     public void fetchTickets() {
+        // Получение информации о текущем пользователе
+        Integer userId = runner.getCurrentUserId();
+        String username = runner.getCurrentUsername();
+        // Заполнение метки информации о пользователе
+        if (userId != null && username != null) {
+            userInfoLabel.setText(String.format("%s %s, %s %d", bundle.getString("main.user.info"), username,
+                    bundle.getString("main.user.info.id"), userId));
+        }
         ObservableList<Ticket> tickets = FXCollections.observableArrayList(runner.fetchTickets());
         ticketData.setAll(tickets);
         dataTable.setItems(ticketData);

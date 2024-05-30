@@ -49,7 +49,7 @@ public class ServerConnection {
         return null;
     }
 
-    private Response sendCommand(Request request) {
+    public Response sendCommand(Request request) {
         if (request.getLogin() == null) {
             request.setLogin(login);
             request.setPassword(password);
@@ -81,5 +81,9 @@ public class ServerConnection {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public String getLogin() {
+        return login;
     }
 }

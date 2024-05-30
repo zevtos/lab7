@@ -42,7 +42,7 @@ public class TicketForm extends Form<Ticket> {
      */
     @Override
     public Ticket build() throws InvalidScriptInputException, InvalidFormException {
-        //todo:обработать ctrl d
+        System.out.println("Creating a new ticket");
         var ticket = new Ticket(
                 null,
                 askName(),
@@ -53,6 +53,7 @@ public class TicketForm extends Form<Ticket> {
                 askTicketType(),
                 askPerson()
         );
+        System.out.println(ticket);
         if (!ticket.validate()) throw new InvalidFormException();
         return ticket;
     }
