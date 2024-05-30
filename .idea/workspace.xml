@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6 funny">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.1 funnyX2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +70,7 @@
     "Application.Unnamed.executor": "Run",
     "Application.UserDAO.executor": "Run",
     "Application.client.executor": "Run",
-    "Application.client1.executor": "Debug",
+    "Application.client1.executor": "Run",
     "Application.client2.executor": "Run",
     "Application.ru.itmo.client.ui.MainApp.executor": "Run",
     "Application.server.executor": "Run",
@@ -93,7 +98,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "terminal",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -132,7 +137,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.client [clean,javafx:run]">
+  <component name="RunManager" selected="Application.client1">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.ui.Main" />
       <module name="client" />
@@ -372,7 +377,11 @@
       <workItem from="1716710652540" duration="29000" />
       <workItem from="1716781048123" duration="26000" />
       <workItem from="1716781736788" duration="10000" />
-      <workItem from="1717085517573" duration="3006000" />
+      <workItem from="1717085517573" duration="3811000" />
+      <workItem from="1717095763514" duration="952000" />
+      <workItem from="1717096740736" duration="1280000" />
+      <workItem from="1717098047044" duration="622000" />
+      <workItem from="1717099413723" duration="2784000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -718,7 +727,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717087908483</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="2.8.6.1 funnyX2">
+      <option name="closed" value="true" />
+      <created>1717088618617</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1717088618617</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -736,8 +753,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.7.8 move StandartConsole" />
-    <MESSAGE value="2.7.8 remove output" />
     <MESSAGE value="2.7.9 add fair to handling requests" />
     <MESSAGE value="2.7.last" />
     <MESSAGE value="2.7.pre_last" />
@@ -761,7 +776,9 @@
     <MESSAGE value="2.8.5 adding commands" />
     <MESSAGE value="2.8.5.1 fix" />
     <MESSAGE value="2.8.6 funny" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.6 funny" />
+    <MESSAGE value="2.8.6 funnyX2" />
+    <MESSAGE value="2.8.6.1 funnyX2" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.1 funnyX2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -771,9 +788,9 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="2" />
+          <url>file://$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ru.itmo.client.MainApp;
 import ru.itmo.client.utility.runtime.Runner;
+import ru.itmo.general.commands.core.Register;
 
 import java.util.ResourceBundle;
 
@@ -49,7 +50,11 @@ public class RegisterController {
             messageOutput.appendText(bundle.getString("register.password.mismatch") + "\n");
             return;
         }
-
+        if(password.length() < Register.MIN_PASSWORD_LENGTH) {
+            messageOutput.appendText(bundle.getString("register.password.length.mismatch") +
+                    "min " + Register.MIN_PASSWORD_LENGTH + "\n");
+            return;
+        }
         Runner.ExitCode result = runner.executeRegister(username, password);
         if (result == Runner.ExitCode.OK) {
             mainApp.showLoginScreen(bundle);

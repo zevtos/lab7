@@ -1,9 +1,11 @@
 package ru.itmo.client.utility.runtime;
 
 import ru.itmo.client.MainApp;
+import ru.itmo.client.utility.console.StandartConsole;
 import ru.itmo.general.exceptions.ScriptRecursionException;
 import ru.itmo.general.managers.CommandManager;
 import ru.itmo.general.models.Ticket;
+import ru.itmo.general.models.forms.TicketForm;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.Interrogator;
@@ -87,6 +89,7 @@ public class Runner {
      */
     private void createCommandManager() {
         CommandManager.initClientCommandsBeforeRegistration();
+        CommandManager.initClientCommandsAfterRegistration(new TicketForm(new StandartConsole()));
     }
 
     public ExitCode executeRegister(String username, String password) {

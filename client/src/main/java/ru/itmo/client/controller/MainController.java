@@ -345,13 +345,16 @@ public class MainController {
         fileChooser.setTitle("Select Script File");
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
         if (file != null) {
-            System.out.println("got commands execute");
-            Runner.ExitCode exitCode = runner.scriptMode(file);
-            if (exitCode == Runner.ExitCode.OK) {
-                showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
-            } else {
-                showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed.");
+            new Thread(() -> {
+                Runner.ExitCode exitCode = runner.scriptMode(file);
+                if (exitCode == Runner.ExitCode.OK) {
+                    showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
+                    fetchTickets();
+                } else {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed.");
+                }
             }
+            ).start();
         }
     }
 
@@ -406,25 +409,33 @@ public class MainController {
     }
 
     public void fetchTickets() {
-        // Получение информации о текущем пользователе
-        Integer userId = runner.getCurrentUserId();
-        String username = runner.getCurrentUsername();
-        // Заполнение метки информации о пользователе
-        if (userId != null && username != null) {
-            userInfoLabel.setText(String.format("%s %s, %s %d", bundle.getString("main.user.info"), username,
-                    bundle.getString("main.user.info.id"), userId));
-        }
-        ObservableList<Ticket> tickets = FXCollections.observableArrayList(runner.fetchTickets());
-        ticketData.setAll(tickets);
-        dataTable.setItems(ticketData);
-        dataTable.refresh();
+        new Thread(() -> {
+            // Получение информации о текущем пользователе
+            Integer userId = runner.getCurrentUserId();
+            String username = runner.getCurrentUsername();
+            // Заполнение метки информации о пользователе
+            if (userId != null && username != null) {
+                userInfoLabel.setText(String.format("%s %s, %s %d", bundle.getString("main.user.info"), username,
+                        bundle.getString("main.user.info.id"), userId));
+            }
+            if (filterCheckBox.isSelected()) {
+                fetchUserTickets();
+                return;
+            }
+            ObservableList<Ticket> tickets = FXCollections.observableArrayList(runner.fetchTickets());
+            ticketData.setAll(tickets);
+            dataTable.setItems(ticketData);
+            dataTable.refresh();
+        }).start();
     }
 
     public void fetchUserTickets() {
-        ObservableList<Ticket> userTickets = FXCollections.observableArrayList(runner.fetchTickets()
-                .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
-        ticketData.setAll(userTickets);
-        dataTable.setItems(ticketData);
-        dataTable.refresh();
+        new Thread(() -> {
+            ObservableList<Ticket> userTickets = FXCollections.observableArrayList(runner.fetchTickets()
+                    .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
+            ticketData.setAll(userTickets);
+            dataTable.setItems(ticketData);
+            dataTable.refresh();
+        }).start();
     }
 }

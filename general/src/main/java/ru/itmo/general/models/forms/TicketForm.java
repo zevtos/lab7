@@ -22,14 +22,14 @@ import java.util.NoSuchElementException;
  */
 public class TicketForm extends Form<Ticket> {
     private static final int nextId = 0;
-    private final MessageOutput console;
+    private final Console console;
 
     /**
      * Constructs a new form for creating a ticket.
      *
      * @param console The console for interacting with the user.
      */
-    public TicketForm(MessageOutput console) {
+    public TicketForm(Console console) {
         this.console = console;
     }
 
@@ -124,7 +124,7 @@ public class TicketForm extends Form<Ticket> {
     }
 
     private Coordinates askCoordinates() throws InvalidScriptInputException, InvalidFormException {
-        return null; // new CoordinatesForm(console).build();
+        return new CoordinatesForm(console).build();
     }
 
     private Double askPrice() throws InvalidScriptInputException {
@@ -186,10 +186,10 @@ public class TicketForm extends Form<Ticket> {
     }
 
     private TicketType askTicketType() throws InvalidScriptInputException {
-        return null; // new TicketTypeForm(console).build();
+        return new TicketTypeForm(console).build();
     }
 
     private Person askPerson() throws InvalidScriptInputException, InvalidFormException {
-        return null; //new PersonForm(console).build();
+        return new PersonForm(console).build();
     }
 }
