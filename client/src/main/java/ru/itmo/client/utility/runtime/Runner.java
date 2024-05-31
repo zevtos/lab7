@@ -88,8 +88,7 @@ public class Runner {
      * Создает менеджер команд приложения.
      */
     private void createCommandManager() {
-        CommandManager.initClientCommandsBeforeRegistration();
-        CommandManager.initClientCommandsAfterRegistration(new TicketForm(new StandartConsole()));
+        CommandManager.initClientCommands(new TicketForm(new StandartConsole()));
     }
 
     public ExitCode executeRegister(String username, String password) {

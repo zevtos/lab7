@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.2 multithreading for beauty&#10;fix execute_script">
-      <change afterPath="$PROJECT_DIR$/.idea/stylesheetLinters/stylelint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/css/NightStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/css/LightStyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/LoginScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/LoginScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/RegisterScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/RegisterScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/RootLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/RootLayout.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" afterDir="false" />
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.3 very funny executeInBackground and fix thread access to javafx">
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -400,7 +392,7 @@
       <workItem from="1717098047044" duration="622000" />
       <workItem from="1717099413723" duration="8292000" />
       <workItem from="1717161200919" duration="594000" />
-      <workItem from="1717171094307" duration="1660000" />
+      <workItem from="1717171094307" duration="2023000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -762,7 +754,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717102299924</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="2.8.6.3 very funny executeInBackground and fix thread access to javafx">
+      <option name="closed" value="true" />
+      <created>1717174519377</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1717174519377</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,7 +780,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.7.last" />
     <MESSAGE value="2.7.pre_last" />
     <MESSAGE value="2.7.exactly_last" />
     <MESSAGE value="2.8.0 init GUI base update" />
@@ -805,7 +804,8 @@
     <MESSAGE value="2.8.6 funnyX2" />
     <MESSAGE value="2.8.6.1 funnyX2" />
     <MESSAGE value="2.8.6.2 multithreading for beauty&#10;fix execute_script" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.2 multithreading for beauty&#10;fix execute_script" />
+    <MESSAGE value="2.8.6.3 very funny executeInBackground and fix thread access to javafx" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.3 very funny executeInBackground and fix thread access to javafx" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -814,11 +814,6 @@
           <properties class="java.net.BindException" package="java.net" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java</url>
-          <line>44</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
