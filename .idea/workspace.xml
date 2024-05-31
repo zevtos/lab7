@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.3 very funny executeInBackground and fix thread access to javafx">
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/managers/CommandManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/models/forms/TicketForm.java" afterDir="false" />
-    </list>
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.4 optimization and removal of the debug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -392,7 +386,7 @@
       <workItem from="1717098047044" duration="622000" />
       <workItem from="1717099413723" duration="8292000" />
       <workItem from="1717161200919" duration="594000" />
-      <workItem from="1717171094307" duration="2023000" />
+      <workItem from="1717171094307" duration="2358000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -762,7 +756,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717174519377</updated>
     </task>
-    <option name="localTasksCounter" value="47" />
+    <task id="LOCAL-00047" summary="2.8.6.4 optimization and removal of the debug">
+      <option name="closed" value="true" />
+      <created>1717175010237</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1717175010237</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -780,7 +782,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.7.pre_last" />
     <MESSAGE value="2.7.exactly_last" />
     <MESSAGE value="2.8.0 init GUI base update" />
     <MESSAGE value="2.8.1 added simple windows" />
@@ -805,7 +806,8 @@
     <MESSAGE value="2.8.6.1 funnyX2" />
     <MESSAGE value="2.8.6.2 multithreading for beauty&#10;fix execute_script" />
     <MESSAGE value="2.8.6.3 very funny executeInBackground and fix thread access to javafx" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.3 very funny executeInBackground and fix thread access to javafx" />
+    <MESSAGE value="2.8.6.4 optimization and removal of the debug" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.4 optimization and removal of the debug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

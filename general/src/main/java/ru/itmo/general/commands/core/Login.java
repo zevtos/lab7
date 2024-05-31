@@ -47,7 +47,25 @@ public class Login extends Command {
 
             return new Response(true, "Вы успешно вошли в систему", user.getId());
         } catch (Exception e) {
+            System.out.println("Exception during login: " + e); // Debug message
             return new Response(false, e.toString(), null);
+        }
+    }
+
+
+    @Override
+    public Request execute(String[] arguments) {
+        try {
+            System.out.println(arguments);
+            if (arguments.length <= 2 || arguments[1].isEmpty() || arguments[2].isEmpty())
+                throw new InvalidNumberOfElementsException();
+            Request request = new Request(true, getName(), null);
+            request.setLogin(arguments[1]);
+            if (arguments[2].isEmpty()) throw new InvalidNumberOfElementsException();
+            request.setPassword(arguments[2]);
+            return request;
+        } catch (InvalidNumberOfElementsException exception) {
+            return new Request(false, getName(), getUsingError());
         }
     }
 }

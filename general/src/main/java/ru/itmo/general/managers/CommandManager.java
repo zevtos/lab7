@@ -89,6 +89,8 @@ public class CommandManager {
         register("min_by_discount", new MinByDiscount());
         register("max_by_name", new MaxByName());
         register("history", new History());
+        register("login", new Login());
+        register("register", new Register());
     }
 
     public static void initClientCommandsBeforeRegistration() {

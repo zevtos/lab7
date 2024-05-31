@@ -67,4 +67,36 @@ public class Register extends Command {
             return new Response(false, e.toString(), -1);
         }
     }
+
+    /**
+     * Executes the command.
+     *
+     * @param arguments the command arguments (expects the username and password)
+     * @return the request indicating the success or failure of the command execution
+     */
+    @Override
+    public Request execute(String[] arguments) {
+        try {
+            if (arguments.length < 3 || arguments[1].isEmpty() || arguments[2].isEmpty())
+                throw new InvalidNumberOfElementsException();
+
+            String username = arguments[1];
+            if (username.length() > MAX_USERNAME_LENGTH)
+                throw new InvalidFormException("Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
+
+            String password = arguments[2];
+            if (password.length() < MIN_PASSWORD_LENGTH)
+                throw new InvalidFormException("Длина пароля должна быть >= " + MIN_PASSWORD_LENGTH);
+
+            Request request = new Request(true, getName(), null);
+            request.setLogin(username);
+            request.setPassword(password);
+            return request;
+
+        } catch (InvalidFormException invalid) {
+            return new Request(false, getName(), invalid.getMessage());
+        } catch (InvalidNumberOfElementsException exception) {
+            return new Request(false, getName(), getUsingError());
+        }
+    }
 }
