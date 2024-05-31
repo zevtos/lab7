@@ -9,7 +9,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import lombok.Getter;
 import ru.itmo.client.controller.*;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.client.utility.runtime.ServerConnection;
@@ -23,7 +22,6 @@ import java.util.ResourceBundle;
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    @Getter
     private Runner runner;
     private ResourceBundle bundle;
 
@@ -114,6 +112,7 @@ public class MainApp extends Application {
             controller.setMainApp(this);
             controller.setRunner(runner);
             controller.setBundle(bundle);
+            controller.setPrimaryStage(primaryStage);
             controller.fetchTickets();
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,6 +123,7 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/TicketEditDialog.fxml"));
+            loader.setResources(bundle);
             BorderPane page = loader.load();
 
             Stage dialogStage = new Stage();
@@ -172,5 +172,4 @@ public class MainApp extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.OK;
     }
-
 }

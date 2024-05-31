@@ -1,0 +1,407 @@
+/* Night Theme */
+
+/* Основные стили для всего приложения */
+.root {
+    -fx-font-family: "Segoe UI", sans-serif;
+    -fx-background-color: #011627; /* Основной фон приложения */
+}
+
+/* Стили для меню */
+.menu-bar {
+    -fx-background-color: #1E1E1E; /* Темный фон для меню */
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+.menu {
+    -fx-background-color: #1E1E1E; /* Темный фон для меню */
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+.menu-item {
+    -fx-background-color: #1E1E1E; /* Темный фон для пунктов меню */
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;
+}
+
+/* Стили для боковой панели */
+.sidebar {
+    -fx-background-color: #1E1E1E; /* Темный фон боковой панели */
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+}
+
+.sidebar-title {
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-item {
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+}
+
+.sidebar-item:hover {
+    -fx-text-fill: #22D3EE; /* Яркий цвет при наведении */
+}
+
+/* Стили для панели подробностей */
+.details-panel {
+    -fx-background-color: #1E1E1E; /* Темный фон панели подробностей */
+    -fx-border-color: #1E1E1E;
+    -fx-border-width: 1px;
+    -fx-padding: 20px;
+    -fx-spacing: 15px;
+}
+
+.label {
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;
+}
+
+.label-value {
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+/* Стили для статусной строки */
+.status-bar {
+    -fx-background-color: #1E1E1E; /* Темный фон статусной строки */
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+/* Стили для верхней панели */
+.top-bar {
+    -fx-background-color: #1E1E1E; /* Темный фон верхней панели */
+    -fx-padding: 10px;
+}
+
+/* Стили для чекбокса фильтра */
+.filter-checkbox {
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;
+}
+
+/* Стили для таблицы */
+.table-view {
+    -fx-background-color: #011627; /* Темный фон для таблицы */
+    -fx-border-color: #1E1E1E;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;
+}
+
+/* Стили для панели кнопок */
+.button-bar {
+    -fx-background-color: #1E1E1E; /* Темный фон панели кнопок */
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
+.button-add {
+    -fx-background-color: #22D3EE; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-update {
+    -fx-background-color: #A78BFA; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-delete {
+    -fx-background-color: #EF4444; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-clear {
+    -fx-background-color: #F59E0B; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+/* Общие стили для всего приложения */
+.root {
+    -fx-font-family: "Arial";
+}
+
+/* Стили для контейнера логина */
+.login-container {
+    -fx-background-color: #011627; /* Темный фон контейнера логина */
+    -fx-padding: 30;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0); /* Тень */
+}
+
+/* Стили для заголовка */
+.title-label {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-padding: 10px 0;
+}
+
+/* Стили для сетки ввода */
+.login-grid {
+    -fx-padding: 20 0;
+}
+
+/* Стили для меток ввода */
+.input-label {
+    -fx-font-size: 16px;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+/* Стили для полей ввода */
+.input-field {
+    -fx-pref-width: 200px;
+    -fx-padding: 5px;
+    -fx-border-color: #2E3B4E;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+}
+
+/* Стили для контейнера кнопок */
+.button-container {
+    -fx-padding: 20 0;
+}
+
+/* Стили для кнопок */
+.login-button {
+    -fx-background-color: #22D3EE; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.register-button {
+    -fx-background-color: #A78BFA; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #1E1E1E;
+}
+
+.register-button:hover {
+    -fx-background-color: #7C3AED;
+}
+
+/* Стили для текстового поля вывода сообщений */
+.message-output {
+    -fx-background-color: #011627;
+    -fx-border-color: #2E3B4E;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+/* Основные стили для информации о пользователе */
+.user-info {
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+    -fx-font-size: 14px;    /* Размер шрифта */
+    -fx-padding: 5px 10px;  /* Внутренние отступы */
+    -fx-background-color: #1E1E1E; /* Темный фон */
+    -fx-border-radius: 5px;  /* Радиус границ */
+    -fx-background-radius: 5px; /* Радиус фона */
+}
+
+/* Стили для заголовка */
+.header-bar {
+    -fx-background-color: #1E1E1E; /* Темный фон заголовка */
+    -fx-padding: 10px;
+}
+
+/* Стили для таблицы */
+.table-view {
+    -fx-border-color: #1E1E1E; /* Темная граница таблицы */
+    -fx-background-color: #011627; /* Темный фон таблицы */
+    -fx-padding: 10px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+/* Стили для кнопок */
+.button-bar {
+    -fx-padding: 20px;
+    -fx-spacing: 10px;
+    -fx-background-color: #1E1E1E; /* Темный фон панели кнопок */
+}
+
+.button-add {
+    -fx-background-color: #22D3EE; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-update {
+    -fx-background-color: #A78BFA; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-delete {
+    -fx-background-color: #EF4444; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-clear {
+    -fx-background-color: #F59E0B; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.button-add:hover {
+    -fx-background-color: #0E7490;
+}
+
+.button-update:hover {
+    -fx-background-color: #7C3AED;
+}
+
+.button-delete:hover {
+    -fx-background-color: #B91C1C;
+}
+
+.button-clear:hover {
+    -fx-background-color: #CA8A04;
+}
+
+/* Стили для панели с деталями */
+.details-pane {
+    -fx-background-color: #011627; /* Темный фон панели с деталями */
+    -fx-padding: 20px;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0.5, 0, 0);
+}
+
+.details-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+.details-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #D6DEEB; /* Светлый текст */
+}
+
+.button-add-if-min {
+    -fx-background-color: #22D3EE; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-sum-of-price {
+    -fx-background-color: #A78BFA; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.button-execute-script {
+    -fx-background-color: #FF5722; /* Яркий цвет кнопок */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+
+.help-button {
+    -fx-background-color: transparent;
+    -fx-border-color: #D6DEEB;
+    -fx-border-radius: 50%;
+    -fx-font-size: 14px;
+    -fx-text-fill: #D6DEEB;
+    -fx-padding: 10px;
+}
+.main-title {
+    -fx-font-size: 24px;
+    -fx-padding: 10px;
+}
+
+.sidebar-item:hover {
+    -fx-text-fill: #F9AA33;
+}
+
+.button-add:hover {
+    -fx-background-color: #45a049;
+}
+
+.button-update:hover {
+    -fx-background-color: #1e88e5;
+}
+
+.button-delete:hover {
+    -fx-background-color: #e53935;
+}
+
+.button-clear:hover {
+    -fx-background-color: #fb8c00;
+}
+
+.filter-checkbox {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}

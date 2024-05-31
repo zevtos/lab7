@@ -6,17 +6,17 @@
 
 /* Стили для меню */
 .menu-bar {
-    -fx-background-color: #344955;
+    -fx-background-color: #8dadc4;
     -fx-text-fill: #ffffff;
 }
 
 .menu {
-    -fx-background-color: #344955;
+    -fx-background-color: #8dadc4;
     -fx-text-fill: #ffffff;
 }
 
 .menu-item {
-    -fx-background-color: #344955;
+    -fx-background-color: #60839a;
     -fx-text-fill: #ffffff;
     -fx-font-size: 14px;
 }

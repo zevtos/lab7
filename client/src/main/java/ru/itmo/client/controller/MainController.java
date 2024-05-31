@@ -1,8 +1,10 @@
 package ru.itmo.client.controller;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lombok.Setter;
 import org.controlsfx.control.Notifications;
 import ru.itmo.client.MainApp;
 import ru.itmo.client.utility.runtime.Runner;
@@ -61,6 +64,10 @@ public class MainController {
     private TableColumn<Ticket, Integer> userIdColumn;
     @FXML
     private CheckBox filterCheckBox;
+    @FXML
+    private ComboBox<String> themeSelector;
+    @Setter
+    private Stage primaryStage;
     @FXML
     private Button addButton;
     @FXML
@@ -176,27 +183,43 @@ public class MainController {
         boolean okClicked = mainApp.showTicketEditDialog(newTicket);
 
         if (okClicked) {
-            newTicket.setUserId(runner.getCurrentUserId()); // Устанавливаем идентификатор пользователя
-            boolean added = runner.addTicket(newTicket); // Assuming you have a runner that handles the business logic
+            newTicket.setUserId(runner.getCurrentUserId());
 
-            if (added) {
-                ticketData.add(newTicket);
+            Task<Boolean> task = new Task<>() {
+                @Override
+                protected Boolean call() {
+                    return runner.addTicket(newTicket);
+                }
 
-                dataTable.getItems().add(newTicket); // Add the ticket directly to the table
-                dataTable.refresh(); // Ensure the table view is refreshed
-                dataTable.sort();
+                @Override
+                protected void succeeded() {
+                    Boolean added = getValue();
+                    if (added) {
+                        Platform.runLater(() -> {
+                            ticketData.add(newTicket);
+                            dataTable.getItems().add(newTicket);
+                            dataTable.refresh();
+                            dataTable.sort();
+                            Notifications.create()
+                                    .title("Ticket Added")
+                                    .text("The ticket was successfully added." + '\n' + "Assigned id: " + newTicket.getId())
+                                    .hideAfter(Duration.seconds(3))
+                                    .position(Pos.BOTTOM_RIGHT)
+                                    .showInformation();
+                        });
+                    }
+                }
 
-                // Create and show notification
-                Notifications.create()
-                        .title("Ticket Added")
-                        .text("The ticket was successfully added." + '\n'
-                                + "Assigned id: " + newTicket.getId())
-                        .hideAfter(Duration.seconds(3))
-                        .position(Pos.BOTTOM_RIGHT)
-                        .showInformation();
-            }
+                @Override
+                protected void failed() {
+                    showAlert("Error", "Failed to add ticket", getException().getMessage());
+                }
+            };
+
+            executeInBackground(task);
         }
     }
+
 
     @FXML
     private void handleUpdate() {
@@ -204,35 +227,71 @@ public class MainController {
         if (selectedTicket != null) {
             boolean okClicked = mainApp.showTicketEditDialog(selectedTicket);
             if (okClicked) {
-                runner.updateTicket(selectedTicket);  // Assuming you have a runner that handles the business logic
-                showTicketDetails(selectedTicket);
-                dataTable.refresh(); // Ensure the table view is refreshed
+                Task<Void> task = new Task<>() {
+                    @Override
+                    protected Void call() {
+                        runner.updateTicket(selectedTicket);
+                        return null;
+                    }
+
+                    @Override
+                    protected void succeeded() {
+                        Platform.runLater(() -> {
+                            showTicketDetails(selectedTicket);
+                            dataTable.refresh();
+                        });
+                    }
+
+                    @Override
+                    protected void failed() {
+                        showAlert("Error", "Failed to update ticket", getException().getMessage());
+                    }
+                };
+
+                executeInBackground(task);
             }
         } else {
-            showAlert(
-                    bundle.getString("update.error.title"),
+            showAlert(bundle.getString("update.error.title"),
                     bundle.getString("update.error.header"),
-                    bundle.getString("update.error.content")
-            );
+                    bundle.getString("update.error.content"));
         }
     }
+
 
     @FXML
     private void handleDelete() {
         int selectedIndex = dataTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
             Ticket selectedTicket = dataTable.getItems().get(selectedIndex);
-            runner.deleteTicket(selectedTicket);  // Assuming you have a runner that handles the business logic
-            dataTable.getItems().remove(selectedIndex);
-            dataTable.refresh(); // Ensure the table view is refreshed
+            Task<Void> task = new Task<>() {
+                @Override
+                protected Void call() {
+                    runner.deleteTicket(selectedTicket);
+                    return null;
+                }
+
+                @Override
+                protected void succeeded() {
+                    Platform.runLater(() -> {
+                        dataTable.getItems().remove(selectedIndex);
+                        dataTable.refresh();
+                    });
+                }
+
+                @Override
+                protected void failed() {
+                    showAlert("Error", "Failed to delete ticket", getException().getMessage());
+                }
+            };
+
+            executeInBackground(task);
         } else {
-            showAlert(
-                    bundle.getString("delete.error.title"),
+            showAlert(bundle.getString("delete.error.title"),
                     bundle.getString("delete.error.header"),
-                    bundle.getString("delete.error.content")
-            );
+                    bundle.getString("delete.error.content"));
         }
     }
+
 
     @FXML
     private void handleClear() {
@@ -242,23 +301,43 @@ public class MainController {
                 bundle.getString("clear.confirm.content")
         );
         if (confirmed) {
-            boolean success = runner.clearTickets();
-            if (success) {
-                ticketData.clear();
-                MainApp.showAlert(
-                        bundle.getString("clear.success.title"),
-                        bundle.getString("clear.success.header"),
-                        bundle.getString("clear.success.content")
-                );
-            } else {
-                MainApp.showAlert(
-                        bundle.getString("clear.error.title"),
-                        bundle.getString("clear.error.header"),
-                        bundle.getString("clear.error.content")
-                );
-            }
+            Task<Boolean> task = new Task<>() {
+                @Override
+                protected Boolean call() {
+                    return runner.clearTickets();
+                }
+
+                @Override
+                protected void succeeded() {
+                    Boolean success = getValue();
+                    Platform.runLater(() -> {
+                        if (success) {
+                            ticketData.clear();
+                            MainApp.showAlert(
+                                    bundle.getString("clear.success.title"),
+                                    bundle.getString("clear.success.header"),
+                                    bundle.getString("clear.success.content")
+                            );
+                        } else {
+                            MainApp.showAlert(
+                                    bundle.getString("clear.error.title"),
+                                    bundle.getString("clear.error.header"),
+                                    bundle.getString("clear.error.content")
+                            );
+                        }
+                    });
+                }
+
+                @Override
+                protected void failed() {
+                    showAlert("Error", "Failed to clear tickets", getException().getMessage());
+                }
+            };
+
+            executeInBackground(task);
         }
     }
+
 
     @FXML
     private void handleHelp() {
@@ -345,16 +424,32 @@ public class MainController {
         fileChooser.setTitle("Select Script File");
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
         if (file != null) {
-            new Thread(() -> {
-                Runner.ExitCode exitCode = runner.scriptMode(file);
-                if (exitCode == Runner.ExitCode.OK) {
-                    showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
-                    fetchTickets();
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed.");
+            Task<Runner.ExitCode> task = new Task<>() {
+                @Override
+                protected Runner.ExitCode call() {
+                    return runner.scriptMode(file);
                 }
-            }
-            ).start();
+
+                @Override
+                protected void succeeded() {
+                    Runner.ExitCode exitCode = getValue();
+                    Platform.runLater(() -> {
+                        if (exitCode == Runner.ExitCode.OK) {
+                            showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
+                            fetchTickets();
+                        } else {
+                            showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed.");
+                        }
+                    });
+                }
+
+                @Override
+                protected void failed() {
+                    showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed: " + getException().getMessage());
+                }
+            };
+
+            executeInBackground(task);
         }
     }
 
@@ -409,33 +504,66 @@ public class MainController {
     }
 
     public void fetchTickets() {
-        new Thread(() -> {
-            // Получение информации о текущем пользователе
-            Integer userId = runner.getCurrentUserId();
-            String username = runner.getCurrentUsername();
-            // Заполнение метки информации о пользователе
-            if (userId != null && username != null) {
-                userInfoLabel.setText(String.format("%s %s, %s %d", bundle.getString("main.user.info"), username,
-                        bundle.getString("main.user.info.id"), userId));
+        Task<ObservableList<Ticket>> task = new Task<>() {
+            @Override
+            protected ObservableList<Ticket> call() {
+                Integer userId = runner.getCurrentUserId();
+                String username = runner.getCurrentUsername();
+                Platform.runLater(() -> userInfoLabel.setText(String.format("%s %s, %s %d", bundle.getString("main.user.info"), username,
+                        bundle.getString("main.user.info.id"), userId)));
+                return FXCollections.observableArrayList(runner.fetchTickets());
             }
-            if (filterCheckBox.isSelected()) {
-                fetchUserTickets();
-                return;
+
+            @Override
+            protected void succeeded() {
+                ObservableList<Ticket> tickets = getValue();
+                Platform.runLater(() -> {
+                    ticketData.setAll(tickets);
+                    dataTable.setItems(ticketData);
+                    dataTable.refresh();
+                });
             }
-            ObservableList<Ticket> tickets = FXCollections.observableArrayList(runner.fetchTickets());
-            ticketData.setAll(tickets);
-            dataTable.setItems(ticketData);
-            dataTable.refresh();
-        }).start();
+
+            @Override
+            protected void failed() {
+                showAlert("Error", "Failed to fetch tickets", getException().getMessage());
+            }
+        };
+
+        executeInBackground(task);
     }
 
+
     public void fetchUserTickets() {
-        new Thread(() -> {
-            ObservableList<Ticket> userTickets = FXCollections.observableArrayList(runner.fetchTickets()
-                    .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
-            ticketData.setAll(userTickets);
-            dataTable.setItems(ticketData);
-            dataTable.refresh();
-        }).start();
+        Task<ObservableList<Ticket>> task = new Task<>() {
+            @Override
+            protected ObservableList<Ticket> call() {
+                return FXCollections.observableArrayList(runner.fetchTickets()
+                        .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
+            }
+
+            @Override
+            protected void succeeded() {
+                ObservableList<Ticket> userTickets = getValue();
+                Platform.runLater(() -> {
+                    ticketData.setAll(userTickets);
+                    dataTable.setItems(userTickets);
+                    dataTable.refresh();
+                });
+            }
+
+            @Override
+            protected void failed() {
+                showAlert("Error", "Failed to fetch user tickets", getException().getMessage());
+            }
+        };
+
+        executeInBackground(task);
+    }
+
+    private <V> void executeInBackground(Task<V> task) {
+        Thread thread = new Thread(task);
+        thread.setDaemon(true);
+        thread.start();
     }
 }

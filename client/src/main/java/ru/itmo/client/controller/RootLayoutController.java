@@ -27,7 +27,7 @@ public class RootLayoutController {
 
     @FXML
     private void handleAbout() {
-        String infoMessage = mainApp.getRunner().getInfo();
+        String infoMessage = runner.getInfo();
         MainApp.showAlert("Информация о коллекции", null, infoMessage);
     }
 }
