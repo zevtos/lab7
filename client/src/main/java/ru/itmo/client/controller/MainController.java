@@ -26,6 +26,7 @@ import ru.itmo.general.network.Response;
 import java.io.File;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController {
@@ -112,6 +113,9 @@ public class MainController {
 
 
     private ObservableList<Ticket> ticketData = FXCollections.observableArrayList();
+    private boolean backgroundTaskRunning = false;
+    private Thread backgroundThread;
+    private Thread scriptThread;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -216,7 +220,7 @@ public class MainController {
                 }
             };
 
-            executeInBackground(task);
+            startBackgroundTask(task);
         }
     }
 
@@ -248,7 +252,7 @@ public class MainController {
                     }
                 };
 
-                executeInBackground(task);
+                startBackgroundTask(task);
             }
         } else {
             showAlert(bundle.getString("update.error.title"),
@@ -284,7 +288,7 @@ public class MainController {
                 }
             };
 
-            executeInBackground(task);
+            startBackgroundTask(task);
         } else {
             showAlert(bundle.getString("delete.error.title"),
                     bundle.getString("delete.error.header"),
@@ -334,7 +338,7 @@ public class MainController {
                 }
             };
 
-            executeInBackground(task);
+            startBackgroundTask(task);
         }
     }
 
@@ -449,7 +453,7 @@ public class MainController {
                 }
             };
 
-            executeInBackground(task);
+            startBackgroundTask(task);
         }
     }
 
@@ -530,7 +534,7 @@ public class MainController {
             }
         };
 
-        executeInBackground(task);
+        startBackgroundTask(task);
     }
 
 
@@ -558,12 +562,45 @@ public class MainController {
             }
         };
 
-        executeInBackground(task);
+        startBackgroundTask(task);
     }
 
-    private <V> void executeInBackground(Task<V> task) {
-        Thread thread = new Thread(task);
-        thread.setDaemon(true);
-        thread.start();
+    private void startBackgroundTask(Task<?> task) {
+        backgroundThread = new Thread(task);
+        backgroundThread.setDaemon(true);
+        backgroundThread.start();
+        backgroundTaskRunning = true;
+
+        task.setOnSucceeded(event -> backgroundTaskRunning = false);
+        task.setOnFailed(event -> backgroundTaskRunning = false);
+        task.setOnCancelled(event -> backgroundTaskRunning = false);
+    }
+
+    private void startScriptTask(Task<?> task) {
+        scriptThread = new Thread(task);
+        scriptThread.setDaemon(true);
+        scriptThread.start();
+    }
+
+    private void executeScriptInBackground(Task<?> task) {
+        if (scriptThread != null && scriptThread.isAlive()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Script Task Running");
+            alert.setHeaderText("A script task is already running.");
+            alert.setContentText("Do you want to interrupt the current script task and start a new one?");
+
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes) {
+                scriptThread.interrupt();
+                startScriptTask(task);
+            }
+        } else {
+            startScriptTask(task);
+        }
     }
 }
