@@ -72,7 +72,7 @@ public class DataVisualizationController {
     public void addTicket(Ticket ticket) {
         routes.add(ticket);
         if (!userColors.containsKey(ticket.getUserId())) {
-            userColors.put(ticket.getUserId(), generateRandomColor());
+            userColors.put(ticket.getUserId(), generateColorForUserId(ticket.getUserId()));
         }
         updateMaxCoordinates(Collections.singletonList(ticket));
         refreshCircles();
@@ -182,7 +182,10 @@ public class DataVisualizationController {
         }
     }
 
-    private Color generateRandomColor() {
+    private Color generateColorForUserId(int userId) {
+        int hash = Integer.hashCode(userId);
+        Random random = new Random(hash);
         return Color.color(random.nextDouble(), random.nextDouble(), random.nextDouble());
     }
+
 }

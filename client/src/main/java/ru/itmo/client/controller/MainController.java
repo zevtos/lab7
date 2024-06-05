@@ -173,7 +173,7 @@ public class MainController {
             protected Void call() throws Exception {
                 while (true) {
                     TimeUnit.SECONDS.sleep(10);
-                    handleFilter();
+                    Platform.runLater(() -> handleFilter());
                 }
             }
         };
@@ -191,10 +191,12 @@ public class MainController {
                     filteredData.add(ticket);
                 }
             }
-            ticketData.setAll(filteredData);
-            dataTable.setItems(ticketData);
-            dataTable.refresh();
-            dataTable.sort();
+            Platform.runLater(() -> {
+                ticketData.setAll(filteredData);
+                dataTable.setItems(ticketData);
+                dataTable.refresh();
+                dataTable.sort();
+            });
         } else {
             fetchTickets();
         }
@@ -241,14 +243,13 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    showAlert("Error", "Failed to add ticket", getException().getMessage());
+                    Platform.runLater(() -> showAlert("Error", "Failed to add ticket", getException().getMessage()));
                 }
             };
 
             startBackgroundTask(task);
         }
     }
-
 
     @FXML
     private void handleUpdate() {
@@ -277,7 +278,7 @@ public class MainController {
 
                     @Override
                     protected void failed() {
-                        showAlert("Error", "Failed to update ticket", getException().getMessage());
+                        Platform.runLater(() -> showAlert("Error", "Failed to update ticket", getException().getMessage()));
                     }
                 };
 
@@ -289,7 +290,6 @@ public class MainController {
                     bundle.getString("update.error.content"));
         }
     }
-
 
     @FXML
     private void handleDelete() {
@@ -317,7 +317,7 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    showAlert("Error", "Failed to delete ticket", getException().getMessage());
+                    Platform.runLater(() -> showAlert("Error", "Failed to delete ticket", getException().getMessage()));
                 }
             };
 
@@ -328,7 +328,6 @@ public class MainController {
                     bundle.getString("delete.error.content"));
         }
     }
-
 
     @FXML
     private void handleClear() {
@@ -371,14 +370,13 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    showAlert("Error", "Failed to clear tickets", getException().getMessage());
+                    Platform.runLater(() -> showAlert("Error", "Failed to clear tickets", getException().getMessage()));
                 }
             };
 
             startBackgroundTask(task);
         }
     }
-
 
     @FXML
     private void handleHelp() {
@@ -456,11 +454,13 @@ public class MainController {
     }
 
     private void showAlert(Alert.AlertType alertType, String title, String message) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(alertType);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
     }
 
     @FXML
@@ -490,7 +490,7 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed: " + getException().getMessage());
+                    Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed: " + getException().getMessage()));
                 }
             };
 
@@ -498,54 +498,57 @@ public class MainController {
         }
     }
 
-
     private void showTicketDetails(Ticket ticket) {
         if (ticket != null) {
             // Fill the labels with info from the ticket object
-            nameLabel.setText(ticket.getName());
-            coordinatesLabel.setText(ticket.getCoordinates().toString());
-            creationDateLabel.setText(ticket.getCreationDate().toString());
-            priceLabel.setText(Double.toString(ticket.getPrice()));
-            discountLabel.setText(ticket.getDiscount() != null ? ticket.getDiscount().toString() : ""); // Обработка null
-            commentLabel.setText(ticket.getComment());
-            commentLabel.setText(ticket.getComment());
-            typeLabel.setText(ticket.getType().toString());
+            Platform.runLater(() -> {
+                nameLabel.setText(ticket.getName());
+                coordinatesLabel.setText(ticket.getCoordinates().toString());
+                creationDateLabel.setText(ticket.getCreationDate().toString());
+                priceLabel.setText(Double.toString(ticket.getPrice()));
+                discountLabel.setText(ticket.getDiscount() != null ? ticket.getDiscount().toString() : ""); // Обработка null
+                commentLabel.setText(ticket.getComment() != null ? ticket.getComment() : "");
+                typeLabel.setText(ticket.getType().toString());
 
-            if (ticket.getPerson() != null) {
-                birthdayLabel.setText(ticket.getPerson().birthday().toString());
-                heightLabel.setText(ticket.getPerson().height().toString());
-                passportIDLabel.setText(ticket.getPerson().passportID());
-                hairColorLabel.setText(ticket.getPerson().hairColor().toString());
-            } else {
+                if (ticket.getPerson() != null) {
+                    birthdayLabel.setText(ticket.getPerson().birthday().toString());
+                    heightLabel.setText(ticket.getPerson().height().toString());
+                    passportIDLabel.setText(ticket.getPerson().passportID());
+                    hairColorLabel.setText(ticket.getPerson().hairColor().toString());
+                } else {
+                    birthdayLabel.setText("");
+                    heightLabel.setText("");
+                    passportIDLabel.setText("");
+                    hairColorLabel.setText("");
+                }
+            });
+        } else {
+            // Ticket is null, remove all the text
+            Platform.runLater(() -> {
+                nameLabel.setText("");
+                coordinatesLabel.setText("");
+                creationDateLabel.setText("");
+                priceLabel.setText("");
+                discountLabel.setText("");
+                commentLabel.setText("");
+                typeLabel.setText("");
                 birthdayLabel.setText("");
                 heightLabel.setText("");
                 passportIDLabel.setText("");
                 hairColorLabel.setText("");
-            }
-        } else {
-            // Ticket is null, remove all the text
-            nameLabel.setText("");
-            coordinatesLabel.setText("");
-            creationDateLabel.setText("");
-            priceLabel.setText("");
-            discountLabel.setText("");
-            commentLabel.setText("");
-            typeLabel.setText("");
-            birthdayLabel.setText("");
-            heightLabel.setText("");
-            passportIDLabel.setText("");
-            hairColorLabel.setText("");
+            });
         }
     }
 
     private void showAlert(String title, String header, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.initOwner(mainApp.getPrimaryStage());
-        alert.setTitle(title);
-        alert.setHeaderText(header);
-        alert.setContentText(content);
-
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle(title);
+            alert.setHeaderText(header);
+            alert.setContentText(content);
+            alert.showAndWait();
+        });
     }
 
     public void fetchTickets() {
@@ -563,18 +566,20 @@ public class MainController {
             @Override
             protected void succeeded() {
                 ObservableList<Ticket> tickets = getValue();
-                setRouteData(tickets);
-                Platform.runLater(() -> {
-                    ticketData.setAll(tickets);
-                    dataTable.setItems(ticketData);
-                    dataTable.refresh();
-                    dataTable.sort();
-                });
+                if (!tickets.equals(ticketData)) {
+                    setRouteData(tickets);
+                    Platform.runLater(() -> {
+                        ticketData.setAll(tickets);
+                        dataTable.setItems(ticketData);
+                        dataTable.refresh();
+                        dataTable.sort();
+                    });
+                }
             }
 
             @Override
             protected void failed() {
-                showAlert("Error", "Failed to fetch tickets", getException().getMessage());
+                Platform.runLater(() -> showAlert("Error", "Failed to fetch tickets", getException().getMessage()));
             }
         };
 
@@ -587,7 +592,6 @@ public class MainController {
         task.setOnFailed(event -> fetchThreadRunning = false);
         task.setOnCancelled(event -> fetchThreadRunning = false);
     }
-
 
     public void fetchUserTickets() {
         Task<ObservableList<Ticket>> task = new Task<>() {
@@ -600,17 +604,19 @@ public class MainController {
             @Override
             protected void succeeded() {
                 ObservableList<Ticket> userTickets = getValue();
-                setRouteData(userTickets);
-                Platform.runLater(() -> {
-                    ticketData.setAll(userTickets);
-                    dataTable.setItems(userTickets);
-                    dataTable.refresh();
-                });
+                if (!userTickets.equals(ticketData)) {
+                    setRouteData(userTickets);
+                    Platform.runLater(() -> {
+                        ticketData.setAll(userTickets);
+                        dataTable.setItems(userTickets);
+                        dataTable.refresh();
+                    });
+                }
             }
 
             @Override
             protected void failed() {
-                showAlert("Error", "Failed to fetch user tickets", getException().getMessage());
+                Platform.runLater(() -> showAlert("Error", "Failed to fetch user tickets", getException().getMessage()));
             }
         };
         fetchThread = new Thread(task);
@@ -622,6 +628,7 @@ public class MainController {
         task.setOnFailed(event -> fetchThreadRunning = false);
         task.setOnCancelled(event -> fetchThreadRunning = false);
     }
+
 
     private void startBackgroundTask(Task<?> task) {
         backgroundThread = new Thread(task);
@@ -663,7 +670,7 @@ public class MainController {
     }
 
     public void selectTicket(Ticket ticket) {
-        dataTable.getSelectionModel().select(ticket);
+        Platform.runLater(() -> dataTable.getSelectionModel().select(ticket));
     }
 
     private void updateVisualization() {

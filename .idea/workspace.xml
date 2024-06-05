@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.5 upgrade client multithreading">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.7 strashno no vrode robit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/add.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/add.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/script.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -453,14 +444,8 @@
       <workItem from="1717492584166" duration="16106000" />
       <workItem from="1717532256264" duration="12000" />
       <workItem from="1717575046027" duration="3915000" />
-    </task>
-    <task id="LOCAL-00001" summary="1.0">
-      <option name="closed" value="true" />
-      <created>1713907510597</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1713907510597</updated>
+      <workItem from="1717587034031" duration="326000" />
+      <workItem from="1717593541538" duration="1049000" />
     </task>
     <task id="LOCAL-00002" summary="1.1">
       <option name="closed" value="true" />
@@ -846,7 +831,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717176076310</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="2.8.7 strashno no vrode robit">
+      <option name="closed" value="true" />
+      <created>1717587072434</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1717587072435</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -857,14 +850,25 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.8.1 added simple windows" />
     <MESSAGE value="2.8.2 tables, register, add, update, remove" />
     <MESSAGE value="2.8.2.1 remove javafx from general" />
     <MESSAGE value="2.8.2.2 switch String data to List Tickets(for adding to table)" />
@@ -889,7 +893,8 @@
     <MESSAGE value="2.8.6.4 optimization and removal of the debug" />
     <MESSAGE value="2.8.6.4.1 i'm sorry fup" />
     <MESSAGE value="2.8.6.5 upgrade client multithreading" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.5 upgrade client multithreading" />
+    <MESSAGE value="2.8.7 strashno no vrode robit" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.7 strashno no vrode robit" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -898,11 +903,6 @@
           <properties class="java.net.BindException" package="java.net" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java</url>
-          <line>206</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java</url>
           <line>88</line>
