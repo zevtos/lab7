@@ -2,12 +2,14 @@ package ru.itmo.client;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import ru.itmo.client.controller.*;
 import ru.itmo.client.utility.runtime.Runner;
@@ -33,8 +35,17 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Ticket Management System");
 
+        this.primaryStage.setFullScreen(true);
+
         Locale.setDefault(new Locale("ru"));
         ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
+
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        this.primaryStage.setX(bounds.getMinX());
+        this.primaryStage.setY(bounds.getMinY());
+        this.primaryStage.setWidth(bounds.getWidth());
+        this.primaryStage.setHeight(bounds.getHeight());
 
         ServerConnection connection = new ServerConnection("localhost", 4093); // Укажите хост и порт вашего сервера
         runner = new Runner(connection);
