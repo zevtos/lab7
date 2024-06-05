@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
-<BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.DataVisualizationController" stylesheets="@../css/LightStyle.css">
-    <center>
-        <Canvas fx:id="canvas" width="600" height="900" styleClass="canvas"/>
-    </center>
-</BorderPane>
+<AnchorPane fx:id="dataVisualization" fx:controller="ru.itmo.client.controller.DataVisualizationController"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane stylesheets="@../css/LightStyle.css">
+        <center>
+            <Canvas fx:id="canvas" width="600" height="900" styleClass="canvas"/>
+        </center>
+    </BorderPane>
+</AnchorPane>

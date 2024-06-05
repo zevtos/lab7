@@ -65,7 +65,7 @@ public class ServerConnection {
         }
         if(request.getCommand().equals("login") || request.getCommand().equals("register")) {
             try {
-                currentUserId = (Integer) response.getData();
+                currentUserId = response == null ? null : (Integer) response.getData();
             } catch (Exception ignored){
             }
         }
@@ -74,9 +74,8 @@ public class ServerConnection {
 
     public List<Ticket> receiveTickets() {
         try {
-            System.out.println("Ticekts");
             Response response = sendCommand("show", null);
-            return (List<Ticket>) response.getData();
+            return response != null ? ((List<Ticket>) response.getData()) : null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

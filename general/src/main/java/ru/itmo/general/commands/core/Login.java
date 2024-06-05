@@ -56,7 +56,6 @@ public class Login extends Command {
     @Override
     public Request execute(String[] arguments) {
         try {
-            System.out.println(arguments);
             if (arguments.length <= 2 || arguments[1].isEmpty() || arguments[2].isEmpty())
                 throw new InvalidNumberOfElementsException();
             Request request = new Request(true, getName(), null);

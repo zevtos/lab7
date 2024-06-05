@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.canvas.Canvas?>
 <BorderPane xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.itmo.client.controller.MainController"
@@ -12,14 +11,6 @@
         <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
             <Button fx:id="helpButton" text="?" onAction="#handleHelp" styleClass="help-button"/>
             <CheckBox fx:id="filterCheckBox" text="%main.filter.checkbox" styleClass="filter-checkbox"/>
-            <!--            <ComboBox fx:id="themeSelector" onAction="#handleThemeChange">-->
-            <!--                <items>-->
-            <!--                    <FXCollections fx:factory="observableArrayList">-->
-            <!--                        <String fx:value="Light Theme"/>-->
-            <!--                        <String fx:value="Night Theme"/>-->
-            <!--                    </FXCollections>-->
-            <!--                </items>-->
-            <!--            </ComboBox>-->
             <HBox spacing="10" alignment="CENTER_RIGHT" HBox.hgrow="ALWAYS">
                 <Label text="%main.user.info" styleClass="user-info"/>
                 <Label fx:id="userInfoLabel" styleClass="user-info"/>
@@ -27,23 +18,27 @@
         </HBox>
     </top>
     <center>
-        <TableView fx:id="dataTable" prefHeight="400" prefWidth="600" styleClass="table-view">
-            <columns>
-                <TableColumn fx:id="idColumn" text="%main.id" styleClass="table-column"/>
-                <TableColumn fx:id="nameColumn" text="%main.name" styleClass="table-column"/>
-                <TableColumn fx:id="coordinatesColumn" text="%main.coordinates" styleClass="table-column"/>
-                <TableColumn fx:id="creationDateColumn" text="%main.creationDate" styleClass="table-column"/>
-                <TableColumn fx:id="priceColumn" text="%main.price" styleClass="table-column"/>
-                <TableColumn fx:id="discountColumn" text="%main.discount" styleClass="table-column"/>
-                <TableColumn fx:id="commentColumn" text="%main.comment" styleClass="table-column"/>
-                <TableColumn fx:id="typeColumn" text="%main.type" styleClass="table-column"/>
-                <TableColumn fx:id="columnBirthday" text="%main.column.birthday" styleClass="table-column"/>
-                <TableColumn fx:id="columnHeight" text="%main.column.height" styleClass="table-column"/>
-                <TableColumn fx:id="columnPassportID" text="%main.column.passportID" styleClass="table-column"/>
-                <TableColumn fx:id="columnHairColor" text="%main.column.hairColor" styleClass="table-column"/>
-                <TableColumn fx:id="userIdColumn" text="%main.user.id" styleClass="table-column"/>
-            </columns>
-        </TableView>
+        <VBox spacing="10" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToWidth="true" fitToHeight="true" VBox.vgrow="ALWAYS">
+                <TableView fx:id="dataTable" styleClass="table-view" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="%main.id" styleClass="table-column"/>
+                        <TableColumn fx:id="nameColumn" text="%main.name" styleClass="table-column"/>
+                        <TableColumn fx:id="coordinatesColumn" text="%main.coordinates" styleClass="table-column"/>
+                        <TableColumn fx:id="creationDateColumn" text="%main.creationDate" styleClass="table-column"/>
+                        <TableColumn fx:id="priceColumn" text="%main.price" styleClass="table-column"/>
+                        <TableColumn fx:id="discountColumn" text="%main.discount" styleClass="table-column"/>
+                        <TableColumn fx:id="commentColumn" text="%main.comment" styleClass="table-column"/>
+                        <TableColumn fx:id="typeColumn" text="%main.type" styleClass="table-column"/>
+                        <TableColumn fx:id="columnBirthday" text="%main.column.birthday" styleClass="table-column"/>
+                        <TableColumn fx:id="columnHeight" text="%main.column.height" styleClass="table-column"/>
+                        <TableColumn fx:id="columnPassportID" text="%main.column.passportID" styleClass="table-column"/>
+                        <TableColumn fx:id="columnHairColor" text="%main.column.hairColor" styleClass="table-column"/>
+                        <TableColumn fx:id="userIdColumn" text="%main.user.id" styleClass="table-column"/>
+                    </columns>
+                </TableView>
+            </ScrollPane>
+        </VBox>
     </center>
     <bottom>
         <HBox spacing="10" alignment="CENTER" styleClass="button-bar">
@@ -62,7 +57,7 @@
         </HBox>
     </bottom>
     <right>
-        <VBox spacing="10" styleClass="details-pane">
+        <VBox spacing="10" styleClass="details-pane" VBox.vgrow="ALWAYS">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
@@ -117,6 +112,11 @@
                     <Label text="%main.column.hairColor" GridPane.rowIndex="10" GridPane.columnIndex="0"
                            styleClass="details-label"/>
                     <Label fx:id="hairColorLabel" GridPane.rowIndex="10" GridPane.columnIndex="1"
+                           styleClass="details-value"/>
+
+                    <Label text="%main.column.userId" GridPane.rowIndex="11" GridPane.columnIndex="0"
+                           styleClass="details-label"/>
+                    <Label fx:id="userIdLabel" GridPane.rowIndex="11" GridPane.columnIndex="1"
                            styleClass="details-value"/>
                 </children>
             </GridPane>

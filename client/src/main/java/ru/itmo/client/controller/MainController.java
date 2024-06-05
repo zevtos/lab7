@@ -66,6 +66,8 @@ public class MainController {
     private CheckBox filterCheckBox;
     @FXML
     private ComboBox<String> themeSelector;
+    @FXML
+    public VBox dataVisualization;
     @Setter
     private Stage primaryStage;
     @FXML
@@ -109,9 +111,10 @@ public class MainController {
     private Label hairColorLabel;
     @FXML
     private Label userInfoLabel;
+    @FXML
+    private Label userIdLabel;
     @Getter
     private ObservableList<Ticket> ticketData = FXCollections.observableArrayList();
-    private boolean backgroundTaskRunning = false;
     private Thread backgroundThread;
     private Thread scriptThread;
     private Thread fetchThread;
@@ -165,6 +168,7 @@ public class MainController {
                 (observable, oldValue, newValue) -> showTicketDetails(newValue));
 
         startBackgroundUpdateThread();
+
     }
 
     private void startBackgroundUpdateThread() {
@@ -185,18 +189,7 @@ public class MainController {
 
     private void handleFilter() {
         if (filterCheckBox.isSelected()) {
-            ObservableList<Ticket> filteredData = FXCollections.observableArrayList();
-            for (Ticket ticket : runner.fetchTickets()) {
-                if (ticket.getUserId().equals(runner.getCurrentUserId())) {
-                    filteredData.add(ticket);
-                }
-            }
-            Platform.runLater(() -> {
-                ticketData.setAll(filteredData);
-                dataTable.setItems(ticketData);
-                dataTable.refresh();
-                dataTable.sort();
-            });
+            fetchUserTickets();
         } else {
             fetchTickets();
         }
@@ -345,14 +338,10 @@ public class MainController {
 
                 @Override
                 protected void succeeded() {
-                    DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
-                    if (dataVisualizationController != null) {
-                        dataVisualizationController.clearAllTickets();
-                    }
                     Boolean success = getValue();
                     Platform.runLater(() -> {
                         if (success) {
-                            ticketData.clear();
+                            fetchTickets();
                             MainApp.showAlert(
                                     bundle.getString("clear.success.title"),
                                     bundle.getString("clear.success.header"),
@@ -434,7 +423,7 @@ public class MainController {
                         .position(Pos.BOTTOM_RIGHT)
                         .showInformation();
             } else {
-                showAlert("failure.title", bundle.getString("add.failure.header"), bundle.getString("add.failure.content"));
+                showAlert("failure.title", bundle.getString("add.if.min.failure.header"), "");
             }
         }
     }
@@ -504,7 +493,7 @@ public class MainController {
             Platform.runLater(() -> {
                 nameLabel.setText(ticket.getName());
                 coordinatesLabel.setText(ticket.getCoordinates().toString());
-                creationDateLabel.setText(ticket.getCreationDate().toString());
+                creationDateLabel.setText(ticket.getCreationDate().toInstant().toString());
                 priceLabel.setText(Double.toString(ticket.getPrice()));
                 discountLabel.setText(ticket.getDiscount() != null ? ticket.getDiscount().toString() : ""); // Обработка null
                 commentLabel.setText(ticket.getComment() != null ? ticket.getComment() : "");
@@ -521,6 +510,7 @@ public class MainController {
                     passportIDLabel.setText("");
                     hairColorLabel.setText("");
                 }
+                userIdLabel.setText(ticket.getUserId().toString());
             });
         } else {
             // Ticket is null, remove all the text
@@ -536,6 +526,7 @@ public class MainController {
                 heightLabel.setText("");
                 passportIDLabel.setText("");
                 hairColorLabel.setText("");
+                userIdLabel.setText("");
             });
         }
     }
@@ -555,18 +546,17 @@ public class MainController {
         Task<ObservableList<Ticket>> task = new Task<>() {
             @Override
             protected ObservableList<Ticket> call() {
-                Integer userId = runner.getCurrentUserId();
-                String username = runner.getCurrentUsername();
-                Platform.runLater(() -> userInfoLabel.setText(String.format("%s %s, %s %d",
-                        bundle.getString("main.user.info"), username,
-                        bundle.getString("main.user.info.id"), userId)));
-                return FXCollections.observableArrayList(runner.fetchTickets());
+                List<Ticket> tickets = runner.fetchTickets();
+                if (tickets == null) {
+                    return null;
+                }
+                return FXCollections.observableArrayList(tickets);
             }
 
             @Override
             protected void succeeded() {
                 ObservableList<Ticket> tickets = getValue();
-                if (!tickets.equals(ticketData)) {
+                if (tickets != null && !tickets.equals(ticketData)) {
                     setRouteData(tickets);
                     Platform.runLater(() -> {
                         ticketData.setAll(tickets);
@@ -574,6 +564,7 @@ public class MainController {
                         dataTable.refresh();
                         dataTable.sort();
                     });
+                } else if (tickets == null) {
                 }
             }
 
@@ -597,20 +588,25 @@ public class MainController {
         Task<ObservableList<Ticket>> task = new Task<>() {
             @Override
             protected ObservableList<Ticket> call() {
-                return FXCollections.observableArrayList(runner.fetchTickets()
+                List<Ticket> tickets = runner.fetchTickets();
+                if (tickets == null) {
+                    return null;
+                }
+                return FXCollections.observableArrayList(tickets
                         .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
             }
 
             @Override
             protected void succeeded() {
                 ObservableList<Ticket> userTickets = getValue();
-                if (!userTickets.equals(ticketData)) {
+                if (userTickets != null && !userTickets.equals(ticketData)) {
                     setRouteData(userTickets);
                     Platform.runLater(() -> {
                         ticketData.setAll(userTickets);
                         dataTable.setItems(userTickets);
                         dataTable.refresh();
                     });
+                } else if (userTickets == null) {
                 }
             }
 
@@ -631,14 +627,29 @@ public class MainController {
 
 
     private void startBackgroundTask(Task<?> task) {
-        backgroundThread = new Thread(task);
-        backgroundThread.setDaemon(true);
-        backgroundThread.start();
-        backgroundTaskRunning = true;
+        if (backgroundThread != null && backgroundThread.isAlive()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Background Task");
+            alert.setHeaderText("A background task is already running.");
+            alert.setContentText("Do you want to interrupt the current background task and start a new one?");
 
-        task.setOnSucceeded(event -> backgroundTaskRunning = false);
-        task.setOnFailed(event -> backgroundTaskRunning = false);
-        task.setOnCancelled(event -> backgroundTaskRunning = false);
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == buttonTypeYes) {
+                backgroundThread.interrupt();
+                backgroundThread = new Thread(task);
+                backgroundThread.setDaemon(true);
+                backgroundThread.start();startScriptTask(task);
+            }
+        } else {
+            backgroundThread = new Thread(task);
+            backgroundThread.setDaemon(true);
+            backgroundThread.start();
+        }
     }
 
     private void startScriptTask(Task<?> task) {
@@ -689,5 +700,14 @@ public class MainController {
             dataVisualizationController.setMainController(this);
             dataVisualizationController.initializeRoutes(routes);
         }
+    }
+
+
+    public void setUserInfo() {
+        Integer userId = runner.getCurrentUserId();
+        String username = runner.getCurrentUsername();
+        Platform.runLater(() -> userInfoLabel.setText(String.format("%s %s, %s %d",
+                bundle.getString("main.user.info"), username,
+                bundle.getString("main.user.info.id"), userId)));
     }
 }

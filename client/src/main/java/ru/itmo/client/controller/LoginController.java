@@ -7,6 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import ru.itmo.client.MainApp;
 import ru.itmo.client.utility.runtime.Runner;
+import ru.itmo.general.network.Response;
 
 import java.util.ResourceBundle;
 
@@ -47,11 +48,11 @@ public class LoginController {
         System.out.println(username);
         String password = passwordField.getText();
         System.out.println(password);
-        Runner.ExitCode result = runner.executeLogin(username, password);
-        if (result == Runner.ExitCode.OK) {
-            mainApp.showMainScreen(bundle);
+        Response result = runner.executeLogin(username, password);
+        if (result == null || !result.isSuccess()) {
+            messageOutput.appendText(bundle.getString("login.failed") + " " + (result != null ? result.getMessage() : "") + "\n");
         } else {
-            messageOutput.appendText(bundle.getString("login.failed") + "\n");
+            mainApp.showMainScreen(bundle);
         }
     }
 

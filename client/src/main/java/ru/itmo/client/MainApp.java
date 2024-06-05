@@ -5,10 +5,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import ru.itmo.client.controller.*;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.client.utility.runtime.ServerConnection;
@@ -65,12 +65,13 @@ public class MainApp extends Application {
             e.printStackTrace();
         }
     }
+
     public void showDataVisualization() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(MainApp.class.getResource("/view/DataVisualization.fxml"));
             loader.setResources(bundle);
-            BorderPane dataVisualization = loader.load();
+            AnchorPane dataVisualization = loader.load();
 
             dataVisualization.getStyleClass().add("data-visualization-pane");
 
@@ -139,6 +140,7 @@ public class MainApp extends Application {
             controller.setBundle(bundle);
             controller.setPrimaryStage(primaryStage);
             controller.fetchTickets();
+            controller.setUserInfo();
             List<Ticket> tickets = controller.getTicketData();
             showDataVisualization();
             DataVisualizationController dataVisualizationController = getDataVisualizationController();
@@ -191,7 +193,7 @@ public class MainApp extends Application {
         alert.showAndWait();
     }
 
-    public Window getPrimaryStage() {
+    public Stage getPrimaryStage() {
         return primaryStage;
     }
 
@@ -204,6 +206,7 @@ public class MainApp extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.OK;
     }
+
     public DataVisualizationController getDataVisualizationController() {
         return dataVisualizationController;
     }

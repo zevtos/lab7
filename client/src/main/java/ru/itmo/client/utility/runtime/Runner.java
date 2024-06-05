@@ -101,19 +101,14 @@ public class Runner {
         }
     }
 
-    public ExitCode executeLogin(String username, String password) {
+    public Response executeLogin(String username, String password) {
         Response response = connection.sendCommand(new String[]{"login", username, password});
-        if (response.isSuccess()) {
-            return ExitCode.OK;
-        } else {
-            MainApp.showAlert("Ошибка входа", response.getMessage(), (response.getData() == null) ? "" : response.getData().toString());
-            return ExitCode.ERROR;
-        }
+        return response;
     }
 
     public List<Ticket> fetchTickets() {
         List<Ticket> tickets = connection.receiveTickets();
-        return tickets != null ? tickets : new ArrayList<>();
+        return tickets;
     }
 
     public boolean addTicket(Ticket newTicket) {
@@ -123,7 +118,6 @@ public class Runner {
             newTicket.setId((Integer) response.getData());
             return true;
         } else {
-            MainApp.showAlert("Ошибка добавления", "Билет не был добавлен", response.getMessage());
             return false;
         }
     }
@@ -142,7 +136,6 @@ public class Runner {
         if (response.isSuccess()) {
             return true;
         } else {
-            MainApp.showAlert("Ошибка очистки билетов", "Билеты не были добавлены", response.getMessage());
             return false;
         }
     }
@@ -164,7 +157,6 @@ public class Runner {
             newTicket.setId((Integer) response.getData());
             return true;
         } else {
-            MainApp.showAlert("Ошибка добавления", "Билет не был добавлен", response.getMessage());
             return false;
         }
     }

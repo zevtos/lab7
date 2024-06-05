@@ -4,10 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.7 strashno no vrode robit">
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.7.1 fix update without changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ServerConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/ServerConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/css/LightStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/css/LightStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/ru/itmo/server/dao/UserDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,15 +455,8 @@
       <workItem from="1717532256264" duration="12000" />
       <workItem from="1717575046027" duration="3915000" />
       <workItem from="1717587034031" duration="326000" />
-      <workItem from="1717593541538" duration="1049000" />
-    </task>
-    <task id="LOCAL-00002" summary="1.1">
-      <option name="closed" value="true" />
-      <created>1713912913570</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1713912913570</updated>
+      <workItem from="1717593541538" duration="5791000" />
+      <workItem from="1717599400476" duration="4820000" />
     </task>
     <task id="LOCAL-00003" summary="1.2">
       <option name="closed" value="true" />
@@ -839,7 +842,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717587072435</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="2.8.7.1 fix update without changes">
+      <option name="closed" value="true" />
+      <created>1717594863053</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1717594863054</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -869,7 +880,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.8.2 tables, register, add, update, remove" />
     <MESSAGE value="2.8.2.1 remove javafx from general" />
     <MESSAGE value="2.8.2.2 switch String data to List Tickets(for adding to table)" />
     <MESSAGE value="2.8.2.3 update add to return id + some useful updates" />
@@ -894,7 +904,8 @@
     <MESSAGE value="2.8.6.4.1 i'm sorry fup" />
     <MESSAGE value="2.8.6.5 upgrade client multithreading" />
     <MESSAGE value="2.8.7 strashno no vrode robit" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.7 strashno no vrode robit" />
+    <MESSAGE value="2.8.7.1 fix update without changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.7.1 fix update without changes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -905,7 +916,7 @@
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java</url>
-          <line>88</line>
+          <line>89</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

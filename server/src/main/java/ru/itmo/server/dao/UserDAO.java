@@ -129,7 +129,6 @@ public class UserDAO implements Registered {
                     String passwordHash = resultSet.getString("password_hash");
                     String salt = resultSet.getString("salt");
                     LocalDateTime registrationDate = resultSet.getTimestamp("registration_date").toLocalDateTime();
-                    LocalDateTime lastLoginDate = resultSet.getTimestamp("last_login").toLocalDateTime();
 
                     return new User(id, storedUsername, passwordHash, salt, registrationDate);
                 } else {

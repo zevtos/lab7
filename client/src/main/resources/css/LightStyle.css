@@ -435,3 +435,7 @@
     -fx-border-radius: 5px;  /* Радиус границ */
     -fx-background-radius: 5px; /* Радиус фона */
 }
+
+.canvas {
+    -fx-background-color: #FFFFFF;
+}

@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 import ru.itmo.client.MainApp;
@@ -15,6 +16,7 @@ import ru.itmo.general.models.Ticket;
 import java.util.*;
 
 public class DataVisualizationController {
+    public AnchorPane dataVisualization;
     private MainApp mainApp;
     private Runner runner;
     private MainController mainController;
@@ -187,5 +189,4 @@ public class DataVisualizationController {
         Random random = new Random(hash);
         return Color.color(random.nextDouble(), random.nextDouble(), random.nextDouble());
     }
-
 }
