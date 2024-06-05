@@ -4,11 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.4.1 i'm sorry fup">
-      <change afterPath="$PROJECT_DIR$/docs/report.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/~$report.docx" afterDir="false" />
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.6.5 upgrade client multithreading">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/DataVisualizationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/network/TCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/DataVisualization.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/add.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/add.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/script.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/script.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +83,9 @@
     &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
     &quot;Maven.client [clean,javafx:run].executor&quot;: &quot;Run&quot;,
     &quot;Maven.client [exec:java].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.client [javafx:run].executor&quot;: &quot;Run&quot;,
     &quot;Maven.client.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.da [javafx:run].executor&quot;: &quot;Run&quot;,
     &quot;Maven.general.executor&quot;: &quot;Run&quot;,
     &quot;Maven.lab6 [compile,package].executor&quot;: &quot;Run&quot;,
     &quot;Maven.lab6 [exec:java].executor&quot;: &quot;Run&quot;,
@@ -135,7 +145,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Maven.client [clean,javafx:run]">
+  <component name="RunManager" selected="Maven.da [javafx:run]">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.itmo.client.ui.Main" />
       <module name="client" />
@@ -193,7 +203,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="client [clean,javafx:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
+    <configuration name="client [javafx:run]" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -205,7 +215,36 @@
             </option>
             <option name="goals">
               <list>
-                <option value="clean" />
+                <option value="javafx:run" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$/client" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="da [javafx:run]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
                 <option value="javafx:run" />
               </list>
             </option>
@@ -228,10 +267,11 @@
       <item itemvalue="Application.client1" />
       <item itemvalue="Application.client2" />
       <item itemvalue="Application.server" />
-      <item itemvalue="Application.ru.itmo.client.main.MainApp" />
       <item itemvalue="Application.MainApp" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="Maven.client [clean,javafx:run]" />
+      <item itemvalue="Application.ru.itmo.client.main.MainApp" />
+      <item itemvalue="Maven.client [javafx:run]" />
+      <item itemvalue="Maven.da [javafx:run]" />
     </list>
     <recent_temporary>
       <list>
@@ -391,7 +431,28 @@
       <workItem from="1717098047044" duration="622000" />
       <workItem from="1717099413723" duration="8292000" />
       <workItem from="1717161200919" duration="594000" />
-      <workItem from="1717171094307" duration="3270000" />
+      <workItem from="1717171094307" duration="3315000" />
+      <workItem from="1717182488589" duration="1805000" />
+      <workItem from="1717187330387" duration="154000" />
+      <workItem from="1717231476146" duration="45000" />
+      <workItem from="1717231693387" duration="840000" />
+      <workItem from="1717243162681" duration="150000" />
+      <workItem from="1717247119086" duration="24000" />
+      <workItem from="1717247221834" duration="27000" />
+      <workItem from="1717267581399" duration="839000" />
+      <workItem from="1717319233800" duration="6000" />
+      <workItem from="1717329751998" duration="9000" />
+      <workItem from="1717329792880" duration="45000" />
+      <workItem from="1717336822919" duration="23000" />
+      <workItem from="1717347690218" duration="43000" />
+      <workItem from="1717347899347" duration="731000" />
+      <workItem from="1717350757841" duration="8000" />
+      <workItem from="1717352847939" duration="23000" />
+      <workItem from="1717353397374" duration="2000" />
+      <workItem from="1717416210062" duration="10000" />
+      <workItem from="1717492584166" duration="16106000" />
+      <workItem from="1717532256264" duration="12000" />
+      <workItem from="1717575046027" duration="3915000" />
     </task>
     <task id="LOCAL-00001" summary="1.0">
       <option name="closed" value="true" />
@@ -777,7 +838,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717175361180</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="2.8.6.5 upgrade client multithreading">
+      <option name="closed" value="true" />
+      <created>1717176076310</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1717176076310</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -795,7 +864,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.8.0 init GUI base update" />
     <MESSAGE value="2.8.1 added simple windows" />
     <MESSAGE value="2.8.2 tables, register, add, update, remove" />
     <MESSAGE value="2.8.2.1 remove javafx from general" />
@@ -820,7 +888,8 @@
     <MESSAGE value="2.8.6.3 very funny executeInBackground and fix thread access to javafx" />
     <MESSAGE value="2.8.6.4 optimization and removal of the debug" />
     <MESSAGE value="2.8.6.4.1 i'm sorry fup" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.4.1 i'm sorry fup" />
+    <MESSAGE value="2.8.6.5 upgrade client multithreading" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.6.5 upgrade client multithreading" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -829,6 +898,16 @@
           <properties class="java.net.BindException" package="java.net" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java</url>
+          <line>206</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java</url>
+          <line>88</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>

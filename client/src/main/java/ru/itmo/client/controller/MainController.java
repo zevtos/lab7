@@ -16,6 +16,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lombok.Getter;
 import lombok.Setter;
 import org.controlsfx.control.Notifications;
 import ru.itmo.client.MainApp;
@@ -24,10 +25,8 @@ import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Response;
 
 import java.io.File;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class MainController {
 
@@ -110,12 +109,13 @@ public class MainController {
     private Label hairColorLabel;
     @FXML
     private Label userInfoLabel;
-
-
+    @Getter
     private ObservableList<Ticket> ticketData = FXCollections.observableArrayList();
     private boolean backgroundTaskRunning = false;
     private Thread backgroundThread;
     private Thread scriptThread;
+    private Thread fetchThread;
+    private boolean fetchThreadRunning = false;
 
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
@@ -163,6 +163,24 @@ public class MainController {
         // Listen for selection changes and show the ticket details when changed
         dataTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showTicketDetails(newValue));
+
+        startBackgroundUpdateThread();
+    }
+
+    private void startBackgroundUpdateThread() {
+        Task<Void> task = new Task<>() {
+            @Override
+            protected Void call() throws Exception {
+                while (true) {
+                    TimeUnit.SECONDS.sleep(10);
+                    handleFilter();
+                }
+            }
+        };
+
+        backgroundThread = new Thread(task);
+        backgroundThread.setDaemon(true);
+        backgroundThread.start();
     }
 
     private void handleFilter() {
@@ -173,11 +191,13 @@ public class MainController {
                     filteredData.add(ticket);
                 }
             }
-            dataTable.setItems(filteredData);
+            ticketData.setAll(filteredData);
+            dataTable.setItems(ticketData);
+            dataTable.refresh();
+            dataTable.sort();
         } else {
             fetchTickets();
         }
-        dataTable.refresh();
     }
 
     @FXML
@@ -200,10 +220,15 @@ public class MainController {
                     Boolean added = getValue();
                     if (added) {
                         Platform.runLater(() -> {
-                            ticketData.add(newTicket);
                             dataTable.getItems().add(newTicket);
                             dataTable.refresh();
                             dataTable.sort();
+
+                            DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+                            if (dataVisualizationController != null) {
+                                dataVisualizationController.addTicket(newTicket);
+                            }
+
                             Notifications.create()
                                     .title("Ticket Added")
                                     .text("The ticket was successfully added." + '\n' + "Assigned id: " + newTicket.getId())
@@ -240,6 +265,10 @@ public class MainController {
 
                     @Override
                     protected void succeeded() {
+                        DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+                        if (dataVisualizationController != null) {
+                            dataVisualizationController.updateTicket(selectedTicket);
+                        }
                         Platform.runLater(() -> {
                             showTicketDetails(selectedTicket);
                             dataTable.refresh();
@@ -276,6 +305,10 @@ public class MainController {
 
                 @Override
                 protected void succeeded() {
+                    DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+                    if (dataVisualizationController != null) {
+                        dataVisualizationController.removeTicket(selectedTicket);
+                    }
                     Platform.runLater(() -> {
                         dataTable.getItems().remove(selectedIndex);
                         dataTable.refresh();
@@ -313,6 +346,10 @@ public class MainController {
 
                 @Override
                 protected void succeeded() {
+                    DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+                    if (dataVisualizationController != null) {
+                        dataVisualizationController.clearAllTickets();
+                    }
                     Boolean success = getValue();
                     Platform.runLater(() -> {
                         if (success) {
@@ -386,6 +423,10 @@ public class MainController {
                 dataTable.refresh(); // Ensure the table view is refreshed
                 dataTable.sort();
 
+                DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+                if (dataVisualizationController != null) {
+                    dataVisualizationController.addTicket(newTicket);
+                }
                 // Create and show notification
                 Notifications.create()
                         .title("Ticket Added")
@@ -439,8 +480,8 @@ public class MainController {
                     Runner.ExitCode exitCode = getValue();
                     Platform.runLater(() -> {
                         if (exitCode == Runner.ExitCode.OK) {
-                            showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
                             fetchTickets();
+                            showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
                         } else {
                             showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed.");
                         }
@@ -453,7 +494,7 @@ public class MainController {
                 }
             };
 
-            startBackgroundTask(task);
+            executeScriptInBackground(task);
         }
     }
 
@@ -513,7 +554,8 @@ public class MainController {
             protected ObservableList<Ticket> call() {
                 Integer userId = runner.getCurrentUserId();
                 String username = runner.getCurrentUsername();
-                Platform.runLater(() -> userInfoLabel.setText(String.format("%s %s, %s %d", bundle.getString("main.user.info"), username,
+                Platform.runLater(() -> userInfoLabel.setText(String.format("%s %s, %s %d",
+                        bundle.getString("main.user.info"), username,
                         bundle.getString("main.user.info.id"), userId)));
                 return FXCollections.observableArrayList(runner.fetchTickets());
             }
@@ -521,10 +563,12 @@ public class MainController {
             @Override
             protected void succeeded() {
                 ObservableList<Ticket> tickets = getValue();
+                setRouteData(tickets);
                 Platform.runLater(() -> {
                     ticketData.setAll(tickets);
                     dataTable.setItems(ticketData);
                     dataTable.refresh();
+                    dataTable.sort();
                 });
             }
 
@@ -534,7 +578,14 @@ public class MainController {
             }
         };
 
-        startBackgroundTask(task);
+        fetchThread = new Thread(task);
+        fetchThread.setDaemon(true);
+        fetchThread.start();
+        fetchThreadRunning = true;
+
+        task.setOnSucceeded(event -> fetchThreadRunning = false);
+        task.setOnFailed(event -> fetchThreadRunning = false);
+        task.setOnCancelled(event -> fetchThreadRunning = false);
     }
 
 
@@ -549,6 +600,7 @@ public class MainController {
             @Override
             protected void succeeded() {
                 ObservableList<Ticket> userTickets = getValue();
+                setRouteData(userTickets);
                 Platform.runLater(() -> {
                     ticketData.setAll(userTickets);
                     dataTable.setItems(userTickets);
@@ -561,8 +613,14 @@ public class MainController {
                 showAlert("Error", "Failed to fetch user tickets", getException().getMessage());
             }
         };
+        fetchThread = new Thread(task);
+        fetchThread.setDaemon(true);
+        fetchThread.start();
+        fetchThreadRunning = true;
 
-        startBackgroundTask(task);
+        task.setOnSucceeded(event -> fetchThreadRunning = false);
+        task.setOnFailed(event -> fetchThreadRunning = false);
+        task.setOnCancelled(event -> fetchThreadRunning = false);
     }
 
     private void startBackgroundTask(Task<?> task) {
@@ -601,6 +659,28 @@ public class MainController {
             }
         } else {
             startScriptTask(task);
+        }
+    }
+
+    public void selectTicket(Ticket ticket) {
+        dataTable.getSelectionModel().select(ticket);
+    }
+
+    private void updateVisualization() {
+        DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+        if (dataVisualizationController != null) {
+            dataVisualizationController.initializeRoutes(ticketData);
+        }
+    }
+
+    public void setRouteData(List<Ticket> routes) {
+        ticketData.setAll(routes);
+        dataTable.setItems(ticketData);
+
+        DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+        if (dataVisualizationController != null) {
+            dataVisualizationController.setMainController(this);
+            dataVisualizationController.initializeRoutes(routes);
         }
     }
 }

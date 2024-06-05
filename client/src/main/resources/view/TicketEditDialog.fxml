@@ -15,9 +15,6 @@
                 <Label text="Coordinates:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <TextField fx:id="coordinatesField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                <Label text="Creation Date:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                <DatePicker fx:id="creationDateField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-
                 <Label text="Price:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
                 <TextField fx:id="priceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 

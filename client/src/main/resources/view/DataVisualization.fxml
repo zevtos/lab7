@@ -6,6 +6,6 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itmo.client.controller.DataVisualizationController" stylesheets="@../css/LightStyle.css">
     <center>
-        <Canvas fx:id="canvas" width="600" height="400" styleClass="canvas"/>
+        <Canvas fx:id="canvas" width="600" height="900" styleClass="canvas"/>
     </center>
 </BorderPane>

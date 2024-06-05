@@ -15,6 +15,8 @@ import ru.itmo.client.utility.runtime.ServerConnection;
 import ru.itmo.general.models.Ticket;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -24,6 +26,7 @@ public class MainApp extends Application {
     private BorderPane rootLayout;
     private Runner runner;
     private ResourceBundle bundle;
+    private DataVisualizationController dataVisualizationController;
 
     @Override
     public void start(Stage primaryStage) {
@@ -58,6 +61,24 @@ public class MainApp extends Application {
             RootLayoutController controller = loader.getController();
             controller.setMainApp(this, bundle);
             controller.setRunner(runner);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showDataVisualization() {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MainApp.class.getResource("/view/DataVisualization.fxml"));
+            loader.setResources(bundle);
+            BorderPane dataVisualization = loader.load();
+
+            dataVisualization.getStyleClass().add("data-visualization-pane");
+
+            dataVisualizationController = loader.getController();
+            dataVisualizationController.setMainApp(this);
+            dataVisualizationController.setRunner(runner);
+
+            rootLayout.setRight(dataVisualization);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -102,7 +123,11 @@ public class MainApp extends Application {
     public void showMainScreen(ResourceBundle bundle) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/view/MainScreen.fxml"));
+            URL resourceUrl = MainApp.class.getResource("/view/MainScreen.fxml");
+            if (resourceUrl == null) {
+                throw new IOException("Resource not found: /view/MainScreen.fxml");
+            }
+            loader.setLocation(resourceUrl);
             loader.setResources(bundle);
             BorderPane mainScreen = loader.load();
 
@@ -114,6 +139,13 @@ public class MainApp extends Application {
             controller.setBundle(bundle);
             controller.setPrimaryStage(primaryStage);
             controller.fetchTickets();
+            List<Ticket> tickets = controller.getTicketData();
+            showDataVisualization();
+            DataVisualizationController dataVisualizationController = getDataVisualizationController();
+            if (dataVisualizationController != null) {
+                dataVisualizationController.setMainController(controller);
+                dataVisualizationController.initializeRoutes(tickets);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,5 +203,8 @@ public class MainApp extends Application {
 
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.OK;
+    }
+    public DataVisualizationController getDataVisualizationController() {
+        return dataVisualizationController;
     }
 }

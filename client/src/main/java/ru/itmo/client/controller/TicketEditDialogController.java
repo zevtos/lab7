@@ -20,8 +20,6 @@ public class TicketEditDialogController {
     @FXML
     private TextField coordinatesField;
     @FXML
-    private DatePicker creationDateField;
-    @FXML
     private TextField priceField;
     @FXML
     private TextField discountField;
@@ -54,9 +52,8 @@ public class TicketEditDialogController {
 
         nameField.setText(ticket.getName());
         coordinatesField.setText(ticket.getCoordinates().toString());
-        creationDateField.setValue(ticket.getCreationDate().toLocalDate());
         priceField.setText(Double.toString(ticket.getPrice()));
-        discountField.setText(Long.toString(ticket.getDiscount()));
+        discountField.setText(ticket.getDiscount() == null ? "" : Long.toString(ticket.getDiscount()));
         commentField.setText(ticket.getComment());
         typeComboBox.setItems(FXCollections.observableArrayList(TicketType.values()));
         typeComboBox.setValue(ticket.getType());
@@ -86,14 +83,13 @@ public class TicketEditDialogController {
                     Double.parseDouble(coordinatesField.getText().split(";")[0]),
                     Float.parseFloat(coordinatesField.getText().split(";")[1])
             ));
-            ticket.setCreationDate(ZonedDateTime.of(creationDateField.getValue().atStartOfDay(), ZoneId.systemDefault()));
-            ticket.setPrice(Double.parseDouble(priceField.getText()));
-            ticket.setDiscount(Long.parseLong(discountField.getText()));
-            ticket.setComment(commentField.getText());
+            ticket.setPrice(priceField.getText().isEmpty() ? 0 : Double.parseDouble(priceField.getText()));
+            ticket.setDiscount((discountField.getText().isEmpty()) ? null : Long.parseLong(discountField.getText()));
+            ticket.setComment(commentField.getText().isEmpty() ? null : commentField.getText());
             ticket.setType(typeComboBox.getValue());
 
             LocalDate birthday = birthdayField.getValue();
-            Float height = Float.parseFloat(heightField.getText());
+            Float height = heightField.getText().isEmpty() ? null : Float.parseFloat(heightField.getText());
             String passportID = passportIDField.getText();
             Color hairColor = hairColorComboBox.getValue();
             Person person = new Person(birthday.atStartOfDay(), height, passportID, hairColor);
@@ -127,16 +123,10 @@ public class TicketEditDialogController {
             try {
                 String[] coords = coordinatesField.getText().split(";");
                 Double x = Double.parseDouble(coords[0]);
-                Float y = Float.parseFloat(coords[1]);
-                if (x == null || y == null) {
-                    errorMessage += bundle.getString("ticket.edit.invalid.coordinates.format") + "\n";
-                }
+                Float y = coords[1].isEmpty() ? null : Float.parseFloat(coords[1]);
             } catch (NumberFormatException e) {
                 errorMessage += bundle.getString("ticket.edit.invalid.coordinates.format") + "\n";
             }
-        }
-        if (creationDateField.getValue() == null) {
-            errorMessage += bundle.getString("ticket.edit.invalid.creationDate") + "\n";
         }
         if (priceField.getText() == null || priceField.getText().length() == 0) {
             errorMessage += bundle.getString("ticket.edit.invalid.price") + "\n";
@@ -159,9 +149,6 @@ public class TicketEditDialogController {
             } catch (NumberFormatException e) {
                 errorMessage += bundle.getString("ticket.edit.invalid.discount.format") + "\n";
             }
-        }
-        if (commentField.getText() == null || commentField.getText().length() == 0) {
-            errorMessage += bundle.getString("ticket.edit.invalid.comment") + "\n";
         }
         if (typeComboBox.getValue() == null) {
             errorMessage += bundle.getString("ticket.edit.invalid.type") + "\n";
