@@ -1,6 +1,8 @@
 package ru.itmo.client;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -11,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import ru.itmo.client.controller.*;
 import ru.itmo.client.utility.runtime.Runner;
 import ru.itmo.client.utility.runtime.ServerConnection;
@@ -29,6 +32,12 @@ public class MainApp extends Application {
     private Runner runner;
     private ResourceBundle bundle;
     private DataVisualizationController dataVisualizationController;
+
+    private String currentScreen;
+    private static final String LOGIN_SCREEN = "/view/LoginScreen.fxml";
+    private static final String REGISTER_SCREEN = "/view/RegisterScreen.fxml";
+    private static final String MAIN_SCREEN = "/view/MainScreen.fxml";
+    private static final String DATA_VISUALIZATION_SCREEN = "/view/DataVisualization.fxml";
 
     @Override
     public void start(Stage primaryStage) {
@@ -80,7 +89,7 @@ public class MainApp extends Application {
     public void showDataVisualization() {
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/view/DataVisualization.fxml"));
+            loader.setLocation(MainApp.class.getResource(DATA_VISUALIZATION_SCREEN));
             loader.setResources(bundle);
             AnchorPane dataVisualization = loader.load();
 
@@ -97,9 +106,10 @@ public class MainApp extends Application {
     }
 
     public void showLoginScreen(ResourceBundle bundle) {
+        currentScreen = LOGIN_SCREEN;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/view/LoginScreen.fxml"));
+            loader.setLocation(MainApp.class.getResource(currentScreen));
             loader.setResources(bundle);
             BorderPane loginScreen = loader.load();
 
@@ -115,9 +125,10 @@ public class MainApp extends Application {
     }
 
     public void showRegisterScreen(ResourceBundle bundle) {
+        currentScreen = REGISTER_SCREEN;
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApp.class.getResource("/view/RegisterScreen.fxml"));
+            loader.setLocation(MainApp.class.getResource(currentScreen));
             loader.setResources(bundle);
             BorderPane registerScreen = loader.load();
 
@@ -133,11 +144,12 @@ public class MainApp extends Application {
     }
 
     public void showMainScreen(ResourceBundle bundle) {
+        currentScreen = MAIN_SCREEN;
         try {
             FXMLLoader loader = new FXMLLoader();
-            URL resourceUrl = MainApp.class.getResource("/view/MainScreen.fxml");
+            URL resourceUrl = MainApp.class.getResource(currentScreen);
             if (resourceUrl == null) {
-                throw new IOException("Resource not found: /view/MainScreen.fxml");
+                throw new IOException("Resource not found: " + currentScreen);
             }
             loader.setLocation(resourceUrl);
             loader.setResources(bundle);
@@ -220,5 +232,69 @@ public class MainApp extends Application {
 
     public DataVisualizationController getDataVisualizationController() {
         return dataVisualizationController;
+    }
+
+    public void changeLocale(Locale locale) {
+        Locale.setDefault(locale);
+        bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
+        reloadScenes();
+    }
+
+    private void fadeTransition(Scene scene, double fromValue, double toValue, int durationMillis, Runnable onFinished) {
+        FadeTransition fade = new FadeTransition(Duration.millis(durationMillis), scene.getRoot());
+        fade.setFromValue(fromValue);
+        fade.setToValue(toValue);
+        fade.setOnFinished(event -> {
+            if (onFinished != null) {
+                onFinished.run();
+            }
+        });
+        fade.play();
+    }
+
+    private void reloadScenes() {
+        boolean isFullScreen = primaryStage.isFullScreen();
+        double x = primaryStage.getX();
+        double y = primaryStage.getY();
+        double width = primaryStage.getWidth();
+        double height = primaryStage.getHeight();
+
+        // Анимация исчезновения
+        fadeTransition(primaryStage.getScene(), 1.0, 0.0, 500, () -> {
+            Platform.runLater(() -> {
+                initRootLayout(bundle);
+                initCurrentLayout();
+
+                primaryStage.setX(x);
+                primaryStage.setY(y);
+                primaryStage.setWidth(width);
+                primaryStage.setHeight(height);
+                primaryStage.setFullScreen(isFullScreen);
+
+                // Принудительное обновление стилей и перерисовка
+                primaryStage.getScene().getRoot().applyCss();
+                primaryStage.getScene().getRoot().layout();
+                primaryStage.hide();  // Скрыть окно
+                primaryStage.show();  // Показать окно
+
+                // Анимация появления
+                fadeTransition(primaryStage.getScene(), 0.0, 1.0, 500, null);
+            });
+        });
+    }
+
+
+    private void initCurrentLayout() {
+        switch (currentScreen) {
+            case LOGIN_SCREEN:
+                showLoginScreen(bundle);
+                break;
+            case REGISTER_SCREEN:
+                showRegisterScreen(bundle);
+                break;
+            case MAIN_SCREEN:
+                showMainScreen(bundle);
+                break;
+        }
     }
 }

@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -225,8 +226,8 @@ public class MainController {
                             }
 
                             Notifications.create()
-                                    .title("Ticket Added")
-                                    .text("The ticket was successfully added." + '\n' + "Assigned id: " + newTicket.getId())
+                                    .title(bundle.getString("ticket.added.title"))
+                                    .text(bundle.getString("ticket.added.message") + '\n' + bundle.getString("ticket.assigned.id") + newTicket.getId())
                                     .hideAfter(Duration.seconds(3))
                                     .position(Pos.BOTTOM_RIGHT)
                                     .showInformation();
@@ -236,7 +237,7 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    Platform.runLater(() -> showAlert("Error", "Failed to add ticket", getException().getMessage()));
+                    Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.add.failed"), getException().getMessage()));
                 }
             };
 
@@ -271,7 +272,7 @@ public class MainController {
 
                     @Override
                     protected void failed() {
-                        Platform.runLater(() -> showAlert("Error", "Failed to update ticket", getException().getMessage()));
+                        Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.update.failed"), getException().getMessage()));
                     }
                 };
 
@@ -310,7 +311,7 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    Platform.runLater(() -> showAlert("Error", "Failed to delete ticket", getException().getMessage()));
+                    Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.delete.failed"), getException().getMessage()));
                 }
             };
 
@@ -359,7 +360,7 @@ public class MainController {
 
                 @Override
                 protected void failed() {
-                    Platform.runLater(() -> showAlert("Error", "Failed to clear tickets", getException().getMessage()));
+                    Platform.runLater(() -> showAlert("Error", bundle.getString("clear.failed"), getException().getMessage()));
                 }
             };
 
@@ -370,18 +371,17 @@ public class MainController {
     @FXML
     private void handleHelp() {
         // Display help dialog or message
-        ResourceBundle bundle = ResourceBundle.getBundle("messages", Locale.getDefault());
         String helpMessage = bundle.getString("help.general");
 
         Stage helpStage = new Stage();
         helpStage.initModality(Modality.APPLICATION_MODAL);
-        helpStage.setTitle("Help");
+        helpStage.setTitle(bundle.getString("help.title"));
 
         TextArea helpTextArea = new TextArea();
         helpTextArea.setEditable(false);
         helpTextArea.setWrapText(true);
         helpTextArea.setText(helpMessage);
-        Button closeButton = new Button("Close");
+        Button closeButton = new Button(bundle.getString("help.close.button"));
         closeButton.setOnAction(event -> helpStage.close());
 
         VBox vbox = new VBox(helpTextArea, closeButton);
@@ -416,9 +416,9 @@ public class MainController {
                 }
                 // Create and show notification
                 Notifications.create()
-                        .title("Ticket Added")
-                        .text("The ticket was successfully added." + '\n'
-                                + "Assigned id: " + newTicket.getId())
+                        .title(bundle.getString("ticket.added.title"))
+                        .text(bundle.getString("ticket.added.message") + '\n'
+                                + bundle.getString("ticket.assigned.id") + newTicket.getId())
                         .hideAfter(Duration.seconds(3))
                         .position(Pos.BOTTOM_RIGHT)
                         .showInformation();
@@ -433,12 +433,12 @@ public class MainController {
         Response response = runner.sumOfPrice();
         if (response != null) {
             if (response.isSuccess()) {
-                showAlert(Alert.AlertType.INFORMATION, "Sum of Prices", response.toString());
+                showAlert(Alert.AlertType.INFORMATION, bundle.getString("sum.of.price.title"), response.toString());
             } else {
                 showAlert(Alert.AlertType.ERROR, "Error", response.getMessage());
             }
         } else {
-            showAlert(Alert.AlertType.ERROR, "Error", "No response from server.");
+            showAlert(Alert.AlertType.ERROR, "Error", bundle.getString("no.response.from.server"));
         }
     }
 
@@ -455,7 +455,7 @@ public class MainController {
     @FXML
     public void handleExecuteScript() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Script File");
+        fileChooser.setTitle(bundle.getString("select.script.file"));
         File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
         if (file != null) {
             Task<Runner.ExitCode> task = new Task<>() {
@@ -470,16 +470,16 @@ public class MainController {
                     Platform.runLater(() -> {
                         if (exitCode == Runner.ExitCode.OK) {
                             fetchTickets();
-                            showAlert(Alert.AlertType.INFORMATION, "Script Execution", "Script executed successfully.");
+                            showAlert(Alert.AlertType.INFORMATION, bundle.getString("script.execution.title"), bundle.getString("script.execution.success"));
                         } else {
-                            showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed.");
+                            showAlert(Alert.AlertType.ERROR, "Error", bundle.getString("script.execution.failed"));
                         }
                     });
                 }
 
                 @Override
                 protected void failed() {
-                    Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Error", "Script execution failed: " + getException().getMessage()));
+                    Platform.runLater(() -> showAlert(Alert.AlertType.ERROR, "Error", bundle.getString("script.execution.failed") + ": " + getException().getMessage()));
                 }
             };
 
@@ -570,7 +570,7 @@ public class MainController {
 
             @Override
             protected void failed() {
-                Platform.runLater(() -> showAlert("Error", "Failed to fetch tickets", getException().getMessage()));
+                Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.fetch.failed"), getException().getMessage()));
             }
         };
 
@@ -612,7 +612,7 @@ public class MainController {
 
             @Override
             protected void failed() {
-                Platform.runLater(() -> showAlert("Error", "Failed to fetch user tickets", getException().getMessage()));
+                Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.fetch.failed"), getException().getMessage()));
             }
         };
         fetchThread = new Thread(task);
@@ -629,12 +629,12 @@ public class MainController {
     private void startBackgroundTask(Task<?> task) {
         if (backgroundThread != null && backgroundThread.isAlive()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Background Task");
-            alert.setHeaderText("A background task is already running.");
-            alert.setContentText("Do you want to interrupt the current background task and start a new one?");
+            alert.setTitle(bundle.getString("background.task.title"));
+            alert.setHeaderText(bundle.getString("background.task.header"));
+            alert.setContentText(bundle.getString("background.task.content"));
 
-            ButtonType buttonTypeYes = new ButtonType("Yes");
-            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType buttonTypeYes = new ButtonType(bundle.getString("button.yes"));
+            ButtonType buttonTypeNo = new ButtonType(bundle.getString("button.no"), ButtonBar.ButtonData.CANCEL_CLOSE);
 
             alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 
@@ -643,7 +643,7 @@ public class MainController {
                 backgroundThread.interrupt();
                 backgroundThread = new Thread(task);
                 backgroundThread.setDaemon(true);
-                backgroundThread.start();startScriptTask(task);
+                backgroundThread.start();
             }
         } else {
             backgroundThread = new Thread(task);
@@ -661,12 +661,12 @@ public class MainController {
     private void executeScriptInBackground(Task<?> task) {
         if (scriptThread != null && scriptThread.isAlive()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Script Task Running");
-            alert.setHeaderText("A script task is already running.");
-            alert.setContentText("Do you want to interrupt the current script task and start a new one?");
+            alert.setTitle(bundle.getString("script.task.title"));
+            alert.setHeaderText(bundle.getString("script.task.header"));
+            alert.setContentText(bundle.getString("script.task.content"));
 
-            ButtonType buttonTypeYes = new ButtonType("Yes");
-            ButtonType buttonTypeNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            ButtonType buttonTypeYes = new ButtonType(bundle.getString("button.yes"));
+            ButtonType buttonTypeNo = new ButtonType(bundle.getString("button.no"), ButtonBar.ButtonData.CANCEL_CLOSE);
 
             alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
 

@@ -141,9 +141,9 @@ public class Runner {
     }
 
     // В классе Runner
-    public String getInfo() {
+    public Object[] getInfo() {
         Response response = connection.sendCommand("info", null);
-        return (String) response.getData();
+        return (Object[]) response.getData();
     }
 
     public Integer getCurrentUserId() {

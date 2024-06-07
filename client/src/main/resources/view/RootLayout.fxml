@@ -13,6 +13,13 @@
             <Menu text="%menu.help" styleClass="menu">
                 <MenuItem text="%menu.help.about" onAction="#handleAbout" styleClass="menu-item"/>
             </Menu>
+            <Menu text="%menu.language" styleClass="menu">
+                <MenuItem text="%language.english" fx:id="menuItemEnglish" styleClass="menu-item"/>
+                <MenuItem text="%language.russian" fx:id="menuItemRussian" styleClass="menu-item"/>
+                <MenuItem text="%language.swedish" fx:id="menuItemSwedish" styleClass="menu-item"/>
+                <MenuItem text="%language.spanish" fx:id="menuItemSpanish" styleClass="menu-item"/>
+                <MenuItem text="%language.finnish" fx:id="menuItemFinnish" styleClass="menu-item"/>
+            </Menu>
         </MenuBar>
     </top>
 </BorderPane>

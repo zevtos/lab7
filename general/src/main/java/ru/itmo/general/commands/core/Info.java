@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 
 /**
  * Команда 'info'. Выводит информацию о коллекции.
- *
- * @author zevtos
  */
 public class Info extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
@@ -39,19 +37,17 @@ public class Info extends Command {
      */
     @Override
     public Response execute(Request arguments) {
-
         LocalDateTime ticketLastSaveTime = ticketCollectionManager.getLastSaveTime();
-        String ticketLastSaveTimeString = (ticketLastSaveTime == null) ? "в данной сессии сохранения еще не происходило" :
+        String ticketLastSaveTimeString = (ticketLastSaveTime == null) ? null :
                 ticketLastSaveTime.toLocalDate().toString() + " " + ticketLastSaveTime.toLocalTime().toString();
 
-        String message;
+        Object[] responseData = new Object[]{
+                ticketCollectionManager.collectionType(),
+                ticketCollectionManager.collectionSize(),
+                ticketLastSaveTimeString
+        };
 
-        message = "Сведения о коллекции:" + '\n' +
-                " Тип: " + ticketCollectionManager.collectionType() + '\n' +
-                " Количество элементов Ticket: " + ticketCollectionManager.collectionSize() + '\n' +
-                " Дата последнего сохранения:" + ticketLastSaveTimeString;
-
-        return new Response(true, null, message);
+        return new Response(true, null, responseData);
     }
 
     /**
