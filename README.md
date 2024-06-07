@@ -14,6 +14,7 @@ mvn exec:java
 
 For tunneling to helios(to run the server part on helios, and the client part on a PC and redirect requests to helios):
 
+!!! only for TCP
 ```
 ssh -p 2222 -L XXXX:localhost:YYYY s'SSSSSS'@helios.cs.ifmo.ru
 ```
