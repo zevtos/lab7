@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -26,7 +25,10 @@ import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Response;
 
 import java.io.File;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 public class MainController {
@@ -169,7 +171,6 @@ public class MainController {
                 (observable, oldValue, newValue) -> showTicketDetails(newValue));
 
         startBackgroundUpdateThread();
-
     }
 
     private void startBackgroundUpdateThread() {
@@ -216,21 +217,7 @@ public class MainController {
                     Boolean added = getValue();
                     if (added) {
                         Platform.runLater(() -> {
-                            dataTable.getItems().add(newTicket);
-                            dataTable.refresh();
-                            dataTable.sort();
-
-                            DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
-                            if (dataVisualizationController != null) {
-                                dataVisualizationController.addTicket(newTicket);
-                            }
-
-                            Notifications.create()
-                                    .title(bundle.getString("ticket.added.title"))
-                                    .text(bundle.getString("ticket.added.message") + '\n' + bundle.getString("ticket.assigned.id") + newTicket.getId())
-                                    .hideAfter(Duration.seconds(3))
-                                    .position(Pos.BOTTOM_RIGHT)
-                                    .showInformation();
+                            addTicket(newTicket);
                         });
                     }
                 }
@@ -243,6 +230,24 @@ public class MainController {
 
             startBackgroundTask(task);
         }
+    }
+
+    private void addTicket(Ticket newTicket) {
+        dataTable.getItems().add(newTicket);
+        dataTable.refresh();
+        dataTable.sort();
+
+        DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
+        if (dataVisualizationController != null) {
+            dataVisualizationController.addTicket(newTicket);
+        }
+
+        Notifications.create()
+                .title(bundle.getString("ticket.added.title"))
+                .text(bundle.getString("ticket.added.message") + '\n' + bundle.getString("ticket.assigned.id") + newTicket.getId())
+                .hideAfter(Duration.seconds(3))
+                .position(Pos.BOTTOM_RIGHT)
+                .showInformation();
     }
 
     @FXML
@@ -406,22 +411,7 @@ public class MainController {
             if (added) {
                 ticketData.add(newTicket);
 
-                dataTable.getItems().add(newTicket); // Add the ticket directly to the table
-                dataTable.refresh(); // Ensure the table view is refreshed
-                dataTable.sort();
-
-                DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
-                if (dataVisualizationController != null) {
-                    dataVisualizationController.addTicket(newTicket);
-                }
-                // Create and show notification
-                Notifications.create()
-                        .title(bundle.getString("ticket.added.title"))
-                        .text(bundle.getString("ticket.added.message") + '\n'
-                                + bundle.getString("ticket.assigned.id") + newTicket.getId())
-                        .hideAfter(Duration.seconds(3))
-                        .position(Pos.BOTTOM_RIGHT)
-                        .showInformation();
+                addTicket(newTicket);
             } else {
                 showAlert("failure.title", bundle.getString("add.if.min.failure.header"), "");
             }
@@ -495,7 +485,7 @@ public class MainController {
                 coordinatesLabel.setText(ticket.getCoordinates().toString());
                 creationDateLabel.setText(ticket.getCreationDate().toInstant().toString());
                 priceLabel.setText(Double.toString(ticket.getPrice()));
-                discountLabel.setText(ticket.getDiscount() != null ? ticket.getDiscount().toString() : ""); // Обработка null
+                discountLabel.setText(ticket.getDiscount() != null ? ticket.getDiscount().toString() : "");
                 commentLabel.setText(ticket.getComment() != null ? ticket.getComment() : "");
                 typeLabel.setText(ticket.getType().toString());
 
@@ -564,24 +554,18 @@ public class MainController {
                         dataTable.refresh();
                         dataTable.sort();
                     });
-                } else if (tickets == null) {
                 }
             }
 
             @Override
             protected void failed() {
-                Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.fetch.failed"), getException().getMessage()));
+                Platform.runLater(() -> showAlert("Error",
+                        bundle.getString("ticket.fetch.failed"),
+                        getException().getMessage()));
             }
         };
 
-        fetchThread = new Thread(task);
-        fetchThread.setDaemon(true);
-        fetchThread.start();
-        fetchThreadRunning = true;
-
-        task.setOnSucceeded(event -> fetchThreadRunning = false);
-        task.setOnFailed(event -> fetchThreadRunning = false);
-        task.setOnCancelled(event -> fetchThreadRunning = false);
+        startFectchTickets(task);
     }
 
     public void fetchUserTickets() {
@@ -593,7 +577,8 @@ public class MainController {
                     return null;
                 }
                 return FXCollections.observableArrayList(tickets
-                        .stream().filter(ticket -> Objects.equals(ticket.getUserId(), runner.getCurrentUserId())).toList());
+                        .stream().filter(ticket -> Objects.equals(ticket.getUserId(),
+                                runner.getCurrentUserId())).toList());
             }
 
             @Override
@@ -606,15 +591,20 @@ public class MainController {
                         dataTable.setItems(userTickets);
                         dataTable.refresh();
                     });
-                } else if (userTickets == null) {
                 }
             }
 
             @Override
             protected void failed() {
-                Platform.runLater(() -> showAlert("Error", bundle.getString("ticket.fetch.failed"), getException().getMessage()));
+                Platform.runLater(() -> showAlert("Error",
+                        bundle.getString("ticket.fetch.failed"),
+                        getException().getMessage()));
             }
         };
+        startFectchTickets(task);
+    }
+
+    private void startFectchTickets(Task<ObservableList<Ticket>> task) {
         fetchThread = new Thread(task);
         fetchThread.setDaemon(true);
         fetchThread.start();
@@ -682,13 +672,6 @@ public class MainController {
 
     public void selectTicket(Ticket ticket) {
         Platform.runLater(() -> dataTable.getSelectionModel().select(ticket));
-    }
-
-    private void updateVisualization() {
-        DataVisualizationController dataVisualizationController = mainApp.getDataVisualizationController();
-        if (dataVisualizationController != null) {
-            dataVisualizationController.initializeRoutes(ticketData);
-        }
     }
 
     public void setRouteData(List<Ticket> routes) {

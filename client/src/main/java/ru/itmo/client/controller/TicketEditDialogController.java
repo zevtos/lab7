@@ -11,8 +11,6 @@ import ru.itmo.general.models.*;
 
 import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -61,17 +59,15 @@ public class TicketEditDialogController {
 
         nameField.setText(ticket.getName());
         coordinatesField.setText(ticket.getCoordinates().toString());
-        priceField.setText(Double.toString(ticket.getPrice()));
+        priceField.setText(currencyFormat.format(ticket.getPrice()));
         discountField.setText(ticket.getDiscount() == null ? "" : numberFormat.format(ticket.getDiscount()));
         commentField.setText(ticket.getComment());
-        typeComboBox.setItems(FXCollections.observableArrayList(TicketType.values()));
         typeComboBox.setValue(ticket.getType());
 
         if (ticket.getPerson() != null) {
             birthdayField.setValue(ticket.getPerson().birthday().toLocalDate());
-            heightField.setText(Float.toString(ticket.getPerson().height()));
+            heightField.setText(numberFormat.format(ticket.getPerson().height()));
             passportIDField.setText(ticket.getPerson().passportID());
-            hairColorComboBox.setItems(FXCollections.observableArrayList(Color.values()));
             hairColorComboBox.setValue(ticket.getPerson().hairColor());
         }
     }
@@ -88,23 +84,22 @@ public class TicketEditDialogController {
     private void handleOk() {
         if (isInputValid()) {
             ticket.setName(nameField.getText());
+            String[] coords = coordinatesField.getText().split(";");
             ticket.setCoordinates(new Coordinates(
-                    Double.parseDouble(coordinatesField.getText().split(";")[0]),
-                    Float.parseFloat(coordinatesField.getText().split(";")[1])
+                    Double.parseDouble(coords[0]),
+                    Float.parseFloat(coords[1])
             ));
             ticket.setPrice(priceField.getText().isEmpty() ? 0 : Double.parseDouble(priceField.getText()));
-            ticket.setDiscount((discountField.getText().isEmpty()) ? null : Long.parseLong(discountField.getText()));
+            ticket.setDiscount(discountField.getText().isEmpty() ? null : Long.parseLong(discountField.getText()));
             ticket.setComment(commentField.getText().isEmpty() ? null : commentField.getText());
             ticket.setType(typeComboBox.getValue());
 
             LocalDate birthday = birthdayField.getValue();
-            Float height = heightField.getText().isEmpty() ? null : Float.parseFloat(heightField.getText());
+            Float height = Float.parseFloat(heightField.getText());
             String passportID = passportIDField.getText();
             Color hairColor = hairColorComboBox.getValue();
             Person person = new Person(birthday.atStartOfDay(), height, passportID, hairColor);
             ticket.setPerson(person);
-
-            System.out.println("Ticket before sending: " + ticket); // Debug message
 
             okClicked = true;
             dialogStage.close();
@@ -121,67 +116,67 @@ public class TicketEditDialogController {
     }
 
     private boolean isInputValid() {
-        String errorMessage = "";
+        StringBuilder errorMessage = new StringBuilder();
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += bundle.getString("ticket.edit.invalid.name") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.name")).append("\n");
         }
         if (coordinatesField.getText() == null || coordinatesField.getText().length() == 0) {
-            errorMessage += bundle.getString("ticket.edit.invalid.coordinates") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.coordinates")).append("\n");
         } else {
             try {
                 String[] coords = coordinatesField.getText().split(";");
-                Double x = Double.parseDouble(coords[0]);
-                Float y = coords[1].isEmpty() ? null : Float.parseFloat(coords[1]);
-            } catch (NumberFormatException e) {
-                errorMessage += bundle.getString("ticket.edit.invalid.coordinates.format") + "\n";
+                Double.parseDouble(coords[0]);
+                Float.parseFloat(coords[1]);
+            } catch (Exception e) {
+                errorMessage.append(bundle.getString("ticket.edit.invalid.coordinates.format")).append("\n");
             }
         }
         if (priceField.getText() == null || priceField.getText().length() == 0) {
-            errorMessage += bundle.getString("ticket.edit.invalid.price") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.price")).append("\n");
         } else {
             try {
                 double price = Double.parseDouble(priceField.getText());
                 if (price <= 0) {
-                    errorMessage += bundle.getString("ticket.edit.invalid.price.format") + "\n";
+                    errorMessage.append(bundle.getString("ticket.edit.invalid.price.format")).append("\n");
                 }
             } catch (NumberFormatException e) {
-                errorMessage += bundle.getString("ticket.edit.invalid.price.format") + "\n";
+                errorMessage.append(bundle.getString("ticket.edit.invalid.price.format")).append("\n");
             }
         }
         if (discountField.getText() != null && discountField.getText().length() != 0) {
             try {
                 long discount = Long.parseLong(discountField.getText());
                 if (discount <= 0 || discount > 100) {
-                    errorMessage += bundle.getString("ticket.edit.invalid.discount.format") + "\n";
+                    errorMessage.append(bundle.getString("ticket.edit.invalid.discount.format")).append("\n");
                 }
             } catch (NumberFormatException e) {
-                errorMessage += bundle.getString("ticket.edit.invalid.discount.format") + "\n";
+                errorMessage.append(bundle.getString("ticket.edit.invalid.discount.format")).append("\n");
             }
         }
         if (typeComboBox.getValue() == null) {
-            errorMessage += bundle.getString("ticket.edit.invalid.type") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.type")).append("\n");
         }
         if (birthdayField.getValue() == null) {
-            errorMessage += bundle.getString("ticket.edit.invalid.birthday") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.birthday")).append("\n");
         }
         if (heightField.getText() == null || heightField.getText().length() == 0) {
-            errorMessage += bundle.getString("ticket.edit.invalid.height") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.height")).append("\n");
         } else {
             try {
                 float height = Float.parseFloat(heightField.getText());
                 if (height <= 0) {
-                    errorMessage += bundle.getString("ticket.edit.invalid.height.format") + "\n";
+                    errorMessage.append(bundle.getString("ticket.edit.invalid.height.format")).append("\n");
                 }
             } catch (NumberFormatException e) {
-                errorMessage += bundle.getString("ticket.edit.invalid.height.format") + "\n";
+                errorMessage.append(bundle.getString("ticket.edit.invalid.height.format")).append("\n");
             }
         }
         if (passportIDField.getText() == null || passportIDField.getText().length() == 0) {
-            errorMessage += bundle.getString("ticket.edit.invalid.passportID") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.passportID")).append("\n");
         }
         if (hairColorComboBox.getValue() == null) {
-            errorMessage += bundle.getString("ticket.edit.invalid.hairColor") + "\n";
+            errorMessage.append(bundle.getString("ticket.edit.invalid.hairColor")).append("\n");
         }
 
         if (errorMessage.length() == 0) {
@@ -189,11 +184,10 @@ public class TicketEditDialogController {
         } else {
             MainApp.showAlert(bundle.getString("ticket.edit.invalid.title"),
                     bundle.getString("ticket.edit.invalid.header"),
-                    errorMessage);
+                    errorMessage.toString());
             return false;
         }
     }
-
 
     public void setDialogStage(Stage dialogStage) {
         this.dialogStage = dialogStage;
