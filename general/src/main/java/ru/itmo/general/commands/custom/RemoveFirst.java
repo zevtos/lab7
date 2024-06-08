@@ -14,16 +14,16 @@ import ru.itmo.general.utility.base.Accessible;
 import java.rmi.AccessException;
 
 /**
- * Команда 'remove_first'. Удаляет первый элемент из коллекции.
+ * Command 'remove_first'. Removes the first element from the collection.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class RemoveFirst extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
     private Accessible dao;
 
     public RemoveFirst() {
-        super(CommandName.REMOVE_FIRST, "удалить первый элемент из коллекции");
+        super(CommandName.REMOVE_FIRST, "remove the first element from the collection");
     }
 
     public RemoveFirst(CollectionManager<Ticket> ticketCollectionManager, Accessible dao) {
@@ -33,9 +33,10 @@ public class RemoveFirst extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @param request the command request
+     * @return the response indicating the success or failure of the command execution
      */
     @Override
     public Response execute(Request request) {
@@ -45,23 +46,23 @@ public class RemoveFirst extends Command {
             var ticketToRemove = ticketCollectionManager.getFirst();
             if (ticketToRemove == null) throw new NotFoundException();
             if (!dao.checkOwnership(ticketToRemove.getId(), request.getUserId()))
-                throw new AccessException("У вас нет доступа к этому билету");
+                throw new AccessException("You do not have access to this ticket");
             ticketCollectionManager.remove(ticketToRemove);
-            return new Response(true, "Билет успешно удален.");
-
+            return new Response(true, "Ticket successfully removed.");
         } catch (EmptyValueException exception) {
-            return new Response(false, "Коллекция пуста!");
+            return new Response(false, "The collection is empty!");
         } catch (NotFoundException exception) {
-            return new Response(false, "Билета с таким ID в коллекции нет!");
+            return new Response(false, "No ticket with such ID exists in the collection!");
         } catch (AccessException exception) {
             return new Response(false, exception.getMessage());
         }
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the request indicating the success or failure of the command execution
      */
     @Override
     public Request execute(String[] arguments) {

@@ -10,21 +10,21 @@ import ru.itmo.general.network.Response;
 import java.util.List;
 
 /**
- * Команда 'show'. Выводит все элементы коллекции.
+ * Command 'show'. Displays all elements in the collection.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class Show extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
 
     public Show() {
-        super(CommandName.SHOW, "вывести все элементы коллекции Ticket");
+        super(CommandName.SHOW, "display all elements in the Ticket collection");
     }
 
     /**
-     * Конструктор для создания экземпляра команды Show.
+     * Constructor for creating an instance of the Show command.
      *
-     * @param ticketCollectionManager менеджер коллекции
+     * @param ticketCollectionManager the collection manager
      */
     public Show(CollectionManager<Ticket> ticketCollectionManager) {
         this();
@@ -32,10 +32,10 @@ public class Show extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param arguments аргументы команды
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the response indicating the success or failure of the command execution
      */
     @Override
     public Response execute(Request arguments) {
@@ -44,14 +44,14 @@ public class Show extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param arguments аргументы команды
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the request indicating the success or failure of the command execution
      */
     @Override
     public Request execute(String[] arguments) {
-        if (!arguments[1].isEmpty()) {
+        if (arguments.length > 1 && !arguments[1].isEmpty()) {
             return new Request(false, getName(), getUsingError());
         }
         return new Request(getName(), null);

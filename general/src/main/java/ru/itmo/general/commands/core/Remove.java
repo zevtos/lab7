@@ -10,27 +10,27 @@ import ru.itmo.general.models.Ticket;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.base.Accessible;
-import ru.itmo.general.utility.console.Console;
 
 import java.rmi.AccessException;
 
 /**
- * Команда 'remove_by_id'. Удаляет элемент из коллекции по ID.
+ * Command 'remove_by_id'. Removes an element from the collection by ID.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class Remove extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
     private Accessible dao;
 
     public Remove() {
-        super(CommandName.REMOVE_BY_ID, "<ID> удалить ticket из коллекции по ID");
+        super(CommandName.REMOVE_BY_ID, "<ID> remove a ticket from the collection by ID");
     }
 
     /**
-     * Конструктор для создания экземпляра команды Remove.
+     * Constructor for creating an instance of the Remove command.
      *
-     * @param ticketCollectionManager менеджер коллекции билетов
+     * @param ticketCollectionManager the ticket collection manager
+     * @param dao the data access object
      */
     public Remove(CollectionManager<Ticket> ticketCollectionManager, Accessible dao) {
         this();
@@ -39,38 +39,36 @@ public class Remove extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param request аргументы команды
-     * @return Успешность выполнения команды.
+     * @param request the command request
+     * @return the response indicating the success or failure of the command execution
      */
     @Override
     public Response execute(Request request) {
         try {
-
             if (ticketCollectionManager.collectionSize() == 0) throw new EmptyValueException();
 
-            var id = ((Integer) request.getData());
+            var id = (Integer) request.getData();
             if (!dao.checkOwnership(id, request.getUserId()))
-                throw new AccessException("У вас нет доступа к этому билету");
+                throw new AccessException("You do not have access to this ticket");
             if (!ticketCollectionManager.remove(id)) throw new NotFoundException();
 
-            return new Response(true, "Билет успешно удален.");
-
+            return new Response(true, "Ticket successfully removed.");
         } catch (EmptyValueException exception) {
-            return new Response(false, "Коллекция пуста!");
+            return new Response(false, "The collection is empty!");
         } catch (NotFoundException exception) {
-            return new Response(false, "Билета с таким ID в коллекции не существует или он был создан не вами!");
+            return new Response(false, "No ticket with the given ID exists in the collection or it was not created by you!");
         } catch (AccessException e) {
             return new Response(false, e.getMessage());
         }
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param arguments аргументы команды
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the request indicating the success or failure of the command execution
      */
     @Override
     public Request execute(String[] arguments) {
@@ -82,7 +80,7 @@ public class Remove extends Command {
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         } catch (NumberFormatException exception) {
-            return new Request(false, getName(), "ID должен быть представлен числом!");
+            return new Request(false, getName(), "ID must be a number!");
         }
     }
 }

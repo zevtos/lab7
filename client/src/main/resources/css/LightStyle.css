@@ -59,6 +59,7 @@
     -fx-padding: 10px;
     -fx-alignment: center;
 }
+
 /* Основные стили для всего приложения */
 .root {
     -fx-font-family: "Segoe UI", sans-serif;
@@ -401,38 +402,49 @@
     -fx-font-size: 14px;
     -fx-text-fill: #ffffff;
     -fx-padding: 10px;
+    -fx-cursor: hand;
 }
+
 .button-add-if-min {
     -fx-background-color: #4CAF50; /* Зеленый */
     -fx-text-fill: white;
     -fx-font-size: 14px;
-    -fx-padding: 10px;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
 }
 
 .button-sum-of-price {
     -fx-background-color: #2196F3; /* Синий */
     -fx-text-fill: white;
     -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-padding: 10px;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
 }
 
 .button-execute-script {
     -fx-background-color: #FF5722; /* Оранжевый */
     -fx-text-fill: white;
     -fx-font-size: 14px;
+    -fx-font-weight: bold;
     -fx-padding: 10px;
     -fx-border-radius: 5px;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
 }
 
 /* Основные стили для информации о пользователе */
 .user-info {
     -fx-text-fill: #ffffff; /* Белый текст */
-    -fx-font-size: 14px;    /* Размер шрифта */
-    -fx-padding: 5px 10px;  /* Внутренние отступы */
+    -fx-font-size: 14px; /* Размер шрифта */
+    -fx-padding: 5px 10px; /* Внутренние отступы */
     -fx-background-color: #344955; /* Цвет фона */
-    -fx-border-radius: 5px;  /* Радиус границ */
+    -fx-border-radius: 5px; /* Радиус границ */
     -fx-background-radius: 5px; /* Радиус фона */
 }
 

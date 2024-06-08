@@ -9,9 +9,11 @@ import javafx.stage.Stage;
 import ru.itmo.client.MainApp;
 import ru.itmo.general.models.*;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class TicketEditDialogController {
@@ -41,10 +43,17 @@ public class TicketEditDialogController {
     private boolean okClicked = false;
     private ResourceBundle bundle;
 
+    private NumberFormat numberFormat;
+    private NumberFormat currencyFormat;
+
     @FXML
     private void initialize() {
         typeComboBox.setItems(FXCollections.observableArrayList(TicketType.values()));
         hairColorComboBox.setItems(FXCollections.observableArrayList(Color.values()));
+
+        Locale locale = Locale.getDefault();
+        numberFormat = NumberFormat.getNumberInstance(locale);
+        currencyFormat = NumberFormat.getCurrencyInstance(locale);
     }
 
     public void setTicket(Ticket ticket) {
@@ -53,7 +62,7 @@ public class TicketEditDialogController {
         nameField.setText(ticket.getName());
         coordinatesField.setText(ticket.getCoordinates().toString());
         priceField.setText(Double.toString(ticket.getPrice()));
-        discountField.setText(ticket.getDiscount() == null ? "" : Long.toString(ticket.getDiscount()));
+        discountField.setText(ticket.getDiscount() == null ? "" : numberFormat.format(ticket.getDiscount()));
         commentField.setText(ticket.getComment());
         typeComboBox.setItems(FXCollections.observableArrayList(TicketType.values()));
         typeComboBox.setValue(ticket.getType());

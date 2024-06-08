@@ -9,42 +9,42 @@
     <center>
         <GridPane hgap="10" vgap="10">
             <children>
-                <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.name" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
                 <TextField fx:id="nameField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
 
-                <Label text="Coordinates:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.coordinates" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
                 <TextField fx:id="coordinatesField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
 
-                <Label text="Price:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.price" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
                 <TextField fx:id="priceField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
 
-                <Label text="Discount:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.discount" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
                 <TextField fx:id="discountField" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
 
-                <Label text="Comment:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.comment" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
                 <TextField fx:id="commentField" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
 
-                <Label text="Type:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.type" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
                 <ComboBox fx:id="typeComboBox" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
 
-                <Label text="Birthday:" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.birthday" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
                 <DatePicker fx:id="birthdayField" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
 
-                <Label text="Height:" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.height" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
                 <TextField fx:id="heightField" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
 
-                <Label text="Passport ID:" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.passportID" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
                 <TextField fx:id="passportIDField" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
 
-                <Label text="Hair Color:" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
+                <Label text="%ticket.edit.hairColor" GridPane.rowIndex="10" GridPane.columnIndex="0"/>
                 <ComboBox fx:id="hairColorComboBox" GridPane.rowIndex="10" GridPane.columnIndex="1"/>
             </children>
         </GridPane>
     </center>
     <bottom>
         <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10px;">
-            <Button text="OK" onAction="#handleOk"/>
-            <Button text="Cancel" onAction="#handleCancel"/>
+            <Button text="%ticket.edit.ok" onAction="#handleOk"/>
+            <Button text="%ticket.edit.cancel" onAction="#handleCancel"/>
         </HBox>
     </bottom>
     <padding>

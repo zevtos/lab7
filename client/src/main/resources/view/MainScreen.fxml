@@ -3,8 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
 <BorderPane xmlns="http://javafx.com/javafx/8"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="ru.itmo.client.controller.MainController"
@@ -44,12 +42,14 @@
     </center>
     <bottom>
         <HBox spacing="10" alignment="CENTER" styleClass="button-bar">
-            <Button text="%main.add.button" fx:id="addButton" onAction="#handleAdd" styleClass="button-add"/>
+            <Button text="%main.add.button" fx:id="addButton" onAction="#handleAdd"
+                    styleClass="button-add"/>
             <Button text="%main.update.button" fx:id="updateButton" onAction="#handleUpdate"
                     styleClass="button-update"/>
             <Button text="%main.delete.button" fx:id="deleteButton" onAction="#handleDelete"
                     styleClass="button-delete"/>
-            <Button text="%main.clear.button" fx:id="clearButton" onAction="#handleClear" styleClass="button-clear"/>
+            <Button text="%main.clear.button" fx:id="clearButton" onAction="#handleClear"
+                    styleClass="button-clear"/>
             <Button text="%main.addIfMin.button" fx:id="addIfMinButton" onAction="#handleAddIfMin"
                     styleClass="button-add-if-min"/>
             <Button text="%main.sumOfPrice.button" fx:id="sumOfPriceButton" onAction="#handleSumOfPrice"

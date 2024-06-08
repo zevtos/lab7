@@ -4,25 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.8">
-      <change afterPath="$PROJECT_DIR$/.idea/resourceBundles.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/messages_en.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/messages_es_CR.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/messages_fi.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/src/main/resources/messages_sv.properties" afterDir="false" />
+    <list default="true" id="938ce0b3-4017-4483-9a0e-f59e0c4a989f" name="Changes" comment="2.8.8.1">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/MainApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/RootLayoutController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/utility/runtime/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/ru/itmo/client/controller/TicketEditDialogController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/css/LightStyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/css/LightStyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_es_CR.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_es_CR.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_fi.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_fi.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_ru.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/messages_sv.properties" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/messages_sv.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/MainScreen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/RootLayout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/RootLayout.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/general/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/general/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/view/TicketEditDialog.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Add.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Clear.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Clear.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/ExecuteScript.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/ExecuteScript.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Exit.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Exit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Help.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Help.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Register.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Remove.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Remove.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/core/Show.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/AddIfMin.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/AddIfMin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/MaxByName.java" beforeDir="false" afterPath="$PROJECT_DIR$/general/src/main/java/ru/itmo/general/commands/custom/MaxByName.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +87,7 @@
     &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
     &quot;Application.UserDAO.executor&quot;: &quot;Run&quot;,
     &quot;Application.client.executor&quot;: &quot;Run&quot;,
-    &quot;Application.client1.executor&quot;: &quot;Run&quot;,
+    &quot;Application.client1.executor&quot;: &quot;Debug&quot;,
     &quot;Application.client2.executor&quot;: &quot;Run&quot;,
     &quot;Application.ru.itmo.client.main.MainApp.executor&quot;: &quot;Run&quot;,
     &quot;Application.ru.itmo.client.ui.MainApp.executor&quot;: &quot;Run&quot;,
@@ -469,15 +475,9 @@
       <workItem from="1717761728183" duration="4178000" />
       <workItem from="1717782202141" duration="12000" />
       <workItem from="1717788071150" duration="2497000" />
-      <workItem from="1717790601215" duration="2872000" />
-    </task>
-    <task id="LOCAL-00006" summary="1.4">
-      <option name="closed" value="true" />
-      <created>1714120716966</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1714120716966</updated>
+      <workItem from="1717790601215" duration="3795000" />
+      <workItem from="1717833731238" duration="2855000" />
+      <workItem from="1717840965625" duration="2661000" />
     </task>
     <task id="LOCAL-00007" summary="1.5">
       <option name="closed" value="true" />
@@ -863,7 +863,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717607625500</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="2.8.8 localization &#10;(quote: intermegadenacification)">
+      <option name="closed" value="true" />
+      <created>1717793756387</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1717793756388</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -893,7 +901,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="2.8.3 Start adding commands from 5 labs" />
     <MESSAGE value="2.8.3.1 fix ServerConnection(adding password and login to request)" />
     <MESSAGE value="2.8.3.2 visual and extract tickets" />
     <MESSAGE value="2.8.3.3 debug" />
@@ -918,7 +925,8 @@
     <MESSAGE value="2.8.7.2 more fixes" />
     <MESSAGE value="2.8.7.3 fullScreenMode and max size from starting" />
     <MESSAGE value="2.8.7.4 fix css colors" />
-    <option name="LAST_COMMIT_MESSAGE" value="2.8.7.4 fix css colors" />
+    <MESSAGE value="2.8.8 localization &#10;(quote: intermegadenacification)" />
+    <option name="LAST_COMMIT_MESSAGE" value="2.8.8 localization &#10;(quote: intermegadenacification)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

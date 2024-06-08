@@ -13,16 +13,16 @@ import ru.itmo.general.utility.base.Accessible;
 import java.rmi.AccessException;
 
 /**
- * Команда 'remove_head'. Выводит первый элемент коллекции и удаляет его.
+ * Command 'remove_head'. Displays the first element of the collection and removes it.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class RemoveHead extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
     private Accessible dao;
 
     public RemoveHead() {
-        super(CommandName.REMOVE_HEAD, "вывести первый элемент коллекции и удалить его");
+        super(CommandName.REMOVE_HEAD, "display the first element of the collection and remove it");
     }
 
     public RemoveHead(CollectionManager<Ticket> ticketCollectionManager, Accessible dao) {
@@ -32,36 +32,37 @@ public class RemoveHead extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @param request the command request
+     * @return the response indicating the success or failure of the command execution
      */
     @Override
     public Response execute(Request request) {
         try {
             if (ticketCollectionManager.collectionSize() == 0) throw new EmptyValueException();
-            Ticket ticketToRemove = ticketCollectionManager.getLast();
+            Ticket ticketToRemove = ticketCollectionManager.getFirst();
             if (!dao.checkOwnership(ticketToRemove.getId(), request.getUserId()))
-                throw new AccessException("У вас нет доступа к этому билету");
+                throw new AccessException("You do not have access to this ticket");
             ticketCollectionManager.remove(ticketToRemove);
-            return new Response(true, "Билет успешно удален.");
-
+            return new Response(true, "Ticket successfully removed.");
         } catch (EmptyValueException exception) {
-            return new Response(false, "Коллекция пуста!");
+            return new Response(false, "The collection is empty!");
         } catch (AccessException e) {
             return new Response(false, e.getMessage());
         }
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the request indicating the success or failure of the command execution
      */
     @Override
     public Request execute(String[] arguments) {
         try {
-            if (arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
+            if (arguments.length > 1 && !arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
             return new Request(getName(), null);
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());

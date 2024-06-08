@@ -4,26 +4,25 @@ import ru.itmo.general.commands.Command;
 import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.network.Request;
 
-
 /**
- * Команда 'help'. Выводит справку по доступным командам.
+ * Command 'help'. Displays help for available commands.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class Help extends Command {
 
     /**
-     * Конструктор для создания экземпляра команды Help.
+     * Constructor to create an instance of the Help command.
      */
     public Help() {
-        super(CommandName.HELP, "вывести справку по доступным командам");
+        super(CommandName.HELP, "display help for available commands");
     }
 
     /**
-     * Выполняет команду.
+     * Executes the command.
      *
-     * @param arguments аргументы команды (в данном случае ожидается отсутствие аргументов)
-     * @return Успешность выполнения команды
+     * @param arguments the command arguments (expected to be empty)
+     * @return the success of the command execution
      */
     @Override
     public Request execute(String[] arguments) {

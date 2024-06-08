@@ -12,22 +12,22 @@ import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 
 /**
- * Команда 'add'. Добавляет новый элемент в коллекцию.
+ * Command 'add'. Adds a new element to the collection.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class Add extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
     private Form<Ticket> ticketForm;
 
     public Add() {
-        super(CommandName.ADD, "{element} добавить новый объект Ticket в коллекцию");
+        super(CommandName.ADD, "{element} add a new Ticket object to the collection");
     }
 
     /**
-     * Конструктор для создания экземпляра команды Add.
+     * Constructor to create an instance of the Add command.
      *
-     * @param ticketCollectionManager менеджер коллекции
+     * @param ticketCollectionManager the collection manager
      */
     public Add(CollectionManager<Ticket> ticketCollectionManager) {
         this();
@@ -40,33 +40,33 @@ public class Add extends Command {
     }
 
     /**
-     * Выполняет команду.
+     * Executes the command.
      *
-     * @param request запрос на добавление билета
-     * @return Успешность выполнения команды
+     * @param request the request to add the ticket
+     * @return the success of the command execution
      */
     @Override
     public Response execute(Request request) {
         try {
             var ticket = ((Ticket) request.getData());
             if (!ticket.validate()) {
-                return new Response(false, "Билет не добавлен, поля билета не валидны!");
+                return new Response(false, "Ticket not added, ticket fields are not valid!");
             }
             ticket.setUserId(request.getUserId());
             Integer newID = ticketCollectionManager.add(ticket, request.getUserId());
             if (newID == -1)
-                return new Response(false, "Билет уже существует", -1);
-            return new Response(true, "Билет успешно добавлен", newID);
+                return new Response(false, "Ticket already exists", -1);
+            return new Response(true, "Ticket successfully added", newID);
         } catch (Exception e) {
             return new Response(false, e.toString(), -1);
         }
     }
 
     /**
-     * Выполняет команду.
+     * Executes the command.
      *
-     * @param arguments аргументы команды (ожидается отсутствие аргументов)
-     * @return Успешность выполнения команды
+     * @param arguments the command arguments (expected to be empty)
+     * @return the success of the command execution
      */
     @Override
     public Request execute(String[] arguments) {
@@ -79,9 +79,9 @@ public class Add extends Command {
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         } catch (InvalidFormException exception) {
-            return new Request(false, getName(), "Поля билета не валидны! Билет не создан!");
+            return new Request(false, getName(), "Ticket fields are not valid! Ticket not created!");
         } catch (InvalidScriptInputException ignored) {
-            return new Request(false, getName(), "Ошибка чтения из скрипта");
+            return new Request(false, getName(), "Script reading error");
         }
     }
 }

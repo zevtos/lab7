@@ -10,16 +10,15 @@ import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
 
 /**
- * Команда 'min_by_discount'. выводит элемент с минимальным discount.
+ * Command 'min_by_discount'. Displays the element with the minimum discount.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class MinByDiscount extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
 
     public MinByDiscount() {
-        super(CommandName.MIN_BY_DISCOUNT, "вывести любой объект из коллекции, значение поля discount которого является минимальным");
-
+        super(CommandName.MIN_BY_DISCOUNT, "display any object from the collection whose discount field value is the minimum");
     }
 
     public MinByDiscount(CollectionManager<Ticket> ticketCollectionManager) {
@@ -28,9 +27,10 @@ public class MinByDiscount extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @param request the command request
+     * @return the response indicating the success or failure of the command execution
      */
     @Override
     public Response execute(Request request) {
@@ -39,24 +39,23 @@ public class MinByDiscount extends Command {
 
             Ticket minTicketByDiscount = minByDiscount();
             return new Response(true, null, minTicketByDiscount.toString());
-
         } catch (EmptyValueException exception) {
-            return new Response(false, "Коллекция пуста!", null);
+            return new Response(false, "The collection is empty!", null);
         }
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the request indicating the success or failure of the command execution
      */
     @Override
     public Request execute(String[] arguments) {
         try {
-            if (!arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
+            if (arguments.length > 1 && !arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
 
             return new Request(getName(), null);
-
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         }

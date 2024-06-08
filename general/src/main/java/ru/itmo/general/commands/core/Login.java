@@ -11,13 +11,13 @@ import ru.itmo.general.utility.base.Registered;
 /**
  * Command 'login'. Logs in a user to the system.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class Login extends Command {
     private Registered userDAO;
 
     public Login() {
-        super(CommandName.LOGIN, "{username} вход в систему");
+        super(CommandName.LOGIN, "{username} log in to the system");
     }
 
     public Login(Registered userDAO) {
@@ -32,7 +32,7 @@ public class Login extends Command {
             String password = request.getPassword();
 
             if (!userDAO.verifyUserPassword(username, password)) {
-                return new Response(false, "Неверное имя пользователя или пароль", null);
+                return new Response(false, "Invalid username or password", null);
             }
 
             User user = userDAO.getUserByUsername(username);
@@ -45,13 +45,12 @@ public class Login extends Command {
                 return new Response(false, "User ID is null", null);
             }
 
-            return new Response(true, "Вы успешно вошли в систему", user.getId());
+            return new Response(true, "You have successfully logged in", user.getId());
         } catch (Exception e) {
             System.out.println("Exception during login: " + e); // Debug message
             return new Response(false, e.toString(), null);
         }
     }
-
 
     @Override
     public Request execute(String[] arguments) {

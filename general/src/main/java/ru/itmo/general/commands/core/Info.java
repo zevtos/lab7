@@ -10,19 +10,21 @@ import ru.itmo.general.network.Response;
 import java.time.LocalDateTime;
 
 /**
- * Команда 'info'. Выводит информацию о коллекции.
+ * Command 'info'. Displays information about the collection.
+ *
+ * @autor zevtos
  */
 public class Info extends Command {
     private CollectionManager<Ticket> ticketCollectionManager;
 
     public Info() {
-        super(CommandName.INFO, "вывести информацию о коллекции");
+        super(CommandName.INFO, "display information about the collection");
     }
 
     /**
-     * Конструктор для создания экземпляра команды Info.
+     * Constructor to create an instance of the Info command.
      *
-     * @param ticketCollectionManager менеджер коллекции билетов
+     * @param ticketCollectionManager the ticket collection manager
      */
     public Info(CollectionManager<Ticket> ticketCollectionManager) {
         this();
@@ -30,10 +32,10 @@ public class Info extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param arguments аргументы команды
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the success of the command execution.
      */
     @Override
     public Response execute(Request arguments) {
@@ -51,10 +53,10 @@ public class Info extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param arguments аргументы команды
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the success of the command execution.
      */
     @Override
     public Request execute(String[] arguments) {

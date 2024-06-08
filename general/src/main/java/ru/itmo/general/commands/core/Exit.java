@@ -7,24 +7,24 @@ import ru.itmo.general.network.Response;
 import ru.itmo.general.utility.console.Console;
 
 /**
- * Команда 'exit'. Завершает выполнение программы (без сохранения в файл).
+ * Command 'exit'. Terminates the program (without saving to a file).
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class Exit extends Command {
 
     /**
-     * Конструктор для создания экземпляра команды Exit.
+     * Constructor to create an instance of the Exit command.
      */
     public Exit() {
-        super(CommandName.EXIT, "завершить работу приложения");
+        super(CommandName.EXIT, "terminate the application");
     }
 
     /**
-     * Выполняет команду.
+     * Executes the command.
      *
-     * @param arguments аргументы команды (ожидается отсутствие аргументов)
-     * @return Успешность выполнения команды
+     * @param arguments the command arguments (expected to be empty)
+     * @return the success of the command execution
      */
     @Override
     public Response execute(Request arguments) {
@@ -36,9 +36,9 @@ public class Exit extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @return the success of the command execution.
      */
     @Override
     public Request execute(String[] arguments) {
@@ -46,6 +46,6 @@ public class Exit extends Command {
             return new Request(false, getName(), getUsingError());
         }
 
-        return new Request(getName(), "Завершение работы приложения...");
+        return new Request(getName(), "Terminating the application...");
     }
 }

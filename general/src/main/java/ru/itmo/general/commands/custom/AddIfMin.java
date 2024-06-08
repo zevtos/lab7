@@ -10,25 +10,24 @@ import ru.itmo.general.models.Ticket;
 import ru.itmo.general.models.forms.Form;
 import ru.itmo.general.network.Request;
 import ru.itmo.general.network.Response;
-import ru.itmo.general.utility.console.Console;
 
 /**
- * Команда 'add_if_min'. Добавляет новый элемент в коллекцию, если его цена меньше минимальной.
+ * Command 'add_if_min'. Adds a new element to the collection if its price is less than the minimum price in the collection.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class AddIfMin extends Command {
     private Form<Ticket> ticketForm;
     private CollectionManager<Ticket> ticketCollectionManager;
 
     public AddIfMin() {
-        super(CommandName.ADD_IF_MIN, "{element} добавить новый элемент в коллекцию, если его цена меньше минимальной цены этой коллекции");
+        super(CommandName.ADD_IF_MIN, "{element} add a new element to the collection if its price is less than the minimum price in the collection");
     }
 
     /**
-     * Конструктор для создания экземпляра команды AddIfMin.
+     * Constructor for creating an instance of the AddIfMin command.
      *
-     * @param ticketCollectionManager менеджер коллекции
+     * @param ticketCollectionManager the collection manager
      */
     public AddIfMin(CollectionManager<Ticket> ticketCollectionManager) {
         this();
@@ -36,9 +35,9 @@ public class AddIfMin extends Command {
     }
 
     /**
-     * Конструктор для создания экземпляра команды AddIfMin.
+     * Constructor for creating an instance of the AddIfMin command.
      *
-     * @param console объект для взаимодействия с консолью
+     * @param ticketForm the form for creating tickets
      */
     public AddIfMin(Form<Ticket> ticketForm) {
         this();
@@ -46,10 +45,10 @@ public class AddIfMin extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param request запрос на выполнение команды
-     * @return Успешность выполнения команды.
+     * @param request the command request
+     * @return the response indicating the success or failure of the command execution
      */
     @Override
     public Response execute(Request request) {
@@ -59,9 +58,9 @@ public class AddIfMin extends Command {
             var minPrice = minPrice();
             if (ticket.getPrice() < minPrice) {
                 ticketCollectionManager.add(ticket, request.getUserId());
-                return new Response(true, "Билет успешно добавлен!", minPrice);
+                return new Response(true, "Ticket successfully added!", minPrice);
             } else {
-                return new Response(false, null, minPrice);
+                return new Response(false, "Ticket price is not less than the minimum price in the collection", minPrice);
             }
         } catch (Exception e) {
             return new Response(false, e.toString(), null);
@@ -69,29 +68,24 @@ public class AddIfMin extends Command {
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @param arguments аргументы команды
-     * @return Успешность выполнения команды.
+     * @param arguments the command arguments
+     * @return the request indicating the success or failure of the command execution
      */
     @Override
     public Request execute(String[] arguments) {
         try {
-            if (!arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
+            if (arguments.length > 1 && !arguments[1].isEmpty()) throw new InvalidNumberOfElementsException();
             var ticket = ticketForm.build();
 
             return new Request(getName(), ticket);
         } catch (InvalidNumberOfElementsException exception) {
             return new Request(false, getName(), getUsingError());
         } catch (InvalidFormException exception) {
-            return new Request(
-                    false,
-                    getName(),
-                    "Поля билета не валидны! Билет не создан!");
+            return new Request(false, getName(), "Ticket fields are not valid! Ticket not created!");
         } catch (InvalidScriptInputException ignored) {
-            return new Request(false,
-                    getName(),
-                    "Ошибка чтения из скрипта");
+            return new Request(false, getName(), "Script reading error");
         }
     }
 

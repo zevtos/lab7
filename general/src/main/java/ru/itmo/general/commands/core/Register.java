@@ -21,7 +21,7 @@ public class Register extends Command {
     private Registered userDAO;
 
     public Register() {
-        super(CommandName.REGISTER, "{username} регистрация нового пользователя");
+        super(CommandName.REGISTER, "{username} register a new user");
     }
 
     /**
@@ -44,10 +44,10 @@ public class Register extends Command {
     public Response execute(Request request) {
         try {
             if (request.getLogin().length() >= MAX_USERNAME_LENGTH)
-                throw new InvalidFormException("Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
+                throw new InvalidFormException("Username length must be less than " + MAX_USERNAME_LENGTH);
 
             if (request.getPassword().length() < MIN_PASSWORD_LENGTH)
-                throw new InvalidFormException("Длина пароля меньше " + MIN_PASSWORD_LENGTH);
+                throw new InvalidFormException("Password length must be at least " + MIN_PASSWORD_LENGTH);
 
             if (request.getUserId() != null) throw new InstanceAlreadyExistsException("User already exists");
 
@@ -56,9 +56,9 @@ public class Register extends Command {
             if (user == null) throw new InstanceAlreadyExistsException("User already exists");
 
             if (!user.validate())
-                throw new InvalidFormException("Пользователь не зарегистрирован, поля пользователя не валидны!");
+                throw new InvalidFormException("User not registered, user fields are not valid!");
 
-            return new Response(true, "Пользователь успешно зарегистрирован", user.getId());
+            return new Response(true, "User successfully registered", user.getId());
         } catch (InstanceAlreadyExistsException ex) {
             return new Response(false, ex.getMessage(), null);
         } catch (InvalidFormException invalid) {
@@ -82,11 +82,11 @@ public class Register extends Command {
 
             String username = arguments[1];
             if (username.length() > MAX_USERNAME_LENGTH)
-                throw new InvalidFormException("Длина имени пользователя должна быть < " + MAX_USERNAME_LENGTH);
+                throw new InvalidFormException("Username length must be less than " + MAX_USERNAME_LENGTH);
 
             String password = arguments[2];
             if (password.length() < MIN_PASSWORD_LENGTH)
-                throw new InvalidFormException("Длина пароля должна быть >= " + MIN_PASSWORD_LENGTH);
+                throw new InvalidFormException("Password length must be at least " + MIN_PASSWORD_LENGTH);
 
             Request request = new Request(true, getName(), null);
             request.setLogin(username);

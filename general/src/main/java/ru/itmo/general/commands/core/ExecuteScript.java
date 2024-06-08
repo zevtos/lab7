@@ -5,19 +5,19 @@ import ru.itmo.general.commands.CommandName;
 import ru.itmo.general.network.Request;
 
 /**
- * Команда 'execute_script'. Выполнить скрипт из файла.
+ * Command 'execute_script'. Execute a script from a file.
  *
- * @author zevtos
+ * @autor zevtos
  */
 public class ExecuteScript extends Command {
     public ExecuteScript() {
-        super(CommandName.EXECUTE_SCRIPT, "<file_name> исполнить скрипт из указанного файла");
+        super(CommandName.EXECUTE_SCRIPT, "<file_name> execute a script from the specified file");
     }
 
     /**
-     * Выполняет команду
+     * Executes the command.
      *
-     * @return Успешность выполнения команды.
+     * @return the success of the command execution.
      */
     @Override
     public Request execute(String[] arguments) {
